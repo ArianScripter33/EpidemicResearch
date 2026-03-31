@@ -43,7 +43,9 @@
 | 4 | **openFMD CSV** | `openfmd.org/dashboard/fmdwatch/` (download button) | CSV | Series FMD internacionales → valida R0 → Chronos (Tier 2) | Alta |
 | 5 | **SIAP/SADER** | Datos abiertos de producción pecuaria | CSV | Densidad ganadera por estado → choropleth + features XGBoost | Media |
 | 6 | **PUCRA PDFs** | `puiree.cic.unam.mx/divulgacion/docs/pucra2024.pdf` | PDF→tablas | Tablas RAM → narrativa de resistencia antimicrobiana | Media |
-| 7 | **WAHIS/WOAH** | `github.com/loicleray/WOAH_WAHIS.ReportRetriever` | API→CSV | Datos FMD contemporáneos Sudamérica | Baja |
+| 7 | **WAHIS/WOAH** | `github.com/loicleray/WOAH_WAHIS.ReportRetriever` | API→CSV | Datos FMD contemporáneos Sudamérica | DEPRECATED |
+
+> **Status Alert (March 2026):** The `WOAH_WAHIS.ReportRetriever` tool is currently **broken**. WOAH has updated its security to use Cloudflare, which blocks the tool's direct API requests with a 403 Forbidden error. Use literature fallbacks or manual WAHIS exports instead.
 
 **¿Cuándo ejecutar Wave 2?**
 - Solo si Wave 1 está completa y los datos son insuficientes para la narrativa.

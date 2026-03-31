@@ -64,6 +64,10 @@ PUCRA_URLS = {
 
 # WAHIS — WOAH reports retriever (GitHub tool)
 WAHIS_RETRIEVER_REPO = "https://github.com/loicleray/WOAH_WAHIS.ReportRetriever"
+# Note: Broken as of March 2026 due to Cloudflare protection.
+
+# Kaggle FMD Dataset
+KAGGLE_FMD_DATASET = "wasimfaraz/fmd-cattle-dataset"
 
 # --- Wave 3: Hostile Extraction ---
 
