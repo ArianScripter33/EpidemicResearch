@@ -1,27 +1,25 @@
+# Ganado Saludable — .gitignore
+
+# Data files (downloaded, can be re-extracted)
+data/raw/
+data/processed/
+*.csv
+!requirements.txt
+
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
 *.egg-info/
 dist/
 build/
+*.egg
 .eggs/
 
-# Virtual environments
+# Virtual environment
 venv/
 .venv/
 env/
-
-# Data (raw downloads — too large for git)
-data/raw/
-data/processed/
-*.csv
-*.xlsx
-*.zip
-
-# Notebooks checkpoints
-.ipynb_checkpoints/
 
 # IDE
 .vscode/
@@ -34,12 +32,14 @@ data/processed/
 .DS_Store
 Thumbs.db
 
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
 # Docker
 docker-compose.override.yml
-
-# Environment variables
-.env
-.env.local
 
 # MongoDB data
 mongo_data/

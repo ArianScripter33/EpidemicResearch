@@ -16,34 +16,37 @@
 - [x] Create presentation_script.md (guion narrativo para coloquio)
 - [x] Add Component 5 (visualization + stats multivariate) to implementation plan
 - [x] Add "Proxy de Opacidad" (clembuterol) to XGBoost features and PNT extractor
-- [ ] Get user approval on plan + answers to 5 open questions
+- [x] Create docs/mvp_strategy.md (priorización + anti-overengineering)
+- [x] Create docs/data_acquisition_plan.md (plan de adquisición de datos Wave 1-3)
 
 ## Phase 1: Core Infra & Security
 
-- [ ] Create directory structure (src/, extractors/, warehouse/, models/, crypto/, visualization/, tests/)
-- [ ] Create `src/config.py` (all URLs from M_doc [1]-[24], V2.md constants, **FMD constants**)
-- [ ] Create `src/base_extractor.py` (ABC with lineage: fecha_extraccion_etl, fuente_origen)
+- [x] Create directory structure (src/, extractors/, warehouse/, models/, crypto/, visualization/, tests/)
+- [x] Create `src/config.py` (all URLs from M_doc [1]-[24], V2.md constants, FMD constants, SIR scenarios)
+- [x] Create `src/base_extractor.py` (ABC with lineage: fecha_extraccion_etl, fuente_origen, version_etl)
+- [x] Create `requirements.txt`
+- [x] Update `.gitignore`
 - [ ] Create `src/crypto/encryption.py` (César + RSA — Problema Prototípico §Criptografía)
-- [ ] Create `requirements.txt`, `.gitignore`
 
 ## Phase 2: Extraction Modules (Module 1) — Wave-Based
 
-### Wave 1 (Stable Endpoints)
+### Wave 1 (Stable Endpoints) ✅
 
-- [ ] **SENASICA TB:** CSV hatos libres + API oculta fallback + Cuarentenas PDF (camelot) — **proxy calibración**
-- [ ] **DGE Morbilidad:** Anuarios ZIP→CSV, CIE-10 filter (A15-A19, A05), latin1 encoding
+- [x] **SENASICA TB:** CSV hatos libres → **64 rows, 32 estados** — proxy calibración
+- [x] **DGE Morbilidad:** Anuarios 2015-2017 ZIP→CSV → **384 rows** (288 TB + 96 A05)
+  - Nota: Anuarios 2018+ no disponibles en formato CSV (404). 2015-2017 tienen datos por estado/edad/mes/institución.
 
-### Wave 2 (International + PDF Parsing — **FMD Data**)
+### Wave 2 (International + FMD Data)
 
-- [ ] **openFMD:** FMD global CSV — **datos primarios para la enfermedad asignada** + Chronos training
-- [ ] **WRLFMD/PANAFTOSA:** Reportes regionales Sudamérica (serotipos, R0 estimados)
-- [ ] **Manuales CPA:** KPIs de capacidad de respuesta (t_detección, t_cuarentena, brigadas)
-- [ ] **PUCRA RAM:** PDF table extraction (E. coli, K. pneumoniae resistance rates)
+- [x] **openFMD:** Live API no accesible → **6 rows referencia literatura** (UK 2001, Argentina, Colombia, Germany 2025, Turkey, Brazil)
+- [ ] **Buscar datasets alternativos de FMD** (Kaggle FMD Cattle Dataset, papers with supplementary data)
+- [ ] **PUCRA RAM PDFs:** Extracción tablas resistencia antimicrobiana (camelot/pdfplumber)
+- [ ] **COFEPRIS clausuras:** Lista de establecimientos clausurados (CSV directo disponible)
 
-### Wave 3 (Hostile Extraction)
+### Wave 3 (Hostile Extraction — Solo si sobra tiempo)
 
 - [ ] **SINAIS Cubos:** ViewState bypass (tokens + POST) OR Anuarios fallback
-- [ ] **PNT/COFEPRIS:** Selenium headless — clausuras (clembuterol, LMR, Salmonella) + **Proxy de Opacidad**
+- [ ] **PNT/COFEPRIS:** Selenium headless — clausuras (clembuterol, LMR, Salmonella) + Proxy de Opacidad
 
 ## Phase 3: Data Warehouse & NoSQL (Module 2)
 
@@ -56,34 +59,46 @@
 ## Phase 4: Model Preparation & Financials (Module 3)
 
 - [ ] **SIR DUAL MODE:** Calibración TB (R0≈1.8, γ=1/180d) → Simulación FMD (R0≈6.0, γ=1/14d) — 6 escenarios
-- [ ] XGBoost feature engineering (+ **proxy clembuterol** como feature de bioseguridad → target A05)
-- [ ] **Stats Multivariate:** PCA + scree/biplot, ANOVA canales de venta, Regresión Múltiple → R²
-- [ ] Chronos time-series formatter — **FMD series como principal**, TB series como calibración
-- [ ] Financial ROI engine (VPN, ROI, Apalancamiento — **dual: TB crónico $39M vs FMD catastrófico $200B**)
+- [ ] **Stats Multivariate:** ANOVA canales de venta (con datos V2.md), PCA (si datos suficientes), Regresión Múltiple
+- [ ] **Financial ROI:** VPN, ROI, tabla comparativa preventivo vs reactivo
+- [ ] XGBoost feature engineering (Tier 2 — si datos suficientes)
+- [ ] Chronos time-series formatter (Tier 2 — si openFMD data obtenida)
 
 ## Phase 5: Visualization & Dashboard (Module 4)
 
-- [ ] **Caras de Chernoff:** 32 caras (una por estado), rasgos = prevalencia TB, RAM, clausuras, densidad
-- [ ] **Curvas de Andrews:** series de Fourier para clusters de estados epidemiológicamente similares
-- [ ] **Mapas coropléticos:** mapa de México por estado con prevalencia TB, densidad, clausuras clembuterol
-- [ ] **SIR Plots:** curvas S(t), I(t), R(t) comparativas TB vs FMD + diagramas de fase
-- [ ] **Dashboard interactivo (Streamlit/Plotly Dash):** mapa + selector de estado + SIR + financiero
+- [ ] **Mapa coroplético:** México por estado con datos SENASICA (plotly.express)
+- [ ] **SIR Plots:** Curvas S(t), I(t), R(t) comparativas TB vs FMD + diagramas de fase
+- [ ] **Tabla financiera:** Visualización ROI preventivo vs reactivo
+- [ ] Caras de Chernoff (Tier 2 — si datos multivariados suficientes)
+- [ ] Curvas de Andrews (Tier 2)
+- [ ] Dashboard interactivo Streamlit (Tier 3)
 
 ## Phase 6: Notebooks EDA
 
-- [ ] `01_eda_senasica.ipynb` — Exploración datos SENASICA
-- [ ] `02_eda_morbilidad.ipynb` — Exploración datos DGE/SINAIS
-- [ ] `03_multivariate_analysis.ipynb` — PCA, Chernoff, Andrews, ANOVA
+- [ ] `01_eda_senasica.ipynb` — Exploración datos SENASICA (32 estados)
+- [ ] `02_eda_morbilidad.ipynb` — Exploración datos DGE (TB + A05, 3 años)
+- [ ] `03_multivariate_analysis.ipynb` — PCA, ANOVA, Chernoff
 - [ ] `04_sir_simulation.ipynb` — Simulación SIR dual interactiva
-- [ ] `05_xgboost_training.ipynb` — Entrenamiento + SHAP values
-- [ ] `06_financial_analysis.ipynb` — VPN, ROI, escenarios
+- [ ] `05_financial_analysis.ipynb` — VPN, ROI, escenarios
 
 ## Phase 7: Verification & Delivery
 
 - [ ] Unit tests (mock HTTP, Pydantic validation, César/RSA bidireccional)
-- [ ] Smoke test (download real SENASICA CSV, confirm endpoint alive)
-- [ ] Local E2E with Docker MongoDB (pipeline: extract → ingest → model prep)
-- [ ] Lineage audit (confirm fecha_extraccion_etl in all collections)
+- [x] Smoke test SENASICA CSV (endpoint alive, 64 rows downloaded)
+- [x] Smoke test DGE Anuarios (2015-2017 alive, 384 filtered rows)
+- [x] Smoke test openFMD (API no accesible, fallback a literatura OK)
 - [ ] SIR dual validation (gráfica comparativa TB vs FMD side-by-side)
 - [ ] Artículo de divulgación (15-25 páginas, APA 7, min 5 fuentes)
 - [ ] Presentación digital (Gamma/Genially/Prezi)
+
+---
+
+## Data Inventory (as of 2026-03-31)
+
+| Dataset | Source | Rows | Status | Key columns |
+|---------|--------|------|--------|-------------|
+| SENASICA TB | CSV datos abiertos | 64 | ✅ Ready | entidad, constancias, bovinos_libres |
+| DGE Morbilidad | Anuarios ZIP 2015-2017 | 384 | ✅ Ready | estado, CIE-10, acumulado, edad, mes, institución |
+| openFMD Reference | Literature fallback | 6 | ✅ Ready | country, R0, animals_culled, cost |
+| PUCRA RAM | PDFs UNAM | — | ⬜ Pending | bacteria, antibiótico, % resistencia |
+| COFEPRIS Clausuras | gob.mx | — | ⬜ Pending | establecimiento, motivo, agente |
