@@ -10,7 +10,11 @@ REPO="ArianScripter33/EpidemicResearch"
 
 echo "🚀 Launching 4 Jules issues to $REPO..."
 
+# Create 'jules' label if it doesn't exist
+gh label create "jules" --color "0E8A16" --description "Issues assigned to Jules async agent" --repo "$REPO" 2>/dev/null || echo "Label 'jules' already exists, continuing..."
+
 # ── ISSUE 1: DGE Morbilidad 2018-2024 (HIGH PRIORITY) ────────
+
 gh issue create \
   --repo "$REPO" \
   --title "[DATA] DGE Morbilidad 2018-2024: Find + extract updated CSV data beyond 2015-2017" \
