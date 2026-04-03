@@ -22,7 +22,7 @@
 | # | Fuente | URL | Formato | Qué alimenta | Slides |
 |---|--------|-----|---------|---------------|--------|
 | 1 | **SENASICA Hatos Libres TB** | `repodatos.atdt.gob.mx/.../hatos_libres_tuberculosis.csv` | CSV | SIR calibración + Mapa coroplético | 6, 7-8 |
-| 2 | **DGE Anuarios Morbilidad** | `epidemiologia.salud.gob.mx/anuario/datos_abiertos/Anuario_{year}.zip` | ZIP→CSV | ANOVA + EDA + correlación TB animal↔humano | 9 |
+| 2 | **DGE Anuarios Morbilidad** | `epidemiologia.salud.gob.mx/anuario/datos_abiertos/Anuario_{year}.zip` | ZIP→CSV | ANOVA + EDA + correlación TB animal↔humano. (Nota: Solo 2015-2017, post-2018 solo PDF) | 9 |
 | 3 | **Constantes de literatura** | V2.md + README.md (ya documentadas) | In-memory | SIR FMD (R0=6.0), ANOVA (prevalencias), Tabla financiera | 7-8, 9, 10 |
 
 **¿Por qué Wave 1 primero?**
@@ -42,7 +42,7 @@
 |---|--------|-----|---------|---------------|-----------|
 | 4 | **openFMD CSV** | `openfmd.org/dashboard/fmdwatch/` (download button) | CSV | Series FMD internacionales → valida R0 → Chronos (Tier 2) | Alta |
 | 5 | **SIAP/SADER** | Datos abiertos de producción pecuaria | CSV | Densidad ganadera por estado → choropleth + features XGBoost | Media |
-| 6 | **PUCRA PDFs** | `puiree.cic.unam.mx/divulgacion/docs/pucra2024.pdf` | PDF→tablas | Tablas RAM → narrativa de resistencia antimicrobiana | Media |
+| 6 | **PUCRA PDFs** | `puiree.cic.unam.mx/divulgacion/docs/pucra2024.pdf` | PDF→tablas | Tablas RAM → narrativa de resistencia antimicrobiana (Servidor inestable, usar constantes V2.md como fallback principal) | Media |
 | 7 | **WAHIS/WOAH** | `github.com/loicleray/WOAH_WAHIS.ReportRetriever` | API→CSV | Datos FMD contemporáneos Sudamérica | Baja |
 
 **¿Cuándo ejecutar Wave 2?**
@@ -62,8 +62,8 @@
 | # | Fuente | Método | Riesgo | Qué alimenta |
 |---|--------|--------|--------|---------------|
 | 8 | **SINAIS Cubos** | ViewState bypass (POST) | Alto — ActiveX/OWC11 | Validación cruzada DGE |
-| 9 | **PNT/COFEPRIS** | Selenium headless | Alto — JS dinámico, CAPTCHAs | Proxy de Opacidad (clembuterol) |
-| 10 | **Cuarentenas TB PDFs** | camelot/tabula (PDF parsing) | Medio — tablas escaneadas | Datos granulares de despoblación |
+| 9 | **PNT/COFEPRIS** | Web scraping (pdfplumber) | Resuelto ✅ — 2 filas hiper-filtradas. | Proxy de Opacidad (clembuterol, LMR, Salmonella) |
+| 10 | **Cuarentenas TB PDFs** | camelot/pdfplumber (Extracción PDF) | Resuelto ✅ — 108 filas de cuarentenas 2024. (API oculta regresó 404) | Datos granulares de despoblación |
 
 **Regla de oro Wave 3:** Solo si te sobran >3 días antes de la entrega Y las Waves 1-2 están completas.
 

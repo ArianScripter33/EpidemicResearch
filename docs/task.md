@@ -40,8 +40,9 @@
 
 - [x] **openFMD:** Live API no accesible → **6 rows referencia literatura** (UK 2001, Argentina, Colombia, Germany 2025, Turkey, Brazil)
 - [ ] **Buscar datasets alternativos de FMD** (Kaggle FMD Cattle Dataset, papers with supplementary data)
-- [ ] **PUCRA RAM PDFs:** Extracción tablas resistencia antimicrobiana (camelot/pdfplumber)
-- [ ] **COFEPRIS clausuras:** Lista de establecimientos clausurados (CSV directo disponible)
+- [x] **PUCRA RAM PDFs:** Extractor `pucra_ram.py` funcionando (nota: servidores UNAM inestables).
+- [x] **COFEPRIS clausuras:** Extractor `cofepris_clausuras.py` → **2 filas limpias** (Clenbuterol/Salmonella/LMR).
+- [x] **SENASICA Cuarentenas:** Extractor `senasica_cuarentenas.py` → **108 filas** 2024 PDFs (API oculta = 404).
 
 ### Wave 3 (Hostile Extraction — Solo si sobra tiempo)
 
@@ -100,5 +101,6 @@
 | SENASICA TB | CSV datos abiertos | 64 | ✅ Ready | entidad, constancias, bovinos_libres |
 | DGE Morbilidad | Anuarios ZIP 2015-2017 | 384 | ✅ Ready | estado, CIE-10, acumulado, edad, mes, institución |
 | openFMD Reference | Literature fallback | 6 | ✅ Ready | country, R0, animals_culled, cost |
-| PUCRA RAM | PDFs UNAM | — | ⬜ Pending | bacteria, antibiótico, % resistencia |
-| COFEPRIS Clausuras | gob.mx | — | ⬜ Pending | establecimiento, motivo, agente |
+| PUCRA RAM | PDFs UNAM | — | ✅ Script Ready | bacteria, antibiotico, pct_resistencia |
+| COFEPRIS Clausuras | gob.mx PDFs | 2 | ✅ Ready | establecimiento, motivo, agente |
+| SENASICA Cuarentenas| PDFs trimestrales 2024 | 108 | ✅ Ready | estado, cuarentena, animales_sacrificados |
