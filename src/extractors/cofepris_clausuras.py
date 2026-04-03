@@ -1,169 +1,196 @@
 """
-COFEPRIS Clausuras Extractor — Wave 3 (Hostile Extraction)
-=========================================================
-Extracts data from COFEPRIS closure lists (establecimientos clausurados).
-Specifically targets meat processing plants with clenbuterol or salmonella.
-
-Feeds: Proxy de Opacidad (XGBoost feature)
+COFEPRIS Clausuras Extractor — Wave 3 (Tidy repair)
+===================================================
+Repairs the parsing of the already-downloaded 2023/2024 verification PDFs.
 """
+
+from __future__ import annotations
+
+import re
+from pathlib import Path
+from typing import Dict, Iterable, List
 
 import pandas as pd
 import pdfplumber
-import re
-from typing import Optional
+
 from src.base_extractor import BaseExtractor
-from src.config import COFEPRIS_CLAUSURAS, ESTADOS_MEXICO
+from src.config import COFEPRIS_CLAUSURAS, ESTADOS_MEXICO, RAW_DIR
+
+
+EXPECTED_COLUMNS = [
+    "no",
+    "establecimiento",
+    "domicilio",
+    "orden_verificacion",
+    "fecha_inicio_visita",
+    "fecha_termino_visita",
+    "giro_actividad",
+    "motivo_visita",
+]
+
 
 class CofeprisClausurasExtractor(BaseExtractor):
     """
-    Extractor for COFEPRIS closure lists.
-    Strategy:
-    1. Scrape the documents page to find the latest PDF link.
-    2. Download the PDF.
-    3. Extract tables using pdfplumber.
-    4. Filter by meat-related keywords and contaminants.
+    Parse the local 2023/2024 PDFs into a stable eight-column schema and then
+    filter rows useful for the project proxy.
     """
+
+    KEYWORDS = [
+        "CLENBUTEROL",
+        "CLEMBUTEROL",
+        "LMR",
+        "SALMONELLA",
+        "RASTRO",
+        "CARNICERIA",
+        "MATANZA",
+        "POLLO",
+        "CARNE",
+        "ALIMENT",
+        "RES",
+        "BOVIN",
+        "AVICOLA",
+    ]
 
     def __init__(self):
         super().__init__(name="cofepris_clausuras")
-        self.base_url = "https://www.gob.mx"
 
     def extract(self) -> pd.DataFrame:
-        """Find and download the latest PDF, then extract tables."""
-        self.logger.info("Finding latest PDF closure lists...")
+        pdf_paths = self._resolve_pdf_paths()
+        all_rows: List[Dict[str, object]] = []
 
-        # Search for multiple sources as the first one might only be clinics
-        urls_to_check = [COFEPRIS_CLAUSURAS, "https://www.gob.mx/cofepris/acciones-y-programas/listado-de-visitas-de-verificacion"]
-        all_pdfs = []
+        for pdf_path in pdf_paths:
+            all_rows.extend(self._extract_pdf_rows(pdf_path))
 
-        for url in urls_to_check:
-            resp = self.session.get(url)
-            html = resp.text
-            matches = re.findall(r'href="([^"]*?\.pdf)"', html, re.IGNORECASE)
-            for m in matches:
-                full_url = m if m.startswith('http') else self.base_url + m
-                if full_url not in all_pdfs:
-                    all_pdfs.append(full_url)
-
-        if not all_pdfs:
-            self.logger.error("Could not find any PDF links in the COFEPRIS pages.")
+        if not all_rows:
             return pd.DataFrame()
 
-        self.logger.info(f"Found {len(all_pdfs)} PDF candidates.")
-
-        # In a real scenario, we might want to filter PDFs by name (e.g. including 'Establecimientos')
-        # For now, let's try the ones that look most promising
-        target_pdfs = [p for p in all_pdfs if 'Establecimientos' in p or 'clausuradas' in p]
-        if not target_pdfs: target_pdfs = all_pdfs[:3] # Fallback to first few
-
-        all_data = []
-        for pdf_url in target_pdfs:
-            try:
-                local_path = self.download_file(pdf_url)
-                with pdfplumber.open(local_path) as pdf:
-                    self.logger.info(f"Extracting tables from {pdf_url} ({len(pdf.pages)} pages)...")
-                    for i, page in enumerate(pdf.pages):
-                        table = page.extract_table()
-                        if table:
-                            # Use first row as header, but handle cases where it might not be perfect
-                            header = [str(c).replace('\n', ' ').strip() for c in table[0]]
-                            # Ensure unique headers by appending suffix if duplicate
-                            seen = {}
-                            unique_header = []
-                            for h in header:
-                                if h in seen:
-                                    seen[h] += 1
-                                    unique_header.append(f"{h}_{seen[h]}")
-                                else:
-                                    seen[h] = 0
-                                    unique_header.append(h)
-
-                            df_page = pd.DataFrame(table[1:], columns=unique_header)
-                            df_page['source_pdf'] = pdf_url
-                            all_data.append(df_page)
-            except Exception as e:
-                self.logger.warning(f"Failed to process {pdf_url}: {e}")
-
-        if not all_data:
-            self.logger.warning("No tables found in the PDF.")
-            return pd.DataFrame()
-
-        combined_df = pd.concat(all_data, ignore_index=True)
-        self.logger.info(f"Extracted {len(combined_df)} raw rows from PDF.")
-        return combined_df
+        return pd.DataFrame(all_rows)
 
     def transform(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Clean data, filter by keywords, and normalize states."""
         if df.empty:
             return df
 
         clean = df.copy()
+        for column in EXPECTED_COLUMNS:
+            clean[column] = clean[column].astype(str).str.replace(r"\s+", " ", regex=True).str.strip()
 
-        # Normalize columns
-        clean.columns = [
-            str(c).lower().strip()
-            .replace('\n', ' ')
-            .replace(' ', '_')
-            .replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
-            for c in clean.columns
-        ]
-
-        # Identify columns
-        # Expected: establecimiento, estado, motivo, fecha, agente_detectado
-        # But may vary by PDF version
-        self.logger.info(f"Available columns: {list(clean.columns)}")
-
-        # Mapping to target columns if they exist under different names
-        col_mapping = {
-            'nombre_del_establecimiento': 'establecimiento',
-            'razon_social': 'establecimiento',
-            'entidad_federativa': 'estado',
-            'causa_de_la_sancion': 'motivo',
-            'fecha_de_clausura': 'fecha',
-            'irregularidades_detectadas': 'motivo',
-            'giro': 'motivo'
-        }
-
-        for old, new in col_mapping.items():
-            if old in clean.columns and new not in clean.columns:
-                clean[new] = clean[old]
-
-        # Filter by keywords
-        keywords = ["CLENBUTEROL", "CLEMBUTEROL", "LMR", "SALMONELLA", "RASTRO", "CARNICERIA", "MATANZA", "POLLO", "CARNE", "ALIMENT"]
-        pattern = '|'.join(keywords)
-
-        # Look for keywords in all string columns (mostly 'motivo' or 'irregularidades')
-        mask = clean.apply(lambda row: row.astype(str).str.contains(pattern, case=False, na=False).any(), axis=1)
+        keyword_pattern = "|".join(self.KEYWORDS)
+        mask = clean[["establecimiento", "domicilio", "giro_actividad", "motivo_visita"]].apply(
+            lambda column: column.str.contains(keyword_pattern, case=False, na=False)
+        ).any(axis=1)
 
         filtered = clean[mask].copy()
-        self.logger.info(f"Filtered to {len(filtered)} rows matching keywords: {keywords}")
-
-        # Normalize states
-        if 'estado' in filtered.columns:
-            # Simple normalization for exact matches in the dictionary
-            # Reverse map for normalization? Actually ESTADOS_MEXICO is code -> full_name
-            inv_estados = {v.upper(): k for k, v in ESTADOS_MEXICO.items()}
-
-            def normalize_state(s):
-                s = str(s).strip().upper()
-                # Remove accents
-                s = s.replace('Á', 'A').replace('É', 'E').replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U')
-                if s in inv_estados:
-                    return s # or inv_estados[s] if we want the code
-                # Try partial match or special cases
-                if 'MEXICO' in s and 'CIUDAD' not in s: return 'MEXICO'
-                if 'DISTRITO FEDERAL' in s: return 'CIUDAD DE MEXICO'
-                return s
-
-            filtered['estado_norm'] = filtered['estado'].apply(normalize_state)
-
+        filtered["estado_norm"] = filtered["domicilio"].apply(self._extract_state_from_address)
+        filtered = filtered.drop_duplicates(subset=["source_pdf", "orden_verificacion"])
+        filtered = filtered.sort_values(["source_pdf", "no"]).reset_index(drop=True)
         return filtered
+
+    def _resolve_pdf_paths(self) -> List[Path]:
+        preferred = [
+            RAW_DIR / "Listado_de_Establecimientos_Verificados__2024.pdf",
+            RAW_DIR / "Listado_de_Establecimientos_Verificados__2023.pdf",
+        ]
+        existing = [path for path in preferred if path.exists()]
+        if existing:
+            return existing
+
+        self.logger.info("No local COFEPRIS PDFs found. Falling back to remote discovery.")
+        return [self.download_file(url, filename=url.split("/")[-1]) for url in self._discover_remote_pdfs()]
+
+    def _discover_remote_pdfs(self) -> List[str]:
+        response = self.session.get(COFEPRIS_CLAUSURAS, timeout=30)
+        response.raise_for_status()
+        html = response.text
+        urls = sorted(
+            {
+                url if url.startswith("http") else f"https://www.gob.mx{url}"
+                for url in re.findall(r'href="([^"]+Listado_de_Establecimientos_Verificados[^"]+\.pdf)"', html)
+            }
+        )
+        return urls[:2]
+
+    def _extract_pdf_rows(self, pdf_path: Path) -> List[Dict[str, object]]:
+        rows: List[Dict[str, object]] = []
+        with pdfplumber.open(pdf_path) as pdf:
+            for page_num, page in enumerate(pdf.pages, start=1):
+                tables = page.extract_tables()
+                if not tables:
+                    continue
+
+                for table in tables:
+                    rows.extend(self._extract_table_rows(table, pdf_path.name, page_num))
+
+        self.logger.info(f"Parsed {len(rows)} tidy COFEPRIS rows from {pdf_path.name}")
+        return rows
+
+    def _extract_table_rows(self, table: List[List[str]], source_pdf: str, page_num: int) -> List[Dict[str, object]]:
+        rows: List[Dict[str, object]] = []
+        if not table:
+            return rows
+
+        start_idx = 0
+        if len(table) > 1 and self._looks_like_header_banner(table[0]):
+            start_idx = 2
+
+        for raw_row in table[start_idx:]:
+            normalized = [self._normalize_cell(cell) for cell in raw_row[: len(EXPECTED_COLUMNS)]]
+            if len(normalized) < len(EXPECTED_COLUMNS):
+                continue
+            if not self._looks_like_data_row(normalized):
+                continue
+
+            record = dict(zip(EXPECTED_COLUMNS, normalized))
+            record["source_pdf"] = source_pdf
+            record["page_num"] = page_num
+            rows.append(record)
+
+        return rows
+
+    @staticmethod
+    def _normalize_cell(cell: object) -> str:
+        return re.sub(r"\s+", " ", str(cell or "")).strip()
+
+    @staticmethod
+    def _looks_like_header_banner(row: List[str]) -> bool:
+        joined = " ".join(str(cell or "") for cell in row).upper()
+        return "LICENCIA SANITARIA" in joined or "MOTIVO DE VISITA" in joined
+
+    @staticmethod
+    def _looks_like_data_row(row: List[str]) -> bool:
+        return (
+            len(row) == len(EXPECTED_COLUMNS)
+            and row[0].isdigit()
+            and row[1].upper() != "ESTABLECIMIENTO"
+            and bool(re.search(r"\d{2}-MF-", row[3]))
+            and bool(re.search(r"\d{2}/\d{2}/\d{4}", row[4]))
+        )
+
+    @staticmethod
+    def _extract_state_from_address(address: str) -> str:
+        normalized = (
+            address.upper()
+            .replace("Á", "A")
+            .replace("É", "E")
+            .replace("Í", "I")
+            .replace("Ó", "O")
+            .replace("Ú", "U")
+        )
+        state_names = {value.upper(): value for value in ESTADOS_MEXICO.values()}
+        for state_upper, canonical in state_names.items():
+            if state_upper.upper() in normalized:
+                return canonical
+        if "CIUDAD DE MEXICO" in normalized:
+            return "Ciudad de México"
+        if re.search(r"\bMEXICO\b", normalized):
+            return "Estado de México"
+        return "SIN_ESTADO"
+
 
 if __name__ == "__main__":
     extractor = CofeprisClausurasExtractor()
     result = extractor.run()
     if not result.empty:
-        print(f"Extracted {len(result)} rows.")
-        print(result.head())
+        print(f"Extracted {len(result)} tidy COFEPRIS rows.")
+        print(result.head().to_string(index=False))
     else:
-        print("No data extracted.")
+        print("No COFEPRIS rows extracted.")

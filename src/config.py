@@ -40,6 +40,11 @@ SENASICA_CUARENTENAS_PDFS = {
 # [3] DGE Anuarios de Morbilidad (ZIP → CSV)
 DGE_ANUARIO_URL_TEMPLATE = "https://epidemiologia.salud.gob.mx/anuario/datos_abiertos/Anuario_{year}.zip"
 DGE_YEARS = list(range(2015, 2023))  # 2015–2022
+DGE_PDF_YEARS = list(range(2018, 2025))  # 2018–2024
+DGE_NATIONAL_REPORT_NAME = "distribucion_casos_nuevos_enfermedad_fuente_notificacion"
+DGE_NATIONAL_PDF_URL_TEMPLATE = (
+    "https://epidemiologia.salud.gob.mx/anuario/{year}/morbilidad/nacional/{report_name}.pdf"
+)
 
 # API oculta SENASICA (secondary path — Doc A / Protocolo PDF)
 SENASICA_API_OCULTA = "https://dj.senasica.gob.mx/sias/api/Statistics/SaludAnimal/TuberculosisBovina/ObtenerDatos"

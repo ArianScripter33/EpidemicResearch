@@ -13,13 +13,15 @@ Output: DataFrame con brotes FMD por país/fecha
 Feeds: Validación de R0 + Series temporales para Chronos (Tier 2)
 """
 
+from pathlib import Path
+
 import pandas as pd
 
 from src.base_extractor import BaseExtractor
 from src.config import (
+    KAGGLE_FMD_DATASET,
     OPENFMD_DASHBOARD,
-    WAHIS_RETRIEVER_REPO,
-    HTTP_TIMEOUT,
+    RAW_DIR,
 )
 
 
@@ -28,9 +30,9 @@ class OpenFMDExtractor(BaseExtractor):
     Extrae datos de brotes de Fiebre Aftosa a nivel global.
 
     Strategy:
-    1. Try openFMD dashboard CSV download
-    2. If fails → try WAHIS OIE data via alternative endpoints
-    3. If both fail → Use R0 estimates from literature (Tildesley et al.)
+    1. Normalize a browser-assisted export already saved in data/raw/
+    2. If unavailable, use Kaggle only when credentials are configured
+    3. If both fail, fall back to a literature reference dataset
     """
 
     def __init__(self):
@@ -38,95 +40,97 @@ class OpenFMDExtractor(BaseExtractor):
 
     def extract(self) -> pd.DataFrame:
         """
-        Attempt to download FMD data from available sources.
+        Normalize real exports first, then fall back to literature.
         """
-        # --- Primary: openFMD dashboard ---
         try:
-            df = self._try_openfmd()
+            df = self._load_local_browser_export()
             if df is not None and not df.empty:
+                self.logger.info(f"Loaded {len(df)} rows from a local openFMD export")
                 return df
         except Exception as e:
-            self.logger.warning(f"openFMD failed: {e}")
+            self.logger.warning(f"Local openFMD export failed: {e}")
 
-        # --- Secondary: Try known FMD datasets ---
         try:
-            df = self._try_alternative_sources()
+            df = self._try_kaggle_dataset()
             if df is not None and not df.empty:
+                self.logger.info(f"Loaded {len(df)} rows from Kaggle dataset {KAGGLE_FMD_DATASET}")
                 return df
         except Exception as e:
-            self.logger.warning(f"Alternative sources failed: {e}")
+            self.logger.warning(f"Kaggle fallback failed: {e}")
 
-        # --- Fallback: Generate synthetic reference data from literature ---
         self.logger.info("All sources failed. Generating reference data from literature.")
         return self._generate_literature_reference()
 
-    def _try_openfmd(self) -> pd.DataFrame:
+    def _load_local_browser_export(self) -> pd.DataFrame | None:
         """
-        Try to download CSV from openFMD dashboard.
+        Prefer browser-assisted CSV exports already saved in data/raw/.
+        """
+        patterns = ("*openfmd*.csv", "*fmdwatch*.csv", "*wahis*.csv")
+        candidates: list[Path] = []
+        for pattern in patterns:
+            candidates.extend(RAW_DIR.glob(pattern))
 
-        Note: Playwright investigation (March 2026) shows that the "Download CSV"
-        button in the Shiny dashboard does not use a static API endpoint.
-        It generates the file dynamically via WebSockets and triggers a
-        browser-side blob download.
-        """
-        # Common download URL patterns for FMDwatch (legacy or guessed)
-        possible_urls = [
-            "https://openfmd.org/api/fmdwatch/export/csv",
-            "https://openfmd.org/dashboard/fmdwatch/download",
-            "https://openfmd.org/fmdwatch/data/export.csv",
-            # Fallback to direct Shiny session download (rarely works outside browser)
-            "https://openfmd.org/dashboard/fmdwatch/session/fmd_data.csv"
+        candidates = [
+            path for path in candidates
+            if path.name not in {"openfmd_raw.csv", "openfmd_clean.csv"}
         ]
+        candidates = sorted(set(candidates), key=lambda p: p.stat().st_mtime, reverse=True)
 
-        for url in possible_urls:
-            try:
-                self.logger.info(f"Trying: {url}")
-                response = self.session.get(url, timeout=HTTP_TIMEOUT, allow_redirects=True)
-
-                if response.status_code == 200:
-                    content_type = response.headers.get("content-type", "")
-                    if "csv" in content_type or "text" in content_type or "octet" in content_type:
-                        from io import BytesIO
-                        df = pd.read_csv(BytesIO(response.content))
-                        if len(df) > 0:
-                            self.logger.info(f"  ✓ Got {len(df)} rows from {url}")
-                            df["source_url"] = url
-                            return df
-            except Exception as e:
-                self.logger.debug(f"  {url}: {e}")
+        for path in candidates:
+            if self._looks_like_html(path):
+                self.logger.warning(f"Skipping {path.name}: downloaded artifact is HTML, not CSV")
                 continue
+            df = self._read_csv_with_fallbacks(path)
+            if df is not None and not df.empty:
+                if len(df.columns) == 1 and "<!doctype html" in str(df.columns[0]).lower():
+                    self.logger.warning(f"Skipping {path.name}: parsed as a single HTML column")
+                    continue
+                df["source_file"] = path.name
+                if "data_type" not in df.columns:
+                    df["data_type"] = "browser_export"
+                return df
 
-        self.logger.warning("No openFMD download URL worked")
         return None
 
-    def _try_alternative_sources(self) -> pd.DataFrame:
-        """
-        Try alternative FMD data sources:
-        - Kaggle FMD Cattle Dataset 
-        - WOAH WAHIS direct API queries
-        """
-        # WOAH WAHIS API — try a direct query for FMD events
-        wahis_api_urls = [
-            "https://wahis.woah.org/api/v1/pi/getReport?reportDisease=Foot%20and%20mouth%20disease",
-        ]
+    @staticmethod
+    def _looks_like_html(path: Path) -> bool:
+        try:
+            sample = path.read_text(encoding="utf-8", errors="ignore")[:2048].lower()
+        except Exception:
+            return False
+        return "<!doctype html" in sample or "<html" in sample
 
-        for url in wahis_api_urls:
+    @staticmethod
+    def _read_csv_with_fallbacks(path: Path) -> pd.DataFrame | None:
+        for kwargs in (
+            {"sep": None, "engine": "python"},
+            {"sep": ","},
+            {"sep": ";"},
+            {"sep": "\t"},
+        ):
             try:
-                self.logger.info(f"Trying WAHIS API: {url}")
-                response = self.session.get(url, timeout=HTTP_TIMEOUT)
-                if response.status_code == 200:
-                    data = response.json()
-                    if isinstance(data, list) and len(data) > 0:
-                        return pd.DataFrame(data)
-                    elif isinstance(data, dict):
-                        for key in ["data", "results", "reports", "events"]:
-                            if key in data and isinstance(data[key], list):
-                                return pd.DataFrame(data[key])
-            except Exception as e:
-                self.logger.debug(f"  WAHIS API: {e}")
+                df = pd.read_csv(path, **kwargs)
+                if not df.empty:
+                    return df
+            except Exception:
                 continue
-
         return None
+
+    def _try_kaggle_dataset(self) -> pd.DataFrame | None:
+        """
+        Use Kaggle only if credentials are already configured.
+        """
+        try:
+            from src.extractors.kaggle_fmd import KaggleFMDExtractor
+        except Exception:
+            return None
+
+        df = KaggleFMDExtractor().extract()
+        if df is not None and not df.empty:
+            df["source_file"] = f"kaggle:{KAGGLE_FMD_DATASET}"
+            if "data_type" not in df.columns:
+                df["data_type"] = "kaggle_dataset"
+        return df
 
     def _generate_literature_reference(self) -> pd.DataFrame:
         """
@@ -243,17 +247,33 @@ class OpenFMDExtractor(BaseExtractor):
 
         clean = df.copy()
 
-        # Normalize column names
         clean.columns = (
             clean.columns.str.strip()
             .str.lower()
             .str.replace(r"\s+", "_", regex=True)
         )
 
-        # Ensure R0 columns are numeric
+        alias_map = {
+            "country_name": "country",
+            "country/territory": "country",
+            "country_or_territory": "country",
+            "event_date": "date",
+            "outbreak_date": "date",
+            "date_of_outbreak": "date",
+            "serotype/strain": "serotype",
+            "number_of_cases": "cases",
+            "cases_count": "cases",
+            "animals_destroyed": "animals_culled",
+            "number_destroyed": "animals_culled",
+        }
+        clean = clean.rename(columns={old: new for old, new in alias_map.items() if old in clean.columns})
+
         for col in clean.columns:
-            if "r0" in col.lower() or "cases" in col.lower() or "culled" in col.lower():
+            if any(token in col for token in ["r0", "cases", "culled", "year", "duration", "cost"]):
                 clean[col] = pd.to_numeric(clean[col], errors="coerce")
+
+        if "data_type" not in clean.columns:
+            clean["data_type"] = "browser_export"
 
         self.logger.info(f"Transformed: {len(clean)} rows, {len(clean.columns)} columns")
         return clean

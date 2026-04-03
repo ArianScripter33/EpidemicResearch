@@ -1,130 +1,266 @@
 """
-PUCRA RAM Extractor — Wave 2 (PDF Parsing)
-==========================================
-Extracts antimicrobial resistance tables from PUCRA/UNAM annual reports.
-
-Target bacteria: E. coli, Klebsiella pneumoniae, Salmonella spp., Acinetobacter baumannii
-Feeds: AMR parameters for simulation and article.
+PUCRA RAM Extractor — Wave 2 (Single-source hardening)
+======================================================
+Parses the 2024 PUCRA PDF into a tidy resistance table with one row per
+organism, antibiotic, and period.
 """
+
+from __future__ import annotations
+
+import re
+from pathlib import Path
+from typing import Dict, Iterable, List, Optional, Tuple
 
 import pandas as pd
 import pdfplumber
-import re
+import requests
+
 from src.base_extractor import BaseExtractor
-from src.config import PUCRA_URLS, RESISTENCIA_AMPICILINA
+from src.config import PUCRA_URLS, RAW_DIR, RESISTENCIA_AMPICILINA
+
 
 class PucraRAMExtractor(BaseExtractor):
     """
-    Extractor for PUCRA RAM tables.
     Strategy:
-    1. Download PDF reports for multiple years.
-    2. Extract tables with resistance rates.
-    3. Filter for specific bacteria and antibiotics.
-    4. Cross-validate with hardcoded constants.
+    1. Work against a single live source first (2024 report).
+    2. Parse table text into tidy rows.
+    3. Accept a manually downloaded local PDF when the host is unavailable.
+    4. Keep exact source/page metadata for auditing.
     """
 
-    def __init__(self):
+    TARGET_ORGANISMS = {
+        re.compile(r"\b(?:Escherichia coli|E\. coli)\b", re.IGNORECASE): "Escherichia coli",
+        re.compile(r"\b(?:Klebsiella pneumoniae|K\. pneumoniae)\b", re.IGNORECASE): "Klebsiella pneumoniae",
+        re.compile(r"\bSalmonella(?: spp\.)?\b", re.IGNORECASE): "Salmonella spp.",
+        re.compile(r"\b(?:Acinetobacter baumannii|A\. baumannii)\b", re.IGNORECASE): "Acinetobacter baumannii",
+    }
+    TARGET_ANTIBIOTICS = {
+        re.compile(r"^Ampicilina\b", re.IGNORECASE): "Ampicilina",
+        re.compile(r"^Carbenicilina\b", re.IGNORECASE): "Carbenicilina",
+        re.compile(r"^Tetraciclina\b", re.IGNORECASE): "Tetraciclina",
+        re.compile(r"^(?:TMP[-/ ]?SMX|Trimetoprim/?Sulfametoxazol)\b", re.IGNORECASE): "TMP-SMX",
+        re.compile(r"^SAM\b", re.IGNORECASE): "Ampicilina/Sulbactam",
+    }
+
+    def __init__(self, years: Optional[Iterable[str]] = None):
         super().__init__(name="pucra_ram")
+        self.years = list(years or ["2024"])
 
     def extract(self) -> pd.DataFrame:
-        """Download and parse PUCRA PDFs."""
-        all_data = []
-        for year, url in PUCRA_URLS.items():
+        all_records: List[Dict[str, object]] = []
+
+        for year in self.years:
+            url = PUCRA_URLS.get(str(year))
+            if not url:
+                self.logger.warning(f"PUCRA source not configured for {year}")
+                continue
+
             try:
-                local_path = self.download_file(url)
-                with pdfplumber.open(local_path) as pdf:
-                    self.logger.info(f"Extracting tables from PUCRA {year} ({len(pdf.pages)} pages)...")
-                    for i, page in enumerate(pdf.pages):
-                        tables = page.extract_tables()
-                        for table in tables:
-                            if not table or len(table) < 2: continue
+                pdf_path = self._ensure_local_pdf(url)
+            except Exception as exc:
+                self.logger.warning(f"Skipping PUCRA {year}: {exc}")
+                continue
+            all_records.extend(self._extract_pdf_rows(pdf_path, year=str(year), source_url=url))
 
-                            # Heuristic: resistance tables have certain headers
-                            header = [str(c).replace('\n', ' ').strip().lower() for c in table[0]]
-                            if any(k in header for k in ['antibiótico', 'antimicrobiano', 'bacteria', 'resistencia']):
-                                df_table = pd.DataFrame(table[1:], columns=header)
-                                # Clean potential empty headers/duplicates
-                                df_table.columns = [f"col_{j}" if not c else c for j, c in enumerate(df_table.columns)]
-                                df_table['year_report'] = year
-                                df_table['source_url'] = url
-                                df_table['page_num'] = i + 1
-                                all_data.append(df_table)
-            except Exception as e:
-                self.logger.warning(f"Failed to process PUCRA {year}: {e}")
-
-        if not all_data:
+        if not all_records:
             return pd.DataFrame()
 
-        combined_df = pd.concat(all_data, ignore_index=True)
-        self.logger.info(f"Extracted {len(combined_df)} raw rows from PUCRA PDFs.")
-        return combined_df
+        return pd.DataFrame(all_records)
 
     def transform(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Clean and normalize RAM data."""
-        if df.empty: return df
+        if df.empty:
+            return df
 
         clean = df.copy()
+        clean["pct_resistencia"] = pd.to_numeric(clean["pct_resistencia"], errors="coerce")
+        clean = clean.dropna(subset=["organismo", "antibiotico", "periodo"])
+        clean = clean.drop_duplicates(
+            subset=["source_report_year", "organismo", "antibiotico", "periodo", "page_num"]
+        )
+        clean = clean.sort_values(
+            ["source_report_year", "organismo", "antibiotico", "periodo"]
+        ).reset_index(drop=True)
 
-        # Target bacteria
-        target_bacteria = [
-            'E. COLI', 'ESCHERICHIA COLI',
-            'KLEBSIELLA PNEUMONIAE',
-            'SALMONELLA SPP.', 'SALMONELLA',
-            'ACINETOBACTER BAUMANNII'
-        ]
-
-        # Identify relevant columns
-        cols = clean.columns
-        bacteria_col = next((c for c in cols if any(k in c.lower() for k in ['bacteria', 'organismo', 'especie'])), None)
-        antibiotic_col = next((c for c in cols if any(k in c.lower() for k in ['antibiótico', 'antimicrobiano', 'antibiotico', 'fármaco', 'agente'])), None)
-        resistance_col = next((c for c in cols if any(k in c.lower() for k in ['resistencia', 'pct', '%', 'porcentaje'])), None)
-        n_col = next((c for c in cols if 'aislamientos' in c or 'n=' in c or 'total' in c), None)
-
-        if not bacteria_col or not antibiotic_col:
-            # Try to infer if not found by name
-            self.logger.warning("Could not identify bacteria or antibiotic columns by name. Columns were: " + str(list(cols)))
-            return clean # Or return empty if we want strict
-
-        # Standardize names
-        final_cols = {
-            bacteria_col: 'bacteria',
-            antibiotic_col: 'antibiotico',
-            resistance_col: 'pct_resistencia' if resistance_col else 'raw_resistencia',
-            n_col: 'n_aislamientos' if n_col else 'raw_n'
-        }
-        clean = clean.rename(columns={k: v for k, v in final_cols.items() if k})
-
-        # Filtering
-        # 1. Row filtering by bacteria (if it's per row) or table context?
-        # Often tables have a single bacteria in the title, and then rows are antibiotics.
-        # But some tables have bacteria in the first column.
-
-        def is_target_bacteria(val):
-            val = str(val).upper().strip()
-            return any(b in val for b in target_bacteria)
-
-        # Clean pct_resistencia
-        if 'pct_resistencia' in clean.columns:
-            clean['pct_resistencia'] = clean['pct_resistencia'].str.replace('%', '').str.replace(',', '.').str.strip()
-            clean['pct_resistencia'] = pd.to_numeric(clean['pct_resistencia'], errors='coerce')
-
-        # Validation with constants (e.g. Salmonella + Ampicilina ~ 94.7%)
-        # Note: 94.7% in config is 0.947, so we check for ~94.7 in the PDF
         salmo_amp = clean[
-            (clean['bacteria'].fillna('').str.upper().str.contains('SALMONELLA')) &
-            (clean['antibiotico'].fillna('').str.upper().str.contains('AMPICILINA'))
+            (clean["organismo"].str.contains("Salmonella", case=False, na=False))
+            & (clean["antibiotico"].str.contains("Ampicilina", case=False, na=False))
         ]
         if not salmo_amp.empty:
-            extracted_val = salmo_amp['pct_resistencia'].iloc[0]
-            self.logger.info(f"Cross-validation: Extracted {extracted_val}% for Salmonella+Ampicilina. Config expects {RESISTENCIA_AMPICILINA*100}%.")
+            extracted_val = salmo_amp["pct_resistencia"].iloc[0]
+            self.logger.info(
+                "Cross-validation: Salmonella + Ampicilina = %.2f%% vs config %.2f%%",
+                extracted_val,
+                RESISTENCIA_AMPICILINA * 100,
+            )
 
         return clean
+
+    def _ensure_local_pdf(self, url: str) -> Path:
+        filename = url.split("/")[-1]
+        pdf_path = RAW_DIR / filename
+        if pdf_path.exists() and pdf_path.stat().st_size > 0:
+            return pdf_path
+
+        candidate_paths = self._find_local_pdf_candidates(filename)
+        if candidate_paths:
+            chosen = candidate_paths[0]
+            self.logger.info(f"Using existing local PUCRA PDF: {chosen.name}")
+            return chosen
+
+        RAW_DIR.mkdir(parents=True, exist_ok=True)
+        self.logger.info(f"Downloading: {url}")
+        self.logger.info(f"  → Target: {pdf_path}")
+        try:
+            response = requests.get(
+                url,
+                headers=dict(self.session.headers),
+                timeout=(15, 30),
+                stream=False,
+            )
+            response.raise_for_status()
+            pdf_path.write_bytes(response.content)
+            return pdf_path
+        except Exception as exc:
+            raise RuntimeError(
+                "PUCRA host unavailable. Save the report manually under "
+                f"{RAW_DIR / filename} or any matching pucra*.pdf file in data/raw/ and rerun."
+            ) from exc
+
+    def _find_local_pdf_candidates(self, filename: str) -> List[Path]:
+        stem = Path(filename).stem
+        patterns = [
+            f"{filename}",
+            f"*{stem}*.pdf",
+            "*pucra*.pdf",
+            "*PUCRA*.pdf",
+            "*resistencia*antimicrobiana*.pdf",
+            "*RAM*.pdf",
+        ]
+
+        matches: List[Path] = []
+        for pattern in patterns:
+            matches.extend(path for path in RAW_DIR.glob(pattern) if path.is_file() and path.stat().st_size > 0)
+
+        unique_matches = list({path.resolve(): path for path in matches}.values())
+        return sorted(
+            unique_matches,
+            key=lambda path: (
+                0 if path.name == filename else 1,
+                -path.stat().st_mtime,
+                -path.stat().st_size,
+            ),
+        )
+
+    def _extract_pdf_rows(self, pdf_path: Path, year: str, source_url: str) -> List[Dict[str, object]]:
+        records: List[Dict[str, object]] = []
+        with pdfplumber.open(pdf_path) as pdf:
+            for page_num, page in enumerate(pdf.pages, start=1):
+                text = page.extract_text() or ""
+                if not text.strip():
+                    continue
+
+                lines = [self._normalize_line(line) for line in text.splitlines() if self._normalize_line(line)]
+                for organism, section_lines in self._split_page_sections(lines):
+                    periods = self._extract_periods(section_lines)
+                    for line in section_lines:
+                        parsed_row = self._parse_antibiotic_row(line, periods)
+                        if not parsed_row:
+                            continue
+
+                        for periodo, value in zip(parsed_row["periodos"], parsed_row["values"]):
+                            if value == "ND":
+                                continue
+                            records.append(
+                                {
+                                    "source_report_year": year,
+                                    "organismo": organism,
+                                    "antibiotico": parsed_row["antibiotico"],
+                                    "periodo": periodo,
+                                    "pct_resistencia": value,
+                                    "source_pdf": pdf_path.name,
+                                    "page_num": page_num,
+                                    "source_url": source_url,
+                                    "raw_line": line,
+                                }
+                            )
+
+        self.logger.info(f"Extracted {len(records)} tidy rows from {pdf_path.name}")
+        return records
+
+    @staticmethod
+    def _normalize_line(line: str) -> str:
+        return re.sub(r"\s+", " ", line or "").strip()
+
+    def _match_organism(self, line: str) -> Optional[str]:
+        for pattern, canonical in self.TARGET_ORGANISMS.items():
+            if pattern.search(line):
+                return canonical
+        return None
+
+    def _split_page_sections(self, lines: List[str]) -> List[Tuple[str, List[str]]]:
+        sections: List[Tuple[str, List[str]]] = []
+        current_organism: Optional[str] = None
+        current_lines: List[str] = []
+
+        for line in lines:
+            matched_organism = self._match_organism(line)
+            if matched_organism:
+                if matched_organism == current_organism and current_lines:
+                    current_lines.append(line)
+                    continue
+                if current_organism and current_lines:
+                    sections.append((current_organism, current_lines))
+                current_organism = matched_organism
+                current_lines = [line]
+                continue
+
+            if current_organism:
+                current_lines.append(line)
+
+        if current_organism and current_lines:
+            sections.append((current_organism, current_lines))
+
+        return sections
+
+    @staticmethod
+    def _extract_periods(lines: List[str]) -> List[str]:
+        ordered_periods: List[str] = []
+        for line in lines:
+            for year in re.findall(r"\b20\d{2}\b", line):
+                if year not in ordered_periods:
+                    ordered_periods.append(year)
+            if "Promedio" in line and "Promedio" not in ordered_periods:
+                ordered_periods.append("Promedio")
+        return ordered_periods
+
+    def _parse_antibiotic_row(self, line: str, periods: List[str]) -> Optional[Dict[str, object]]:
+        for pattern, canonical in self.TARGET_ANTIBIOTICS.items():
+            if not pattern.search(line):
+                continue
+
+            remainder = pattern.sub("", line, count=1).strip()
+            values = re.findall(r"\b(?:ND|\d{1,3})\b", remainder)
+            if not values:
+                return None
+
+            candidate_periods = periods[-len(values):] if periods and len(values) <= len(periods) else periods
+            if not candidate_periods or len(candidate_periods) != len(values):
+                candidate_periods = [f"value_{idx + 1}" for idx in range(len(values))]
+
+            return {
+                "antibiotico": canonical,
+                "periodos": candidate_periods,
+                "values": values,
+            }
+
+        return None
+
 
 if __name__ == "__main__":
     extractor = PucraRAMExtractor()
     result = extractor.run()
     if not result.empty:
-        print(f"Extracted {len(result)} rows.")
-        print(result.head())
+        print(f"Extracted {len(result)} tidy RAM rows.")
+        print(result.head().to_string(index=False))
     else:
-        print("No data extracted.")
+        print("No PUCRA rows extracted.")
