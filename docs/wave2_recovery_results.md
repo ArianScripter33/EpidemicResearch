@@ -10,7 +10,8 @@ La fase de recuperación de `Wave 2` quedó funcional en los componentes de mayo
 - `DGE nacional 2015-2024` quedó consolidado sin alterar el CSV estatal legado.
 - `openFMD` quedó resuelto con adquisición browser-assisted real desde el dashboard Shiny y normalización local en el repo.
 - `COFEPRIS` quedó reparado a un esquema tidy estable sobre los PDFs locales `2023/2024`.
-- `PUCRA` quedó endurecido, pero su adquisición sigue dependiendo de disponibilidad externa o de un PDF local/manual.
+- `COFEPRIS alimentario` quedó recuperado de forma parcial mediante PDFs oficiales de `Resoluciones y sanciones`, con 12 registros alimentarios/cárnicos utilizables como proxy alternativo.
+- `PUCRA` quedó endurecido, pero su adquisición local sigue dependiendo de disponibilidad externa o de un PDF manual.
 
 ## Estado Por Fuente
 
@@ -20,7 +21,8 @@ La fase de recuperación de `Wave 2` quedó funcional en los componentes de mayo
 | DGE nacional consolidado `2015-2024` | Recuperado | 40 filas, años `2015-2024`, `0` duplicados | `data/processed/dge_morbilidad_nacional_2015_2024_clean.csv` |
 | openFMD / FMDwatch | Recuperado | 28,585 filas crudas/limpias desde navegador real | `data/raw/openfmd_fmdwatch_export.csv` |
 | COFEPRIS `2023/2024` | Recuperado | 33 filas limpias, esquema tidy | `data/processed/cofepris_clausuras_clean.csv` |
-| PUCRA `2024` | Preparado, sin adquisición remota confiable | El host `puiree.cic.unam.mx` sigue inestable | Espera `data/raw/pucra2024.pdf` |
+| COFEPRIS alimentario alternativo | Recuperado parcialmente | 12 registros oficiales alimentarios/cárnicos desde `Resoluciones y sanciones`; sin detalle de contaminante | `data/processed/cofepris_clausuras_alimentarias_clean.csv` |
+| PUCRA `2024` | Preparado, sin adquisición local concluida | El PDF oficial fue verificable por navegador/web, pero no se logró persistir localmente desde shell/red | Espera `data/raw/pucra2024.pdf` |
 
 ## Resultados Recuperados
 
@@ -131,6 +133,27 @@ Campos principales:
 - `motivo_visita`
 - `estado_norm`
 
+### 4.1 COFEPRIS alimentario alternativo
+
+Ruta:
+- `data/processed/cofepris_clausuras_alimentarias_clean.csv`
+
+Fuentes oficiales usadas:
+- `data/raw/cofepris_resoluciones_sanciones_sep_2023.pdf`
+- `data/raw/cofepris_resoluciones_sanciones_dic_2023.pdf`
+- `data/raw/cofepris_resoluciones_sanciones_dic_2024.pdf`
+
+Resultado validado:
+- 12 registros alimentarios/cárnicos
+- 7 registros con `meat_related = true`
+- 0 registros con `closure_explicit = true`
+- 0 registros con `contaminant_explicit = true`
+
+Lectura correcta del hallazgo:
+- sí existe una señal oficial alimentaria útil para proxy regulatorio
+- no se encontraron en esta pasada menciones explícitas a `clenbuterol`, `salmonella`, `LMR`, `rastro` o `matanza`
+- por eso este archivo debe usarse como `proxy regulatorio alimentario alternativo`, no como evidencia directa de contaminantes cárnicos
+
 ### 5. PUCRA
 
 Comando:
@@ -141,8 +164,9 @@ python -m src.extractors.pucra_ram
 
 Estado:
 - el extractor ya está listo para trabajar con una sola fuente viva `2024`
-- el host `puiree.cic.unam.mx` sigue fallando por timeout desde esta red
+- el host `puiree.cic.unam.mx` sigue fallando cuando intentamos persistir el PDF localmente desde shell/red
 - el flujo quedó degradado de forma limpia: si el host no responde, el extractor no rompe el pipeline
+- el PDF oficial `pucra2024.pdf` sí fue verificable por navegador/web y corresponde al reporte `Resistencia antimicrobiana en México 2017 a 2023`
 
 Ruta operativa recomendada:
 - guardar manualmente el PDF como `data/raw/pucra2024.pdf`
@@ -202,12 +226,16 @@ Uso:
 ### COFEPRIS
 
 Usar:
-- `data/processed/cofepris_clausuras_clean.csv`
+- `data/processed/cofepris_clausuras_alimentarias_clean.csv`
 
 Uso:
 - proxy de opacidad regulatoria
-- señal de riesgo alimentario local
+- señal de riesgo alimentario oficial
+- fallback cuando no existan clausuras cárnicas explícitas con contaminante
 - features regulatorias para XGBoost
+
+Notas:
+- `data/processed/cofepris_clausuras_clean.csv` sigue existiendo, pero estaba sesgado a verificaciones farmacéuticas y no debe ser la primera opción para el proxy alimentario
 
 ### PUCRA
 
@@ -222,9 +250,10 @@ Uso:
 ## Limitaciones Conocidas
 
 1. `openFMD` requiere navegador real o Playwright; no es una fuente confiable por `requests` directos.
-2. `PUCRA` sigue sin una ruta de descarga remota estable desde esta red.
+2. `PUCRA` sigue sin una ruta de descarga local persistente desde shell/red, aunque el PDF oficial sí pudo verificarse en navegador/web.
 3. `openFMD` contiene registros históricos muy antiguos; para análisis epidemiológico reciente conviene filtrar por ventana temporal.
 4. `DGE 2018-2024` se recuperó a nivel nacional, no estatal.
+5. `COFEPRIS` no entregó en esta pasada un PDF federal con motivo explícito `clenbuterol/salmonella/LMR`; el mejor hallazgo fue un conjunto de sanciones alimentarias oficiales.
 
 ## Archivos Clave
 
@@ -242,5 +271,5 @@ python -m unittest tests.test_wave2_recovery
 ```
 
 Resultado:
-- `7` pruebas
+- `8` pruebas
 - `OK`
