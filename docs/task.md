@@ -2,6 +2,8 @@
 
 > **Enfermedad asignada: Fiebre Aftosa (FMD)** | TB Bovina = Proxy de calibración
 
+> **Última actualización:** 2026-04-03 (Post Wave 2 Recovery)
+
 ## Phase 0: Research & Audit
 
 - [x] Read V2.md (epidemiological context, 35.1M biomass, RAM prevalence)
@@ -35,13 +37,15 @@
 - [x] **SENASICA TB:** CSV hatos libres → **64 rows, 32 estados** — proxy calibración
 - [x] **DGE Morbilidad:** Anuarios 2015-2017 ZIP→CSV → **384 rows** (288 TB + 96 A05)
   - Nota: Anuarios 2018+ no disponibles en formato CSV (404). 2015-2017 tienen datos por estado/edad/mes/institución.
+- [x] **DGE Morbilidad 2018-2024:** PDFs parseados con pdfplumber → **28 filas nacionales** + serie consolidada 2015-2024 (40 filas)
+  - Nota: Solo nivel nacional (no estatal). CSV estatal legado 2015-2017 preservado intacto.
 
 ### Wave 2 (International + FMD Data)
 
-- [x] **openFMD:** Live API no accesible → **6 rows referencia literatura** (UK 2001, Argentina, Colombia, Germany 2025, Turkey, Brazil)
-- [ ] **Buscar datasets alternativos de FMD** (Kaggle FMD Cattle Dataset, papers with supplementary data)
-- [x] **PUCRA RAM PDFs:** Extractor `pucra_ram.py` funcionando (nota: servidores UNAM inestables).
-- [x] **COFEPRIS clausuras:** Extractor `cofepris_clausuras.py` → **2 filas limpias** (Clenbuterol/Salmonella/LMR).
+- [x] **openFMD:** Browser-assisted Playwright export → **28,585 filas reales** (123 países, serotipos, coordenadas GPS, 2001-2025)
+- [x] **Kaggle FMD:** Extractor `kaggle_fmd.py` listo (necesita API key)
+- [x] **PUCRA RAM PDFs:** Extractor `pucra_ram.py` endurecido. Host UNAM sigue caído. Acepta PDF local en `data/raw/pucra2024.pdf`.
+- [x] **COFEPRIS clausuras:** Parser reparado → **33 filas tidy**. ⚠️ PROBLEMA: PDFs son de "Establecimientos Verificados" (laboratorios farmacéuticos), NO de clausuras de rastros/mataderos. Necesita nuevas fuentes PDF con clausuras alimentarias reales.
 - [x] **SENASICA Cuarentenas:** Extractor `senasica_cuarentenas.py` → **108 filas** 2024 PDFs (API oculta = 404).
 
 ### Wave 3 (Hostile Extraction — Solo si sobra tiempo)
@@ -94,13 +98,17 @@
 
 ---
 
-## Data Inventory (as of 2026-03-31)
+## Data Inventory (as of 2026-04-03)
 
 | Dataset | Source | Rows | Status | Key columns |
 |---------|--------|------|--------|-------------|
 | SENASICA TB | CSV datos abiertos | 64 | ✅ Ready | entidad, constancias, bovinos_libres |
-| DGE Morbilidad | Anuarios ZIP 2015-2017 | 384 | ✅ Ready | estado, CIE-10, acumulado, edad, mes, institución |
-| openFMD Reference | Literature fallback | 6 | ✅ Ready | country, R0, animals_culled, cost |
-| PUCRA RAM | PDFs UNAM | — | ✅ Script Ready | bacteria, antibiotico, pct_resistencia |
-| COFEPRIS Clausuras | gob.mx PDFs | 2 | ✅ Ready | establecimiento, motivo, agente |
-| SENASICA Cuarentenas| PDFs trimestrales 2024 | 108 | ✅ Ready | estado, cuarentena, animales_sacrificados |
+| SENASICA Cuarentenas | PDFs trimestrales 2024 | 108 | ✅ Ready | estado, cuarentena, animales_sacrificados |
+| DGE Morbilidad (estatal) | Anuarios ZIP 2015-2017 | 384 | ✅ Ready | estado, CIE-10, acumulado, edad, mes, institución |
+| DGE Morbilidad (nacional) | PDFs 2018-2024 | 28 | ✅ Ready | year, cve_cie10, acumulado_nacional |
+| DGE Consolidado Nacional | Unión 2015-2024 | 40 | ✅ Ready | year, cve_cie10, acumulado_nacional |
+| openFMD (real data) | Browser export WRLFMD | 28,585 | ✅ Ready | country, date, serotype, topotype, lineage |
+| COFEPRIS Verificaciones | gob.mx PDFs | 33 | ⚠️ Wrong population | Solo laboratorios farmacéuticos, no rastros/mataderos |
+| PUCRA RAM | PDFs UNAM | — | ❌ Host caído | Esperando PDF local en data/raw/pucra2024.pdf |
+
+**Total filas limpias:** ~29,242 (excluyendo COFEPRIS y PUCRA pendientes)
