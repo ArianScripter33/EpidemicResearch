@@ -63,13 +63,19 @@ class OpenFMDExtractor(BaseExtractor):
     def _try_openfmd(self) -> pd.DataFrame:
         """
         Try to download CSV from openFMD dashboard.
-        The exact download URL may vary — we try common patterns.
+
+        Note: Playwright investigation (March 2026) shows that the "Download CSV"
+        button in the Shiny dashboard does not use a static API endpoint.
+        It generates the file dynamically via WebSockets and triggers a
+        browser-side blob download.
         """
-        # Common download URL patterns for FMDwatch
+        # Common download URL patterns for FMDwatch (legacy or guessed)
         possible_urls = [
             "https://openfmd.org/api/fmdwatch/export/csv",
             "https://openfmd.org/dashboard/fmdwatch/download",
             "https://openfmd.org/fmdwatch/data/export.csv",
+            # Fallback to direct Shiny session download (rarely works outside browser)
+            "https://openfmd.org/dashboard/fmdwatch/session/fmd_data.csv"
         ]
 
         for url in possible_urls:
