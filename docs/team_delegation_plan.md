@@ -89,7 +89,19 @@ Antes de asignar tareas, cada miembro del equipo debe:
 
 ---
 
-## 4. Lo Que NO Deben Tocar
+## 4. Nota Sobre Uso de Herramientas IA
+
+Los miembros del equipo tienen acceso a agentes de inteligencia artificial (Gemini, ChatGPT, Copilot, etc.) para asistirles en la ejecución de sus tareas. **Esto es aceptable y recomendado**, siempre que:
+
+1. **Entiendan** lo que el agente genera (no copy-paste ciego)
+2. **Verifiquen** que los números coincidan con los datasets reales
+3. **Documenten** qué herramientas usaron en sus notebooks (buenas prácticas de reproducibilidad)
+
+Las tareas están diseñadas para ser simples en scope pero requieren comprensión del dominio epidemiológico. Si usan IA correctamente, pueden terminar más rápido y con mejor calidad — pero **el Core Team validará todo** en la fase de revisión.
+
+---
+
+## 5. Lo Que NO Deben Tocar
 
 - `src/config.py` — Fuente de verdad. Solo lectura.
 - `src/base_extractor.py` — Infraestructura interna.
@@ -98,19 +110,78 @@ Antes de asignar tareas, cada miembro del equipo debe:
 
 ---
 
-## 5. Flujo de Revisión (Code Review)
+## 6. Revisión y Optimización por Core Team
+
+### 6.1 Checklist de Revisión (Por Tarea)
+
+Cuando cada miembro entregue su trabajo, el Core Team (Arian) ejecutará esta revisión:
+
+**Para Miembro 1 (NoSQL + Criptografía):**
+
+| Criterio | Verificación | Acción si falla |
+|----------|-------------|-----------------|
+| JSON bien formado | `json.load()` no lanza error | Devolver con instrucciones de fix |
+| Suma de animales = 7,558 | `sum(all_animales) == 7558` | Revisar agrupación por estado |
+| 27 estados en JSON | `len(json.keys()) == 27` | Verificar filtro de estados |
+| Cifrado bidireccional | `descifrar(cifrar("Bachoco", 7), 7) == "Bachoco"` | Revisar lógica de módulo |
+| Manejo de caracteres especiales | Cifrar "S.A. DE C.V." no rompe | Agregar guard para no-alfabéticos |
+
+**Para Miembro 2 (Stats + Viz):**
+
+| Criterio | Verificación | Acción si falla |
+|----------|-------------|-----------------|
+| Filtro FMD correcto | Solo `fmdv_positive == "Yes"` y año >= 2000 | Devolver — datos sin filtrar son inútiles |
+| Top 10 coincide con EDA | India ≈ 1,506, Pakistán ≈ 1,455 | Cruzar contra `01_eda_global.ipynb` |
+| Stats TB por estado completos | 32 estados presentes | Verificar que no hicieron `dropna()` |
+| Interpretación COVID coherente | Menciona cierre de tianguis/canales informales | Guiar si es superficial |
+
+### 6.2 Optimización de Algoritmos
+
+Si el código de los miembros funciona pero es ineficiente o poco elegante, el Core Team tiene permiso de:
+
+1. **Refactorizar** sus scripts manteniendo la lógica original (no reescribir desde cero)
+2. **Documentar** las optimizaciones como comentarios inline (`# Optimizado por Core Team: ...`)
+3. **Agregar type hints** y docstrings si faltan
+4. **Limpiar** outputs de notebook (quitar celdas de debug, ordenar visualizaciones)
+
+**Regla de oro:** Si el miembro hizo el 80% correcto, el Core Team completa el 20% restante. Si hizo menos del 50% correcto, se le devuelve con feedback específico para rehacerlo.
+
+### 6.3 Sesión de Feedback (30 min por miembro)
+
+Después de la revisión técnica, el Core Team conduce una mini-sesión donde:
+
+1. **Se muestra** su trabajo integrado en el notebook global — que vean cómo su gráfica encaja en la narrativa completa
+2. **Se explican** las optimizaciones hechas — que aprendan del refactor, no solo reciban el código limpio
+3. **Se validan** sus interpretaciones — si escribieron "India tiene más brotes porque tiene más vacas", se les desafía: "¿Es por la densidad ganadera, la falta de vacunación, o ambas?"
+4. **Se documenta** la contribución de cada miembro para el reporte final
+
+### 6.4 Criterio de Integración al Reporte
+
+El trabajo de los miembros se integra al artículo final **solo si:**
+
+- [ ] Pasa todos los criterios del checklist (sección 6.1)
+- [ ] Las gráficas tienen títulos, ejes etiquetados y fuentes citadas
+- [ ] Las interpretaciones son coherentes con los hallazgos del EDA global
+- [ ] El código corre sin errores en el entorno del proyecto (`requirements.txt`)
+
+---
+
+## 7. Flujo de Revisión Completo
 
 ```
-1. Onboarding (Lectura)     →  Cada miembro lee hallazgos_fase1_eda.md
-2. Asignación (CSVs + .md)  →  Se les entrega los CSVs y este plan
-3. Ejecución (3-5 horas)    →  Desarrollan scripts/notebooks
-4. Revisión (Code Review)   →  Core Team valida contra EDA global
-5. Integración              →  Se incorpora al reporte final
+1. Onboarding (Lectura)      →  Cada miembro lee hallazgos_fase1_eda.md
+2. Asignación (CSVs + .md)   →  Se les entrega los CSVs y este plan
+3. Ejecución (3-5 horas)     →  Desarrollan scripts/notebooks (pueden usar IA)
+4. Entrega (Pull Request)    →  Suben su rama al repo
+5. Revisión (Checklist 6.1)  →  Core Team valida contra EDA global
+6. Optimización (6.2)        →  Core Team refactoriza si necesario
+7. Feedback (6.3)            →  Sesión de 30 min por miembro
+8. Integración (6.4)         →  Se incorpora al reporte final
 ```
 
 ---
 
-## 6. Calendario Sugerido
+## 8. Calendario Sugerido
 
 | Día | Miembro 1 | Miembro 2 | Core Team |
 |-----|-----------|-----------|-----------|
