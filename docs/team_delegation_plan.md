@@ -85,7 +85,20 @@ Antes de asignar tareas, cada miembro del equipo debe:
 - **Acción:** Escribir 2 párrafos explicando por qué las intoxicaciones alimentarias cayeron 41.5% en 2020 pero la tuberculosis solo cayó 24.8%. ¿Qué dice esto sobre los mecanismos de transmisión de cada enfermedad?
 - **Entregable:** Texto en Markdown al final de su notebook.
 
-**Tiempo estimado:** 4-5 horas total.
+### 👨‍💻 Arian (Core Team / Liderazgo Técnico)
+
+**Perfil necesario:** Machine Learning, Ecuaciones Diferenciales, Orquestación de Repositorios.
+
+**Tarea A — Modelado SIR Dual (FMD vs TB)**
+- **Acción:** Implementar sistemas de ecuaciones diferenciales ordinarias (ODEs) con `scipy.odeint` para el Incidente de Modelado Matemático. 
+- **Entregable:** Script `src/models/sir_dual.py` con 3 escenarios paramétricos calibrados con los R0 de la literatura.
+
+**Tarea B — Estadística Inferencial (ANOVA)**
+- **Acción:** Desarrollar el análisis de varianza para probar hipótesis sobre la contaminación estacional cruzada con factores de puntos de venta (Incidente de Estadística Multivariada).
+- **Entregable:** Script `src/models/stats_multivariate.py`.
+
+**Tarea C — Arquitectura y Review**
+- **Acción:** Orquestar el entorno en GitHub, consolidar todos los análisis del equipo en un documento científico uniforme, y realizar validación cruzada y optimización de sus rutinas de código.
 
 ---
 
