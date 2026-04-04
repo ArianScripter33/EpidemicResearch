@@ -203,7 +203,20 @@ La serie temporal de eventos FMD positivos por año muestra comportamientos anó
    - **Right-Censoring (Rezago de reporte):** El WRLFMD recibe reportes anuales/bianuales de países en desarrollo. Los datos de 2024-2025 aún están "viajando" por el cerco burocrático.
    - **Cambio Estructural Post-COVID:** La pandemia masificó la tecnología PCR. Países endémicos que antes enviaban sus muestras físicamente al Reino Unido (WRLFMD) para secuenciación, ahora secuencian internamente. Ergo, el WRLFMD pierde visibilidad de esos brotes, generando un sesgo de sub-reporte masivo en openFMD.
 
-**Implicación para Importación:** A falta de datos en tiempo real precisos, la evaluación del cerco sanitario nacional exige enfoques probabilísticos como los **Modelos de Gravedad Espacial (Spatial Gravity Models)**. Estos modelos determinan que la probabilidad de importar la FMD a territorio limpio (México) escala proporcionalmente al *Volumen de Comercio* con zonas rojas y cae inversamente respecto al cuadrado de la *Distancia* física.
+**Implicación para Importación (El Escudo Narrativo):** 
+A falta de datos epidemiológicos confiables en tiempo real, ¿cómo justificamos académicamente el introducir "un brote inicial" en nuestro modelo SIR en un país libre de la enfermedad como México? La respuesta es el **Modelo de Gravedad Espacial (Spatial Gravity Model)**.
+
+Este marco teórico estipula que la probabilidad de importar la FMD a territorio limpio no es aleatoria, sino que obedece a una fórmula análoga a la gravedad de Newton: 
+`Riesgo = (T * P) / D²`
+
+1. **(T) Volumen de Comercio:** Toneladas de origen animal o flujo de personas importadas. *Datos obtenibles de bases aduaneras y fiscales perfectamente estructuradas (UN Comtrade, SAT, SIAP)*.
+2. **(P) Prevalencia del Origen:** Nivel de infección en el país exportador. *Aquí es donde nuestro modelo se topa con pared por el Falso Cero y el sub-registro global*.
+3. **(D) Fricción/Distancia:** Distancia geográfica, horas de vuelo o controles sanitarios.
+
+**Giro Narrativo Estratégico:** 
+Como la variable (P) está corrompida por el sub-registro de WRLFMD, un Modelo de Gravedad nos arrojaría un falso riesgo de cero si intentáramos programarlo. Por ende, no codificaremos este modelo predictivo de frontera. En cambio, usaremos esta teoría de la Gravedad Espacial como **protección argumentativa** en la defensa del proyecto: 
+
+*"Modelamos el SIR asumiendo una filtración del virus (`I₀ = 1`) porque la Teoría de Gravedad nos dice que, mientras México participe en la hiperconectividad del comercio agropecuario global (altos valores en T), la probabilidad de importar el virus es perpetua e inevitable, sin importar cuán ineficiente y lenta sea la red global en reportar los focos de prevalencia reales (P)."*
 
 **Gráfica:** `data/processed/eda_charts/openfmd_evolucion_temporal.png`
 
