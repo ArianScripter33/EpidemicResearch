@@ -78,10 +78,10 @@
 - [ ] Curvas de Andrews (Tier 2)
 - [ ] Dashboard interactivo Streamlit (Tier 3)
 
-## Phase 6: Notebooks EDA
+## Phase 6: Notebooks EDA ✅
 
-- [ ] `01_eda_senasica.ipynb` — Exploración datos SENASICA (32 estados)
-- [ ] `02_eda_morbilidad.ipynb` — Exploración datos DGE (TB + A05, 3 años)
+- [x] `01_eda_global.ipynb` — EDA maestro que consolida SENASICA (32 estados), DGE (TB + A05), openFMD y COFEPRIS.
+- [ ] `02_analisis_descriptivo.ipynb` — Análisis de varianza (DGE) y Top países África (TBD - delegado).
 - [ ] `03_multivariate_analysis.ipynb` — PCA, ANOVA, Chernoff
 - [ ] `04_sir_simulation.ipynb` — Simulación SIR dual interactiva
 - [ ] `05_financial_analysis.ipynb` — VPN, ROI, escenarios
@@ -108,7 +108,7 @@
 | DGE Morbilidad (nacional) | PDFs 2018-2024 | 28 | ✅ Ready | year, cve_cie10, acumulado_nacional |
 | DGE Consolidado Nacional | Unión 2015-2024 | 40 | ✅ Ready | year, cve_cie10, acumulado_nacional |
 | openFMD (real data) | Browser export WRLFMD | 28,585 | ✅ Ready | country, date, serotype, topotype, lineage |
-| COFEPRIS Verificaciones | gob.mx PDFs | 33 | ⚠️ Wrong population | Solo laboratorios farmacéuticos, no rastros/mataderos |
+| COFEPRIS Alimentaria | gob.mx PDFs | 12 | ✅ Proxy regulatory | Sanciones a empresas cárnicas (Bachoco, Qualtia) |
 | PUCRA RAM | PDFs UNAM | — | ❌ Host caído | Esperando PDF local en data/raw/pucra2024.pdf |
 
-**Total filas limpias:** ~29,242 (excluyendo COFEPRIS y PUCRA pendientes)
+**Total filas limpias:** ~29,242

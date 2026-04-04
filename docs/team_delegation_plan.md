@@ -68,11 +68,11 @@ Antes de asignar tareas, cada miembro del equipo debe:
 
 **Perfil necesario:** Pandas básico, Matplotlib o Seaborn.
 
-**Tarea A — Top 10 Países FMD**
+**Tarea A — Top 5 Países FMD (África)**
 - **Input:** `data/processed/openfmd_clean.csv` (28,585 filas)
-- **Filtro obligatorio:** `fmdv_positive == "Yes"` y `date_sampling` entre 2000-01-01 y 2025-12-31
-- **Acción:** Agrupar por `country`, contar eventos, graficar un barplot horizontal del Top 10.
-- **Resultado esperado:** India (1,506), Pakistán (1,455), Vietnam (1,342), Irán (902), Turquía (749)...
+- **Filtro obligatorio:** Continente africano (`un_region == "Africa"`), `fmdv_positive == "Yes"`, y `date_sampling` entre 2000 y 2025.
+- **Acción:** Agrupar por `country`, contar eventos, graficar un barplot de los 5 países africanos con más brotes.
+- **Resultado esperado:** Egipto (651), Kenia (645), Nigeria (552), Etiopía (505), Sudán (288).
 - **Entregable:** Notebook `notebooks/02_analisis_descriptivo.ipynb` con la gráfica y 2 párrafos de interpretación.
 
 **Tarea B — Estadísticos de TB Humana por Estado**
@@ -85,7 +85,7 @@ Antes de asignar tareas, cada miembro del equipo debe:
 - **Acción:** Escribir 2 párrafos explicando por qué las intoxicaciones alimentarias cayeron 41.5% en 2020 pero la tuberculosis solo cayó 24.8%. ¿Qué dice esto sobre los mecanismos de transmisión de cada enfermedad?
 - **Entregable:** Texto en Markdown al final de su notebook.
 
-### 👨‍💻 Arian (Core Team / Liderazgo Técnico)
+### 👨‍💻 Arian (Core Team)
 
 **Perfil necesario:** Machine Learning, Ecuaciones Diferenciales, Orquestación de Repositorios.
 
@@ -119,7 +119,7 @@ Las tareas están diseñadas para ser simples en scope pero requieren comprensi�
 - `src/config.py` — Fuente de verdad. Solo lectura.
 - `src/base_extractor.py` — Infraestructura interna.
 - `src/extractors/*` — Los extractores ya están validados.
-- `notebooks/01_eda_global.ipynb` — Nuestro notebook maestro.
+- `notebooks/01_eda_global.ipynb` — Nuestro notebook maestro SI pueden hacer una copia hacer merge.
 
 ---
 
