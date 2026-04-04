@@ -216,7 +216,7 @@ Este marco teórico estipula que la probabilidad de importar la FMD a territorio
 **Giro Narrativo Estratégico:** 
 Como la variable (P) está corrompida por el sub-registro de WRLFMD, un Modelo de Gravedad nos arrojaría un falso riesgo de cero si intentáramos programarlo. Por ende, no codificaremos este modelo predictivo de frontera. En cambio, usaremos esta teoría de la Gravedad Espacial como **protección argumentativa** en la defensa del proyecto: 
 
-*"Modelamos el SIR asumiendo una filtración del virus (`I₀ = 1`) porque la Teoría de Gravedad nos dice que, mientras México participe en la hiperconectividad del comercio agropecuario global (altos valores en T), la probabilidad de importar el virus es perpetua e inevitable, sin importar cuán ineficiente y lenta sea la red global en reportar los focos de prevalencia reales (P)."*
+*"Modelamos el SIR asumiendo una filtración del virus (`I₀ = 1`) porque la Teoría de Gravedad nos dice que, mientras México participe en la hiperconectividad del comercio agropecuario global (altos valores en T), la probabilidad de importar el virus es perpetua e inevitable, es decir siempre es mayor a cero pero nunca 0, sin importar cuán ineficiente y lenta sea la red global en reportar los focos de prevalencia reales (P)."*
 
 **Gráfica:** `data/processed/eda_charts/openfmd_evolucion_temporal.png`
 
