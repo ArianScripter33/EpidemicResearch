@@ -194,9 +194,16 @@ Esto justifica el uso de un R₀ = 6.0 (no reducido por inmunidad parcial) en el
 
 ---
 
-### Hallazgo 7: Evolución Temporal Global — La FMD No Está Controlada
+### Hallazgo 7: Evolución Temporal Global — Anomalías en el Reporte (Right-Censoring)
 
-La serie temporal de eventos FMD positivos por año muestra que la enfermedad **no está en declive global**. Los picos recientes en 2010-2015 y la actividad sostenida en 2020-2025 (incluyendo brotes en Alemania y Turquía) confirman que la FMD sigue siendo una amenaza activa.
+La serie temporal de eventos FMD positivos por año muestra comportamientos anómalos que revelan cambios estructurales, tanto epidemiológicos como en la ingeniería de datos:
+
+1. **El efecto COVID (2020-2021):** Los casos cayeron de picos históricos a una meseta de ~600 anuales. Esto es consistente con la parálisis comercial global; al cerrarse las fronteras, el tránsito de ganado y carne se detuvo, actuando como un experimento natural de contención.
+2. **El "Falso Cero" (2022-2026):** La gráfica muestra un colapso pronunciado acercándose a cero. Esto NO significa que la FMD se haya erradicado. Responde a dos factores críticos:
+   - **Right-Censoring (Rezago de reporte):** El WRLFMD recibe reportes anuales/bianuales de países en desarrollo. Los datos de 2024-2025 aún están "viajando" por el cerco burocrático.
+   - **Cambio Estructural Post-COVID:** La pandemia masificó la tecnología PCR. Países endémicos que antes enviaban sus muestras físicamente al Reino Unido (WRLFMD) para secuenciación, ahora secuencian internamente. Ergo, el WRLFMD pierde visibilidad de esos brotes, generando un sesgo de sub-reporte masivo en openFMD.
+
+**Implicación para Importación:** A falta de datos en tiempo real precisos, la evaluación del cerco sanitario nacional exige enfoques probabilísticos como los **Modelos de Gravedad Espacial (Spatial Gravity Models)**. Estos modelos determinan que la probabilidad de importar la FMD a territorio limpio (México) escala proporcionalmente al *Volumen de Comercio* con zonas rojas y cae inversamente respecto al cuadrado de la *Distancia* física.
 
 **Gráfica:** `data/processed/eda_charts/openfmd_evolucion_temporal.png`
 
