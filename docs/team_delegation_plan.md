@@ -1,45 +1,120 @@
-# Plan de Delegación y Análisis Exploratorio (EDA)
+# Plan de Delegación de Tareas al Equipo
 
-## 1. Fase de Análisis Exploratorio Global (EDA)
-**Responsables:** Arian & Antigravity (Core Team)
-**Objetivo:** Consolidar, limpiar y descubrir *insights* en todos los datasets recuperados antes de pasarlos al equipo.
-
-**Acciones a realizar en Jupyter Notebook (`01_eda_global.ipynb`):**
-1. **DGE Morbilidad:** Graficar la serie de tiempo 2015-2024 para Tuberculosis (A15-A19) vs Intoxicaciones (A05) a nivel nacional.
-2. **SENASICA:** Analizar la distribución de hatos libres vs cuarentenados. Evaluar cuánta biomasa está bajo riesgo en los 13 estados afectados.
-3. **openFMD:** Filtrar brotes de Fiebre Aftosa (2000-2025) por continente. Identificar serotipos más comunes (O, A, SAT2) para justificar los parámetros de nuestro modelo SIR.
-4. **COFEPRIS:** Mapear las 33 sanciones de laboratorios para establecer nuestro "proxy basal normativo" (la frecuencia con la que el gobierno inspecciona).
+> **Última actualización:** 2026-04-03 (Post EDA Global)  
+> **Hallazgos de referencia:** `docs/hallazgos_fase1_eda.md`  
+> **Notebook de referencia:** `notebooks/01_eda_global.ipynb`
 
 ---
 
-## 2. Alineación con Incidentes Críticos (Syllabus)
-Las tareas delegadas deben cumplir con los requisitos académicos sin requerir conocimientos avanzados de modelado matemático o Machine Learning.
+## 1. Onboarding: Lo Que Todo El Equipo Debe Saber
 
-*   **Incidente Crítico 1 (Matemáticas Discretas / Criptografía):** Implementación de cifrado para proteger datos de granjas.
-*   **Incidente Crítico 2 (Estadística Multivariada):** Análisis de varianza (ANOVA) y pruebas de hipótesis.
-*   **Incidente Crítico 3 (Bases de Datos NoSQL):** Ingesta de JSONs a MongoDB.
+Antes de asignar tareas, cada miembro del equipo debe:
 
----
-
-## 3. Asignación de Tareas Específicas (Nivel: Analista Junior)
-
-Estas tareas están diseñadas para ser **muy medibles, delimitadas y útiles**. Les dará el sentimiento de contribución real mientras nosotros construimos la arquitectura pesada.
-
-### 👨‍💻 Miembro 1 del Equipo: Transformación a NoSQL y Criptografía Básica
-**Perfil necesario:** Python básico, conocimientos de diccionarios, JSON.
-**Tarea A:** Convertir el dataset `senasica_cuarentenas_clean.csv` en una estructura JSON anidada (por estado y trimestre) para simular la ingesta a MongoDB.
-**Tarea B:** Programar una función en Python (Cifrado César o similar simple) que encripte la columna de `establecimiento` del dataset de COFEPRIS para "proteger datos sensibles" (Cumple con requisito de Matemáticas Discretas).
-**Entregable:** Un script `crypto_mongo_prep.py` que genere los JSONs cifrados.
-
-### 👨‍💻 Miembro 2 del Equipo: Estadística Descriptiva y Visualización (Plotly/Seaborn)
-**Perfil necesario:** Manejo de Pandas básico, Matplotlib/Plotly.
-**Tarea A:** Agrupar el dataset `openfmd_clean.csv` por continente (`un_region`) y año, y generar un gráfico de barras apiladas de los 10 países con más brotes de Fiebre Aftosa en los últimos 20 años.
-**Tarea B:** Calcular la media, mediana y desviación estándar de los casos de morbilidad de Tuberculosis de nuestro dataset DGE 2015-2017 por estado, y preparar una tabla resumen.
-**Entregable:** Un jupyter notebook `02_analisis_descriptivo.ipynb` con las 2 gráficas y la tabla resumen.
+1. **Leer** `docs/hallazgos_fase1_eda.md` — Resumen completo de qué datos tenemos, de dónde salieron, y qué descubrimos.
+2. **Ejecutar** `notebooks/01_eda_global.ipynb` — Correr el notebook celda por celda para familiarizarse con los datasets y las gráficas.
+3. **Entender los números clave:**
+   - México tiene **35.1 millones** de cabezas de ganado bovino
+   - Solo **1.2%** está certificado como libre de tuberculosis
+   - **27 de 32 estados** tienen cuarentenas activas por TB bovina
+   - Jalisco concentra **66.6%** de los animales afectados
+   - Las Américas solo representan **2.7%** de los brotes globales de Fiebre Aftosa
+   - COVID-2020 redujo intoxicaciones alimentarias en **41.5%** (al cerrar canales informales)
 
 ---
 
-## 4. Flujo de Revisión (Code Review)
-1. **Asignación:** Se les entrega a cada uno sus respectivos CSVs limpios y un archivo `.prompt` o `.md` con instrucciones paso a paso.
-2. **Ejecución:** Ellos desarrollan sus scripts.
-3. **Revisión:** Nosotros cruzamos sus gráficas y scripts con nuestro EDA global para verificar métricas, depuramos su código ("Insights") y lo integramos al reporte final.
+## 2. Alineación con Incidentes Críticos del Syllabus
+
+| Incidente Crítico | Materia | Tarea Asociada | Asignado a |
+|-------------------|---------|----------------|------------|
+| IC1: Criptografía | Matemáticas Discretas | Cifrado César/RSA sobre datos sensibles | Miembro 1 |
+| IC2: Estadística | Estadística Multivariada | Cálculos descriptivos + gráficas | Miembro 2 |
+| IC3: NoSQL | Bases de Datos | Transformación CSV → JSON → MongoDB | Miembro 1 |
+| IC4: Modelado SIR | Modelado Matemático | `scipy.odeint` (Core Team) | Arian |
+| IC5: Visualización | Herramientas Computacionales | Mapa coroplético, gráficas SIR | Core Team + Miembro 2 |
+
+---
+
+## 3. Asignación de Tareas Concretas
+
+### 👨‍💻 Miembro 1: Transformación a NoSQL y Criptografía
+
+**Perfil necesario:** Python básico, manejo de diccionarios y JSON.
+
+**Tarea A — Transformación NoSQL**
+- **Input:** `data/processed/senasica_cuarentenas_clean.csv` (108 filas, 11 columnas)
+- **Acción:** Convertir el CSV en una estructura JSON anidada por estado y trimestre. Ejemplo:
+```json
+{
+  "Jalisco": {
+    "Q1_2024": {"hatos": 30, "animales": 1200},
+    "Q2_2024": {"hatos": 35, "animales": 1350}
+  }
+}
+```
+- **Entregable:** Script `src/warehouse/csv_to_json.py` + archivo `data/processed/cuarentenas.json`
+- **Verificación:** El JSON debe tener 27 estados (coincide con EDA) y el total de animales debe sumar 7,558.
+
+**Tarea B — Criptografía Básica**
+- **Input:** `data/processed/cofepris_clausuras_alimentarias_clean.csv` (12 filas)
+- **Acción:** Implementar una función de Cifrado César que encripte la columna `establecimiento` con una clave k=7. Implementar la función inversa (descifrado). Demostrar bidireccionalidad.
+- **Entregable:** Script `src/crypto/encryption.py` con funciones `cifrar_cesar(texto, k)` y `descifrar_cesar(texto, k)`
+- **Verificación:** `descifrar_cesar(cifrar_cesar("Bachoco", 7), 7)` debe retornar `"Bachoco"`.
+
+**Tiempo estimado:** 3-4 horas total.
+
+---
+
+### 👨‍💻 Miembro 2: Estadística Descriptiva y Visualización
+
+**Perfil necesario:** Pandas básico, Matplotlib o Seaborn.
+
+**Tarea A — Top 10 Países FMD**
+- **Input:** `data/processed/openfmd_clean.csv` (28,585 filas)
+- **Filtro obligatorio:** `fmdv_positive == "Yes"` y `date_sampling` entre 2000-01-01 y 2025-12-31
+- **Acción:** Agrupar por `country`, contar eventos, graficar un barplot horizontal del Top 10.
+- **Resultado esperado:** India (1,506), Pakistán (1,455), Vietnam (1,342), Irán (902), Turquía (749)...
+- **Entregable:** Notebook `notebooks/02_analisis_descriptivo.ipynb` con la gráfica y 2 párrafos de interpretación.
+
+**Tarea B — Estadísticos de TB Humana por Estado**
+- **Input:** `data/processed/dge_morbilidad_clean.csv` (384 filas, dataset estatal 2015-2017)
+- **Acción:** Filtrar filas donde CIE-10 sea "A15" o "A16" (tuberculosis respiratoria). Agrupar por estado. Calcular: media, mediana, desviación estándar y coeficiente de variación de los casos acumulados.
+- **Entregable:** En el mismo notebook, una tabla resumen con los 32 estados + breve análisis de cuáles estados tienen mayor variabilidad.
+
+**Tarea C (Opcional) — Interpretación del Efecto COVID**
+- **Input:** La gráfica `dge_tendencia_temporal.png` generada por el notebook del EDA Global.
+- **Acción:** Escribir 2 párrafos explicando por qué las intoxicaciones alimentarias cayeron 41.5% en 2020 pero la tuberculosis solo cayó 24.8%. ¿Qué dice esto sobre los mecanismos de transmisión de cada enfermedad?
+- **Entregable:** Texto en Markdown al final de su notebook.
+
+**Tiempo estimado:** 4-5 horas total.
+
+---
+
+## 4. Lo Que NO Deben Tocar
+
+- `src/config.py` — Fuente de verdad. Solo lectura.
+- `src/base_extractor.py` — Infraestructura interna.
+- `src/extractors/*` — Los extractores ya están validados.
+- `notebooks/01_eda_global.ipynb` — Nuestro notebook maestro.
+
+---
+
+## 5. Flujo de Revisión (Code Review)
+
+```
+1. Onboarding (Lectura)     →  Cada miembro lee hallazgos_fase1_eda.md
+2. Asignación (CSVs + .md)  →  Se les entrega los CSVs y este plan
+3. Ejecución (3-5 horas)    →  Desarrollan scripts/notebooks
+4. Revisión (Code Review)   →  Core Team valida contra EDA global
+5. Integración              →  Se incorpora al reporte final
+```
+
+---
+
+## 6. Calendario Sugerido
+
+| Día | Miembro 1 | Miembro 2 | Core Team |
+|-----|-----------|-----------|-----------|
+| Día 1 | Onboarding + Tarea A (JSON) | Onboarding + Tarea A (Top 10 FMD) | Modelo SIR Dual |
+| Día 2 | Tarea B (Criptografía) | Tarea B (Stats TB por estado) | ANOVA + Financiero |
+| Día 3 | — | Tarea C (Interpretación COVID) | Mapa coroplético |
+| Día 4 | Code Review conjunto | Code Review conjunto | Integración al artículo |
