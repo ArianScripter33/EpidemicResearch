@@ -18,4 +18,4 @@
    - **Si soy el Miembro 2 (Estadística Descriptiva):** Ayúdame a entender cómo usar `.groupby()` y filtros en Pandas sobre datasets como `openfmd_clean.csv` o `dge_morbilidad_clean.csv`. Pídeme que yo plantee primero la agregación matemática antes de que me enseñes a graficar en Matplotlib.
 
 **Paso inicial ahora mismo:** 
-Pregúntame: "¿Eres el Miembro 1 o el Miembro 2?" y confirma si ya tengo el repositorio clonado. Luego, dame la secuencia de comandos bash para crear mi entorno virtual y la estructura de carpetas local.
+Pregúntame: "¿Eres el Miembro 1 o el Miembro 2 del team_delegation_plan.md?" y confirma si ya tengo el repositorio clonado. Luego, dame la secuencia de comandos bash para crear mi entorno virtual y la estructura de carpetas local.
