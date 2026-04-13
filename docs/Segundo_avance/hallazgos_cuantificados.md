@@ -258,3 +258,23 @@ Integrando el costo continuo sobre la población activa de infectados simulados 
 Esta cifra no incluye el costo de los programas gubernamentales de tuberculinización, cuarentenas y liquidación de hatos reactores, que multiplican el impacto real. La TB bovina es, por tanto, un sangrado crónico que diezma al pequeño ganadero sin la dramatismo visual de un brote exponencial.
 
 ![Impacto Financiero Acumulado — Tuberculosis Bovina](../figures/tb_impacto_financiero.png)
+
+---
+
+### 7.3 Hallazgo Económico Extremo — La Quiebra Automática (Fiebre Aftosa)
+
+**Código:** `src/models/fmd_storytelling_plot.py` | **Figura:** `docs/figures/fmd_impacto_nuclear.png`
+
+En contraste con el sangrado de la Tuberculosis, la Fiebre Aftosa (FMD) desencadena un colapso financiero instantáneo derivado de políticas comerciales internacionales (OMSA) y protocolos de erradicación violenta.
+
+**Bases de Cuantificación (Modelo "Rifle Sanitario"):**
+- **Pérdida Biológica:** Las vacas infectadas no continúan produciendo a menor rendimiento; son sacrificadas inmediatamente. Se determinó un valor promedio de biomasa conservador: **500 kg en pie a $50 MXN = $25,000 MXN ≈ $1,250 USD** por cabeza. (Fuente: SNIIM / Uniones Ganaderas).
+- **Cierre de Fronteras:** Al declararse el Caso Cero ($I_0=1$), se activa un bloqueo de la OMSA a los $3,000 Millones USD anuales de exportación cárnica (pérdida de **~$8.2 Millones USD diarios**).
+
+**Resultado de la Simulación (150 días):**
+El valor de la bolsa matemática de *Removidos* ($R$) escala hiper-exponencialmente hasta liquidar casi la mitad del hato nacional (~18.7 Millones de cabezas). El costo por animal ejecutado, sumado al apagón de exportaciones durante el mismo periodo, arrastra a la industria a una pérdida de **$22.8 Billones de Dólares (Billions USD)** en menos de cinco meses.
+
+**La Justificación NoSQL:**
+Como se aprecia en la gráfica, la ruina nacional no es una advertencia distante; está consolidada en el modelo de contagio. Este precipicio justifica absolutamente la recolección temprana de anomalías geográficas y el abandono de la lentitud algorítmica ($O(n)$ Joins) del software tradicional (SQL). Se necesita Mongo y se necesita Rápido.
+
+![Colapso Financiero — Fiebre Aftosa](../figures/fmd_impacto_nuclear.png)
