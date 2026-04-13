@@ -73,12 +73,15 @@ ax1.spines['left'].set_visible(False)
 ax1.spines['bottom'].set_color('#CCCCCC')
 ax1.grid(axis='y', linestyle='--', alpha=0.4)
 
-# Títulos y Explicaciones (Textos directos como manda Cole Nussbaumer Knaflic)
+# Títulos y Explicaciones
 ax1.set_title("Tuberculosis Bovina: El 'Cáncer Financiero' del Ganadero", 
-              fontsize=18, fontweight='bold', loc='left', pad=30, color='#2C3E50')
+              fontsize=18, fontweight='bold', loc='left', pad=45, color='#2C3E50')
 
-ax1.text(0, 1.05, "Mientras la curva infecciosa parece plana, cada vaca enferma durante 6 meses genera un daño acumulativo devastador.\nSimulación basada en un costo operativo amortizado de $10 USD diarios por vaca infectada.", 
+ax1.text(0, 1.08, "Mientras la curva infecciosa parece plana, cada vaca enferma genera un daño acumulativo devastador.\nSimulación basada en literatura (Rahman & Samad) a $1.1 USD diarios por pérdida lechera.", 
          transform=ax1.transAxes, fontsize=12, color='#7F8C8D', linespacing=1.5)
+
+# Expandir límite X para que quepa la anotación final
+ax1.set_xlim(0, 3.3)
 
 # Formateo de Ejes
 ax1.set_xlabel('Años de Simulación', fontsize=12, color='#7F8C8D', labelpad=10)
@@ -100,8 +103,8 @@ ax2.spines['right'].set_visible(False)
 ax2.set_ylabel('Animales Enfermos (Plana)', fontsize=11, color='#95A5A6', rotation=270, labelpad=25)
 ax2.yaxis.set_major_formatter(ticker.StrMethodFormatter('{x:,.0f} cabezas'))
 
-plt.tight_layout()
+plt.subplots_adjust(top=0.85, bottom=0.15, right=0.85, left=0.1)
 os.makedirs('docs/figures', exist_ok=True)
 out_path = 'docs/figures/tb_impacto_financiero.png'
-plt.savefig(out_path, dpi=300, facecolor=fig.get_facecolor(), edgecolor='none')
+plt.savefig(out_path, dpi=300, facecolor=fig.get_facecolor(), edgecolor='none', bbox_inches='tight')
 print(f"✅ Gráfica Big 4 generada: {out_path}")
