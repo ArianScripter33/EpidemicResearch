@@ -100,7 +100,7 @@ El código `src/models/sir_dual.py` procesa los datos reales ingeridos por el pi
 
 ![Gráfico: Tuberculosis Endémica vs Fiebre Aftosa Exótica](../figures/sir_comparativo.png)
 
-* **Izquierda (TB Bovina):** Endémica y lenta. La simulación arranca con $I_0 = 7,558$ (las cuarentenas documentadas ocultas del SENASICA). Al ser $R_0 = 1.8$, el crecimiento es paulatino y se mantiene controlable a los 150 días.
+* **Izquierda (TB Bovina):** Endémica y lenta. La simulación arranca con $I_0 = 7,558$ y sube a $14,711$ infectados. La curva aparenta ser completamente plana (inocua) debido a un efecto de escala (el eje Y abarca 35 millones de animales). Sin embargo, esta curva plana disfraza el verdadero peligro biológico: su parámetro $\gamma = 1/180$ dicta una incubación y padecimiento a largo plazo. A diferencia de un ataque agudo, la TB actúa como un "cáncer financiero", provocando decomisos en mataderos, generando Súper-bacterias (Resistencia Antimicrobiana debido a tratamientos inconclusos) y un alto riesgo Zoonótico en humanos por lácteos no pasteurizados. Es un sangrado crónico que arruina al pequeño productor.
 * **Derecha (FMD):** La importación catastrófica ($I_0 = 1$). El parámetro empírico $R_0 = 6.0$ y un $\gamma = 1/14$ días produce una curva casi vertical (exponencial verdadera). A los 60 días, más de la mitad del sector agropecuario (18.7 millones) termina en estado Removido (extinto/sacrificado). 
 
 Esta visualización ratifica matemáticamente por qué nuestro **Sistema de Vigilancia Unificado** (NoSQL / MongoDB) no es una extravagancia de software, sino un muro de contención económico de vital importancia a nivel nacional.
