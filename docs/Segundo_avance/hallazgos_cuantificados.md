@@ -84,10 +84,15 @@ Este documento recopila **los hallazgos más importantes** del Análisis Explora
 | Aguascalientes | 356 | 70 | 0.9% |
 | Tabasco | 44 | 133 | 1.8% |
 
-**Hallazgo original:** Jalisco concentra 66.6% de todos los animales afectados con solo 15.8% de los hatos cuarentenados, lo que sugiere que las unidades de producción grandes (ranchos extensivos) son los focos epidémicos.
+**Hallazgo original y Mapeo Epidemiológico:** 
+Jalisco concentra el 66.6% de todos los animales afectados con solo el 15.8% de los hatos cuarentenados, lo que sugiere que las unidades de producción grandes (ranchos extensivos) son los focos epidémicos.
+
+Para efectos de nuestro **Modelo Matemático SIR (Susceptibles, Infectados, Recuperados)**, estos dos datasets representan los cimientos de la simulación:
+- El dataset de hatos libres (`senasica_tb_clean.csv`) representa las **"Victorias Sanitarias"**. Es el ganado que el gobierno ha muestreado y certificado (1.2% del país).
+- El dataset de cuarentenas (`senasica_cuarentenas_clean.csv` y `.json`) nos da el número exacto para nuestra variable **$I_0$ (Infectados Iniciales)**. Nuestro modelo no arranca con un brote aleatorio, arranca exactamente con los 7,558 animales bajo cuarentena oficial documentada en 2024.
 
 **Cita sugerida:**
-> *"Del análisis de los reportes trimestrales SENASICA 2024, se identificaron 856 hatos bajo cuarentena distribuidos en 27 de 32 estados. Jalisco concentra el 66.6% de los 7,558 animales afectados a nivel nacional, lo que evidencia una distribución espacialmente heterogénea del riesgo sanitario."*
+> *"Del análisis de los reportes trimestrales SENASICA 2024, se identificaron 856 hatos bajo infección activa distribuidos en 27 estados. Esta cifra provee el parámetro empírico $I_0 = 7,558$ animales infectados para la calibración del modelo compartimental SIR. En contraste, el registro de hatos libres documenta el esfuerzo de certificación oficial, evidenciando una dicotomía en la vigilancia epidemiológica nacional."*
 
 ---
 
