@@ -201,10 +201,60 @@ Para efectos de nuestro **Modelo Matemático SIR (Susceptibles, Infectados, Recu
 
 ---
 
-## Próximos Entregables para Este Avance
-
-- [ ] `src/models/sir_dual.py` — Simulación SIR con los parámetros de la Sección 4
+- [x] `src/models/sir_dual.py` — Simulación SIR Dual ✅ Completado
+- [x] `docs/figures/sir_comparativo.png` — Gráfica comparativa TB vs FMD ✅ Completado
+- [x] `docs/figures/tb_impacto_financiero.png` — Gráfica económica TB Bovina ✅ Completado
 - [ ] `src/models/stats_multivariate.py` — ANOVA canales de venta
 - [ ] `src/visualization/choropleth_maps.py` — Mapa coroplético de cuarentenas
 - [ ] `src/crypto/encryption.py` — Módulo de criptografía (tarea delegada)
 - [ ] Artículo de divulgación científica (basado en las citas sugeridas de este documento)
+
+---
+
+## 7. Hallazgos del Modelo Matemático SIR y Análisis Económico
+
+### 7.1 Hallazgo SIR — Comparativo Dual (TB Bovina vs. Fiebre Aftosa)
+
+**Código:** `src/models/sir_dual.py` | **Figura:** `docs/figures/sir_comparativo.png`
+
+El motor matemático (integración numérica de ODEs vía `scipy.odeint`) revela una dicotomía radical entre las dos amenazas del proyecto:
+
+| Parámetro | TB Bovina (Endémica) | Fiebre Aftosa FMD (Shock Exótico) |
+|-----------|---------------------|-----------------------------------|
+| **$I_0$ inicial** | 7,558 animales (datos SENASICA 2024) | 1 animal (riesgo de importación) |
+| **$R_0$ estimado** | 1.8 (literatura veterinaria) | 6.0 (Tildesley et al., brote UK 2001) |
+| **Duración ($1/\gamma$)** | 180 días (crónica) | 14 días (aguda) |
+| **Pico de $I$ a 150 días** | **14,711 animales** | **18,752,410 animales** |
+| **Interpretación** | Sangrado silencioso | Colapso exponencial catastrófico |
+
+**Hallazgo Clave:** La curva de FMD confirma que un único animal importado con Serotipo O puede incendiar a más del **53% del hato nacional** (18.7M de 35.1M) antes del día 150. Esto valida matemáticamente la inversión en un Sistema de Vigilancia Unificado (MongoDB + Alertas en Tiempo Real).
+
+**Nota sobre el Eje Y:** La curva de TB parece "plana" en la misma gráfica porque la escala de Y abarca 35 millones de animales. Esto es un efecto visual que enmascara su naturaleza crónica, analizada en la Sección 7.2.
+
+---
+
+### 7.2 Hallazgo Económico — El "Cáncer Financiero" de la TB Bovina
+
+**Código:** `src/models/tb_storytelling_plot.py` | **Figura:** `docs/figures/tb_impacto_financiero.png`
+
+Dado que la curva de infectados de TB es estable (~14K animales) pero persistente durante años, el daño real es acumulativo. Se construyó un modelo económico basado en literatura científica para cuantificarlo:
+
+**Base de la Estimación (No Arbitraria):**
+- **Caída en Producción:** Rahman & Samad (2009) — validado para México — reporta una caída del **-17%** en producción de leche por vaca infectada.
+- **Precio de la Leche (SIAP México, 2024):** Promedio de **$6.50 MXN/litro**.
+- **Producción Estándar:** Vaca lechera mexicana promedio: **18 litros/día** (SAGARPA, 2023).
+
+**Derivación:**
+```
+Litros perdidos/día/vaca = 18 L × 17% = 3.06 L
+Costo diario por vaca = 3.06 L × $6.50 MXN = $19.89 MXN ≈ $1.10 USD
+```
+*(Nota: Esta estimación excluye el decomiso total de canal, que representa una pérdida puntual del 100% de la inversión del ganadero en el momento del sacrificio en rastro.)*
+
+**Resultado de la Integración (3 Años):**
+Integrando el costo continuo sobre la población activa de infectados simulados durante 36 meses, la pérdida acumulada del sector agropecuario nacional asciende a aproximadamente **$17.3 Millones de USD** exclusivamente por caída en producción lechera.
+
+**Conclusión para el Proyecto:**
+Esta cifra no incluye el costo de los programas gubernamentales de tuberculinización, cuarentenas y liquidación de hatos reactores, que multiplican el impacto real. La TB bovina es, por tanto, un sangrado crónico que diezma al pequeño ganadero sin la dramatismo visual de un brote exponencial.
+
+![Impacto Financiero Acumulado — Tuberculosis Bovina](../figures/tb_impacto_financiero.png)
