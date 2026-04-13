@@ -1,0 +1,488 @@
+{
+  "Aguascalientes": {
+    "Q4_2024": {
+      "hatos": 89,
+      "animales": 18
+    },
+    "Q3_2024": {
+      "hatos": 89,
+      "animales": 18
+    },
+    "Q2_2024": {
+      "hatos": 89,
+      "animales": 18
+    },
+    "Q1_2024": {
+      "hatos": 89,
+      "animales": 16
+    }
+  },
+  "Campeche": {
+    "Q4_2024": {
+      "hatos": 3,
+      "animales": 1
+    },
+    "Q3_2024": {
+      "hatos": 3,
+      "animales": 2
+    },
+    "Q2_2024": {
+      "hatos": 3,
+      "animales": 1
+    },
+    "Q1_2024": {
+      "hatos": 2,
+      "animales": 4
+    }
+  },
+  "Coahuila": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 2
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 2
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 2
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 2
+    }
+  },
+  "Colima": {
+    "Q4_2024": {
+      "hatos": 1,
+      "animales": 1
+    },
+    "Q3_2024": {
+      "hatos": 1,
+      "animales": 3
+    },
+    "Q2_2024": {
+      "hatos": 1,
+      "animales": 3
+    },
+    "Q1_2024": {
+      "hatos": 2,
+      "animales": 2
+    }
+  },
+  "Chiapas": {
+    "Q4_2024": {
+      "hatos": 2,
+      "animales": 1
+    },
+    "Q3_2024": {
+      "hatos": 3,
+      "animales": 1
+    },
+    "Q2_2024": {
+      "hatos": 3,
+      "animales": 1
+    },
+    "Q1_2024": {
+      "hatos": 3,
+      "animales": 1
+    }
+  },
+  "Chihuahua": {
+    "Q4_2024": {
+      "hatos": 1,
+      "animales": 1
+    },
+    "Q3_2024": {
+      "hatos": 1,
+      "animales": 2
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 2
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 2
+    }
+  },
+  "Durango": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 0
+    }
+  },
+  "Guanajuato": {
+    "Q4_2024": {
+      "hatos": 1,
+      "animales": 92
+    },
+    "Q3_2024": {
+      "hatos": 1,
+      "animales": 92
+    },
+    "Q2_2024": {
+      "hatos": 1,
+      "animales": 92
+    },
+    "Q1_2024": {
+      "hatos": 1,
+      "animales": 92
+    }
+  },
+  "Guerrero": {
+    "Q4_2024": {
+      "hatos": 1,
+      "animales": 38
+    },
+    "Q3_2024": {
+      "hatos": 1,
+      "animales": 38
+    },
+    "Q2_2024": {
+      "hatos": 1,
+      "animales": 45
+    },
+    "Q1_2024": {
+      "hatos": 1,
+      "animales": 44
+    }
+  },
+  "Hidalgo": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 3
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 8
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 8
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 8
+    }
+  },
+  "Jalisco": {
+    "Q4_2024": {
+      "hatos": 33,
+      "animales": 1262
+    },
+    "Q3_2024": {
+      "hatos": 34,
+      "animales": 1262
+    },
+    "Q2_2024": {
+      "hatos": 34,
+      "animales": 1256
+    },
+    "Q1_2024": {
+      "hatos": 34,
+      "animales": 1255
+    }
+  },
+  "Ciudad de México": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 4
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 3
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 4
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 4
+    }
+  },
+  "Michoacán": {
+    "Q4_2024": {
+      "hatos": 18,
+      "animales": 123
+    },
+    "Q3_2024": {
+      "hatos": 17,
+      "animales": 126
+    },
+    "Q2_2024": {
+      "hatos": 17,
+      "animales": 127
+    },
+    "Q1_2024": {
+      "hatos": 17,
+      "animales": 134
+    }
+  },
+  "Morelos": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 80
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 80
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 80
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 79
+    }
+  },
+  "Nayarit": {
+    "Q4_2024": {
+      "hatos": 9,
+      "animales": 34
+    },
+    "Q3_2024": {
+      "hatos": 8,
+      "animales": 29
+    },
+    "Q2_2024": {
+      "hatos": 8,
+      "animales": 28
+    },
+    "Q1_2024": {
+      "hatos": 8,
+      "animales": 29
+    }
+  },
+  "Oaxaca": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 1
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 0
+    }
+  },
+  "Puebla": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 0
+    }
+  },
+  "Querétaro": {
+    "Q4_2024": {
+      "hatos": 2,
+      "animales": 29
+    },
+    "Q3_2024": {
+      "hatos": 2,
+      "animales": 29
+    },
+    "Q2_2024": {
+      "hatos": 2,
+      "animales": 29
+    },
+    "Q1_2024": {
+      "hatos": 2,
+      "animales": 29
+    }
+  },
+  "Sinaloa": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 3
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 2
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 4
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 5
+    }
+  },
+  "Sonora": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 1
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 1
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 0
+    }
+  },
+  "Tabasco": {
+    "Q4_2024": {
+      "hatos": 11,
+      "animales": 31
+    },
+    "Q3_2024": {
+      "hatos": 11,
+      "animales": 34
+    },
+    "Q2_2024": {
+      "hatos": 11,
+      "animales": 34
+    },
+    "Q1_2024": {
+      "hatos": 11,
+      "animales": 34
+    }
+  },
+  "Tamaulipas": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 10
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 5
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 9
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 13
+    }
+  },
+  "Tlaxcala": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 11
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 17
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 17
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 17
+    }
+  },
+  "Veracruz": {
+    "Q4_2024": {
+      "hatos": 41,
+      "animales": 110
+    },
+    "Q3_2024": {
+      "hatos": 40,
+      "animales": 108
+    },
+    "Q2_2024": {
+      "hatos": 41,
+      "animales": 109
+    },
+    "Q1_2024": {
+      "hatos": 40,
+      "animales": 105
+    }
+  },
+  "Yucatán": {
+    "Q4_2024": {
+      "hatos": 2,
+      "animales": 11
+    },
+    "Q3_2024": {
+      "hatos": 2,
+      "animales": 4
+    },
+    "Q2_2024": {
+      "hatos": 2,
+      "animales": 5
+    },
+    "Q1_2024": {
+      "hatos": 2,
+      "animales": 6
+    }
+  },
+  "Zacatecas": {
+    "Q4_2024": {
+      "hatos": 1,
+      "animales": 17
+    },
+    "Q3_2024": {
+      "hatos": 1,
+      "animales": 17
+    },
+    "Q2_2024": {
+      "hatos": 1,
+      "animales": 17
+    },
+    "Q1_2024": {
+      "hatos": 1,
+      "animales": 18
+    }
+  },
+  "Region Lagunera": {
+    "Q4_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q3_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q2_2024": {
+      "hatos": 0,
+      "animales": 0
+    },
+    "Q1_2024": {
+      "hatos": 0,
+      "animales": 1
+    }
+  }
+}
