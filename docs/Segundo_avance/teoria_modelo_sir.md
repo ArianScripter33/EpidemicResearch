@@ -77,3 +77,30 @@ Pensar que el SIR solo sirve en epidemiología para vacas es un error. Este mode
 - **Machine Learning (Graph NNs):** En Ciberseguridad Cloud, se usan Graph Neural Networks entrenadas con métricas cuasi-SIR para predecir qué Servidor va a comprometerse por "zero-day malware" cuando salta entre clusters adyacentes.
 
 ---
+
+## 6. La Bomba Económica: El Caso de Reino Unido (2001) y la justificación del Simposio
+
+Para entender por qué el modelo simula un escenario donde $I_0 = 1$ (un solo animal infectado) genera una debacle total, miramos a la historia empírica. 
+
+La Fiebre Aftosa **no es mortal para los humanos** (el riesgo zoonótico es casi cero), pero es una **arma de destrucción económica**. En un entorno comercial de hiper-velocidad, la variable de "Recuperados" ($R$) en el modelo SIR adopta un tono oscuro: significa **Rifle Sanitario (Sacrificio e Incineración)**. La industria no permite que un animal se recupere para esparcir el virus.
+
+**El Choque del 2001 en el Reino Unido:**
+- **Pérdida de Vida:** Se sacrificaron alrededor de **6 millones de animales** (vacas, cerdos y ovejas). Los cadáveres fueron incinerados en colosales piras al aire libre que traumatizaron a la población.
+- **Daño Económico:** Costó a la economía británica más de **£8,000 millones de libras** (aproximadamente $12,000 millones de USD).
+- **Efectos de Segundo Orden:** Las granjas y áreas rurales fueron puestas en bloqueos militares. Esto destruyó silenciosamente a la industria del **turismo rural y hotelero**, las cuales sufrieron pérdidas monetarias incluso mayores que el propio sector agrario.
+
+Cualquier nación que reporte un solo caso pierde inmediatamente su estatus comercial internacional (OMSA), bloqueando billones de dólares en exportaciones.
+
+---
+
+## 7. Evidencia Gráfica: Salida de la Simulación SIR Dual
+
+El código `src/models/sir_dual.py` procesa los datos reales ingeridos por el pipeline y expulsa este comparativo. 
+*(Figura generada automáticamente a partir del motor de Ecuaciones Diferenciales Ordinarias del lado Python).*
+
+![Gráfico: Tuberculosis Endémica vs Fiebre Aftosa Exótica](../figures/sir_comparativo.png)
+
+* **Izquierda (TB Bovina):** Endémica y lenta. La simulación arranca con $I_0 = 7,558$ (las cuarentenas documentadas ocultas del SENASICA). Al ser $R_0 = 1.8$, el crecimiento es paulatino y se mantiene controlable a los 150 días.
+* **Derecha (FMD):** La importación catastrófica ($I_0 = 1$). El parámetro empírico $R_0 = 6.0$ y un $\gamma = 1/14$ días produce una curva casi vertical (exponencial verdadera). A los 60 días, más de la mitad del sector agropecuario (18.7 millones) termina en estado Removido (extinto/sacrificado). 
+
+Esta visualización ratifica matemáticamente por qué nuestro **Sistema de Vigilancia Unificado** (NoSQL / MongoDB) no es una extravagancia de software, sino un muro de contención económico de vital importancia a nivel nacional.
