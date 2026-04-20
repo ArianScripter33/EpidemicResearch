@@ -104,3 +104,38 @@ El código `src/models/sir_dual.py` procesa los datos reales ingeridos por el pi
 * **Derecha (FMD):** La importación catastrófica ($I_0 = 1$). El parámetro empírico $R_0 = 6.0$ y un $\gamma = 1/14$ días produce una curva casi vertical (exponencial verdadera). A los 60 días, más de la mitad del sector agropecuario (18.7 millones) termina en estado Removido (extinto/sacrificado). 
 
 Esta visualización ratifica matemáticamente por qué nuestro **Sistema de Vigilancia Unificado** (NoSQL / MongoDB) no es una extravagancia de software, sino un muro de contención económico de vital importancia a nivel nacional.
+
+---
+
+## 8. Arquitectura Operativa y Despliegue en Campo (Go-To-Market)
+
+Para que el modelo SIR y el sistema NoSQL no se queden en una teoría académica, deben insertarse en la realidad operativa del país. ¿Cómo interactúa nuestro sistema de bases de datos con las autoridades sanitarias y el campo?
+
+### 8.1 El Estatus Quo Epidémico (Protocolo SENASICA)
+Actualmente en México, si existe una sospecha de Fiebre Aftosa, la responsabilidad recae en notificar obligatoriamente a la **Comisión México-Estados Unidos para la Prevención de la Fiebre Aftosa (CPA)** vinculada a SENASICA (mediante el teléfono 800 751 2100 o la app AVISE). 
+
+El protocolo dictamina que tras un reporte:
+1. Veterinarios oficiales de la CPA inspeccionan físicamente las lesiones.
+2. Se extraen muestras para un Laboratorio Nivel 3.
+3. Si la prueba es positiva, se detona el **DINESA (Dispositivo Nacional de Emergencia de Sanidad Animal)**.
+4. El Ejército Mexicano y la Guardia Nacional, en conjunto con SENASICA, clausuran las fronteras estatales, instalando retenes sanitarios y dictaminando cuarentenas forzosas donde nadie entra ni sale, seguido del temido "Rifle Sanitario" (sacrificio e incineración masiva).
+
+### 8.2 El Cuello de Botella (El Peligro del Productor Informal)
+El problema principal no radica en los grandes corporativos (quienes cuentan con seguros y reportan anomalías inmediatamente), sino en los **productores de traspatio y la ganadería informal**. 
+
+Ante el miedo de enfrentar el Rifle Sanitario y quedar en la quiebra esperando subsidios gubernamentales burocráticos, el ganadero informal **evade reportar a las autoridades**. En su desesperación, intentan vender a las vacas enfermas en tianguis o mercados negros regionales. Este ocultamiento intencional es exactamente el vector que habilita el hiper-contagioso factor de reproducción ($R_0=6.0$), permitiendo que el brote escape antes de que la CPA active sus sirenas.
+
+### 8.3 La Solución: App de Reportes e Indemnización Inteligente
+Aquí es donde la arquitectura de "Ganado Saludable" justifica su diseño tecnológico y su *Wedge* (estrategia de penetración) en el mercado. En lugar de desarrollar un "formulario de reportes" que nadie usará, se diseña un **Sistema de Inteligencia Epidémica Basado en Incentivos**.
+
+**A. Para el Ganadero (La App Móvil):**
+Una aplicación cuyo gancho de entrada (Wedge) sea ofrecer precios diarios del mercado ganadero o información climática de impacto agrícola. Si una vaca presenta llagas extrañas, la app ofrece un "Botón de Pánico". Cuando el granjero lo presiona y toma una foto de la res:
+*   Se genera de inmediato un archivo JSON que Mongo ingesta nativamente, con sus coordenadas espaciales `GeoJSON`.
+*   El incentivo maestro: Si reporta usando el sistema digital en lugar de ocultarlo, recibe acceso a un proceso de **Indemnización Acelerada** (ej. garantías de pago por animal sacrificado en 72 horas). Esto invierte el incentivo y destruye el mercado negro.
+
+**B. Para la Autoridad (El Dashboard NoSQL):**
+De lado gubernamental, la CPA no monitorea reportes aislados en un Excel que se traba al hacer JOINs; visualizan un panel reactivo basado en MongoDB.
+*   Si tres pequeños productores denuncian vacas con llagas en un radio de 50 kilómetros en menos de 2 horas, el sistema dispara automáticamente una **Alerta Espacial de Enjambre** calculando clústeres dinámicos.
+*   El motor NoSQL procesa el $I_0$ detectado y corre la simulación SIR en tiempo real, informando geográficamente al Ejército Mexicano en qué casetas de cobro clave (nodos) deben plantarse de inmediato para evitar que tractocamiones de ganado escapen de la zona cero (Cuarentenas Focalizadas).
+
+Con esta arquitectura vinculada a bases de datos documentales, no solo digitalizamos estadísticas: **orquestamos digitalmente el freno militar, la inteligencia epidemiológica de SENASICA y la indemnización económica del granjero.**
