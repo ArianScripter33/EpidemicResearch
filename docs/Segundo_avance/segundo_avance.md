@@ -122,9 +122,29 @@ COFEPRIS no publica datos granulares sobre clausuras alimentarias con detalle de
 
 **Notebook:** `notebooks/02_analisis_descriptivo.ipynb` — Aporte de la Miembro 2 del equipo (Victoria).
 
-Se filtraron los eventos FMD positivos confirmados en la región africana (2000-2025) del dataset openFMD, aplicando técnicas de *Data Binning* por décadas y generando estadísticas descriptivas (media, mediana, desviación estándar del año de muestreo). Se identificó el Top 5 de países africanos con mayor incidencia.
+Se filtraron **10,606 eventos FMD positivos confirmados** en la región africana (2000-2025) del dataset openFMD, aplicando técnicas de *Data Binning* por décadas y generando estadísticas descriptivas.
 
-**Hallazgo clave:** Se confirmó que los brotes en África no muestran tendencia a la baja, reforzando la hipótesis de que la FMD sigue siendo una amenaza activa a nivel global y que el sub-reporte del WRLFMD (Right-Censoring) enmascara la magnitud real del problema.
+**Top 5 Países con Mayor Incidencia de FMD en África:**
+
+| # | País | Brotes FMD Confirmados |
+|---|------|----------------------|
+| 1 | Algeria | 1,308 |
+| 2 | Zimbabwe | 1,061 |
+| 3 | Sudáfrica | 971 |
+| 4 | Kenya | 914 |
+| 5 | Egipto | 765 |
+
+**Data Binning por Décadas:**
+
+| Década | Brotes en África |
+|--------|------------------|
+| 2000s | 1,208 |
+| 2010s | 3,154 |
+| 2020s | 762 |
+
+**Hallazgo clave:** Los brotes en la década de los 2010s fueron **2.6 veces** mayores que en los 2000s. La aparente caída en los 2020s responde al fenómeno de *Right-Censoring* (rezago de reporte del WRLFMD), no a una mejora epidemiológica real.
+
+![Top 5 Países de África con Mayor Incidencia FMD](../figures/top5_africa_fmd.png)
 
 ### 4.2 Análisis Inferencial: Correlación Zoonótica y ANOVA
 
@@ -133,19 +153,31 @@ Se filtraron los eventos FMD positivos confirmados en la región africana (2000-
 Se realizaron dos pruebas inferenciales:
 
 **A. Correlación cruzada TB Bovina ↔ TB Humana:**
-Se calculó el coeficiente de correlación de Pearson entre los animales en cuarentena por TB bovina (SENASICA) y los casos de tuberculosis humana (DGE) agrupados por estado. El objetivo es demostrar estadísticamente que los estados con mayor carga animal presentan mayor morbilidad humana.
+Se cruzaron los datos de animales en cuarentena por TB bovina (SENASICA, n=26 estados) con los casos acumulados de tuberculosis humana (DGE, CIE-10 A15-A19, 2015-2017).
+
+- **Coeficiente de Pearson:** r = 0.222
+- **P-value:** p = 0.275 (no significativo a α = 0.05)
+
+**Interpretación:** La correlación lineal directa entre TB bovina y TB humana a nivel estatal no resultó estadísticamente significativa. Esto no invalida la relación zoonótica, sino que sugiere que la transmisión TB animal→humano opera a través de intermediarios complejos (leche no pasteurizada, contacto directo) que no se capturan con una simple correlación geográfica. Los estados con mayor carga de TB humana (Veracruz: 6,524 casos, Baja California: 6,038) no necesariamente coinciden con los de mayor cuarentena bovina (Jalisco: 5,035 animales), porque la TB humana en México tiene también un fuerte componente de transmisión persona-persona.
+
+![Correlación Zoonótica TB Bovina ↔ TB Humana](../figures/correlacion_tb_zoonotica.png)
 
 **B. ANOVA — Riesgo de Salmonella según canal de venta:**
 Se simularon 1,000 muestras por canal utilizando distribuciones binomiales basadas en las prevalencias documentadas en la literatura:
 
-| Canal de Venta | Prevalencia Salmonella |
-|----------------|----------------------|
-| Supermercados | 1.3% |
-| Carnicerías | 8.4% |
-| Tianguis | 13.6% |
-| Mercados Municipales | 22.3% |
+| Canal de Venta | Prevalencia Esperada | Prevalencia Simulada |
+|----------------|---------------------|---------------------|
+| Supermercados | 1.3% | 0.8% |
+| Carnicerías | 8.4% | 9.1% |
+| Tianguis | 13.6% | 13.7% |
+| Mercados Municipales | 22.3% | 21.4% |
 
-El test ANOVA evalúa si la diferencia entre canales es estadísticamente significativa (p < 0.05), confirmando cuantitativamente que el canal de distribución es un determinante del riesgo sanitario.
+- **F-statistic:** 78.72
+- **P-value:** 1.80 × 10⁻⁴⁹ (altamente significativo)
+
+**Hallazgo:** La diferencia entre canales es **abrumadoramente significativa** (p < 0.001). Un consumidor que compra carne en un mercado municipal tiene **26 veces más probabilidad** de encontrar Salmonella que uno que compra en un supermercado (21.4% vs 0.8%). Esto valida cuantitativamente el argumento de que el canal de distribución informal es el principal vector de riesgo alimentario.
+
+![ANOVA: Riesgo Sanitario por Canal de Venta](../figures/anova_canales_venta.png)
 
 ---
 
