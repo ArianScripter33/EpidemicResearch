@@ -9,8 +9,10 @@ N = 35_100_000  # Biomasa bovina nacional (cabezas)
 
 # --- Enfermedad 1: Tuberculosis Bovina (Endémica) ---
 I0_TB = 7558    # Animales actualmente en cuarentenas SENASICA 2024
-R0_TB = 1.0     # (Inicialmente 0 = recuperados)
+R0_TB = 0    # (Inicialmente 0 = recuperados)
 S0_TB = N - I0_TB - R0_TB
+
+#R_0 es el valor reproductivo basico
 
 R0_val_TB = 1.8 # R0 estimado en literatura para TB bovina
 gamma_TB = 1.0 / 180.0  # Duración prolongada: ~180 días
