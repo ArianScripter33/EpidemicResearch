@@ -328,32 +328,32 @@ ax_full.annotate(f"Pico: {peak_no_detect/1e6:.1f}M\n(Día {peak_day})",
                  fontsize=9, fontweight='bold', color=ALERT,
                  arrowprops=dict(arrowstyle='->', color=ALERT, lw=1.5))
 
-# ── Panel Derecho: Zoom en escenarios CON detección ──────
+# ── Panel Derecho: Escala logarítmica para ver diferencias ──────
 ax_zoom.set_facecolor(CREAM)
 for label, data in scenarios_fmd.items():
     if label == "Sin detección":
         continue  # Excluir la catástrofe para ver diferencias
     days_range = range(1, 151)
-    infected = [d["I"] for d in data["daily_data"]]
+    infected = [max(d["I"], 0.1) for d in data["daily_data"]]  # floor for log
     lw = 3 if label == "Día 30 (tardía)" else 2.5
-    ax_zoom.plot(days_range, [i/1e3 for i in infected],
+    ax_zoom.plot(days_range, infected,
                  color=colors_s[label], linewidth=lw,
                  label=f"{label}: {data['total_removed']:,} sacrificados", zorder=3)
 
 # Líneas verticales de detección
 for day, color in [(3, GREEN), (14, BLUE), (30, DORADO)]:
     ax_zoom.axvline(x=day, color=color, linestyle='--', alpha=0.5, linewidth=1)
-    ax_zoom.text(day + 1, ax_zoom.get_ylim()[1] if ax_zoom.get_ylim()[1] > 0 else 100,
-                 f"D{day}", fontsize=8, color=color, fontweight='bold', va='top')
 
+ax_zoom.set_yscale('log')
 ax_zoom.set_xlabel("Días desde I₀ = 1", fontsize=11, fontweight='bold', color=DARK)
-ax_zoom.set_ylabel("Animales Infectados (Miles)", fontsize=11, fontweight='bold', color=DARK)
-ax_zoom.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}K"))
-ax_zoom.set_title("Zoom: diferencia entre Día 3, 14 y 30 de detección",
+ax_zoom.set_ylabel("Animales Infectados (escala log)", fontsize=11, fontweight='bold', color=DARK)
+ax_zoom.set_title("Escala logarítmica: separación real entre escenarios",
                    fontsize=10, fontweight='bold', color=DARK, pad=8)
 ax_zoom.legend(loc='upper right', framealpha=0.9, fontsize=8)
 ax_zoom.spines['top'].set_visible(False)
 ax_zoom.spines['right'].set_visible(False)
+ax_zoom.grid(True, which='major', axis='y', alpha=0.3, linestyle='-')
+ax_zoom.grid(True, which='minor', axis='y', alpha=0.15, linestyle=':')
 
 fig2.suptitle("Análisis de Sensibilidad: Impacto del Momento de Detección en FMD",
               fontsize=14, fontweight='bold', color=DARK, y=1.02)
