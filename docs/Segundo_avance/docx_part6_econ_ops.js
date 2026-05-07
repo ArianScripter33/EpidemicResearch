@@ -91,6 +91,8 @@ function buildEconomics() {
     ),
     spacer(2),
     body("Fuente del mercado: Exportaciones bovinas de México: $1,015M (ganado vivo, ~100% a EE.UU.) + $1,700M (carne de res, ~86% a EE.UU.) + ~$285M (subproductos) = ~$3,000M USD/año (USDA FAS GATS 2024; AHDB 2024). EE.UU. = ~90% del mercado combinado bovino."),
+    spacer(2),
+    bodyRuns([b("Metodología de Cálculo: "), r("La pérdida se estima como L = (V_anual / 365) * %_Fase. Con un V_anual de $3,000M USD, la pérdida máxima es de $8.22M USD/día. El costo de $1,201M USD en los escenarios es la sumatoria de estas pérdidas diarias a 150 días, integrando el ramp-up de los primeros 14 días.")]),
     spacer(4),
 
     // Tabla de flujo de caja mensual

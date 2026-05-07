@@ -283,6 +283,11 @@ Se proyectó el impacto económico mensual de un escenario donde **1 solo animal
 
 > **Fuente del mercado:** Exportaciones bovinas de México: $1,015M (ganado vivo, ~100% a EE.UU.) + $1,700M (carne de res, ~86% a EE.UU.) + ~$285M (subproductos) = **~$3,000M USD/año** (USDA FAS GATS 2024; AHDB 2024). EE.UU. representa **~90% del mercado combinado**. Se refiere exclusivamente al sector **bovino**, no a toda la agricultura.
 
+**Metodología de Cálculo:**
+La pérdida diaria se estima mediante la fórmula:
+$$L_{diaria} = \left( \frac{V_{anual}}{365} \right) \times \%_{Fase}$$
+Donde $V_{anual} = \$3,000M$. Esto implica una pérdida de **$8.22M USD** por cada día de cierre total. El costo de **$1,201M USD** reportado en los escenarios es la sumatoria de estas pérdidas diarias durante los primeros 150 días del brote, considerando el ramp-up inicial de 14 días.
+
 | Mes | Infectados (pico) | Animales Sacrificados | Sacrificio (USD) | Cierre Exportaciones (USD) | Pérdida Acumulada |
 |---|---|---|---|---|---|
 | 1 | 9,520 | 1,904 | $2,939,776 | $216,972,000 | $219,928,436 |
