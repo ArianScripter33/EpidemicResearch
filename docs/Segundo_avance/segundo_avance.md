@@ -292,9 +292,9 @@ Se proyectó el impacto económico mensual de un escenario donde **1 solo animal
 
 | Escenario | Día de Detección | Animales Sacrificados | Costo Total (USD) | Ahorro vs. sin detección |
 |---|---|---|---|---|
-| **Detección Ideal** | Día 3 | 16 | $1,230M | **$54.0B (97.8%)** |
-| **Detección Realista** | Día 14 | 461 | $1,231M | **$54.0B (97.8%)** |
-| **Detección Tardía** | Día 30 | 56,674 | $1,318M | **$54.0B (97.6%)** |
+| **Detección Ideal** | Día 3 | 16 | $1,230M | **$54.05B (97.77%)** |
+| **Detección Realista** | Día 14 | 461 | $1,231M | **$54.05B (97.77%)** |
+| **Detección Tardía** | Día 30 | 56,674 | $1,318M | **$53.96B (97.62%)** |
 | **Sin detección** | Nunca | 35,007,684 | $55,282M | — |
 
 **Hallazgos clave:**
