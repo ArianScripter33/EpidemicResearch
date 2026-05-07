@@ -240,72 +240,74 @@ A diferencia de la TB, la Fiebre Aftosa desencadena un colapso instantáneo:
 
 ![Colapso Financiero — Fiebre Aftosa](../figures/fmd_impacto_nuclear.png)
 
-### 6.3 Costos de Diagnóstico: ¿Cuánto cuesta detectar la enfermedad?
+### 6.3 Costos de Diagnóstico FMD: ¿Cuánto cuesta detectar la enfermedad?
 
-Para responder a la pregunta de cuánto cuesta la **detección** (no solo el daño), se construyó la siguiente tabla con costos por cabeza según método diagnóstico:
+En México, la Fiebre Aftosa es una **enfermedad exótica** (libre desde 1954). El diagnóstico ante sospecha es responsabilidad del Estado a través de la CPA y laboratorios BSL-3 de SENASICA. Sin embargo, el costo presupuestario existe y es cuantificable:
 
-| Método Diagnóstico | Costo/cabeza (USD) | Costo/cabeza (MXN) | Tiempo de Resultado | Sensibilidad | Fuente |
-|---|---|---|---|---|---|
-| **Tuberculina Intradérmica (PPD)** | $3 – $8 | $51 – $136 | 72 horas | 80-90% | SENASICA / NOM-031-ZOO; PRONABIVE |
-| **Gamma-Interferón (BOVIGAM™)** | $15 – $25 | $255 – $425 | 24-48 horas | 85-95% | Bezos et al. (2014); Thermo Fisher |
-| **ELISA (Anticuerpos)** | $8 – $12 | $136 – $204 | 24-48 horas | 60-80% | Casal et al. (2017) |
-| **PCR (IS6110/IS1081)** | $20 – $35 | $340 – $595 | 5-7 días | 95-99% | Pérez-Guerrero et al. (2008); UNAM/INIFAP |
-| **Cultivo Bacteriológico** | $40 – $60 | $680 – $1,020 | 4-8 semanas | Gold Standard | OIE Manual, Ch. 3.4.6 |
-| **Inspección Post-mortem (Rastro TIF)** | $0 | $0 | Inmediato | 50-60% | NOM-033-ZOO-1995 |
+| Método Diagnóstico FMD | Costo/muestra (USD) | Tiempo | Sensibilidad | Fuente |
+|---|---|---|---|---|
+| **Inspección Clínica (Vesículas)** | $0 – $10 | Inmediato | ~70% | SENASICA / CPA; OIE Manual 3.1.8 |
+| **ELISA NSP (Anticuerpos No-Estructurales)** | $8 – $15 | 4-6 horas | 90-95% | PrioCHECK FMDV NS; OIE Manual |
+| **RT-PCR Tiempo Real** | $25 – $50 | 4-8 horas | 95-99% | Reid et al. (2003); PANAFTOSA |
+| **LAMP (Prueba de Campo Rápida)** | $10 – $20 | 30-60 min | 85-95% | Dukes et al. (2006) |
+| **Aislamiento Viral (Cultivo Celular)** | $80 – $150 | 3-7 días | Gold Standard | OIE Manual 3.1.8; Pirbright Institute |
+| **Secuenciación Genómica (Serotipado)** | $100 – $300 | 5-14 días | 100% | Knowles & Samuel (2003); WRLFMD |
 
-**Nota:** Los costos de la prueba tuberculina son convenidos entre el productor y el médico veterinario aprobado (CFPP Chihuahua, 2024). En algunos estados, los Comités de Fomento y Protección Pecuaria ofrecen pruebas gratuitas dentro de las campañas sanitarias. La tuberculina PPD es producida por PRONABIVE. El tipo de cambio utilizado es $17 MXN/USD (promedio 2024).
+**Nota:** A diferencia de la Tuberculosis Bovina (donde el productor paga la tuberculina), en FMD el diagnóstico es **absorbido íntegramente por el Estado** como parte del protocolo DINESA. El costo real lo asume el presupuesto de SENASICA y la CPA. La prueba ELISA NSP es particularmente importante porque permite distinguir animales infectados de animales vacunados (capacidad DIVA), crucial para mantener el estatus de país libre ante la OMSA.
 
-**¿Cuánto representa una cabeza o un centenar?**
+**¿Cuánto representa una cabeza o un centenar en riesgo de FMD?**
 
 | Concepto | Por cabeza | Por 100 cabezas |
 |---|---|---|
 | **Valor de mercado en pie** (500 kg × $52.5 MXN/kg) | $26,250 MXN ($1,544 USD) | $2,625,000 MXN ($154,412 USD) |
-| **Pérdida diaria por TB** (caída en producción lechera) | $19.89 MXN ($1.17 USD) | $1,989 MXN ($117 USD) |
-| **Pérdida mensual por TB** (30 días) | $597 MXN ($35.10 USD) | $59,670 MXN ($3,510 USD) |
-| **Costo diagnóstico (tuberculina)** | $5.50 USD promedio | $550 USD |
+| **Pérdida por sacrificio sanitario** (Rifle Sanitario) | $1,544 USD (valor total) | $154,412 USD |
+| **Pérdida diaria de exportaciones** (cierre OMSA) | $8,200,000 USD/día para TODO el sector | $3,000,000,000 USD/año |
+| **Costo diagnóstico RT-PCR** | $37.50 USD promedio | $3,750 USD |
 
-**Fuente de precios:** SNIIM (Sistema Nacional de Información e Integración de Mercados), bovinos para abasto, promedio nacional 2024. Pérdida lechera: Rahman & Samad (2009), caída del -17% en producción; precio leche: SIAP (2024), $6.50 MXN/litro.
+**Fuentes:** Precio ganado en pie: SNIIM 2024. Exportaciones: USDA ERS 2024 ($1,015M ganado vivo + $1,700M carne = ~$3,000M/año). Valor 100 cabezas: derivado de SNIIM.
 
-### 6.4 Análisis de Flujo de Caja Mensual (12 meses)
+### 6.4 Flujo de Caja: Escenario de Reintroducción de FMD (5 meses)
 
-**Código:** `src/models/finance_addendum.py`
+**Código:** `src/models/fmd_finance_addendum.py`
 
-Se tradujo la curva de infectados del modelo SIR de TB Bovina a un flujo de caja mensual, integrando los costos de diagnóstico y las pérdidas en producción lechera:
+Se proyectó el impacto económico mensual de un escenario donde **1 solo animal infectado con Serotipo O** ingresa al hato nacional de 35.1 millones, utilizando el modelo SIR (R₀ = 6.0) y dos componentes de costo: el sacrificio sanitario (valor de mercado de cada animal removido) y el cierre inmediato de exportaciones por la OMSA.
 
-| Mes | Animales Infectados | Litros Perdidos | Pérdida Mensual (USD) | Costo Diagnóstico (USD) | Pérdida Acumulada (USD) |
+| Mes | Infectados (pico) | Animales Sacrificados | Sacrificio (USD) | Cierre Exportaciones (USD) | Pérdida Acumulada |
 |---|---|---|---|---|---|
-| 1 | 7,558 – 7,775 | 705,798 | $270,023 | $42,244 | $312,267 |
-| 2 | 7,775 – 7,998 | 725,921 | $277,726 | $43,449 | $633,442 |
-| 3 | 7,998 – 8,228 | 746,600 | $285,636 | $44,691 | $963,769 |
-| 4 | 8,228 – 8,465 | 767,849 | $293,759 | $45,961 | $1,303,489 |
-| 5 | 8,465 – 8,709 | 789,682 | $302,101 | $47,266 | $1,652,856 |
-| 6 | 8,709 – 8,960 | 812,112 | $310,669 | $48,604 | $2,012,129 |
-| 7 | 8,960 – 9,218 | 835,155 | $319,468 | $49,978 | $2,381,575 |
-| 8 | 9,218 – 9,484 | 858,827 | $328,505 | $51,390 | $2,761,470 |
-| 9 | 9,484 – 9,758 | 883,143 | $337,787 | $52,841 | $3,152,098 |
-| 10 | 9,758 – 10,040 | 908,120 | $347,320 | $54,332 | $3,553,750 |
-| 11 | 10,040 – 10,330 | 933,774 | $357,111 | $55,865 | $3,966,726 |
-| 12 | 10,330 – 10,629 | 960,122 | $367,167 | $57,441 | $4,391,334 |
+| 1 | 16 | 1 | $1,544 | $246,000,000 | $246,001,544 |
+| 2 | 404 | 29 | $44,776 | $246,000,000 | $492,046,320 |
+| 3 | 10,389 | 748 | $1,154,912 | $246,000,000 | $739,201,232 |
+| 4 | 267,252 | 19,269 | $29,751,336 | $246,000,000 | $1,014,952,568 |
+| 5 | 6,579,672 | 1,173,247 | $1,811,493,368 | $246,000,000 | $3,071,445,936 |
 
-**Hallazgo:** A 12 meses, la pérdida acumulada solo por caída en producción lechera + diagnóstico básico asciende a **$4.39 Millones de USD**. Sin embargo, este escenario asume que la enfermedad se propaga libremente sin intervención de cuarentena.
+**Hallazgo:** En los primeros 3 meses, la pérdida está **dominada por el cierre de exportaciones** ($246M USD/mes), no por el sacrificio. Pero en el Mes 5, la curva exponencial del SIR hace que el sacrificio sanitario ($1.8B) supere al cierre comercial. A 5 meses, la pérdida acumulada alcanza **$3.07 Billion USD** — y sigue acelerándose exponencialmente.
 
-![Flujo de Caja Mensual TB Bovina](../figures/flujo_caja_mensual_tb.png)
+**Benchmark internacional:** El brote de FMD en Reino Unido (2001) costó £8B (~$12B USD), con 6.5 millones de animales sacrificados y £1.3B en compensaciones directas (Anderson Report, 2002). México, con un hato 5.4x mayor, enfrentaría pérdidas proporcionalmente mayores.
 
-### 6.5 Beneficios Directos de la Detección Temprana (Análisis Contrafactual)
+![Flujo de Caja — Escenario de Reintroducción FMD](../figures/flujo_caja_fmd.png)
 
-**¿Qué se gana al detectar la enfermedad a tiempo?** Para cuantificarlo, se simularon tres escenarios usando el modelo SIR con una reducción del 70% en la tasa de contagio (β) posterior a la implementación de cuarentena:
+### 6.5 Análisis de Sensibilidad: Impacto del Momento de Detección
 
-| Escenario | Momento de Detección | Pérdida 12 meses (USD) | Animales infectados al mes 12 | Ahorro vs. sin detección |
+**¿Qué se gana al detectar la FMD a tiempo?** Este análisis de sensibilidad varía una sola variable — el **día de activación del DINESA** — y mide el impacto en animales sacrificados y costo total a 150 días. Se asume que la cuarentena (cierre de movimientos + anillo sanitario 3 km) reduce la tasa de contagio un 85% (Tildesley et al., 2006):
+
+| Escenario | Día de Detección | Animales Sacrificados | Costo Total (USD) | Ahorro vs. sin detección |
 |---|---|---|---|---|
-| **Detección Temprana** | Mes 2 | $2,535,620 | ~5,200 | **$5,311,491 (67.7%)** |
-| **Detección Tardía** | Mes 6 | $4,679,371 | ~7,100 | **$3,167,740 (40.4%)** |
-| **Sin detección** | Nunca | $7,847,111 | ~10,629 | — |
+| **Detección Ideal** | Día 3 | 16 | $1,230,025,602 | **$54.0B (97.8%)** |
+| **Detección Realista** | Día 14 | 461 | $1,230,713,288 | **$54.0B (97.8%)** |
+| **Detección Tardía** | Día 30 | 56,674 | $1,317,505,873 | **$54.0B (97.6%)** |
+| **Sin detección** | Nunca | 35,007,684 | $55,281,864,480 | — |
 
-**Hallazgo clave:** Detectar la TB Bovina en el **Mes 2** en lugar de no detectarla ahorra **$5.3 Millones de USD** (67.7% de la pérdida total). Incluso una detección tardía (Mes 6) salva **$3.2 Millones de USD**. El costo de un programa de screening con tuberculina para un hato de 10,000 cabezas es de ~$55,000 USD anuales, lo que implica un **ROI de 96:1** (cada dólar invertido en diagnóstico ahorra $96 en pérdidas evitadas).
+**Hallazgos clave:**
 
-**Para el profesor de Finanzas:** Este ROI justifica económicamente la inversión en detección temprana. Un ganadero con 100 cabezas que invierte $550 USD anuales en tuberculina evita pérdidas potenciales de $35,100 USD en producción lechera a 12 meses.
+1. **Cada día cuenta exponencialmente:** La diferencia entre detectar en el Día 3 (16 animales sacrificados) vs. el Día 30 (56,674) es de **3,542x** — pero ambos siguen siendo manejables comparados con la catástrofe de no detectar (35 millones).
 
-![Análisis Contrafactual: ROI de la Detección Temprana](../figures/contrafactual_deteccion_tb.png)
+2. **El ROI de la vigilancia es astronómico:** El costo anual del sistema de vigilancia epidemiológica de la CPA (~$20M USD estimados) evita pérdidas de **$54 Billion USD**. Eso es un ROI de **2,700:1**.
+
+3. **El cierre de exportaciones domina el costo:** Incluso con detección en Día 3 (solo 16 animales), el cierre OMSA de exportaciones genera $1.23B en pérdidas. Este costo es **inevitable** una vez declarado I₀ = 1, lo que refuerza que la única defensa real es la **prevención absoluta**.
+
+**Proxy comparativo con TB Bovina:** A modo de referencia, la TB Bovina (endémica, R₀ = 1.8) genera pérdidas de ~$7.8M USD en 12 meses sin detección. La FMD genera **$55.3B USD en 5 meses** — una diferencia de **7,000x**. Esto valida la decisión estratégica de usar TB como proxy de calibración: si el modelo funciona para el "sangrado silencioso" de TB, está preparado para el "colapso nuclear" de FMD.
+
+![Análisis de Sensibilidad: Curva de Infectados FMD según Día de Detección](../figures/contrafactual_fmd.png)
 
 ---
 
@@ -349,22 +351,22 @@ La CPA visualiza un panel basado en MongoDB. Si tres productores denuncian anoma
 
 ## 9. Bibliografía
 
+- Anderson, I. (2002). *Foot and Mouth Disease 2001: Lessons to be Learned Inquiry Report.* The Stationery Office, London.
 - Barlow, N.D. (1991). *A spatially aggregated disease/host model for bovine Tb in New Zealand possum populations.* Journal of Applied Ecology, 28(3), 777-793.
-- Bezos, J. et al. (2014). *Current ante-mortem techniques for diagnosis of bovine tuberculosis.* Veterinary Microbiology, 173(1-2), 2-11.
 - Brauer, F., & Castillo-Chávez, C. (2012). *Mathematical Models in Population Biology and Epidemiology.* Springer.
-- Casal, C. et al. (2017). *Strategic use of serology for the diagnosis of bovine tuberculosis after intradermal skin testing.* Preventive Veterinary Medicine, 109(1-2), 25-30.
-- CFPP Chihuahua. (2024). *Procedimiento para pruebas de tuberculina bovina — Tarifas y requisitos.* Comité de Fomento y Protección Pecuaria de Chihuahua.
+- Dukes, J.P. et al. (2006). *A reverse-transcription loop-mediated isothermal amplification (RT-LAMP) assay for the detection of foot-and-mouth disease virus.* Journal of Virological Methods, 138(1-2), 18-26.
 - FAO. (2026). *Update on Foot-and-Mouth Disease outbreaks in Europe and the Near East.* Organización de las Naciones Unidas para la Alimentación y la Agricultura.
 - Kermack, W. O., & McKendrick, A. G. (1927). *A contribution to the mathematical theory of epidemics.* Proceedings of the Royal Society of London A, 115(772), 700-721.
-- NOM-031-ZOO-1995. *Campaña Nacional Contra la Tuberculosis Bovina (Mycobacterium bovis).* Diario Oficial de la Federación, México.
-- NOM-033-ZOO-1995. *Sacrificio humanitario de los animales domésticos y silvestres.* Diario Oficial de la Federación, México.
-- OIE. (2023). *Manual of Diagnostic Tests and Vaccines for Terrestrial Animals, Chapter 3.4.6: Bovine Tuberculosis.* World Organisation for Animal Health.
-- Pérez-Guerrero, L. et al. (2008). *Molecular epidemiology of cattle and human tuberculosis in Mexico.* Veterinary Microbiology, 126(1-3), 288-294.
+- Knight-Jones, T.J.D. & Rushton, J. (2013). *The economic impacts of foot and mouth disease — What are they, how big, and where do they occur?* Preventive Veterinary Medicine, 112(3-4), 161-173.
+- Knowles, N. J. & Samuel, A. R. (2003). *Molecular epidemiology of foot-and-mouth disease virus.* Virus Research, 91(1), 65-80.
+- OIE. (2023). *Manual of Diagnostic Tests and Vaccines for Terrestrial Animals, Chapter 3.1.8: Foot and Mouth Disease; Chapter 3.4.6: Bovine Tuberculosis.* World Organisation for Animal Health.
+- PANAFTOSA / OPS. (2024). *Centro Panamericano de Fiebre Aftosa y Salud Pública Veterinaria — Materiales de Referencia.* Organización Panamericana de la Salud.
 - Rahman, M. A., & Samad, M. A. (2009). *Effect of bovine tuberculosis on milk production.* Bangladesh Journal of Veterinary Medicine, 7(2), 287-290.
+- Reid, S. M. et al. (2003). *Detection of all seven serotypes of foot-and-mouth disease virus by real-time, fluorogenic reverse transcription polymerase chain reaction assay.* Journal of Virological Methods, 105(1), 67-80.
 - SENASICA. (2024). *Boletín Trimestral de Cuarentenas de Tuberculosis Bovina.* Servicio Nacional de Sanidad, Inocuidad y Calidad Agroalimentaria.
-- SENASICA. (2024). *Acuerdo por el que se establece la Campaña Nacional contra la Tuberculosis Bovina.* DOF 30-dic-2024.
 - SIAP. (2024). *Panorama Agroalimentario 2024.* Servicio de Información Agroalimentaria y Pesquera, México.
 - SNIIM. (2024). *Cuadro Comparativo Anual Nacional — Bovinos en Pie.* Sistema Nacional de Información e Integración de Mercados, Secretaría de Economía.
 - Tildesley, M. J. et al. (2006). *Optimal reactive vaccination strategies for a foot-and-mouth disease outbreak in the UK.* Nature, 440, 83-86.
+- USDA ERS. (2024). *Mexico Livestock and Products Annual — Live Cattle and Beef Trade Statistics.* United States Department of Agriculture, Economic Research Service.
 - WOAH. (2026). *Emergence of FMD Serotype SAT1 in the Golan region: Regional implications.* Organización Mundial de Sanidad Animal.
 - WRLFMD / openFMD. (2025). *World Reference Laboratory for Foot-and-Mouth Disease — Open Data Portal.* The Pirbright Institute.
