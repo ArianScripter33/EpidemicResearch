@@ -120,24 +120,43 @@ EXPORT_DIARIO_MAX = 8_200_000  # $3B/año ÷ 365 (100% cierre)
 COSTO_SACRIFICIO_USD = 50  # logística por cabeza (Rifle Sanitario)
 
 # ── Modelo escalonado de cierre de exportaciones ──────────────
-# Fase 1 (Día 1-3):  Sospecha clínica, muestras al laboratorio BSL-3.
-#                     No hay notificación OMSA → no hay cierre oficial.
-# Fase 2 (Día 4-7):  Confirmación RT-PCR + notificación OMSA.
-#                     EE.UU. cierra en ~48h = 62% del mercado bloqueado.
-# Fase 3 (Día 8-14): Japón, Corea del Sur, UE reaccionan.
-#                     ~90% del mercado cerrado.
-# Fase 4 (Día 15+):  Cierre total. 100% de exportaciones bloqueadas.
+# El cierre comercial no es instantáneo. Se modela en 4 fases basadas
+# en precedentes históricos y la estructura del mercado mexicano:
 #
-# Fuente del timing: Anderson Report (2002); OMSA SOP notifications.
+# Market share por destino (Fuente: USDA FAS GATS 2024; AHDB 2024):
+#   - EE.UU.: ~86% de carne de res + ~100% de ganado vivo
+#     → Combinado ~90% del sector exportador total
+#   - Japón + Corea del Sur + Canadá: ~8%
+#   - Resto (UE, otros): ~2%
+#
+# Fase 1 (Día 1-3): Sospecha clínica, muestras al laboratorio BSL-3.
+#   No hay notificación OMSA oficial → no hay cierre.
+#   Fuente: Protocolo DINESA (SENASICA); OIE Manual Ch. 3.1.8
+#   (toma de muestras + envío a CENASA = 24-72h)
+#
+# Fase 2 (Día 4-7): Confirmación RT-PCR + notificación OMSA (24h obligatorias,
+#   Terrestrial Code Art. 1.1.3). EE.UU. cierra en ~48h post-notificación.
+#   Precedente: UK 2001 → UE banó exportaciones en 2 días
+#     (detección 19-Feb, ban 21-Feb; European Commission Decision 2001/145/EC).
+#   EE.UU. = 90% del mercado.
+#   Fuente: WOAH TAHC Art. 1.1.3; Anderson Report (2002) p.18
+#
+# Fase 3 (Día 8-14): Japón, Corea del Sur, Canadá reaccionan.
+#   Estos países realizan evaluación de riesgo independiente (5-10 días).
+#   Acumulado: ~98% del mercado cerrado.
+#   Fuente: MAFF Japan FMD contingency plan; CFIA Canada import policy
+#
+# Fase 4 (Día 15+): Cierre total (100%). Mercados menores/residuales.
+#   Fuente: WOAH TAHC Ch. 8.8 (recomendaciones de importación)
 
 def export_loss_day(day):
     """Retorna la pérdida de exportaciones para un día dado post-I₀=1."""
     if day <= 3:
         return 0                              # Sospecha, sin notificación
     elif day <= 7:
-        return int(EXPORT_DIARIO_MAX * 0.62)   # EE.UU. cierra (62%)
+        return int(EXPORT_DIARIO_MAX * 0.90)   # EE.UU. cierra (90%)
     elif day <= 14:
-        return int(EXPORT_DIARIO_MAX * 0.90)   # + Japón/Corea (90%)
+        return int(EXPORT_DIARIO_MAX * 0.98)   # + Japón/Corea/Canadá (98%)
     else:
         return EXPORT_DIARIO_MAX               # Cierre total (100%)
 

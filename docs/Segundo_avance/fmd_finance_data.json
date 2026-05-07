@@ -55,10 +55,10 @@
       "infected_peak": 9520,
       "sacrificed": 1904,
       "sacrifice_cost_usd": 2939776,
-      "export_loss_usd": 203196000,
+      "export_loss_usd": 216972000,
       "diagnostic_cost_usd": 16660,
-      "total_month_usd": 206152436,
-      "cumulative_usd": 206152436
+      "total_month_usd": 219928436,
+      "cumulative_usd": 219928436
     },
     {
       "month": 2,
@@ -68,7 +68,7 @@
       "export_loss_usd": 246000000,
       "diagnostic_cost_usd": 33990950,
       "total_month_usd": 13744415158,
-      "cumulative_usd": 13950567594
+      "cumulative_usd": 13964343594
     },
     {
       "month": 3,
@@ -78,7 +78,7 @@
       "export_loss_usd": 246000000,
       "diagnostic_cost_usd": 34448925,
       "total_month_usd": 33794885029,
-      "cumulative_usd": 47745452623
+      "cumulative_usd": 47759228623
     },
     {
       "month": 4,
@@ -88,7 +88,7 @@
       "export_loss_usd": 246000000,
       "diagnostic_cost_usd": 5191970,
       "total_month_usd": 4334375626,
-      "cumulative_usd": 52079828249
+      "cumulative_usd": 52093604249
     },
     {
       "month": 5,
@@ -98,7 +98,7 @@
       "export_loss_usd": 246000000,
       "diagnostic_cost_usd": 576905,
       "total_month_usd": 699212857,
-      "cumulative_usd": 52779041106
+      "cumulative_usd": 52792817106
     }
   ],
   "scenarios_fmd": {
@@ -107,18 +107,18 @@
       "total_removed": 16,
       "peak_infected": 2,
       "sacrifice_cost_usd": 25602,
-      "export_loss_usd": 1187196000,
-      "total_cost_usd": 1187221602,
+      "export_loss_usd": 1200972000,
+      "total_cost_usd": 1200997602,
       "savings_usd": 54051838878,
-      "savings_pct": 97.9
+      "savings_pct": 97.8
     },
     "Día 14 (realista)": {
       "detection_day": 14,
       "total_removed": 461,
       "peak_infected": 71,
       "sacrifice_cost_usd": 713288,
-      "export_loss_usd": 1187196000,
-      "total_cost_usd": 1187909288,
+      "export_loss_usd": 1200972000,
+      "total_cost_usd": 1201685288,
       "savings_usd": 54051151192,
       "savings_pct": 97.8
     },
@@ -127,8 +127,8 @@
       "total_removed": 56674,
       "peak_infected": 9520,
       "sacrifice_cost_usd": 87505873,
-      "export_loss_usd": 1187196000,
-      "total_cost_usd": 1274701873,
+      "export_loss_usd": 1200972000,
+      "total_cost_usd": 1288477873,
       "savings_usd": 53964358607,
       "savings_pct": 97.7
     },
@@ -137,8 +137,8 @@
       "total_removed": 35007684,
       "peak_infected": 19685118,
       "sacrifice_cost_usd": 54051864480,
-      "export_loss_usd": 1187196000,
-      "total_cost_usd": 55239060480,
+      "export_loss_usd": 1200972000,
+      "total_cost_usd": 55252836480,
       "savings_usd": 0,
       "savings_pct": 0.0
     }
@@ -149,7 +149,7 @@
     "total_sector_usd": 3000000000,
     "daily_export_loss_max_usd": 8200000,
     "export_model": "phased: D1-3=0%, D4-7=62%, D8-14=90%, D15+=100%",
-    "total_export_loss_150d": 1187196000,
+    "total_export_loss_150d": 1200972000,
     "source": "USDA ERS / GCMA 2024"
   },
   "uk_2001_benchmark": {
