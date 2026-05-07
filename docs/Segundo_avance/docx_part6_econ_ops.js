@@ -72,29 +72,47 @@ function buildEconomics() {
     // ═══════════════════════════════════════════════════════
     h2("6.4 Flujo de Caja: Escenario de Reintroducción de FMD (5 meses)"),
     bodyRuns([b("Código: "), r("src/models/fmd_finance_addendum.py")]),
-    body("Se proyectó el impacto económico mensual de un escenario donde 1 solo animal infectado con Serotipo O ingresa al hato nacional de 35.1 millones, utilizando el modelo SIR (R₀ = 6.0) y dos componentes de costo: el sacrificio sanitario (valor de mercado de cada animal removido) y el cierre inmediato de exportaciones por la OMSA."),
+    body("Se proyectó el impacto económico mensual de un escenario donde 1 solo animal infectado con Serotipo O ingresa al hato nacional de 35.1 millones, utilizando el modelo SIR (R₀ = 6.0) y dos componentes de costo: el sacrificio sanitario (valor de mercado de cada animal removido) y el cierre de exportaciones bovinas por la OMSA."),
+    spacer(2),
+
+    bodyRuns([b("Modelo de cierre de exportaciones: "), r("El bloqueo comercial no es instantáneo. Se implementó un modelo escalonado basado en los tiempos de reacción documentados de los socios comerciales:")]),
+    spacer(2),
+
+    // Tabla de fases de cierre
+    makeTable(
+      ["Fase", "Días", "% Cerrado", "Pérdida/día", "Descripción"],
+      [
+        ["Sospecha", "1-3", "0%", "$0", "Muestras al BSL-3, sin notificación OMSA"],
+        ["Confirmación + EE.UU.", "4-7", "62%", "$5.1M", "RT-PCR → notificación OMSA → EE.UU. cierra ~48h"],
+        ["Reacción global", "8-14", "90%", "$7.4M", "Japón, Corea del Sur, UE cierran"],
+        ["Cierre total", "15+", "100%", "$8.2M", "Bloqueo completo de exportaciones bovinas"],
+      ],
+      [1800, 800, 1000, 1100, 4326]
+    ),
+    spacer(2),
+    body("Fuente del mercado: Exportaciones bovinas de México: $1,015M (ganado vivo) + $1,700M (carne de res) + ~$285M (subproductos) = ~$3,000M USD/año (USDA ERS 2024 / GCMA). Se refiere exclusivamente al sector bovino, no a toda la agricultura."),
     spacer(4),
 
     // Tabla de flujo de caja mensual
     makeTable(
       ["Mes", "Infectados (pico)", "Sacrificados", "Sacrificio (USD)", "Cierre Export. (USD)", "Pérdida Acumulada"],
       [
-        ["1", "9,520", "1,904", "$2,939,776", "$246,000,000", "$248,956,436"],
-        ["2", "19,423,405", "8,720,482", "$13,464,424,208", "$246,000,000", "$13,993,371,594"],
-        ["3", "19,685,118", "21,706,241", "$33,514,436,104", "$246,000,000", "$47,788,256,623"],
-        ["4", "2,966,841", "2,644,549", "$4,083,183,656", "$246,000,000", "$52,122,632,249"],
-        ["5", "329,660", "293,158", "$452,635,952", "$246,000,000", "$52,821,845,106"],
+        ["1", "9,520", "1,904", "$2,939,776", "$203,196,000", "$206,152,436"],
+        ["2", "19,423,405", "8,720,482", "$13,464,424,208", "$246,000,000", "$13,950,567,594"],
+        ["3", "19,685,118", "21,706,241", "$33,514,436,104", "$246,000,000", "$47,745,452,623"],
+        ["4", "2,966,841", "2,644,549", "$4,083,183,656", "$246,000,000", "$52,079,828,249"],
+        ["5", "329,660", "293,158", "$452,635,952", "$246,000,000", "$52,779,041,106"],
       ],
       [800, 1400, 1400, 1600, 1600, 2226]
     ),
     spacer(4),
 
-    bodyRuns([b("Hallazgo: "), r("Con R₀ = 6.0, la FMD no es lineal — es una detonación nuclear biológica. En el Mes 1 parece controlable (1,904 sacrificados), pero en el Mes 2 ya son 8.7 millones y en el Mes 3, 21.7 millones. El costo del sacrificio sanitario domina completamente al cierre de exportaciones ($33.5B vs $246M en el mes pico). A 5 meses, la pérdida acumulada alcanza $52.8 Billion USD — equivalente al 4% del PIB de México.")]),
+    bodyRuns([b("Hallazgo: "), r("Con R₀ = 6.0, la FMD no es lineal — es una detonación nuclear biológica. En el Mes 1 parece controlable (1,904 sacrificados), pero en el Mes 2 ya son 8.7 millones y en el Mes 3, 21.7 millones. El Mes 1 muestra un cierre de exportaciones menor ($203M vs $246M) debido al modelo escalonado: los primeros 3 días son de sospecha sin notificación oficial. A 5 meses, la pérdida acumulada alcanza $52.8 Billion USD — equivalente al 4% del PIB de México.")]),
 
     bodyRuns([b("Benchmark internacional: "), r("El brote de FMD en Reino Unido (2001) costó £8B (~$12B USD), con 6.5 millones de animales sacrificados y £1.3B en compensaciones directas (Anderson Report, 2002). México, con un hato 5.4x mayor, enfrentaría pérdidas proporcionalmente mayores.")]),
 
     img("../figures/flujo_caja_fmd.png", 6.5, 3.0),
-    imgCaption("Figura 12. Flujo de caja mensual FMD — Costo del sacrificio sanitario derivado del modelo SIR (R₀ = 6.0)."),
+    imgCaption("Figura 12. Flujo de caja mensual FMD — Costo del sacrificio sanitario derivado del modelo SIR (R₀ = 6.0). Cierre de exportaciones con modelo escalonado de 4 fases."),
 
     // ═══════════════════════════════════════════════════════
     // §6.5 — ANÁLISIS DE SENSIBILIDAD / CONTRAFACTUAL
@@ -107,26 +125,26 @@ function buildEconomics() {
     makeTable(
       ["Escenario", "Día", "Sacrificados", "Costo Sacrificio", "Cierre Export.", "Costo Total", "Ahorro vs. sin detección"],
       [
-        ["Detección Ideal", "Día 3", "16", "$0.02M", "$1,230M", "$1,230M", "$54.05B (97.77%)"],
-        ["Detección Realista", "Día 14", "461", "$0.71M", "$1,230M", "$1,231M", "$54.05B (97.77%)"],
-        ["Detección Tardía", "Día 30", "56,674", "$87.5M", "$1,230M", "$1,318M", "$53.96B (97.62%)"],
-        ["Sin detección", "Nunca", "35,007,684", "$54,052M", "$1,230M", "$55,282M", "—"],
+        ["Detección Ideal", "Día 3", "16", "$0.03M", "$1,187M", "$1,187M", "$54.05B (97.9%)"],
+        ["Detección Realista", "Día 14", "461", "$0.71M", "$1,187M", "$1,188M", "$54.05B (97.8%)"],
+        ["Detección Tardía", "Día 30", "56,674", "$87.5M", "$1,187M", "$1,275M", "$53.96B (97.7%)"],
+        ["Sin detección", "Nunca", "35,007,684", "$54,052M", "$1,187M", "$55,239M", "—"],
       ],
       [1400, 900, 1200, 1200, 1100, 1100, 2126]
     ),
     spacer(4),
 
-    body("Nota: El cierre de exportaciones ($1,230M = $8.2M/día × 150 días) es un costo fijo inevitable una vez declarado I₀ = 1, independiente del día de detección. La columna \"Costo Sacrificio\" es el verdadero costo variable que la detección temprana controla: de $0.02M (D3) a $54,052M (sin detección), una diferencia de 2.7 millones de veces."),
+    body("Nota metodológica: El cierre de exportaciones ($1,187M) se modela con un ramp-up escalonado de 4 fases, no como pérdida instantánea. Es un costo constante entre escenarios porque se activa con I₀ = 1 independientemente del día de detección. La columna \"Costo Sacrificio\" es el verdadero costo variable que la detección temprana controla. Adicionalmente, el horizonte de 150 días subestima el impacto real, ya que la recuperación del estatus sanitario ante la OMSA requiere entre 6 y 24 meses adicionales post-erradicación (Anderson, 2002)."),
     spacer(4),
 
     bodyRuns([b("Hallazgos clave:")]),
     spacer(2),
     numbered("Cada día cuenta exponencialmente: La diferencia entre detectar en el Día 3 (16 animales sacrificados) vs. el Día 30 (56,674) es de 3,542x — pero ambos siguen siendo manejables comparados con la catástrofe de no detectar (35 millones)."),
     numbered("El ROI de la vigilancia es astronómico: El costo anual del sistema de vigilancia epidemiológica de la CPA (~$20M USD estimados) evita pérdidas de $54 Billion USD. Eso es un ROI de 2,700:1."),
-    numbered("El cierre de exportaciones domina el costo: Incluso con detección en Día 3 (solo 16 animales), el cierre OMSA de exportaciones genera $1.23B en pérdidas. Este costo es inevitable una vez declarado I₀ = 1, lo que refuerza que la única defensa real es la prevención absoluta."),
+    numbered("El cierre de exportaciones domina el costo en escenarios controlados: Incluso con detección en Día 3 (solo 16 animales), el cierre de exportaciones bovinas genera $1.19B en pérdidas. Este costo es inevitable una vez declarado I₀ = 1, lo que refuerza que la única defensa real es la prevención absoluta."),
     spacer(4),
 
-    bodyRuns([b("Proxy comparativo con TB Bovina: "), r("A modo de referencia, la TB Bovina (endémica, R₀ = 1.8) genera pérdidas de ~$7.8M USD en 12 meses sin detección. La FMD genera $55.3B USD en 5 meses — una diferencia de 7,000x. Esto valida la decisión estratégica de usar TB como proxy de calibración: si el modelo funciona para el \"sangrado silencioso\" de TB, está preparado para el \"colapso nuclear\" de FMD.")]),
+    bodyRuns([b("Proxy comparativo con TB Bovina: "), r("A modo de referencia, la TB Bovina (endémica, R₀ = 1.8) genera pérdidas de ~$7.8M USD en 12 meses sin detección. La FMD genera $55.2B USD en 5 meses — una diferencia de 7,000x. Esto valida la decisión estratégica de usar TB como proxy de calibración: si el modelo funciona para el \"sangrado silencioso\" de TB, está preparado para el \"colapso nuclear\" de FMD.")]),
 
     img("../figures/contrafactual_fmd.png", 6.5, 2.8),
     imgCaption("Figura 13. Análisis de sensibilidad — Impacto del momento de detección en FMD (panel dual: escala completa + escala logarítmica)."),

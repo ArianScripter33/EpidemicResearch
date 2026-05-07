@@ -107,7 +107,8 @@ fmd_diagnostics = [
 # Fuentes verificadas:
 #   - Exportación ganado vivo 2024: $1,015M USD (GCMA/USDA, 1.25M cabezas)
 #   - Exportación carne res 2024: $1,700M USD (USDA ERS)
-#   - Total sector exportador: ~$3,000M USD/año ≈ $8.2M USD/día
+#   - Subproductos (cueros, vísceras): ~$285M USD (estimación FAO)
+#   - Total sector exportador bovino: ~$3,000M USD/año ≈ $8.2M USD/día
 #   - Valor cabeza en pie: $26,250 MXN (~$1,544 USD) (SNIIM 2024)
 #   - UK 2001: £8B total, 6.5M animales sacrificados, £1.3B compensación
 #     Ref: Anderson Report (2002); National Audit Office
@@ -115,8 +116,38 @@ fmd_diagnostics = [
 
 N = 35_100_000
 VALOR_CABEZA_USD = 1_544
-EXPORT_DIARIO_USD = 8_200_000  # $3B/año ÷ 365
+EXPORT_DIARIO_MAX = 8_200_000  # $3B/año ÷ 365 (100% cierre)
 COSTO_SACRIFICIO_USD = 50  # logística por cabeza (Rifle Sanitario)
+
+# ── Modelo escalonado de cierre de exportaciones ──────────────
+# Fase 1 (Día 1-3):  Sospecha clínica, muestras al laboratorio BSL-3.
+#                     No hay notificación OMSA → no hay cierre oficial.
+# Fase 2 (Día 4-7):  Confirmación RT-PCR + notificación OMSA.
+#                     EE.UU. cierra en ~48h = 62% del mercado bloqueado.
+# Fase 3 (Día 8-14): Japón, Corea del Sur, UE reaccionan.
+#                     ~90% del mercado cerrado.
+# Fase 4 (Día 15+):  Cierre total. 100% de exportaciones bloqueadas.
+#
+# Fuente del timing: Anderson Report (2002); OMSA SOP notifications.
+
+def export_loss_day(day):
+    """Retorna la pérdida de exportaciones para un día dado post-I₀=1."""
+    if day <= 3:
+        return 0                              # Sospecha, sin notificación
+    elif day <= 7:
+        return int(EXPORT_DIARIO_MAX * 0.62)   # EE.UU. cierra (62%)
+    elif day <= 14:
+        return int(EXPORT_DIARIO_MAX * 0.90)   # + Japón/Corea (90%)
+    else:
+        return EXPORT_DIARIO_MAX               # Cierre total (100%)
+
+def export_loss_range(start_day, end_day):
+    """Pérdida acumulada de exportaciones entre dos días."""
+    return sum(export_loss_day(d) for d in range(start_day + 1, end_day + 1))
+
+def export_loss_total(days):
+    """Pérdida total de exportaciones en N días."""
+    return export_loss_range(0, days)
 
 # ═══════════════════════════════════════════════════════════════
 # 3. MODELO SIR FMD — Escenario de Reintroducción (5 meses)
@@ -161,7 +192,7 @@ for month in range(1, 6):
     
     # Costos
     sacrifice_cost = sacrificed * VALOR_CABEZA_USD
-    export_loss = EXPORT_DIARIO_USD * 30  # Cierre total de fronteras
+    export_loss = export_loss_range(start_day, end_day)  # Modelo escalonado
     diagnostic_cost = int(peak_I * 0.05) * 35  # 5% muestreados a $35 RT-PCR
     total_month = sacrifice_cost + export_loss + diagnostic_cost
     cumulative += total_month
@@ -190,7 +221,7 @@ for label, det_day in [("Día 3 (ideal)", 3), ("Día 14 (realista)", 14),
     
     # Costo total
     sacrifice = total_removed * VALOR_CABEZA_USD
-    export = EXPORT_DIARIO_USD * 150  # 5 meses de bloqueo
+    export = export_loss_total(150)  # Modelo escalonado (150 días)
     total = sacrifice + export
     
     scenarios_fmd[label] = {
@@ -247,15 +278,16 @@ ax2.annotate(f"${cumul[-1]:.1f}B", xy=(4, cumul[-1]),
              fontsize=13, fontweight='bold', color=DORADO,
              arrowprops=dict(arrowstyle='->', color=DORADO, lw=2))
 
-# Anotación de exportaciones (contexto, no barra)
-export_total = EXPORT_DIARIO_USD * 150 / 1e9  # 5 meses
+# Anotación de exportaciones (contexto escalonado)
+export_total = export_loss_total(150) / 1e9
 ax1.text(0.98, 0.72,
-         f"⚠ Adicionalmente:\n"
-         f"Cierre OMSA de exportaciones\n"
-         f"$246M USD/mes (constante)\n"
-         f"Total 5 meses: ${export_total:.1f}B USD\n"
-         f"Fuente: USDA ERS 2024",
-         transform=ax1.transAxes, fontsize=8.5, ha='right', va='top',
+         f"⚠ Cierre de Exportaciones (escalonado):\n"
+         f"D1-3: $0/día (sospecha)\n"
+         f"D4-7: $5.1M/día (EE.UU. 62%)\n"
+         f"D8-14: $7.4M/día (90%)\n"
+         f"D15+: $8.2M/día (100%)\n"
+         f"Total 150 días: ${export_total:.2f}B USD",
+         transform=ax1.transAxes, fontsize=8, ha='right', va='top',
          bbox=dict(boxstyle='round,pad=0.6', facecolor='white',
                    edgecolor=DORADO, alpha=0.95, linewidth=1.5),
          color=DARK)
@@ -379,7 +411,9 @@ output = {
         "live_cattle_2024_usd": 1_015_000_000,
         "beef_exports_2024_usd": 1_700_000_000,
         "total_sector_usd": 3_000_000_000,
-        "daily_export_loss_usd": EXPORT_DIARIO_USD,
+        "daily_export_loss_max_usd": EXPORT_DIARIO_MAX,
+        "export_model": "phased: D1-3=0%, D4-7=62%, D8-14=90%, D15+=100%",
+        "total_export_loss_150d": export_loss_total(150),
         "source": "USDA ERS / GCMA 2024"
     },
     "uk_2001_benchmark": {
@@ -400,7 +434,8 @@ print("\n" + "="*65)
 print("RESUMEN FINANCIERO FMD — ESCENARIO DE REINTRODUCCIÓN")
 print("="*65)
 print(f"\n📊 Valor por cabeza: ${VALOR_CABEZA_USD:,} USD")
-print(f"📊 Exportaciones en riesgo: ${3_000_000_000:,} USD/año (${EXPORT_DIARIO_USD:,} USD/día)")
+print(f"📊 Exportaciones en riesgo: ${3_000_000_000:,} USD/año (${EXPORT_DIARIO_MAX:,} USD/día max)")
+print(f"📊 Cierre escalonado 150 días: ${export_loss_total(150):,} USD")
 print(f"\n{'Escenario':<25} {'Sacrificados':>15} {'Costo Total':>18} {'Ahorro':>18}")
 print("-"*76)
 for label, data in export_scenarios.items():

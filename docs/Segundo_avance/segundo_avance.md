@@ -270,17 +270,28 @@ En México, la Fiebre Aftosa es una **enfermedad exótica** (libre desde 1954). 
 
 **Código:** `src/models/fmd_finance_addendum.py`
 
-Se proyectó el impacto económico mensual de un escenario donde **1 solo animal infectado con Serotipo O** ingresa al hato nacional de 35.1 millones, utilizando el modelo SIR (R₀ = 6.0) y dos componentes de costo: el sacrificio sanitario (valor de mercado de cada animal removido) y el cierre inmediato de exportaciones por la OMSA.
+Se proyectó el impacto económico mensual de un escenario donde **1 solo animal infectado con Serotipo O** ingresa al hato nacional de 35.1 millones, utilizando el modelo SIR (R₀ = 6.0) y dos componentes de costo: el sacrificio sanitario (valor de mercado de cada animal removido) y el cierre de exportaciones bovinas por la OMSA.
+
+**Modelo de cierre de exportaciones:** El bloqueo comercial no es instantáneo. Se implementó un modelo escalonado basado en los tiempos de reacción documentados de los socios comerciales:
+
+| Fase | Días | % Mercado Cerrado | Pérdida/día (USD) | Descripción |
+|---|---|---|---|---|
+| Sospecha | 1-3 | 0% | $0 | Muestras al laboratorio BSL-3, sin notificación OMSA |
+| Confirmación + EE.UU. | 4-7 | 62% | $5.1M | RT-PCR confirma → notificación OMSA → EE.UU. cierra en ~48h |
+| Reacción global | 8-14 | 90% | $7.4M | Japón, Corea del Sur, UE cierran progresivamente |
+| Cierre total | 15+ | 100% | $8.2M | Bloqueo completo de exportaciones bovinas |
+
+> **Fuente del mercado:** Exportaciones bovinas de México: $1,015M (ganado vivo) + $1,700M (carne de res) + ~$285M (subproductos) = **~$3,000M USD/año** (USDA ERS 2024 / GCMA). Se refiere exclusivamente al sector **bovino**, no a toda la agricultura.
 
 | Mes | Infectados (pico) | Animales Sacrificados | Sacrificio (USD) | Cierre Exportaciones (USD) | Pérdida Acumulada |
 |---|---|---|---|---|---|
-| 1 | 9,520 | 1,904 | $2,939,776 | $246,000,000 | $248,956,436 |
-| 2 | 19,423,405 | 8,720,482 | $13,464,424,208 | $246,000,000 | $13,993,371,594 |
-| 3 | 19,685,118 | 21,706,241 | $33,514,436,104 | $246,000,000 | $47,788,256,623 |
-| 4 | 2,966,841 | 2,644,549 | $4,083,183,656 | $246,000,000 | $52,122,632,249 |
-| 5 | 329,660 | 293,158 | $452,635,952 | $246,000,000 | $52,821,845,106 |
+| 1 | 9,520 | 1,904 | $2,939,776 | $203,196,000 | $206,152,436 |
+| 2 | 19,423,405 | 8,720,482 | $13,464,424,208 | $246,000,000 | $13,950,567,594 |
+| 3 | 19,685,118 | 21,706,241 | $33,514,436,104 | $246,000,000 | $47,745,452,623 |
+| 4 | 2,966,841 | 2,644,549 | $4,083,183,656 | $246,000,000 | $52,079,828,249 |
+| 5 | 329,660 | 293,158 | $452,635,952 | $246,000,000 | $52,779,041,106 |
 
-**Hallazgo:** Con R₀ = 6.0, la FMD **no es lineal** — es una detonación nuclear biológica. En el Mes 1 parece controlable (1,904 sacrificados), pero en el Mes 2 ya son **8.7 millones** y en el Mes 3, **21.7 millones**. El costo del sacrificio sanitario domina completamente al cierre de exportaciones ($33.5B vs $246M en el mes pico). A 5 meses, la pérdida acumulada alcanza **$52.8 Billion USD** — equivalente al 4% del PIB de México.
+**Hallazgo:** Con R₀ = 6.0, la FMD **no es lineal** — es una detonación nuclear biológica. En el Mes 1 parece controlable (1,904 sacrificados), pero en el Mes 2 ya son **8.7 millones** y en el Mes 3, **21.7 millones**. El costo del sacrificio sanitario domina completamente al cierre de exportaciones ($33.5B vs $246M en el mes pico). A 5 meses, la pérdida acumulada alcanza **$52.8 Billion USD** — equivalente al 4% del PIB de México. Nótese que el Mes 1 muestra un cierre de exportaciones menor ($203M vs $246M) debido al modelo escalonado: los primeros 3 días son de sospecha sin notificación oficial.
 
 **Benchmark internacional:** El brote de FMD en Reino Unido (2001) costó £8B (~$12B USD), con 6.5 millones de animales sacrificados y £1.3B en compensaciones directas (Anderson Report, 2002). México, con un hato 5.4x mayor, enfrentaría pérdidas proporcionalmente mayores.
 
@@ -292,12 +303,12 @@ Se proyectó el impacto económico mensual de un escenario donde **1 solo animal
 
 | Escenario | Día | Sacrificados | Costo Sacrificio (USD) | Cierre Export. (USD) | Costo Total (USD) | Ahorro vs. sin detección |
 |---|---|---|---|---|---|---|
-| **Detección Ideal** | Día 3 | 16 | **$0.02M** | $1,230M | $1,230M | **$54.05B (97.77%)** |
-| **Detección Realista** | Día 14 | 461 | **$0.71M** | $1,230M | $1,231M | **$54.05B (97.77%)** |
-| **Detección Tardía** | Día 30 | 56,674 | **$87.5M** | $1,230M | $1,318M | **$53.96B (97.62%)** |
-| **Sin detección** | Nunca | 35,007,684 | **$54,052M** | $1,230M | $55,282M | — |
+| **Detección Ideal** | Día 3 | 16 | **$0.03M** | $1,187M | $1,187M | **$54.05B (97.9%)** |
+| **Detección Realista** | Día 14 | 461 | **$0.71M** | $1,187M | $1,188M | **$54.05B (97.8%)** |
+| **Detección Tardía** | Día 30 | 56,674 | **$87.5M** | $1,187M | $1,275M | **$53.96B (97.7%)** |
+| **Sin detección** | Nunca | 35,007,684 | **$54,052M** | $1,187M | $55,239M | — |
 
-> **Nota:** El cierre de exportaciones ($1,230M = $8.2M/día × 150 días) es un **costo fijo inevitable** una vez declarado I₀ = 1, independiente del día de detección. La columna "Costo Sacrificio" es el verdadero **costo variable** que la detección temprana controla: de $0.02M (D3) a $54,052M (sin detección), una diferencia de **2.7 millones de veces**.
+> **Nota metodológica:** El cierre de exportaciones ($1,187M) se modela con un ramp-up escalonado de 4 fases (ver tabla arriba), no como pérdida instantánea. Es un costo constante entre escenarios porque se activa con I₀ = 1 independientemente del día de detección. La columna "Costo Sacrificio" es el verdadero **costo variable** que la detección temprana controla: de $0.03M (D3) a $54,052M (sin detección). Adicionalmente, el horizonte de 150 días **subestima** el impacto real, ya que la recuperación del estatus sanitario ante la OMSA requiere entre 6 y 24 meses adicionales post-erradicación (Anderson, 2002; Knight-Jones & Rushton, 2013).
 
 **Hallazgos clave:**
 
@@ -305,9 +316,9 @@ Se proyectó el impacto económico mensual de un escenario donde **1 solo animal
 
 2. **El ROI de la vigilancia es astronómico:** El costo anual del sistema de vigilancia epidemiológica de la CPA (~$20M USD estimados) evita pérdidas de **$54 Billion USD**. Eso es un ROI de **2,700:1**.
 
-3. **El cierre de exportaciones domina el costo:** Incluso con detección en Día 3 (solo 16 animales), el cierre OMSA de exportaciones genera $1.23B en pérdidas. Este costo es **inevitable** una vez declarado I₀ = 1, lo que refuerza que la única defensa real es la **prevención absoluta**.
+3. **El cierre de exportaciones domina el costo en escenarios controlados:** Incluso con detección en Día 3 (solo 16 animales), el cierre de exportaciones bovinas genera $1.19B en pérdidas. Este costo es **inevitable** una vez declarado I₀ = 1, lo que refuerza que la única defensa real es la **prevención absoluta**.
 
-**Proxy comparativo con TB Bovina:** A modo de referencia, la TB Bovina (endémica, R₀ = 1.8) genera pérdidas de ~$7.8M USD en 12 meses sin detección. La FMD genera **$55.3B USD en 5 meses** — una diferencia de **7,000x**. Esto valida la decisión estratégica de usar TB como proxy de calibración: si el modelo funciona para el "sangrado silencioso" de TB, está preparado para el "colapso nuclear" de FMD.
+**Proxy comparativo con TB Bovina:** A modo de referencia, la TB Bovina (endémica, R₀ = 1.8) genera pérdidas de ~$7.8M USD en 12 meses sin detección. La FMD genera **$55.2B USD en 5 meses** — una diferencia de **7,000x**. Esto valida la decisión estratégica de usar TB como proxy de calibración: si el modelo funciona para el "sangrado silencioso" de TB, está preparado para el "colapso nuclear" de FMD.
 
 ![Análisis de Sensibilidad: Curva de Infectados FMD según Día de Detección](../figures/contrafactual_fmd.png)
 
