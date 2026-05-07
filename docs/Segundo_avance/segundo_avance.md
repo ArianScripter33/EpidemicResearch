@@ -290,12 +290,14 @@ Se proyectó el impacto económico mensual de un escenario donde **1 solo animal
 
 **¿Qué se gana al detectar la FMD a tiempo?** Este análisis de sensibilidad varía una sola variable — el **día de activación del DINESA** — y mide el impacto en animales sacrificados y costo total a 150 días. Se asume que la cuarentena (cierre de movimientos + anillo sanitario 3 km) reduce la tasa de contagio un 85% (Tildesley et al., 2006):
 
-| Escenario | Día de Detección | Animales Sacrificados | Costo Total (USD) | Ahorro vs. sin detección |
-|---|---|---|---|---|
-| **Detección Ideal** | Día 3 | 16 | $1,230M | **$54.05B (97.77%)** |
-| **Detección Realista** | Día 14 | 461 | $1,231M | **$54.05B (97.77%)** |
-| **Detección Tardía** | Día 30 | 56,674 | $1,318M | **$53.96B (97.62%)** |
-| **Sin detección** | Nunca | 35,007,684 | $55,282M | — |
+| Escenario | Día | Sacrificados | Costo Sacrificio (USD) | Cierre Export. (USD) | Costo Total (USD) | Ahorro vs. sin detección |
+|---|---|---|---|---|---|---|
+| **Detección Ideal** | Día 3 | 16 | **$0.02M** | $1,230M | $1,230M | **$54.05B (97.77%)** |
+| **Detección Realista** | Día 14 | 461 | **$0.71M** | $1,230M | $1,231M | **$54.05B (97.77%)** |
+| **Detección Tardía** | Día 30 | 56,674 | **$87.5M** | $1,230M | $1,318M | **$53.96B (97.62%)** |
+| **Sin detección** | Nunca | 35,007,684 | **$54,052M** | $1,230M | $55,282M | — |
+
+> **Nota:** El cierre de exportaciones ($1,230M = $8.2M/día × 150 días) es un **costo fijo inevitable** una vez declarado I₀ = 1, independiente del día de detección. La columna "Costo Sacrificio" es el verdadero **costo variable** que la detección temprana controla: de $0.02M (D3) a $54,052M (sin detección), una diferencia de **2.7 millones de veces**.
 
 **Hallazgos clave:**
 

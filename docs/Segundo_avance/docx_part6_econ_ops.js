@@ -105,15 +105,18 @@ function buildEconomics() {
 
     // Tabla contrafactual
     makeTable(
-      ["Escenario", "Día de Detección", "Animales Sacrificados", "Costo Total (USD)", "Ahorro vs. sin detección"],
+      ["Escenario", "Día", "Sacrificados", "Costo Sacrificio", "Cierre Export.", "Costo Total", "Ahorro vs. sin detección"],
       [
-        ["Detección Ideal", "Día 3", "16", "$1,230M", "$54.05B (97.77%)"],
-        ["Detección Realista", "Día 14", "461", "$1,231M", "$54.05B (97.77%)"],
-        ["Detección Tardía", "Día 30", "56,674", "$1,318M", "$53.96B (97.62%)"],
-        ["Sin detección", "Nunca", "35,007,684", "$55,282M", "—"],
+        ["Detección Ideal", "Día 3", "16", "$0.02M", "$1,230M", "$1,230M", "$54.05B (97.77%)"],
+        ["Detección Realista", "Día 14", "461", "$0.71M", "$1,230M", "$1,231M", "$54.05B (97.77%)"],
+        ["Detección Tardía", "Día 30", "56,674", "$87.5M", "$1,230M", "$1,318M", "$53.96B (97.62%)"],
+        ["Sin detección", "Nunca", "35,007,684", "$54,052M", "$1,230M", "$55,282M", "—"],
       ],
-      [1800, 1400, 1800, 1600, 2426]
+      [1400, 900, 1200, 1200, 1100, 1100, 2126]
     ),
+    spacer(4),
+
+    body("Nota: El cierre de exportaciones ($1,230M = $8.2M/día × 150 días) es un costo fijo inevitable una vez declarado I₀ = 1, independiente del día de detección. La columna \"Costo Sacrificio\" es el verdadero costo variable que la detección temprana controla: de $0.02M (D3) a $54,052M (sin detección), una diferencia de 2.7 millones de veces."),
     spacer(4),
 
     bodyRuns([b("Hallazgos clave:")]),
