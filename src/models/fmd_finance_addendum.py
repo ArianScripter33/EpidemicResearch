@@ -287,10 +287,11 @@ print("✅ flujo_caja_fmd.png")
 
 # ═══════════════════════════════════════════════════════════════
 # GRÁFICA 2: Análisis Contrafactual / Sensibilidad FMD
+#   Panel dual: escala completa (izq) + zoom en escenarios controlados (der)
 # ═══════════════════════════════════════════════════════════════
-fig2, ax3 = plt.subplots(figsize=(12, 6))
+fig2, (ax_full, ax_zoom) = plt.subplots(1, 2, figsize=(16, 6),
+                                         gridspec_kw={'width_ratios': [1, 1]})
 fig2.patch.set_facecolor(CREAM)
-ax3.set_facecolor(CREAM)
 
 colors_s = {
     "Día 3 (ideal)": GREEN,
@@ -299,33 +300,68 @@ colors_s = {
     "Sin detección": ALERT
 }
 
+# ── Panel Izquierdo: Escala Completa ──────────────────────
+ax_full.set_facecolor(CREAM)
 for label, data in scenarios_fmd.items():
     days_range = range(1, 151)
     infected = [d["I"] for d in data["daily_data"]]
-    ax3.plot(days_range, [i/1e6 for i in infected], 
-             color=colors_s[label], linewidth=2.5,
-             label=f"{label}: {data['total_removed']:,} sacrificados", zorder=3)
+    ax_full.plot(days_range, [i/1e6 for i in infected],
+                 color=colors_s[label], linewidth=2.5,
+                 label=f"{label}", zorder=3)
+
+ax_full.set_xlabel("Días desde I₀ = 1", fontsize=11, fontweight='bold', color=DARK)
+ax_full.set_ylabel("Animales Infectados (Millones)", fontsize=11, fontweight='bold', color=DARK)
+ax_full.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}M"))
+ax_full.set_title("Escala completa: la catástrofe sin detección",
+                   fontsize=10, fontweight='bold', color=DARK, pad=8)
+ax_full.legend(loc='upper right', framealpha=0.9, fontsize=8)
+ax_full.spines['top'].set_visible(False)
+ax_full.spines['right'].set_visible(False)
+
+# Anotación del pico
+peak_no_detect = max(d["I"] for d in scenarios_fmd["Sin detección"]["daily_data"])
+peak_day = next(i+1 for i, d in enumerate(scenarios_fmd["Sin detección"]["daily_data"])
+                if d["I"] == peak_no_detect)
+ax_full.annotate(f"Pico: {peak_no_detect/1e6:.1f}M\n(Día {peak_day})",
+                 xy=(peak_day, peak_no_detect/1e6),
+                 xytext=(peak_day + 20, peak_no_detect/1e6 * 0.85),
+                 fontsize=9, fontweight='bold', color=ALERT,
+                 arrowprops=dict(arrowstyle='->', color=ALERT, lw=1.5))
+
+# ── Panel Derecho: Zoom en escenarios CON detección ──────
+ax_zoom.set_facecolor(CREAM)
+for label, data in scenarios_fmd.items():
+    if label == "Sin detección":
+        continue  # Excluir la catástrofe para ver diferencias
+    days_range = range(1, 151)
+    infected = [d["I"] for d in data["daily_data"]]
+    lw = 3 if label == "Día 30 (tardía)" else 2.5
+    ax_zoom.plot(days_range, [i/1e3 for i in infected],
+                 color=colors_s[label], linewidth=lw,
+                 label=f"{label}: {data['total_removed']:,} sacrificados", zorder=3)
 
 # Líneas verticales de detección
-for day, color, lbl in [(3, GREEN, "D3"), (14, BLUE, "D14"), (30, DORADO, "D30")]:
-    ax3.axvline(x=day, color=color, linestyle='--', alpha=0.4, linewidth=1)
+for day, color in [(3, GREEN), (14, BLUE), (30, DORADO)]:
+    ax_zoom.axvline(x=day, color=color, linestyle='--', alpha=0.5, linewidth=1)
+    ax_zoom.text(day + 1, ax_zoom.get_ylim()[1] if ax_zoom.get_ylim()[1] > 0 else 100,
+                 f"D{day}", fontsize=8, color=color, fontweight='bold', va='top')
 
-ax3.set_xlabel("Días desde I₀ = 1", fontsize=12, fontweight='bold', color=DARK)
-ax3.set_ylabel("Animales Infectados (Millones)", fontsize=12, fontweight='bold', color=DARK)
-ax3.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.1f}M"))
-
-ax3.spines['top'].set_visible(False)
-ax3.spines['right'].set_visible(False)
+ax_zoom.set_xlabel("Días desde I₀ = 1", fontsize=11, fontweight='bold', color=DARK)
+ax_zoom.set_ylabel("Animales Infectados (Miles)", fontsize=11, fontweight='bold', color=DARK)
+ax_zoom.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}K"))
+ax_zoom.set_title("Zoom: diferencia entre Día 3, 14 y 30 de detección",
+                   fontsize=10, fontweight='bold', color=DARK, pad=8)
+ax_zoom.legend(loc='upper right', framealpha=0.9, fontsize=8)
+ax_zoom.spines['top'].set_visible(False)
+ax_zoom.spines['right'].set_visible(False)
 
 fig2.suptitle("Análisis de Sensibilidad: Impacto del Momento de Detección en FMD",
-              fontsize=14, fontweight='bold', color=DARK, y=0.98)
-ax3.set_title("Curva de infectados según día de activación del DINESA (R₀ = 6.0, cuarentena 85%)",
-              fontsize=9, color='gray', style='italic', pad=10)
-ax3.legend(loc='upper left', framealpha=0.9, fontsize=9)
+              fontsize=14, fontweight='bold', color=DARK, y=1.02)
 
 plt.tight_layout()
 plt.savefig(os.path.join(OUT, "contrafactual_fmd.png"), dpi=300, bbox_inches='tight')
 print("✅ contrafactual_fmd.png")
+
 
 # ═══════════════════════════════════════════════════════════════
 # EXPORTAR JSON
