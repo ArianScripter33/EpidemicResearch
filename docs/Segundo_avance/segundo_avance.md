@@ -274,13 +274,13 @@ Se proyectó el impacto económico mensual de un escenario donde **1 solo animal
 
 | Mes | Infectados (pico) | Animales Sacrificados | Sacrificio (USD) | Cierre Exportaciones (USD) | Pérdida Acumulada |
 |---|---|---|---|---|---|
-| 1 | 16 | 1 | $1,544 | $246,000,000 | $246,001,544 |
-| 2 | 404 | 29 | $44,776 | $246,000,000 | $492,046,320 |
-| 3 | 10,389 | 748 | $1,154,912 | $246,000,000 | $739,201,232 |
-| 4 | 267,252 | 19,269 | $29,751,336 | $246,000,000 | $1,014,952,568 |
-| 5 | 6,579,672 | 1,173,247 | $1,811,493,368 | $246,000,000 | $3,071,445,936 |
+| 1 | 9,520 | 1,904 | $2,939,776 | $246,000,000 | $248,956,436 |
+| 2 | 19,423,405 | 8,720,482 | $13,464,424,208 | $246,000,000 | $13,993,371,594 |
+| 3 | 19,685,118 | 21,706,241 | $33,514,436,104 | $246,000,000 | $47,788,256,623 |
+| 4 | 2,966,841 | 2,644,549 | $4,083,183,656 | $246,000,000 | $52,122,632,249 |
+| 5 | 329,660 | 293,158 | $452,635,952 | $246,000,000 | $52,821,845,106 |
 
-**Hallazgo:** En los primeros 3 meses, la pérdida está **dominada por el cierre de exportaciones** ($246M USD/mes), no por el sacrificio. Pero en el Mes 5, la curva exponencial del SIR hace que el sacrificio sanitario ($1.8B) supere al cierre comercial. A 5 meses, la pérdida acumulada alcanza **$3.07 Billion USD** — y sigue acelerándose exponencialmente.
+**Hallazgo:** Con R₀ = 6.0, la FMD **no es lineal** — es una detonación nuclear biológica. En el Mes 1 parece controlable (1,904 sacrificados), pero en el Mes 2 ya son **8.7 millones** y en el Mes 3, **21.7 millones**. El costo del sacrificio sanitario domina completamente al cierre de exportaciones ($33.5B vs $246M en el mes pico). A 5 meses, la pérdida acumulada alcanza **$52.8 Billion USD** — equivalente al 4% del PIB de México.
 
 **Benchmark internacional:** El brote de FMD en Reino Unido (2001) costó £8B (~$12B USD), con 6.5 millones de animales sacrificados y £1.3B en compensaciones directas (Anderson Report, 2002). México, con un hato 5.4x mayor, enfrentaría pérdidas proporcionalmente mayores.
 
@@ -292,10 +292,10 @@ Se proyectó el impacto económico mensual de un escenario donde **1 solo animal
 
 | Escenario | Día de Detección | Animales Sacrificados | Costo Total (USD) | Ahorro vs. sin detección |
 |---|---|---|---|---|
-| **Detección Ideal** | Día 3 | 16 | $1,230,025,602 | **$54.0B (97.8%)** |
-| **Detección Realista** | Día 14 | 461 | $1,230,713,288 | **$54.0B (97.8%)** |
-| **Detección Tardía** | Día 30 | 56,674 | $1,317,505,873 | **$54.0B (97.6%)** |
-| **Sin detección** | Nunca | 35,007,684 | $55,281,864,480 | — |
+| **Detección Ideal** | Día 3 | 16 | $1,230M | **$54.0B (97.8%)** |
+| **Detección Realista** | Día 14 | 461 | $1,231M | **$54.0B (97.8%)** |
+| **Detección Tardía** | Día 30 | 56,674 | $1,318M | **$54.0B (97.6%)** |
+| **Sin detección** | Nunca | 35,007,684 | $55,282M | — |
 
 **Hallazgos clave:**
 
