@@ -211,45 +211,63 @@ for label in scenarios_fmd:
     s["savings_pct"] = round(s["savings_usd"] / baseline_cost * 100, 1) if baseline_cost > 0 else 0
 
 # ═══════════════════════════════════════════════════════════════
-# GRÁFICA 1: Flujo de Caja Mensual FMD (Waterfall)
+# GRÁFICA 1: Flujo de Caja Mensual FMD (Clean SWD style)
 # ═══════════════════════════════════════════════════════════════
 fig, ax1 = plt.subplots(figsize=(12, 6))
 fig.patch.set_facecolor(CREAM)
 ax1.set_facecolor(CREAM)
 
 months = [m["month"] for m in monthly_fmd]
-sacrifice_costs = [m["sacrifice_cost_usd"] / 1e9 for m in monthly_fmd]  # Billions
-export_costs = [m["export_loss_usd"] / 1e9 for m in monthly_fmd]
+sacrifice_costs = [m["sacrifice_cost_usd"] / 1e9 for m in monthly_fmd]
 cumul = [m["cumulative_usd"] / 1e9 for m in monthly_fmd]
 
 x = np.arange(len(months))
-w = 0.35
 
-bars1 = ax1.bar(x - w/2, sacrifice_costs, w, color=CARMESI, alpha=0.9, 
-                label="Sacrificio sanitario", zorder=3)
-bars2 = ax1.bar(x + w/2, export_costs, w, color=DORADO, alpha=0.9,
-                label="Cierre de exportaciones", zorder=3)
+# Barras: Solo sacrificio sanitario (la historia exponencial)
+bars = ax1.bar(x, sacrifice_costs, 0.6, color=CARMESI, alpha=0.9,
+               label="Sacrificio sanitario (por mes)", zorder=3)
 
+# Etiquetas sobre las barras
+for bar, val in zip(bars, sacrifice_costs):
+    if val > 0.5:  # Solo etiquetar barras visibles
+        ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
+                 f"${val:.1f}B", ha='center', va='bottom', fontsize=10,
+                 color=DARK, fontweight='bold')
+
+# Línea acumulada (eje derecho)
 ax2 = ax1.twinx()
-ax2.plot(x, cumul, color=ALERT, linewidth=3, marker='D', markersize=10,
-         markerfacecolor='white', markeredgecolor=ALERT, markeredgewidth=2,
+ax2.plot(x, cumul, color=DORADO, linewidth=3, marker='D', markersize=10,
+         markerfacecolor='white', markeredgecolor=DORADO, markeredgewidth=2,
          label="Pérdida acumulada", zorder=4)
 ax2.set_facecolor("none")
 
-# Etiqueta final
+# Etiqueta final acumulada
 ax2.annotate(f"${cumul[-1]:.1f}B", xy=(4, cumul[-1]),
-             xytext=(3.2, cumul[-1] * 1.05),
-             fontsize=13, fontweight='bold', color=ALERT,
-             arrowprops=dict(arrowstyle='->', color=ALERT, lw=2))
+             xytext=(3.3, cumul[-1] * 1.06),
+             fontsize=13, fontweight='bold', color=DORADO,
+             arrowprops=dict(arrowstyle='->', color=DORADO, lw=2))
+
+# Anotación de exportaciones (contexto, no barra)
+export_total = EXPORT_DIARIO_USD * 150 / 1e9  # 5 meses
+ax1.text(0.98, 0.72,
+         f"⚠ Adicionalmente:\n"
+         f"Cierre OMSA de exportaciones\n"
+         f"$246M USD/mes (constante)\n"
+         f"Total 5 meses: ${export_total:.1f}B USD\n"
+         f"Fuente: USDA ERS 2024",
+         transform=ax1.transAxes, fontsize=8.5, ha='right', va='top',
+         bbox=dict(boxstyle='round,pad=0.6', facecolor='white',
+                   edgecolor=DORADO, alpha=0.95, linewidth=1.5),
+         color=DARK)
 
 ax1.set_xlabel("Mes desde I₀ = 1", fontsize=12, fontweight='bold', color=DARK)
-ax1.set_ylabel("Pérdida Mensual (Billions USD)", fontsize=12, fontweight='bold', color=DARK)
-ax2.set_ylabel("Pérdida Acumulada (Billions USD)", fontsize=12, fontweight='bold', color=ALERT)
+ax1.set_ylabel("Costo Sacrificio Sanitario (Billions USD)", fontsize=12, fontweight='bold', color=CARMESI)
+ax2.set_ylabel("Pérdida Acumulada (Billions USD)", fontsize=12, fontweight='bold', color=DORADO)
 ax1.set_xticks(x)
 ax1.set_xticklabels([f"Mes {m}" for m in months])
 
-ax1.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:.1f}B"))
-ax2.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:.1f}B"))
+ax1.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:.0f}B"))
+ax2.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:.0f}B"))
 
 ax1.spines['top'].set_visible(False)
 ax2.spines['top'].set_visible(False)
@@ -260,7 +278,7 @@ ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left', framealpha=0.9)
 
 fig.suptitle("Flujo de Caja: Escenario de Reintroducción de Fiebre Aftosa en México",
              fontsize=14, fontweight='bold', color=DARK, y=0.98)
-ax1.set_title("Pérdida por sacrificio sanitario + cierre OMSA de exportaciones (R₀ = 6.0, Serotipo O)",
+ax1.set_title("Costo del sacrificio sanitario derivado del modelo SIR (R₀ = 6.0, Serotipo O, I₀ = 1)",
               fontsize=9, color='gray', style='italic', pad=10)
 
 plt.tight_layout()
