@@ -302,8 +302,8 @@ export_total = export_loss_total(150) / 1e9
 ax1.text(0.98, 0.72,
          f"⚠ Cierre de Exportaciones (escalonado):\n"
          f"D1-3: $0/día (sospecha)\n"
-         f"D4-7: $5.1M/día (EE.UU. 62%)\n"
-         f"D8-14: $7.4M/día (90%)\n"
+         f"D4-7: $7.4M/día (EE.UU. 90%)\n"
+         f"D8-14: $8.0M/día (98%)\n"
          f"D15+: $8.2M/día (100%)\n"
          f"Total 150 días: ${export_total:.2f}B USD",
          transform=ax1.transAxes, fontsize=8, ha='right', va='top',
@@ -431,9 +431,9 @@ output = {
         "beef_exports_2024_usd": 1_700_000_000,
         "total_sector_usd": 3_000_000_000,
         "daily_export_loss_max_usd": EXPORT_DIARIO_MAX,
-        "export_model": "phased: D1-3=0%, D4-7=62%, D8-14=90%, D15+=100%",
+        "export_model": "phased: D1-3=0%, D4-7=90%, D8-14=98%, D15+=100%",
         "total_export_loss_150d": export_loss_total(150),
-        "source": "USDA ERS / GCMA 2024"
+        "source": "USDA FAS GATS 2024 / AHDB 2024"
     },
     "uk_2001_benchmark": {
         "total_cost_gbp": 8_000_000_000,

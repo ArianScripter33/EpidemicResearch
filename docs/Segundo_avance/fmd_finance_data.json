@@ -148,9 +148,9 @@
     "beef_exports_2024_usd": 1700000000,
     "total_sector_usd": 3000000000,
     "daily_export_loss_max_usd": 8200000,
-    "export_model": "phased: D1-3=0%, D4-7=62%, D8-14=90%, D15+=100%",
+    "export_model": "phased: D1-3=0%, D4-7=90%, D8-14=98%, D15+=100%",
     "total_export_loss_150d": 1200972000,
-    "source": "USDA ERS / GCMA 2024"
+    "source": "USDA FAS GATS 2024 / AHDB 2024"
   },
   "uk_2001_benchmark": {
     "total_cost_gbp": 8000000000,
