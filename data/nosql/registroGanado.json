@@ -1,0 +1,288 @@
+{
+  "registrosGanado": [
+    {
+      "id": "REG-001",
+      "predio": {
+        "idPredio": "MX-CHIH-0842",
+        "nombre": "Rancho La Esperanza",
+        "ubicacion": "Municipio de Cuauhtémoc, Chihuahua",
+        "contacto": "Dr. Martínez: 625-123-4567"
+      },
+      "animal": {
+        "idAnimal": "BOV-2024-0156",
+        "especie": "Bos taurus",
+        "raza": "Brangus",
+        "edadUnidades": 3,
+        "edadTipo": "años",
+        "pesoKg": 485,
+        "vacunado": false,
+        "fechaUltimaVacuna": null
+      },
+      "diagnostico": {
+        "enfermedad": "Neumonía bovina",
+        "fechaDiagnostico": "2024-03-15",
+        "sintomas": [
+          "Fiebre > 40°C",
+          "Tos seca persistente",
+          "Secreción nasal"
+        ],
+        "gravedad": "moderada"
+      },
+      "tratamiento": {
+        "medicamento": "Oxitetraciclina LA",
+        "dosis": 20,
+        "dosisUnidad": "mg/kg",
+        "frecuencia": "Cada 72 horas",
+        "duracionDias": 9,
+        "responsable": "MVZ. López"
+      },
+      "seguimiento": {
+        "fechaControl": "2024-03-22",
+        "resultado": "En recuperación"
+      }
+    },
+    {
+      "id": "REG-002",
+      "predio": {
+        "idPredio": "MX-JAL-1105",
+        "nombre": "Estancia El Roble",
+        "ubicacion": "Los Altos de Jalisco",
+        "contacto": "MVZ. García: 334-987-6543"
+      },
+      "animal": {
+        "idAnimal": "BOV-2024-0201",
+        "especie": "Bos taurus",
+        "raza": "Angus",
+        "edadUnidades": 2,
+        "edadTipo": "años",
+        "pesoKg": 420,
+        "vacunado": true,
+        "fechaUltimaVacuna": "2024-01-10"
+      },
+      "diagnostico": {
+        "enfermedad": "Sano",
+        "fechaDiagnostico": "2024-03-18",
+        "sintomas": [],
+        "gravedad": "ninguna"
+      },
+      "seguimiento": {
+        "fechaControl": "2024-06-18",
+        "resultado": "Programado"
+      }
+    },
+    {
+      "id": "REG-003",
+      "predio": {
+        "idPredio": "MX-VER-0334",
+        "nombre": "Ganadera Tropical",
+        "ubicacion": "Papantla, Veracruz",
+        "contacto": "Dr. Hernández: 223-456-7890"
+      },
+      "animal": {
+        "idAnimal": "BOV-2024-0089",
+        "especie": "Bos indicus",
+        "raza": "Brahman",
+        "edadUnidades": 4,
+        "edadTipo": "años",
+        "pesoKg": 510,
+        "vacunado": false,
+        "fechaUltimaVacuna": null
+      },
+      "diagnostico": {
+        "enfermedad": "Brucelosis",
+        "fechaDiagnostico": "2024-03-10",
+        "sintomas": [
+          "Aborto espontáneo",
+          "Retención de placenta"
+        ],
+        "gravedad": "grave"
+      },
+      "tratamiento": {
+        "medicamento": "Protocolo de erradicación",
+        "observaciones": "Animal aislado, reporte a SENASICA"
+      }
+    },
+    {
+      "id": "REG-004",
+      "predio": {
+        "idPredio": "MX-SON-0567",
+        "nombre": "Rancho del Desierto",
+        "ubicacion": "Hermosillo, Sonora",
+        "contacto": "MVZ. Ramírez: 662-111-2233"
+      },
+      "animal": {
+        "idAnimal": "BOV-2024-0312",
+        "especie": "Bos taurus",
+        "raza": "Hereford",
+        "edadUnidades": 5,
+        "edadTipo": "años",
+        "pesoKg": 590,
+        "vacunado": true,
+        "fechaUltimaVacuna": "2024-02-28"
+      },
+      "diagnostico": {
+        "enfermedad": "Sano",
+        "fechaDiagnostico": "2024-03-20",
+        "gravedad": "ninguna"
+      }
+    },
+    {
+      "id": "REG-005",
+      "predio": {
+        "idPredio": "MX-CHIH-0842",
+        "nombre": "Rancho La Esperanza",
+        "ubicacion": "Municipio de Cuauhtémoc, Chihuahua",
+        "contacto": "Dr. Martínez: 625-123-4567"
+      },
+      "animal": {
+        "idAnimal": "BOV-2024-0157",
+        "especie": "Bos taurus",
+        "raza": "Brangus",
+        "edadUnidades": 2,
+        "edadTipo": "años",
+        "pesoKg": 395,
+        "vacunado": false,
+        "fechaUltimaVacuna": null
+      },
+      "diagnostico": {
+        "enfermedad": "Neumonía bovina",
+        "fechaDiagnostico": "2024-03-16",
+        "sintomas": [
+          "Depresión",
+          "Fiebre > 40°C"
+        ],
+        "gravedad": "leve"
+      }
+    },
+    {
+      "id": "REG-006",
+      "predio": {
+        "idPredio": "MX-JAL-1105",
+        "nombre": "Estancia El Roble",
+        "ubicacion": "Los Altos de Jalisco",
+        "contacto": "MVZ. García: 334-987-6543"
+      },
+      "animal": {
+        "idAnimal": "BOV-2024-0202",
+        "especie": "Bos taurus",
+        "raza": "Charolais",
+        "edadUnidades": 1,
+        "edadTipo": "año",
+        "pesoKg": 280,
+        "vacunado": true,
+        "fechaUltimaVacuna": "2024-03-01"
+      },
+      "diagnostico": {
+        "enfermedad": "Sano",
+        "fechaDiagnostico": "2024-03-19",
+        "gravedad": "ninguna"
+      }
+    },
+    {
+      "id": "REG-007",
+      "predio": {
+        "idPredio": "MX-VER-0334",
+        "nombre": "Ganadera Tropical",
+        "ubicacion": "Papantla, Veracruz",
+        "contacto": "Dr. Hernández: 223-456-7890"
+      },
+      "animal": {
+        "idAnimal": "BOV-2024-0090",
+        "especie": "Bos indicus",
+        "raza": "Gyr",
+        "edadUnidades": 3,
+        "edadTipo": "años",
+        "pesoKg": 445,
+        "vacunado": false,
+        "fechaUltimaVacuna": null
+      },
+      "diagnostico": {
+        "enfermedad": "Fiebre aftosa (sospecha)",
+        "fechaDiagnostico": "2024-03-21",
+        "sintomas": [
+          "Vesículas en boca",
+          "Cojera",
+          "Sialorrea"
+        ],
+        "gravedad": "grave",
+        "observaciones": "Reporte inmediato a autoridades"
+      }
+    },
+    {
+      "id": "REG-008",
+      "predio": {
+        "idPredio": "MX-SON-0567",
+        "nombre": "Rancho del Desierto",
+        "ubicacion": "Hermosillo, Sonora",
+        "contacto": "MVZ. Ramírez: 662-111-2233"
+      },
+      "animal": {
+        "idAnimal": "BOV-2024-0313",
+        "especie": "Bos taurus",
+        "raza": "Simmental",
+        "edadUnidades": 3,
+        "edadTipo": "años",
+        "pesoKg": 520,
+        "vacunado": true,
+        "fechaUltimaVacuna": "2024-01-15"
+      },
+      "diagnostico": {
+        "enfermedad": "Sano",
+        "fechaDiagnostico": "2024-03-20",
+        "gravedad": "ninguna"
+      }
+    },
+    {
+      "id": "REG-009",
+      "predio": {
+        "idPredio": "MX-CHIH-0901",
+        "nombre": "Agropecuaria del Norte",
+        "ubicacion": "Delicias, Chihuahua",
+        "contacto": "Dr. Torres: 627-555-0199"
+      },
+      "animal": {
+        "idAnimal": "BOV-2024-0445",
+        "especie": "Bos taurus",
+        "raza": "Limousin",
+        "edadUnidades": 4,
+        "edadTipo": "años",
+        "pesoKg": 555,
+        "vacunado": false,
+        "fechaUltimaVacuna": null
+      },
+      "diagnostico": {
+        "enfermedad": "Clostridiosis",
+        "fechaDiagnostico": "2024-03-14",
+        "sintomas": [
+          "Edema subcutáneo",
+          "Decaimiento severo"
+        ],
+        "gravedad": "grave"
+      }
+    },
+    {
+      "id": "REG-010",
+      "predio": {
+        "idPredio": "MX-JAL-1208",
+        "nombre": "La Pradera",
+        "ubicacion": "Tepatitlán, Jalisco",
+        "contacto": "MVZ. Flores: 338-222-4455"
+      },
+      "animal": {
+        "idAnimal": "BOV-2024-0511",
+        "especie": "Bos taurus",
+        "raza": "Angus",
+        "edadUnidades": 2,
+        "edadTipo": "años",
+        "pesoKg": 410,
+        "vacunado": true,
+        "fechaUltimaVacuna": "2024-02-14"
+      },
+      "diagnostico": {
+        "enfermedad": "Sano",
+        "fechaDiagnostico": "2024-03-22",
+        "gravedad": "ninguna"
+      }
+    }
+  ]
+}
