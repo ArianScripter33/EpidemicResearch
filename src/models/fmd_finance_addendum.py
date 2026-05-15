@@ -268,8 +268,8 @@ fig.patch.set_facecolor(CREAM)
 ax1.set_facecolor(CREAM)
 
 months = [m["month"] for m in monthly_fmd]
-sacrifice_costs = [m["sacrifice_cost_usd"] / 1e9 for m in monthly_fmd]
-cumul = [m["cumulative_usd"] / 1e9 for m in monthly_fmd]
+sacrifice_costs = [m["sacrifice_cost_usd"] / 1e6 for m in monthly_fmd]
+cumul = [m["cumulative_usd"] / 1e6 for m in monthly_fmd]
 
 x = np.arange(len(months))
 
@@ -279,9 +279,9 @@ bars = ax1.bar(x, sacrifice_costs, 0.6, color=CARMESI, alpha=0.9,
 
 # Etiquetas sobre las barras
 for bar, val in zip(bars, sacrifice_costs):
-    if val > 0.5:  # Solo etiquetar barras visibles
-        ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
-                 f"${val:.1f}B", ha='center', va='bottom', fontsize=10,
+    if val > 500:  # Solo etiquetar barras visibles
+        ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1000,
+                 f"${val:,.0f}M", ha='center', va='bottom', fontsize=10,
                  color=DARK, fontweight='bold')
 
 # Línea acumulada (eje derecho)
@@ -292,33 +292,33 @@ ax2.plot(x, cumul, color=DORADO, linewidth=3, marker='D', markersize=10,
 ax2.set_facecolor("none")
 
 # Etiqueta final acumulada
-ax2.annotate(f"${cumul[-1]:.1f}B", xy=(4, cumul[-1]),
+ax2.annotate(f"${cumul[-1]:,.0f}M", xy=(4, cumul[-1]),
              xytext=(3.3, cumul[-1] * 1.06),
              fontsize=13, fontweight='bold', color=DORADO,
              arrowprops=dict(arrowstyle='->', color=DORADO, lw=2))
 
 # Anotación de exportaciones (contexto escalonado)
-export_total = export_loss_total(150) / 1e9
+export_total = export_loss_total(150) / 1e6
 ax1.text(0.98, 0.72,
          f"⚠ Cierre de Exportaciones (escalonado):\n"
          f"D1-3: $0/día (sospecha)\n"
          f"D4-7: $7.4M/día (EE.UU. 90%)\n"
          f"D8-14: $8.0M/día (98%)\n"
          f"D15+: $8.2M/día (100%)\n"
-         f"Total 150 días: ${export_total:.2f}B USD",
+         f"Total 150 días: ${export_total:,.0f}M USD",
          transform=ax1.transAxes, fontsize=8, ha='right', va='top',
          bbox=dict(boxstyle='round,pad=0.6', facecolor='white',
                    edgecolor=DORADO, alpha=0.95, linewidth=1.5),
          color=DARK)
 
 ax1.set_xlabel("Mes desde I₀ = 1", fontsize=12, fontweight='bold', color=DARK)
-ax1.set_ylabel("Costo Sacrificio Sanitario (Billions USD)", fontsize=12, fontweight='bold', color=CARMESI)
-ax2.set_ylabel("Pérdida Acumulada (Billions USD)", fontsize=12, fontweight='bold', color=DORADO)
+ax1.set_ylabel("Costo Sacrificio Sanitario (Millones USD)", fontsize=12, fontweight='bold', color=CARMESI)
+ax2.set_ylabel("Pérdida Acumulada (Millones USD)", fontsize=12, fontweight='bold', color=DORADO)
 ax1.set_xticks(x)
 ax1.set_xticklabels([f"Mes {m}" for m in months])
 
-ax1.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:.0f}B"))
-ax2.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:.0f}B"))
+ax1.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:,.0f}M"))
+ax2.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:,.0f}M"))
 
 ax1.spines['top'].set_visible(False)
 ax2.spines['top'].set_visible(False)

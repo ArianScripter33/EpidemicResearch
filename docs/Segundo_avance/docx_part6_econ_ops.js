@@ -24,9 +24,9 @@ function buildEconomics() {
     bullet("Pérdida Biológica: 500 kg en pie × $52.5 MXN/kg = $26,250 MXN ≈ $1,544 USD por cabeza sacrificada (Fuente: SNIIM 2024 / Uniones Ganaderas)."),
     bullet("Cierre de Fronteras: Al declararse I₀=1, se activa un bloqueo OMSA a los $3,000 Millones USD anuales de exportación cárnica (pérdida de ~$8.2 Millones USD diarios)."),
     spacer(2),
-    bodyRuns([b("Resultado: "), r("En menos de 150 días, la pérdida acumulada alcanza $52.8 Billion USD, equivalente al 4% del PIB de México.")]),
+    bodyRuns([b("Resultado: "), r("En menos de 150 días, la pérdida acumulada alcanza $52,800 Millones USD, equivalente al 4% del PIB de México.")]),
     img("../figures/fmd_impacto_nuclear.png", 6.2, 4.0),
-    imgCaption("Figura 11. Colapso financiero catastrófico por Fiebre Aftosa ($52.8B USD en 150 días)."),
+    imgCaption("Figura 11. Colapso financiero catastrófico por Fiebre Aftosa ($52,800M USD en 150 días)."),
 
     // ═══════════════════════════════════════════════════════
     // §6.3 — COSTOS DE DIAGNÓSTICO FMD
@@ -109,9 +109,9 @@ function buildEconomics() {
     ),
     spacer(4),
 
-    bodyRuns([b("Hallazgo: "), r("Con R₀ = 6.0, la FMD no es lineal — es una detonación nuclear biológica. En el Mes 1 parece controlable (1,904 sacrificados), pero en el Mes 2 ya son 8.7 millones y en el Mes 3, 21.7 millones. El Mes 1 muestra un cierre de exportaciones menor ($217M vs $246M) debido al modelo escalonado. A 5 meses, la pérdida acumulada alcanza $52.8 Billion USD — equivalente al 4% del PIB de México.")]),
+    bodyRuns([b("Hallazgo: "), r("Con R₀ = 6.0, la FMD no es lineal — es una detonación nuclear biológica. En el Mes 1 parece controlable (1,904 sacrificados), pero en el Mes 2 ya son 8.7 millones y en el Mes 3, 21.7 millones. El Mes 1 muestra un cierre de exportaciones menor ($217M vs $246M) debido al modelo escalonado. A 5 meses, la pérdida acumulada alcanza $52,800 Millones USD — equivalente al 4% del PIB de México.")]),
 
-    bodyRuns([b("Benchmark internacional: "), r("El brote de FMD en Reino Unido (2001) costó £8B (~$12B USD), con 6.5 millones de animales sacrificados y £1.3B en compensaciones directas (Anderson Report, 2002). México, con un hato 5.4x mayor, enfrentaría pérdidas proporcionalmente mayores.")]),
+    bodyRuns([b("Benchmark internacional: "), r("El brote de FMD en Reino Unido (2001) costó £8,000M (~$12,000M USD), con 6.5 millones de animales sacrificados y £1,300M en compensaciones directas (Anderson Report, 2002). México, con un hato 5.4x mayor, enfrentaría pérdidas proporcionalmente mayores.")]),
 
     img("../figures/flujo_caja_fmd.png", 6.5, 3.0),
     imgCaption("Figura 12. Flujo de caja mensual FMD — Costo del sacrificio sanitario derivado del modelo SIR (R₀ = 6.0). Cierre de exportaciones con modelo escalonado de 4 fases."),
@@ -127,9 +127,9 @@ function buildEconomics() {
     makeTable(
       ["Escenario", "Día", "Sacrificados", "Costo Sacrificio", "Cierre Export.", "Costo Total", "Ahorro vs. sin detección"],
       [
-        ["Detección Ideal", "Día 3", "16", "$0.03M", "$1,201M", "$1,201M", "$54.05B (97.8%)"],
-        ["Detección Realista", "Día 14", "461", "$0.71M", "$1,201M", "$1,202M", "$54.05B (97.8%)"],
-        ["Detección Tardía", "Día 30", "56,674", "$87.5M", "$1,201M", "$1,288M", "$53.96B (97.7%)"],
+        ["Detección Ideal", "Día 3", "16", "$0.03M", "$1,201M", "$1,201M", "$54,050M (97.8%)"],
+        ["Detección Realista", "Día 14", "461", "$0.71M", "$1,201M", "$1,202M", "$54,050M (97.8%)"],
+        ["Detección Tardía", "Día 30", "56,674", "$87.5M", "$1,201M", "$1,288M", "$53,960M (97.7%)"],
         ["Sin detección", "Nunca", "35,007,684", "$54,052M", "$1,201M", "$55,253M", "—"],
       ],
       [1400, 900, 1200, 1200, 1100, 1100, 2126]
@@ -142,11 +142,11 @@ function buildEconomics() {
     bodyRuns([b("Hallazgos clave y Justificación Matemática:")]),
     spacer(2),
     numbered("Cada día cuenta exponencialmente (Crecimiento Viral): La diferencia entre detectar en el Día 3 (16 animales sacrificados) vs. el Día 30 (56,674) es de una magnitud de 3,542x. Esto ocurre porque la curva de contagio inicial sigue la ecuación I(t) = I_0 * e^((R_0 - 1)*gamma*t). Con un R_0 = 6.0, el crecimiento no es lineal, es una explosión demográfica exponencial. A pesar de esto, 56 mil animales sigue siendo manejable comparado con la catástrofe de no detectar (35 millones)."),
-    numbered("El ROI de la vigilancia es astronómico (2,700:1): Calculamos el Retorno de Inversión (ROI) del sistema de vigilancia de la CPA (~$20M USD anuales). ROI = (Costo Sin Detección - Costo Detección Ideal) / Costo de Vigilancia = ($55.25B - $1.20B) / $20M = 2,702. Por cada dólar invertido en vigilancia activa, México ahorra $2,700 dólares en mitigación de crisis."),
-    numbered("El cierre de exportaciones domina el costo en escenarios controlados: Incluso con detección en el Día 3, el costo del sacrificio es insignificante (16 * $1,544 = $24,704 USD), pero el costo por cierre de exportaciones es de $1.20B USD. El ratio de daño colateral es de 48,615x. El daño comercial colateral es casi 50 mil veces mayor que el daño biológico directo. Este costo es inevitable una vez declarado el caso I_0 = 1. La FMD es un virus económico."),
+    numbered("El ROI de la vigilancia es astronómico (2,700:1): Calculamos el Retorno de Inversión (ROI) del sistema de vigilancia de la CPA (~$20M USD anuales). ROI = (Costo Sin Detección - Costo Detección Ideal) / Costo de Vigilancia = ($55,250M - $1,200M) / $20M = 2,702. Por cada dólar invertido en vigilancia activa, México ahorra $2,700 dólares en mitigación de crisis."),
+    numbered("El cierre de exportaciones domina el costo en escenarios controlados: Incluso con detección en el Día 3, el costo del sacrificio es insignificante (16 * $1,544 = $24,704 USD), pero el costo por cierre de exportaciones es de $1,200M USD. El ratio de daño colateral es de 48,615x. El daño comercial colateral es casi 50 mil veces mayor que el daño biológico directo. Este costo es inevitable una vez declarado el caso I_0 = 1. La FMD es un virus económico."),
     spacer(4),
 
-    bodyRuns([b("Proxy comparativo con TB Bovina (7,089x): "), r("Para validar el modelo, comparamos la FMD con la Tuberculosis Bovina (endémica). La TB (R_0 = 1.8) es de progresión lenta y genera pérdidas directas de ~$7.8M USD a 12 meses sin detección. La FMD (R_0 = 6.0) genera $55.3B USD en 5 meses. El ratio de severidad es de 55.3B / 7.8M = 7,089x. Esto valida que un modelo capaz de mapear la TB, es indispensable para la FMD.")]),
+    bodyRuns([b("Proxy comparativo con TB Bovina (7,089x): "), r("Para validar el modelo, comparamos la FMD con la Tuberculosis Bovina (endémica). La TB (R_0 = 1.8) es de progresión lenta y genera pérdidas directas de ~$7.8M USD a 12 meses sin detección. La FMD (R_0 = 6.0) genera $55,300M USD en 5 meses. El ratio de severidad es de 55,300M / 7.8M = 7,089x. Esto valida que un modelo capaz de mapear la TB, es indispensable para la FMD.")]),
 
     img("../figures/contrafactual_fmd.png", 6.5, 2.8),
     imgCaption("Figura 13. Análisis de sensibilidad — Impacto del momento de detección en FMD (panel dual: escala completa + escala logarítmica)."),
