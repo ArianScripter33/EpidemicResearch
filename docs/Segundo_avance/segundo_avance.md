@@ -208,6 +208,19 @@ Las ecuaciones del sistema son:
 
 ![Gráfico: Tuberculosis Endémica vs Fiebre Aftosa Exótica](../figures/sir_comparativo.png)
 
+### 5.3 Evolución: Modelo SIR Espacial (Teoría de Grafos y Gravedad)
+
+El modelo SIR base asume una "mezcla homogénea" (todas las vacas conviven en un solo campo). Para dotar de realismo geográfico a la simulación, se implementó un **Modelo Gravitatorio sobre un Grafo Dirigido**.
+
+- **Nodos (32 estados):** Representados por su centroide geográfico y su masa (inventario bovino SIAP). No se usaron ubicaciones de ranchos individuales por restricciones de privacidad de datos y eficiencia computacional (un modelo ABM hiper-granular requeriría supercomputación para O(N²) interacciones).
+- **Aristas (992 conexiones):** Distancias reales por red carretera asfáltica (obtenidas vía API OSRM).
+- **Ley de Gravedad Newtoniana:** El flujo comercial (y por ende de riesgo) entre dos estados se modela como $F_{ij} = K \cdot (P_i \cdot P_j) / D_{ij}^2$.
+
+**Hallazgos de la Simulación Espacial:**
+La fricción geográfica *aplanó la curva*. El pico de infecciones se redujo de ~17 Millones (modelo básico) a **10.2 Millones** en el día 58. El virus ya no explota simultáneamente en todo el país, sino que los estados sufren *picos desfasados* (efecto dominó). Sin embargo, al día 179, el resultado final sigue siendo catastrófico: **33.4 millones de cabezas sacrificadas** (96.9% del hato nacional).
+
+![Simulación Espacial SIR FMD](../figures/sir_nacional_apilado.png)
+
 ---
 
 ## 6. Análisis de Impacto Económico
@@ -363,21 +376,40 @@ La CPA visualiza un panel basado en MongoDB. Si tres productores denuncian anoma
 
 ---
 
-## 8. Estado de Avance por Materia
+## 8. Machine Learning: Credit Scoring de Riesgo Epidémico (XGBoost)
+
+Mientras que el Modelo SIR Espacial simula la "película" temporal de la infección, se desarrolló un **XGBoost Regressor** para evaluar el riesgo sistémico de la topología de la red sin necesidad de simulaciones costosas. 
+
+Se extrajeron **13 variables topológicas** del grafo carretero (Node Embeddings) para cada estado, incluyendo métricas del algoritmo de Google:
+- **Centralidades:** *PageRank*, Intermediación (Betweenness) y Cercanía.
+- **Flujos Gravitatorios:** Fuerza ponderada entrante y saliente.
+- **Biológicas:** Inventario Bovino.
+
+**Desempeño del Modelo:**
+El XGBoost logró un **R² = 0.843** al predecir el "Pico Máximo de Infectados" de cada estado utilizando únicamente su estructura geográfica y de mercado, sin variables temporales.
+
+**Insight Principal (Feature Importance):**
+Las dos variables que determinan la devastación estatal son el **Inventario Bovino** y el **Flujo Gravitatorio Saliente**. Para que un estado sea el "epicentro catastrófico", no basta con tener muchas vacas (Chiapas tiene más que Michoacán, pero está aislado); se requiere la letal combinación de alto inventario y *alta centralidad de exportación hacia otros estados*.
+
+![SIR vs XGBoost Scatter](../figures/sir_vs_xgboost_pico.png)
+
+---
+
+## 9. Estado de Avance por Materia
 
 | Materia | Componente | Estado | Evidencia |
 |---------|-----------|--------|-----------|
-| **Ecuaciones Diferenciales** | Modelo SIR Dual (TB vs FMD) | ✅ Completado | `src/models/sir_dual.py` |
+| **Ecuaciones Diferenciales** | Modelo SIR Dual y Espacial (Newtoniano) | ✅ Completado | `src/spatial_model/` |
 | **Bases de Datos NoSQL** | Data Warehouse CSV→JSON + Pydantic | ✅ Completado | `src/warehouse/csv_to_json.py` |
 | **Estadística Multivariada** | EDA + ANOVA canales + Correlación zoonótica | ✅ Completado | `notebooks/01-03` |
-| **Inteligencia Artificial** | XGBoost Clasificador (pendiente) | 🟡 En diseño | Features definidas |
+| **Inteligencia Artificial** | XGBoost Riesgo Topológico (Node Embeddings) | ✅ Completado | `src/spatial_model/05_xgboost_risk.py` |
 | **Criptografía** | Cifrado César + RSA | 🟡 En progreso | Tarea delegada |
 | **Finanzas Corporativas** | Modelos de impacto económico TB + FMD | ✅ Completado | `tb_storytelling_plot.py`, `fmd_storytelling_plot.py` |
 | **Innovación Social** | Arquitectura App + Dashboard + DINESA | ✅ Conceptualizado | Sección 7 de este documento |
 
 ---
 
-## 9. Bibliografía
+## 10. Bibliografía
 
 - Anderson, I. (2002). *Foot and Mouth Disease 2001: Lessons to be Learned Inquiry Report.* The Stationery Office, London.
 - Barlow, N.D. (1991). *A spatially aggregated disease/host model for bovine Tb in New Zealand possum populations.* Journal of Applied Ecology, 28(3), 777-793.
