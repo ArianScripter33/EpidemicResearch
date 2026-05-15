@@ -315,15 +315,25 @@ Donde $V_{anual} = \$3,000M$. Esto implica una pérdida de **$8.22M USD** por ca
 
 > **Nota metodológica:** El cierre de exportaciones ($1,201M) se modela con un ramp-up escalonado de 4 fases (ver tabla arriba), no como pérdida instantánea. Los market shares se derivan de USDA FAS GATS 2024 (EE.UU. = ~90% del mercado combinado bovino). Es un costo constante entre escenarios porque se activa con I₀ = 1 independientemente del día de detección. La columna "Costo Sacrificio" es el verdadero **costo variable** que la detección temprana controla: de $0.03M (D3) a $54,052M (sin detección). Adicionalmente, el horizonte de 150 días **subestima** el impacto real, ya que la recuperación del estatus sanitario ante la OMSA requiere entre 6 y 24 meses adicionales post-erradicación (Anderson, 2002; Knight-Jones & Rushton, 2013).
 
-**Hallazgos clave:**
+**Hallazgos clave y Justificación Matemática:**
 
-1. **Cada día cuenta exponencialmente:** La diferencia entre detectar en el Día 3 (16 animales sacrificados) vs. el Día 30 (56,674) es de **3,542x** — pero ambos siguen siendo manejables comparados con la catástrofe de no detectar (35 millones).
+1. **Cada día cuenta exponencialmente (Crecimiento Viral):** 
+La diferencia entre detectar en el Día 3 (16 animales sacrificados) vs. el Día 30 (56,674) es de una magnitud de **3,542x**. Esto ocurre porque la curva de contagio inicial sigue la ecuación $I(t) = I_0 \cdot e^{(R_0 - 1) \gamma t}$. Con un $R_0 = 6.0$, el crecimiento no es lineal, es una explosión demográfica exponencial. A pesar de esto, 56 mil animales sigue siendo un escenario manejable comparado con la catástrofe de no detectar (35 millones).
 
-2. **El ROI de la vigilancia es astronómico:** El costo anual del sistema de vigilancia epidemiológica de la CPA (~$20M USD estimados) evita pérdidas de **$54 Billion USD**. Eso es un ROI de **2,700:1**.
+2. **El ROI de la vigilancia es astronómico (2,700:1):** 
+Calculamos el Retorno de Inversión (ROI) del sistema gubernamental de vigilancia epidemiológica de la CPA, el cual tiene un costo anual estimado de ~$20M USD.
+$$ROI = \frac{\text{Costo Sin Detección} - \text{Costo Detección Ideal}}{\text{Costo de Vigilancia}} = \frac{\$55.25\text{B} - \$1.20\text{B}}{\$20\text{M}} = \frac{\$54.05\text{B}}{\$20\text{M}} \approx 2,702$$
+Por cada dólar invertido en vigilancia activa, México ahorra $2,700 dólares en mitigación de crisis.
 
-3. **El cierre de exportaciones domina el costo en escenarios controlados:** Incluso con detección en Día 3 (solo 16 animales), el cierre de exportaciones bovinas genera $1.20B en pérdidas. Este costo es **inevitable** una vez declarado I₀ = 1, lo que refuerza que la única defensa real es la **prevención absoluta**.
+3. **El cierre de exportaciones domina el costo en escenarios controlados:** 
+Incluso con detección en el Día 3, donde el costo del sacrificio es insignificante ($16 \times \$1,544 = \$24,704 \text{ USD}$), el costo por cierre de exportaciones es de **$1.20B USD**.
+$$\text{Ratio de Daño Colateral} = \frac{\text{Costo Cierre Exportaciones}}{\text{Costo Sacrificio Sanitario}} = \frac{1,201,000,000}{24,704} \approx 48,615x$$
+El daño comercial colateral es casi 50 mil veces mayor que el daño biológico directo. Este costo es inevitable una vez declarado el caso $I_0 = 1$ ante la OMSA. La FMD no es solo una enfermedad animal, es un **virus económico**.
 
-**Proxy comparativo con TB Bovina:** A modo de referencia, la TB Bovina (endémica, R₀ = 1.8) genera pérdidas de ~$7.8M USD en 12 meses sin detección. La FMD genera **$55.3B USD en 5 meses** — una diferencia de **7,000x**. Esto valida la decisión estratégica de usar TB como proxy de calibración: si el modelo funciona para el "sangrado silencioso" de TB, está preparado para el "colapso nuclear" de FMD.
+**Proxy comparativo con TB Bovina (7,089x):** 
+Para validar el modelo, comparamos la FMD con la Tuberculosis Bovina (endémica). La TB ($R_0 = 1.8$) es de progresión lenta y genera pérdidas directas de ~$7.8M USD a 12 meses sin detección. La FMD ($R_0 = 6.0$), por su alta infecciosidad por aerosoles, genera **$55.3B USD** en 5 meses. 
+$$\text{Ratio de Severidad} = \frac{\text{Impacto FMD}}{\text{Impacto TB}} = \frac{55.3 \times 10^9}{7.8 \times 10^6} \approx 7,089x$$
+Esto valida que un modelo capaz de mapear el "sangrado silencioso" de la TB, es indispensable para prevenir el "colapso nuclear" de la FMD.
 
 ![Análisis de Sensibilidad: Curva de Infectados FMD según Día de Detección](../figures/contrafactual_fmd.png)
 

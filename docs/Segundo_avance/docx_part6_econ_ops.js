@@ -139,14 +139,14 @@ function buildEconomics() {
     body("Nota metodológica: El cierre de exportaciones ($1,201M) se modela con un ramp-up escalonado de 4 fases basado en market shares verificados (USDA FAS GATS 2024: EE.UU. = ~90% del mercado bovino). Es un costo constante entre escenarios porque se activa con I₀ = 1. La columna 'Costo Sacrificio' es el verdadero costo variable. El horizonte de 150 días subestima el impacto real: la OMSA requiere 6-24 meses post-erradicación para recuperar estatus libre (Anderson, 2002)."),
     spacer(4),
 
-    bodyRuns([b("Hallazgos clave:")]),
+    bodyRuns([b("Hallazgos clave y Justificación Matemática:")]),
     spacer(2),
-    numbered("Cada día cuenta exponencialmente: La diferencia entre detectar en el Día 3 (16 animales sacrificados) vs. el Día 30 (56,674) es de 3,542x — pero ambos siguen siendo manejables comparados con la catástrofe de no detectar (35 millones)."),
-    numbered("El ROI de la vigilancia es astronómico: El costo anual del sistema de vigilancia epidemiológica de la CPA (~$20M USD estimados) evita pérdidas de $54 Billion USD. Eso es un ROI de 2,700:1."),
-    numbered("El cierre de exportaciones domina el costo en escenarios controlados: Incluso con detección en Día 3 (solo 16 animales), el cierre de exportaciones bovinas genera $1.20B en pérdidas. Este costo es inevitable una vez declarado I₀ = 1."),
+    numbered("Cada día cuenta exponencialmente (Crecimiento Viral): La diferencia entre detectar en el Día 3 (16 animales sacrificados) vs. el Día 30 (56,674) es de una magnitud de 3,542x. Esto ocurre porque la curva de contagio inicial sigue la ecuación I(t) = I_0 * e^((R_0 - 1)*gamma*t). Con un R_0 = 6.0, el crecimiento no es lineal, es una explosión demográfica exponencial. A pesar de esto, 56 mil animales sigue siendo manejable comparado con la catástrofe de no detectar (35 millones)."),
+    numbered("El ROI de la vigilancia es astronómico (2,700:1): Calculamos el Retorno de Inversión (ROI) del sistema de vigilancia de la CPA (~$20M USD anuales). ROI = (Costo Sin Detección - Costo Detección Ideal) / Costo de Vigilancia = ($55.25B - $1.20B) / $20M = 2,702. Por cada dólar invertido en vigilancia activa, México ahorra $2,700 dólares en mitigación de crisis."),
+    numbered("El cierre de exportaciones domina el costo en escenarios controlados: Incluso con detección en el Día 3, el costo del sacrificio es insignificante (16 * $1,544 = $24,704 USD), pero el costo por cierre de exportaciones es de $1.20B USD. El ratio de daño colateral es de 48,615x. El daño comercial colateral es casi 50 mil veces mayor que el daño biológico directo. Este costo es inevitable una vez declarado el caso I_0 = 1. La FMD es un virus económico."),
     spacer(4),
 
-    bodyRuns([b("Proxy comparativo con TB Bovina: "), r("A modo de referencia, la TB Bovina (endémica, R₀ = 1.8) genera pérdidas de ~$7.8M USD en 12 meses sin detección. La FMD genera $55.3B USD en 5 meses — una diferencia de 7,000x.")]),
+    bodyRuns([b("Proxy comparativo con TB Bovina (7,089x): "), r("Para validar el modelo, comparamos la FMD con la Tuberculosis Bovina (endémica). La TB (R_0 = 1.8) es de progresión lenta y genera pérdidas directas de ~$7.8M USD a 12 meses sin detección. La FMD (R_0 = 6.0) genera $55.3B USD en 5 meses. El ratio de severidad es de 55.3B / 7.8M = 7,089x. Esto valida que un modelo capaz de mapear la TB, es indispensable para la FMD.")]),
 
     img("../figures/contrafactual_fmd.png", 6.5, 2.8),
     imgCaption("Figura 13. Análisis de sensibilidad — Impacto del momento de detección en FMD (panel dual: escala completa + escala logarítmica)."),
