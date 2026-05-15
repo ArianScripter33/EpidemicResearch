@@ -145,6 +145,20 @@ Para cada estado infectado i:
 
 ---
 
+## Análisis Crítico: Evolución del Modelo y Machine Learning
+
+### 1. ¿Por qué el pico bajó de 17M a 10.2M de infectados?
+En el **Modelo SIR Inicial (No Espacial)**, observamos un pico de ~17 millones de cabezas. En este nuevo **Modelo SIR Espacial sobre Grafo**, el pico se redujo a ~10.2 millones. ¿A qué se debe esta caída masiva?
+* **Fricción Geográfica (El fin de la "Mezcla Homogénea"):** El primer modelo asumía que cualquier vaca en México podía contagiar instantáneamente a cualquier otra (mezcla perfecta). El modelo espacial introduce *fricción*. Para que el virus pase de Veracruz a Chihuahua, debe viajar a través de la red carretera, superando la distancia física y las probabilidades comerciales del modelo gravitatorio.
+* **Picos Desfasados (Staggered Peaks):** Debido a esta fricción, el virus no explota en todo el país al mismo tiempo. Veracruz llega a su pico en las primeras semanas, pero Chihuahua no recibe la infección hasta el Día 44. Cuando los estados del norte apenas están empezando a ver casos, el centro y sur ya están en fase de sacrificio masivo (R). **La geografía "aplanó la curva" nacional.**
+
+### 2. El rol del XGBoost: Predicción vs. Simulación
+Es importante entender que **XGBoost no reemplaza al simulador SIR, ni genera series de tiempo** (por lo tanto, no se puede hacer un Bar Chart Race con él).
+* **Simulador SIR:** Genera la evolución diaria y la dinámica temporal. Es computacionalmente costoso y altamente estocástico (depende del azar para los contagios entre estados).
+* **XGBoost Regressor:** Actúa como un modelo de **Credit Scoring de Riesgo Epidémico**. En lugar de simular 180 días, toma la topología de la red (flujos carreteros, centralidad, inventario) y predice instantáneamente la devastación final (R² = 0.843). Su propósito es responder preguntas de negocio en milisegundos: *"Si construimos una nueva carretera entre el estado A y B, ¿cómo cambia el riesgo sistémico del país?"*
+
+---
+
 ## Reproducibilidad
 
 ```bash
