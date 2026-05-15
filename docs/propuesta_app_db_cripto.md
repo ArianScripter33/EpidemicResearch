@@ -227,14 +227,13 @@ flowchart LR
     F --> G
 ```
 
-El modelo XGBoost calcula un **Índice de Riesgo Sistémico (0.0 a 1.0)** para cada estado, basado en:
-- Inventario bovino (masa gravitatoria)
-- Centralidad en la red de movimiento de ganado
-- Distancia a los estados más conectados
-- Número de rastros TIF
-- Valor de exportaciones
+El modelo XGBoost calcula un **Índice de Riesgo Sistémico (0.0 a 1.0)** para cada estado, basado en 13 variables de Teoría de Grafos:
+- **Masa Biológica:** Inventario bovino actual.
+- **Topología de Red:** Centralidad de Intermediación (Betweenness), PageRank, Cercanía.
+- **Vectores de Infección:** Flujo Gravitatorio Saliente (weighted_out_flux) y Entrante (weighted_in_flux).
+- **Fricción Geográfica:** Distancia asfáltica promedio al resto del país.
 
-Este score se inyecta automáticamente en el campo `indice_riesgo` de las colecciones `GRANJA` y `ZONA_CONTROL`, permitiendo a los veterinarios de la CPA priorizar las inspecciones.
+Este score predictivo se inyecta automáticamente en el campo `indice_riesgo` de las colecciones `GRANJA` y `ZONA_CONTROL`, permitiendo a los veterinarios de la CPA priorizar inspecciones estructurales (ej. blindar las granjas en estados con alto *flujo gravitatorio saliente*, independientemente de dónde haya iniciado un brote).
 
 ---
 
@@ -243,8 +242,8 @@ Este score se inyecta automáticamente en el campo `indice_riesgo` de las colecc
 | # | Tarea | Responsable | Entregable |
 |---|-------|-------------|------------|
 | 1 | Revisar diagramas de BD y aprobar colecciones | Compañero | Feedback en PR |
-| 2 | Descargar Shapefile INEGI + CSV SIAP | Equipo | Archivos en `data/raw/` |
-| 3 | Programar `gravity_network.py` | Yo | Script + gráfica de la red |
-| 4 | Generar animación de propagación (GIF/MP4) | Yo | Archivo para la presentación |
-| 5 | Entrenar XGBoost y generar mapa de riesgo | Yo | Mapa coroplético + métricas |
+| 2 | Descargar Shapefile INEGI + CSV SIAP | Equipo | ✅ Completado |
+| 3 | Programar Modelo Espacial (`02_gravity_model.py`, `03_spatial_sir.py`) | Yo | ✅ Completado |
+| 4 | Generar animaciones S-I-R (Race Chart + Stacked) | Yo | ✅ Completado |
+| 5 | Entrenar XGBoost y derivar Node Embeddings | Yo | ✅ Completado (R²=0.843) |
 | 6 | Diseñar slides de arquitectura y seguridad | Compañero | Diapositivas con los diagramas de este doc |
