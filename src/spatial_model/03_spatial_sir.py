@@ -12,14 +12,15 @@ GEOJSON_PATH = '../../data/processed/spatial/nodos_estados.geojson'
 MATRIX_PATH = '../../data/processed/spatial/matriz_gravedad.csv'
 # Rutas de salida
 OUT_DIR = '../../data/processed/spatial/frames/'
-OUT_GIF = '../../data/processed/spatial/fmd_spread_simulation.gif'
-OUT_CSV = '../../data/processed/spatial/sir_simulation_results.csv'
+OUT_GIF = '../../data/processed/spatial/fmd_spread_simulation_180d.gif'
+OUT_CSV = '../../data/processed/spatial/sir_simulation_results_180d.csv'
+OUT_STATE_HISTORY = '../../data/processed/spatial/sir_state_history_180d.csv'
 
 # Parámetros Epidémicos (FMD)
 BETA = 0.6      # Tasa de contagio local muy alta
 GAMMA = 0.1     # Tasa de sacrificio/remoción (10 días)
 SPATIAL_BETA = 0.8 # Fuerza del contagio entre estados (rutas comerciales)
-DIAS_SIMULACION = 45
+DIAS_SIMULACION = 180
 ESTADO_PACIENTE_CERO = 'Veracruz'
 
 def main():
@@ -52,6 +53,7 @@ def main():
         spatial_probs[o][d] = row['probabilidad_contagio_base']
         
     historial = []
+    historial_estados = []
     frames = []
     
     print(f"Iniciando simulación de {DIAS_SIMULACION} días...")
@@ -88,10 +90,16 @@ def main():
         frames.append(Image.open(buf))
         plt.close(fig)
         
-        # Registrar métricas
+        # Registrar métricas globales
         total_I = gdf['I'].sum()
         total_R = gdf['R'].sum()
         historial.append({'dia': t, 'infectados': total_I, 'removidos': total_R})
+        
+        # Registrar métricas por estado para el Bar Chart Race
+        fila_estados = {'dia': t}
+        for _, row in gdf.iterrows():
+            fila_estados[row['estado']] = int(row['I'])
+        historial_estados.append(fila_estados)
         
         print(f"Día {t} | Infectados Totales: {int(total_I):,} | Estados Afectados: {len(gdf[gdf['I'] >= 1])}")
         
@@ -151,6 +159,10 @@ def main():
     df_historial = pd.DataFrame(historial)
     df_historial.to_csv(OUT_CSV, index=False)
     print(f"✅ Historial CSV Guardado: {OUT_CSV}")
+    
+    df_historial_estados = pd.DataFrame(historial_estados)
+    df_historial_estados.to_csv(OUT_STATE_HISTORY, index=False)
+    print(f"✅ Historial por Estado (Para Bar Chart) Guardado: {OUT_STATE_HISTORY}")
     
 if __name__ == '__main__':
     script_dir = os.path.dirname(os.path.abspath(__file__))
