@@ -1,0 +1,993 @@
+origen,destino,distancia_carretera_km
+Zacatecas,Yucatán,2053.89
+Zacatecas,Veracruz,1007.27
+Zacatecas,Tlaxcala,787.26
+Zacatecas,Tamaulipas,715.54
+Zacatecas,Tabasco,1464.6
+Zacatecas,Sonora,1485.58
+Zacatecas,Sinaloa,732.05
+Zacatecas,San Luis Potosí,344.81
+Zacatecas,Quintana Roo,2122.79
+Zacatecas,Querétaro,551.45
+Zacatecas,Puebla,848.35
+Zacatecas,Oaxaca,1166.2
+Zacatecas,Nuevo León,474.91
+Zacatecas,Nayarit,648.16
+Zacatecas,Morelos,798.04
+Zacatecas,Michoacán,623.09
+Zacatecas,México,664.5
+Zacatecas,Jalisco,455.08
+Zacatecas,Hidalgo,705.58
+Zacatecas,Guerrero,951.32
+Zacatecas,Guanajuato,395.18
+Zacatecas,Durango,371.9
+Zacatecas,Ciudad de México,708.63
+Zacatecas,Colima,626.2
+Zacatecas,Coahuila,677.21
+Zacatecas,Chihuahua,868.02
+Zacatecas,Chiapas,1594.96
+Zacatecas,Campeche,1797.36
+Zacatecas,Baja California Sur,3015.77
+Zacatecas,Baja California,2210.48
+Zacatecas,Aguascalientes,193.31
+Yucatán,Zacatecas,2060.22
+Yucatán,Veracruz,1127.58
+Yucatán,Tlaxcala,1294.39
+Yucatán,Tamaulipas,1826.7
+Yucatán,Tabasco,667.06
+Yucatán,Sonora,3382.36
+Yucatán,Sinaloa,2628.83
+Yucatán,San Luis Potosí,1857.43
+Yucatán,Quintana Roo,202.66
+Yucatán,Querétaro,1607.35
+Yucatán,Puebla,1233.25
+Yucatán,Oaxaca,1223.73
+Yucatán,Nuevo León,2006.17
+Yucatán,Nayarit,2163.24
+Yucatán,Morelos,1393.61
+Yucatán,Michoacán,1807.61
+Yucatán,México,1462.33
+Yucatán,Jalisco,1970.16
+Yucatán,Hidalgo,1479.56
+Yucatán,Guerrero,1613.15
+Yucatán,Guanajuato,1691.52
+Yucatán,Durango,2389.54
+Yucatán,Ciudad de México,1386.88
+Yucatán,Colima,2075.97
+Yucatán,Coahuila,2387.37
+Yucatán,Chihuahua,2885.65
+Yucatán,Chiapas,837.23
+Yucatán,Campeche,370.62
+Yucatán,Baja California Sur,4985.91
+Yucatán,Baja California,4180.63
+Yucatán,Aguascalientes,1887.12
+Veracruz,Zacatecas,1002.84
+Veracruz,Yucatán,1126.5
+Veracruz,Tlaxcala,230.79
+Veracruz,Tamaulipas,701.4
+Veracruz,Tabasco,537.21
+Veracruz,Sonora,2324.98
+Veracruz,Sinaloa,1571.46
+Veracruz,San Luis Potosí,800.05
+Veracruz,Quintana Roo,1195.4
+Veracruz,Querétaro,549.98
+Veracruz,Puebla,223.66
+Veracruz,Oaxaca,470.59
+Veracruz,Nuevo León,880.87
+Veracruz,Nayarit,1105.87
+Veracruz,Morelos,367.36
+Veracruz,Michoacán,750.24
+Veracruz,México,431.84
+Veracruz,Jalisco,912.79
+Veracruz,Hidalgo,422.19
+Veracruz,Guerrero,586.91
+Veracruz,Guanajuato,634.15
+Veracruz,Durango,1332.16
+Veracruz,Ciudad de México,356.4
+Veracruz,Colima,1018.6
+Veracruz,Coahuila,1262.06
+Veracruz,Chihuahua,1828.28
+Veracruz,Chiapas,667.56
+Veracruz,Campeche,869.97
+Veracruz,Baja California Sur,3928.54
+Veracruz,Baja California,3123.25
+Veracruz,Aguascalientes,829.75
+Tlaxcala,Zacatecas,782.94
+Tlaxcala,Yucatán,1286.19
+Tlaxcala,Veracruz,232.89
+Tlaxcala,Tamaulipas,682.3
+Tlaxcala,Tabasco,696.9
+Tlaxcala,Sonora,2105.08
+Tlaxcala,Sinaloa,1351.56
+Tlaxcala,San Luis Potosí,580.15
+Tlaxcala,Quintana Roo,1355.09
+Tlaxcala,Querétaro,330.07
+Tlaxcala,Puebla,79.39
+Tlaxcala,Oaxaca,400.66
+Tlaxcala,Nuevo León,861.77
+Tlaxcala,Nayarit,885.96
+Tlaxcala,Morelos,176.96
+Tlaxcala,Michoacán,530.34
+Tlaxcala,México,211.8
+Tlaxcala,Jalisco,692.88
+Tlaxcala,Hidalgo,202.28
+Tlaxcala,Guerrero,396.51
+Tlaxcala,Guanajuato,414.25
+Tlaxcala,Durango,1112.26
+Tlaxcala,Ciudad de México,136.35
+Tlaxcala,Colima,798.7
+Tlaxcala,Coahuila,1279.62
+Tlaxcala,Chihuahua,1608.38
+Tlaxcala,Chiapas,827.25
+Tlaxcala,Campeche,1029.65
+Tlaxcala,Baja California Sur,3708.64
+Tlaxcala,Baja California,2903.35
+Tlaxcala,Aguascalientes,609.85
+Tamaulipas,Zacatecas,715.35
+Tamaulipas,Yucatán,1827.37
+Tamaulipas,Veracruz,703.04
+Tamaulipas,Tlaxcala,684.76
+Tamaulipas,Tabasco,1238.08
+Tamaulipas,Sonora,2161.61
+Tamaulipas,Sinaloa,1408.09
+Tamaulipas,San Luis Potosí,376.39
+Tamaulipas,Quintana Roo,1896.27
+Tamaulipas,Querétaro,714.5
+Tamaulipas,Puebla,759.63
+Tamaulipas,Oaxaca,1080.89
+Tamaulipas,Nuevo León,327.96
+Tamaulipas,Nayarit,1020.99
+Tamaulipas,Morelos,854.67
+Tamaulipas,Michoacán,891.9
+Tamaulipas,México,833.43
+Tamaulipas,Jalisco,827.91
+Tamaulipas,Hidalgo,745.95
+Tamaulipas,Guerrero,1074.22
+Tamaulipas,Guanajuato,626.97
+Tamaulipas,Durango,1045.58
+Tamaulipas,Ciudad de México,765.11
+Tamaulipas,Colima,999.03
+Tamaulipas,Coahuila,709.16
+Tamaulipas,Chihuahua,1224.37
+Tamaulipas,Chiapas,1368.43
+Tamaulipas,Campeche,1570.84
+Tamaulipas,Baja California Sur,3555.56
+Tamaulipas,Baja California,2750.27
+Tamaulipas,Aguascalientes,638.46
+Tabasco,Zacatecas,1469.12
+Tabasco,Yucatán,664.16
+Tabasco,Veracruz,536.48
+Tabasco,Tlaxcala,703.29
+Tabasco,Tamaulipas,1235.6
+Tabasco,Sonora,2791.26
+Tabasco,Sinaloa,2037.73
+Tabasco,San Luis Potosí,1266.33
+Tabasco,Quintana Roo,697.07
+Tabasco,Querétaro,1016.25
+Tabasco,Puebla,642.15
+Tabasco,Oaxaca,632.63
+Tabasco,Nuevo León,1415.07
+Tabasco,Nayarit,1572.14
+Tabasco,Morelos,802.51
+Tabasco,Michoacán,1216.51
+Tabasco,México,871.23
+Tabasco,Jalisco,1379.06
+Tabasco,Hidalgo,888.46
+Tabasco,Guerrero,1022.05
+Tabasco,Guanajuato,1100.42
+Tabasco,Durango,1798.44
+Tabasco,Ciudad de México,795.78
+Tabasco,Colima,1484.87
+Tabasco,Coahuila,1796.27
+Tabasco,Chihuahua,2294.55
+Tabasco,Chiapas,378.92
+Tabasco,Campeche,371.64
+Tabasco,Baja California Sur,4394.81
+Tabasco,Baja California,3589.53
+Tabasco,Aguascalientes,1296.02
+Sonora,Zacatecas,1485.71
+Sonora,Yucatán,3373.94
+Sonora,Veracruz,2327.32
+Sonora,Tlaxcala,2107.31
+Sonora,Tamaulipas,2163.82
+Sonora,Tabasco,2784.65
+Sonora,Sinaloa,776.4
+Sonora,San Luis Potosí,1867.43
+Sonora,Quintana Roo,3442.84
+Sonora,Querétaro,1880.03
+Sonora,Puebla,2168.41
+Sonora,Oaxaca,2486.25
+Sonora,Nuevo León,1859.34
+Sonora,Nayarit,1263.15
+Sonora,Morelos,2066.07
+Sonora,Michoacán,1750.52
+Sonora,México,1928.22
+Sonora,Jalisco,1471.19
+Sonora,Hidalgo,2025.63
+Sonora,Guerrero,2215.05
+Sonora,Guanajuato,1756.06
+Sonora,Durango,1343.62
+Sonora,Ciudad de México,2000.65
+Sonora,Colima,1645.83
+Sonora,Coahuila,1356.61
+Sonora,Chihuahua,851.15
+Sonora,Chiapas,2915.01
+Sonora,Campeche,3117.41
+Sonora,Baja California Sur,1664.93
+Sonora,Baja California,859.64
+Sonora,Aguascalientes,1636.46
+Sinaloa,Zacatecas,732.54
+Sinaloa,Yucatán,2620.77
+Sinaloa,Veracruz,1574.15
+Sinaloa,Tlaxcala,1354.13
+Sinaloa,Tamaulipas,1410.65
+Sinaloa,Tabasco,2031.48
+Sinaloa,Sonora,776.15
+Sinaloa,San Luis Potosí,1114.26
+Sinaloa,Quintana Roo,2689.67
+Sinaloa,Querétaro,1126.85
+Sinaloa,Puebla,1415.23
+Sinaloa,Oaxaca,1733.08
+Sinaloa,Nuevo León,1106.17
+Sinaloa,Nayarit,509.97
+Sinaloa,Morelos,1312.9
+Sinaloa,Michoacán,997.35
+Sinaloa,México,1175.05
+Sinaloa,Jalisco,718.01
+Sinaloa,Hidalgo,1272.45
+Sinaloa,Guerrero,1461.88
+Sinaloa,Guanajuato,1002.89
+Sinaloa,Durango,590.45
+Sinaloa,Ciudad de México,1247.48
+Sinaloa,Colima,892.65
+Sinaloa,Coahuila,1042.26
+Sinaloa,Chihuahua,784.61
+Sinaloa,Chiapas,2161.83
+Sinaloa,Campeche,2364.24
+Sinaloa,Baja California Sur,2379.71
+Sinaloa,Baja California,1574.42
+Sinaloa,Aguascalientes,883.29
+San Luis Potosí,Zacatecas,342.6
+San Luis Potosí,Yucatán,1849.57
+San Luis Potosí,Veracruz,802.95
+San Luis Potosí,Tlaxcala,582.94
+San Luis Potosí,Tamaulipas,374.7
+San Luis Potosí,Tabasco,1260.28
+San Luis Potosí,Sonora,1785.59
+San Luis Potosí,Sinaloa,1032.07
+San Luis Potosí,Quintana Roo,1918.47
+San Luis Potosí,Querétaro,341.75
+San Luis Potosí,Puebla,644.03
+San Luis Potosí,Oaxaca,961.88
+San Luis Potosí,Nuevo León,483.06
+San Luis Potosí,Nayarit,648.24
+San Luis Potosí,Morelos,593.72
+San Luis Potosí,Michoacán,519.15
+San Luis Potosí,México,460.69
+San Luis Potosí,Jalisco,455.16
+San Luis Potosí,Hidalgo,476.25
+San Luis Potosí,Guerrero,747.51
+San Luis Potosí,Guanajuato,254.22
+San Luis Potosí,Durango,671.92
+San Luis Potosí,Ciudad de México,504.31
+San Luis Potosí,Colima,626.28
+San Luis Potosí,Coahuila,717.78
+San Luis Potosí,Chihuahua,1172.64
+San Luis Potosí,Chiapas,1390.63
+San Luis Potosí,Campeche,1593.04
+San Luis Potosí,Baja California Sur,3547.26
+San Luis Potosí,Baja California,2741.97
+San Luis Potosí,Aguascalientes,265.71
+Quintana Roo,Zacatecas,2124.88
+Quintana Roo,Yucatán,202.68
+Quintana Roo,Veracruz,1192.25
+Quintana Roo,Tlaxcala,1359.05
+Quintana Roo,Tamaulipas,1891.37
+Quintana Roo,Tabasco,689.85
+Quintana Roo,Sonora,3447.02
+Quintana Roo,Sinaloa,2693.5
+Quintana Roo,San Luis Potosí,1922.09
+Quintana Roo,Querétaro,1672.02
+Quintana Roo,Puebla,1297.91
+Quintana Roo,Oaxaca,1288.4
+Quintana Roo,Nuevo León,2070.84
+Quintana Roo,Nayarit,2227.9
+Quintana Roo,Morelos,1458.27
+Quintana Roo,Michoacán,1872.28
+Quintana Roo,México,1527.0
+Quintana Roo,Jalisco,2034.82
+Quintana Roo,Hidalgo,1544.22
+Quintana Roo,Guerrero,1677.82
+Quintana Roo,Guanajuato,1756.19
+Quintana Roo,Durango,2454.2
+Quintana Roo,Ciudad de México,1451.55
+Quintana Roo,Colima,2140.64
+Quintana Roo,Coahuila,2452.04
+Quintana Roo,Chihuahua,2950.32
+Quintana Roo,Chiapas,836.28
+Quintana Roo,Campeche,366.02
+Quintana Roo,Baja California Sur,5050.58
+Quintana Roo,Baja California,4245.29
+Quintana Roo,Aguascalientes,1951.79
+Querétaro,Zacatecas,548.67
+Querétaro,Yucatán,1598.88
+Querétaro,Veracruz,552.26
+Querétaro,Tlaxcala,332.25
+Querétaro,Tamaulipas,711.43
+Querétaro,Tabasco,1009.59
+Querétaro,Sonora,1878.7
+Querétaro,Sinaloa,1125.17
+Querétaro,San Luis Potosí,340.7
+Querétaro,Quintana Roo,1667.78
+Querétaro,Puebla,393.34
+Querétaro,Oaxaca,711.19
+Querétaro,Nuevo León,805.45
+Querétaro,Nayarit,659.58
+Querétaro,Morelos,343.03
+Querétaro,Michoacán,383.36
+Querétaro,México,210.0
+Querétaro,Jalisco,466.5
+Querétaro,Hidalgo,180.05
+Querétaro,Guerrero,496.82
+Querétaro,Guanajuato,179.97
+Querétaro,Durango,877.99
+Querétaro,Ciudad de México,253.62
+Querétaro,Colima,567.68
+Querétaro,Coahuila,1040.17
+Querétaro,Chihuahua,1374.11
+Querétaro,Chiapas,1139.94
+Querétaro,Campeche,1342.35
+Querétaro,Baja California Sur,3482.26
+Querétaro,Baja California,2676.97
+Querétaro,Aguascalientes,375.57
+Puebla,Zacatecas,844.84
+Puebla,Yucatán,1224.09
+Puebla,Veracruz,222.64
+Puebla,Tlaxcala,78.0
+Puebla,Tamaulipas,757.11
+Puebla,Tabasco,634.8
+Puebla,Sonora,2166.98
+Puebla,Sinaloa,1413.46
+Puebla,San Luis Potosí,642.05
+Puebla,Quintana Roo,1292.99
+Puebla,Querétaro,391.97
+Puebla,Oaxaca,336.4
+Puebla,Nuevo León,936.58
+Puebla,Nayarit,947.86
+Puebla,Morelos,178.23
+Puebla,Michoacán,592.23
+Puebla,México,246.95
+Puebla,Jalisco,754.78
+Puebla,Hidalgo,264.18
+Puebla,Guerrero,397.78
+Puebla,Guanajuato,476.15
+Puebla,Durango,1174.16
+Puebla,Ciudad de México,171.51
+Puebla,Colima,860.6
+Puebla,Coahuila,1341.52
+Puebla,Chihuahua,1670.28
+Puebla,Chiapas,765.15
+Puebla,Campeche,967.56
+Puebla,Baja California Sur,3770.54
+Puebla,Baja California,2965.25
+Puebla,Aguascalientes,671.75
+Oaxaca,Zacatecas,1163.0
+Oaxaca,Yucatán,1223.04
+Oaxaca,Veracruz,471.58
+Oaxaca,Tlaxcala,400.08
+Oaxaca,Tamaulipas,1079.19
+Oaxaca,Tabasco,633.75
+Oaxaca,Sonora,2485.14
+Oaxaca,Sinaloa,1731.62
+Oaxaca,San Luis Potosí,960.21
+Oaxaca,Quintana Roo,1291.94
+Oaxaca,Querétaro,710.14
+Oaxaca,Puebla,336.03
+Oaxaca,Nuevo León,1258.66
+Oaxaca,Nayarit,1266.02
+Oaxaca,Morelos,496.39
+Oaxaca,Michoacán,910.4
+Oaxaca,México,565.12
+Oaxaca,Jalisco,1072.95
+Oaxaca,Hidalgo,582.35
+Oaxaca,Guerrero,715.94
+Oaxaca,Guanajuato,794.31
+Oaxaca,Durango,1492.32
+Oaxaca,Ciudad de México,489.67
+Oaxaca,Colima,1178.76
+Oaxaca,Coahuila,1659.68
+Oaxaca,Chihuahua,1988.44
+Oaxaca,Chiapas,624.89
+Oaxaca,Campeche,966.51
+Oaxaca,Baja California Sur,4088.7
+Oaxaca,Baja California,3283.41
+Oaxaca,Aguascalientes,989.91
+Nuevo León,Zacatecas,476.05
+Nuevo León,Yucatán,2012.9
+Nuevo León,Veracruz,888.57
+Nuevo León,Tlaxcala,870.29
+Nuevo León,Tamaulipas,325.38
+Nuevo León,Tabasco,1423.61
+Nuevo León,Sonora,1854.28
+Nuevo León,Sinaloa,1100.76
+Nuevo León,San Luis Potosí,484.88
+Nuevo León,Quintana Roo,2081.8
+Nuevo León,Querétaro,808.29
+Nuevo León,Puebla,945.16
+Nuevo León,Oaxaca,1266.42
+Nuevo León,Nayarit,1063.51
+Nuevo León,Morelos,1040.21
+Nuevo León,Michoacán,985.69
+Nuevo León,México,927.22
+Nuevo León,Jalisco,870.43
+Nuevo León,Hidalgo,931.49
+Nuevo León,Guerrero,1214.05
+Nuevo León,Guanajuato,720.75
+Nuevo León,Durango,738.25
+Nuevo León,Ciudad de México,970.85
+Nuevo León,Colima,1041.55
+Nuevo León,Coahuila,389.54
+Nuevo León,Chihuahua,917.03
+Nuevo León,Chiapas,1553.97
+Nuevo León,Campeche,1756.37
+Nuevo León,Baja California Sur,3228.41
+Nuevo León,Baja California,2423.12
+Nuevo León,Aguascalientes,608.66
+Nayarit,Zacatecas,647.59
+Nayarit,Yucatán,2155.09
+Nayarit,Veracruz,1108.46
+Nayarit,Tlaxcala,888.45
+Nayarit,Tamaulipas,1019.3
+Nayarit,Tabasco,1565.8
+Nayarit,Sonora,1263.35
+Nayarit,Sinaloa,509.83
+Nayarit,San Luis Potosí,648.57
+Nayarit,Quintana Roo,2223.99
+Nayarit,Querétaro,661.17
+Nayarit,Puebla,949.55
+Nayarit,Oaxaca,1267.4
+Nayarit,Nuevo León,1062.43
+Nayarit,Morelos,847.21
+Nayarit,Michoacán,531.66
+Nayarit,México,709.37
+Nayarit,Jalisco,252.33
+Nayarit,Hidalgo,806.77
+Nayarit,Guerrero,996.19
+Nayarit,Guanajuato,537.2
+Nayarit,Durango,582.9
+Nayarit,Ciudad de México,781.8
+Nayarit,Colima,426.97
+Nayarit,Coahuila,1034.71
+Nayarit,Chihuahua,1225.52
+Nayarit,Chiapas,1696.15
+Nayarit,Campeche,1898.55
+Nayarit,Baja California Sur,2866.91
+Nayarit,Baja California,2061.62
+Nayarit,Aguascalientes,474.5
+Morelos,Zacatecas,801.66
+Morelos,Yucatán,1380.15
+Morelos,Veracruz,363.76
+Morelos,Tlaxcala,176.97
+Morelos,Tamaulipas,852.15
+Morelos,Tabasco,790.86
+Morelos,Sonora,2068.37
+Morelos,Sinaloa,1314.85
+Morelos,San Luis Potosí,598.87
+Morelos,Quintana Roo,1449.05
+Morelos,Querétaro,348.8
+Morelos,Puebla,174.61
+Morelos,Oaxaca,492.46
+Morelos,Nuevo León,1031.62
+Morelos,Nayarit,849.25
+Morelos,Michoacán,493.63
+Morelos,México,148.73
+Morelos,Jalisco,656.17
+Morelos,Hidalgo,260.93
+Morelos,Guerrero,241.05
+Morelos,Guanajuato,432.97
+Morelos,Durango,1130.98
+Morelos,Ciudad de México,107.38
+Morelos,Colima,761.99
+Morelos,Coahuila,1298.34
+Morelos,Chihuahua,1627.1
+Morelos,Chiapas,921.21
+Morelos,Campeche,1123.62
+Morelos,Baja California Sur,3671.93
+Morelos,Baja California,2866.64
+Morelos,Aguascalientes,628.57
+Michoacán,Zacatecas,622.08
+Michoacán,Yucatán,1798.6
+Michoacán,Veracruz,751.98
+Michoacán,Tlaxcala,531.96
+Michoacán,Tamaulipas,889.58
+Michoacán,Tabasco,1209.31
+Michoacán,Sonora,1750.45
+Michoacán,Sinaloa,996.92
+Michoacán,San Luis Potosí,518.85
+Michoacán,Quintana Roo,1867.5
+Michoacán,Querétaro,379.13
+Michoacán,Puebla,593.06
+Michoacán,Oaxaca,910.91
+Michoacán,Nuevo León,983.6
+Michoacán,Nayarit,531.33
+Michoacán,Morelos,490.72
+Michoacán,México,352.88
+Michoacán,Jalisco,338.25
+Michoacán,Hidalgo,450.28
+Michoacán,Guerrero,649.99
+Michoacán,Guanajuato,282.03
+Michoacán,Durango,951.4
+Michoacán,Ciudad de México,425.31
+Michoacán,Colima,329.97
+Michoacán,Coahuila,1218.32
+Michoacán,Chihuahua,1447.52
+Michoacán,Chiapas,1339.66
+Michoacán,Campeche,1542.07
+Michoacán,Baja California Sur,3354.01
+Michoacán,Baja California,2548.72
+Michoacán,Aguascalientes,448.99
+México,Zacatecas,659.69
+México,Yucatán,1447.53
+México,Veracruz,428.25
+México,Tlaxcala,208.23
+México,Tamaulipas,827.95
+México,Tabasco,858.24
+México,Sonora,1925.26
+México,Sinaloa,1171.73
+México,San Luis Potosí,457.22
+México,Quintana Roo,1516.43
+México,Querétaro,207.14
+México,Puebla,242.0
+México,Oaxaca,559.85
+México,Nuevo León,921.97
+México,Nayarit,706.14
+México,Morelos,147.85
+México,Michoacán,350.51
+México,Jalisco,513.06
+México,Hidalgo,222.78
+México,Guerrero,295.25
+México,Guanajuato,290.99
+México,Durango,989.0
+México,Ciudad de México,79.34
+México,Colima,618.88
+México,Coahuila,1156.69
+México,Chihuahua,1485.12
+México,Chiapas,988.6
+México,Campeche,1191.0
+México,Baja California Sur,3528.82
+México,Baja California,2723.53
+México,Aguascalientes,486.59
+Jalisco,Zacatecas,454.26
+Jalisco,Yucatán,1961.75
+Jalisco,Veracruz,915.13
+Jalisco,Tlaxcala,695.12
+Jalisco,Tamaulipas,825.97
+Jalisco,Tabasco,1372.46
+Jalisco,Sonora,1465.34
+Jalisco,Sinaloa,711.82
+Jalisco,San Luis Potosí,455.24
+Jalisco,Quintana Roo,2030.65
+Jalisco,Querétaro,467.84
+Jalisco,Puebla,756.21
+Jalisco,Oaxaca,1074.06
+Jalisco,Nuevo León,869.09
+Jalisco,Nayarit,246.22
+Jalisco,Morelos,653.88
+Jalisco,Michoacán,338.33
+Jalisco,México,516.03
+Jalisco,Hidalgo,613.44
+Jalisco,Guerrero,802.86
+Jalisco,Guanajuato,343.87
+Jalisco,Durango,784.89
+Jalisco,Ciudad de México,588.46
+Jalisco,Colima,210.93
+Jalisco,Coahuila,1088.89
+Jalisco,Chihuahua,1279.7
+Jalisco,Chiapas,1502.81
+Jalisco,Campeche,1705.22
+Jalisco,Baja California Sur,3068.9
+Jalisco,Baja California,2263.61
+Jalisco,Aguascalientes,281.17
+Hidalgo,Zacatecas,701.95
+Hidalgo,Yucatán,1470.88
+Hidalgo,Veracruz,424.26
+Hidalgo,Tlaxcala,204.25
+Hidalgo,Tamaulipas,745.33
+Hidalgo,Tabasco,881.59
+Hidalgo,Sonora,2024.09
+Hidalgo,Sinaloa,1270.56
+Hidalgo,San Luis Potosí,474.64
+Hidalgo,Quintana Roo,1539.78
+Hidalgo,Querétaro,194.62
+Hidalgo,Puebla,265.34
+Hidalgo,Oaxaca,583.19
+Hidalgo,Nuevo León,924.8
+Hidalgo,Nayarit,804.97
+Hidalgo,Morelos,269.98
+Hidalgo,Michoacán,449.34
+Hidalgo,México,221.49
+Hidalgo,Jalisco,611.89
+Hidalgo,Guerrero,463.28
+Hidalgo,Guanajuato,333.25
+Hidalgo,Durango,1031.27
+Hidalgo,Ciudad de México,184.2
+Hidalgo,Colima,717.71
+Hidalgo,Coahuila,1174.11
+Hidalgo,Chihuahua,1527.39
+Hidalgo,Chiapas,1011.94
+Hidalgo,Campeche,1214.35
+Hidalgo,Baja California Sur,3627.65
+Hidalgo,Baja California,2822.36
+Hidalgo,Aguascalientes,528.85
+Guerrero,Zacatecas,949.56
+Guerrero,Yucatán,1600.4
+Guerrero,Veracruz,584.01
+Guerrero,Tlaxcala,397.22
+Guerrero,Tamaulipas,1072.4
+Guerrero,Tabasco,1011.11
+Guerrero,Sonora,2215.13
+Guerrero,Sinaloa,1461.61
+Guerrero,San Luis Potosí,747.1
+Guerrero,Quintana Roo,1669.3
+Guerrero,Querétaro,497.02
+Guerrero,Puebla,394.86
+Guerrero,Oaxaca,712.71
+Guerrero,Nuevo León,1211.85
+Guerrero,Nayarit,996.02
+Guerrero,Morelos,241.92
+Guerrero,Michoacán,648.51
+Guerrero,México,295.5
+Guerrero,Jalisco,802.94
+Guerrero,Hidalgo,467.68
+Guerrero,Guanajuato,580.87
+Guerrero,Durango,1278.88
+Guerrero,Ciudad de México,295.51
+Guerrero,Colima,849.75
+Guerrero,Coahuila,1446.57
+Guerrero,Chihuahua,1775.0
+Guerrero,Chiapas,1141.46
+Guerrero,Campeche,1343.86
+Guerrero,Baja California Sur,3818.69
+Guerrero,Baja California,3013.41
+Guerrero,Aguascalientes,776.47
+Guanajuato,Zacatecas,393.57
+Guanajuato,Yucatán,1682.97
+Guanajuato,Veracruz,636.35
+Guanajuato,Tlaxcala,416.34
+Guanajuato,Tamaulipas,625.36
+Guanajuato,Tabasco,1093.69
+Guanajuato,Sonora,1755.81
+Guanajuato,Sinaloa,1002.28
+Guanajuato,San Luis Potosí,254.63
+Guanajuato,Quintana Roo,1751.87
+Guanajuato,Querétaro,180.54
+Guanajuato,Puebla,477.44
+Guanajuato,Oaxaca,795.29
+Guanajuato,Nuevo León,719.38
+Guanajuato,Nayarit,536.69
+Guanajuato,Morelos,427.12
+Guanajuato,Michoacán,279.71
+Guanajuato,México,293.58
+Guanajuato,Jalisco,343.61
+Guanajuato,Hidalgo,334.66
+Guanajuato,Guerrero,580.41
+Guanajuato,Durango,722.89
+Guanajuato,Ciudad de México,337.72
+Guanajuato,Colima,514.73
+Guanajuato,Coahuila,954.1
+Guanajuato,Chihuahua,1219.01
+Guanajuato,Chiapas,1224.04
+Guanajuato,Campeche,1426.44
+Guanajuato,Baja California Sur,3359.37
+Guanajuato,Baja California,2554.08
+Guanajuato,Aguascalientes,220.48
+Durango,Zacatecas,371.2
+Durango,Yucatán,2382.54
+Durango,Veracruz,1335.91
+Durango,Tlaxcala,1115.9
+Durango,Tamaulipas,1045.57
+Durango,Tabasco,1793.25
+Durango,Sonora,1342.59
+Durango,Sinaloa,589.07
+Durango,San Luis Potosí,673.46
+Durango,Quintana Roo,2451.44
+Durango,Querétaro,880.1
+Durango,Puebla,1177.0
+Durango,Oaxaca,1494.85
+Durango,Nuevo León,741.09
+Durango,Nayarit,582.03
+Durango,Morelos,1126.68
+Durango,Michoacán,951.73
+Durango,México,993.14
+Durango,Jalisco,790.08
+Durango,Hidalgo,1034.22
+Durango,Guerrero,1279.97
+Durango,Guanajuato,723.82
+Durango,Ciudad de México,1037.28
+Durango,Colima,964.71
+Durango,Coahuila,677.18
+Durango,Chihuahua,619.08
+Durango,Chiapas,1923.6
+Durango,Campeche,2126.0
+Durango,Baja California Sur,2946.15
+Durango,Baja California,2140.86
+Durango,Aguascalientes,521.95
+Ciudad de México,Zacatecas,706.06
+Ciudad de México,Yucatán,1376.44
+Ciudad de México,Veracruz,353.82
+Ciudad de México,Tlaxcala,133.62
+Ciudad de México,Tamaulipas,761.67
+Ciudad de México,Tabasco,787.15
+Ciudad de México,Sonora,2000.89
+Ciudad de México,Sinaloa,1247.36
+Ciudad de México,San Luis Potosí,503.27
+Ciudad de México,Quintana Roo,1445.34
+Ciudad de México,Querétaro,253.19
+Ciudad de México,Puebla,170.9
+Ciudad de México,Oaxaca,488.75
+Ciudad de México,Nuevo León,968.02
+Ciudad de México,Nayarit,781.77
+Ciudad de México,Morelos,87.22
+Ciudad de México,Michoacán,426.14
+Ciudad de México,México,79.02
+Ciudad de México,Jalisco,588.69
+Ciudad de México,Hidalgo,182.57
+Ciudad de México,Guerrero,278.23
+Ciudad de México,Guanajuato,337.37
+Ciudad de México,Durango,1035.38
+Ciudad de México,Colima,694.51
+Ciudad de México,Coahuila,1202.74
+Ciudad de México,Chihuahua,1531.5
+Ciudad de México,Chiapas,917.5
+Ciudad de México,Campeche,1119.91
+Ciudad de México,Baja California Sur,3604.45
+Ciudad de México,Baja California,2799.16
+Ciudad de México,Aguascalientes,532.97
+Colima,Zacatecas,628.43
+Colima,Yucatán,2063.2
+Colima,Veracruz,1016.58
+Colima,Tlaxcala,796.57
+Colima,Tamaulipas,1000.14
+Colima,Tabasco,1473.91
+Colima,Sonora,1650.2
+Colima,Sinaloa,896.67
+Colima,San Luis Potosí,629.41
+Colima,Quintana Roo,2132.1
+Colima,Querétaro,564.32
+Colima,Puebla,857.66
+Colima,Oaxaca,1175.51
+Colima,Nuevo León,1043.26
+Colima,Nayarit,431.08
+Colima,Morelos,755.33
+Colima,Michoacán,327.07
+Colima,México,617.48
+Colima,Jalisco,216.05
+Colima,Hidalgo,714.89
+Colima,Guerrero,849.25
+Colima,Guanajuato,518.04
+Colima,Durango,969.75
+Colima,Ciudad de México,689.91
+Colima,Coahuila,1263.06
+Colima,Chihuahua,1453.87
+Colima,Chiapas,1604.26
+Colima,Campeche,1806.67
+Colima,Baja California Sur,3253.76
+Colima,Baja California,2448.47
+Colima,Aguascalientes,455.34
+Coahuila,Zacatecas,677.64
+Coahuila,Yucatán,2395.27
+Coahuila,Veracruz,1270.93
+Coahuila,Tlaxcala,1283.18
+Coahuila,Tamaulipas,707.74
+Coahuila,Tabasco,1805.98
+Coahuila,Sonora,1355.55
+Coahuila,Sinaloa,1040.65
+Coahuila,San Luis Potosí,718.6
+Coahuila,Quintana Roo,2464.17
+Coahuila,Querétaro,1042.0
+Coahuila,Puebla,1344.28
+Coahuila,Oaxaca,1662.13
+Coahuila,Nuevo León,391.78
+Coahuila,Nayarit,1033.62
+Coahuila,Morelos,1293.96
+Coahuila,Michoacán,1219.4
+Coahuila,México,1160.93
+Coahuila,Jalisco,1090.16
+Coahuila,Hidalgo,1176.5
+Coahuila,Guerrero,1447.76
+Coahuila,Guanajuato,954.47
+Coahuila,Durango,678.14
+Coahuila,Ciudad de México,1204.56
+Coahuila,Colima,1261.29
+Coahuila,Chihuahua,635.78
+Coahuila,Chiapas,1936.33
+Coahuila,Campeche,2138.74
+Coahuila,Baja California Sur,3152.25
+Coahuila,Baja California,2346.96
+Coahuila,Aguascalientes,828.39
+Chihuahua,Zacatecas,869.16
+Chihuahua,Yucatán,2880.49
+Chihuahua,Veracruz,1833.87
+Chihuahua,Tlaxcala,1613.86
+Chihuahua,Tamaulipas,1227.06
+Chihuahua,Tabasco,2291.2
+Chihuahua,Sonora,850.67
+Chihuahua,Sinaloa,783.73
+Chihuahua,San Luis Potosí,1171.41
+Chihuahua,Quintana Roo,2949.39
+Chihuahua,Querétaro,1378.05
+Chihuahua,Puebla,1674.95
+Chihuahua,Oaxaca,1992.8
+Chihuahua,Nuevo León,922.59
+Chihuahua,Nayarit,1225.13
+Chihuahua,Morelos,1624.64
+Chihuahua,Michoacán,1449.68
+Chihuahua,México,1491.09
+Chihuahua,Jalisco,1281.68
+Chihuahua,Hidalgo,1532.18
+Chihuahua,Guerrero,1777.92
+Chihuahua,Guanajuato,1221.78
+Chihuahua,Durango,618.82
+Chihuahua,Ciudad de México,1535.23
+Chihuahua,Colima,1452.8
+Chihuahua,Coahuila,636.02
+Chihuahua,Chiapas,2421.55
+Chihuahua,Campeche,2623.96
+Chihuahua,Baja California Sur,2218.31
+Chihuahua,Baja California,1413.02
+Chihuahua,Aguascalientes,1019.91
+Chiapas,Zacatecas,1600.53
+Chiapas,Yucatán,835.59
+Chiapas,Veracruz,667.9
+Chiapas,Tlaxcala,834.7
+Chiapas,Tamaulipas,1367.02
+Chiapas,Tabasco,323.45
+Chiapas,Sonora,2922.67
+Chiapas,Sinaloa,2169.15
+Chiapas,San Luis Potosí,1397.74
+Chiapas,Quintana Roo,839.06
+Chiapas,Querétaro,1147.66
+Chiapas,Puebla,773.56
+Chiapas,Oaxaca,623.54
+Chiapas,Nuevo León,1546.49
+Chiapas,Nayarit,1703.55
+Chiapas,Morelos,933.92
+Chiapas,Michoacán,1347.92
+Chiapas,México,1002.64
+Chiapas,Jalisco,1510.47
+Chiapas,Hidalgo,1019.87
+Chiapas,Guerrero,1153.47
+Chiapas,Guanajuato,1231.84
+Chiapas,Durango,1929.85
+Chiapas,Ciudad de México,927.2
+Chiapas,Colima,1616.29
+Chiapas,Coahuila,1927.68
+Chiapas,Chihuahua,2425.97
+Chiapas,Campeche,513.63
+Chiapas,Baja California Sur,4526.23
+Chiapas,Baja California,3720.94
+Chiapas,Aguascalientes,1427.44
+Campeche,Zacatecas,1803.03
+Campeche,Yucatán,370.2
+Campeche,Veracruz,870.4
+Campeche,Tlaxcala,1037.2
+Campeche,Tamaulipas,1569.52
+Campeche,Tabasco,368.0
+Campeche,Sonora,3125.17
+Campeche,Sinaloa,2371.64
+Campeche,San Luis Potosí,1600.24
+Campeche,Quintana Roo,369.6
+Campeche,Querétaro,1350.16
+Campeche,Puebla,976.06
+Campeche,Oaxaca,966.55
+Campeche,Nuevo León,1748.99
+Campeche,Nayarit,1906.05
+Campeche,Morelos,1136.42
+Campeche,Michoacán,1550.42
+Campeche,México,1205.14
+Campeche,Jalisco,1712.97
+Campeche,Hidalgo,1222.37
+Campeche,Guerrero,1355.96
+Campeche,Guanajuato,1434.34
+Campeche,Durango,2132.35
+Campeche,Ciudad de México,1129.7
+Campeche,Colima,1818.79
+Campeche,Coahuila,2130.18
+Campeche,Chihuahua,2628.47
+Campeche,Chiapas,514.42
+Campeche,Baja California Sur,4728.73
+Campeche,Baja California,3923.44
+Campeche,Aguascalientes,1629.94
+Baja California Sur,Zacatecas,3018.59
+Baja California Sur,Yucatán,4977.95
+Baja California Sur,Veracruz,3931.33
+Baja California Sur,Tlaxcala,3711.32
+Baja California Sur,Tamaulipas,3554.53
+Baja California Sur,Tabasco,4388.66
+Baja California Sur,Sonora,1665.48
+Baja California Sur,Sinaloa,2380.41
+Baja California Sur,San Luis Potosí,3546.36
+Baja California Sur,Quintana Roo,5046.85
+Baja California Sur,Querétaro,3484.04
+Baja California Sur,Puebla,3772.42
+Baja California Sur,Oaxaca,4090.27
+Baja California Sur,Nuevo León,3227.86
+Baja California Sur,Nayarit,2867.16
+Baja California Sur,Morelos,3670.08
+Baja California Sur,Michoacán,3354.53
+Baja California Sur,México,3532.23
+Baja California Sur,Jalisco,3075.2
+Baja California Sur,Hidalgo,3629.64
+Baja California Sur,Guerrero,3819.06
+Baja California Sur,Guanajuato,3360.07
+Baja California Sur,Durango,2947.63
+Baja California Sur,Ciudad de México,3604.67
+Baja California Sur,Colima,3249.84
+Baja California Sur,Coahuila,3150.39
+Baja California Sur,Chihuahua,2219.96
+Baja California Sur,Chiapas,4519.02
+Baja California Sur,Campeche,4721.42
+Baja California Sur,Baja California,937.41
+Baja California Sur,Aguascalientes,3169.34
+Baja California,Zacatecas,2213.24
+Baja California,Yucatán,4172.6
+Baja California,Veracruz,3125.98
+Baja California,Tlaxcala,2905.97
+Baja California,Tamaulipas,2749.18
+Baja California,Tabasco,3583.31
+Baja California,Sonora,860.12
+Baja California,Sinaloa,1575.06
+Baja California,San Luis Potosí,2741.01
+Baja California,Quintana Roo,4241.5
+Baja California,Querétaro,2678.69
+Baja California,Puebla,2967.07
+Baja California,Oaxaca,3284.91
+Baja California,Nuevo León,2422.5
+Baja California,Nayarit,2061.81
+Baja California,Morelos,2864.73
+Baja California,Michoacán,2549.18
+Baja California,México,2726.88
+Baja California,Jalisco,2269.85
+Baja California,Hidalgo,2824.29
+Baja California,Guerrero,3013.71
+Baja California,Guanajuato,2554.72
+Baja California,Durango,2142.28
+Baja California,Ciudad de México,2799.31
+Baja California,Colima,2444.49
+Baja California,Coahuila,2345.04
+Baja California,Chihuahua,1414.61
+Baja California,Chiapas,3713.67
+Baja California,Campeche,3916.07
+Baja California,Baja California Sur,937.3
+Baja California,Aguascalientes,2363.99
+Aguascalientes,Zacatecas,192.53
+Aguascalientes,Yucatán,1883.98
+Aguascalientes,Veracruz,837.36
+Aguascalientes,Tlaxcala,617.34
+Aguascalientes,Tamaulipas,636.53
+Aguascalientes,Tabasco,1294.69
+Aguascalientes,Sonora,1635.52
+Aguascalientes,Sinaloa,882.0
+Aguascalientes,San Luis Potosí,265.8
+Aguascalientes,Quintana Roo,1952.88
+Aguascalientes,Querétaro,381.54
+Aguascalientes,Puebla,678.44
+Aguascalientes,Oaxaca,996.29
+Aguascalientes,Nuevo León,607.36
+Aguascalientes,Nayarit,478.25
+Aguascalientes,Morelos,628.12
+Aguascalientes,Michoacán,453.17
+Aguascalientes,México,494.58
+Aguascalientes,Jalisco,285.17
+Aguascalientes,Hidalgo,535.66
+Aguascalientes,Guerrero,781.41
+Aguascalientes,Guanajuato,225.26
+Aguascalientes,Durango,521.84
+Aguascalientes,Ciudad de México,538.72
+Aguascalientes,Colima,456.29
+Aguascalientes,Coahuila,827.16
+Aguascalientes,Chihuahua,1017.96
+Aguascalientes,Chiapas,1425.04
+Aguascalientes,Campeche,1627.45
+Aguascalientes,Baja California Sur,3165.71
+Aguascalientes,Baja California,2360.42

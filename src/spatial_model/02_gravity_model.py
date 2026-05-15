@@ -7,6 +7,7 @@ import os
 INPUT_CSV = '../../data/processed/spatial/nodos_estados.csv'
 OUT_MATRIX_CSV = '../../data/processed/spatial/matriz_gravedad.csv'
 OUT_EDGES_JSON = '../../data/processed/spatial/edges_gravedad.json'
+INPUT_DISTANCES_CSV = '../../data/processed/spatial/distancias_carretera.csv'
 
 # Parámetros del Modelo Gravitatorio
 # F_ij = k * (P_i^alpha * P_j^beta) / d_ij^gamma
@@ -15,19 +16,16 @@ BETA = 1.0   # Peso del inventario de destino
 GAMMA = 2.0  # Decaimiento por distancia (al cuadrado, ley de gravedad de Newton)
 K_SCALAR = 1e-6 # Escalar para evitar números inmensos (puede ajustarse para calibrar)
 
-def calculate_distance(x1, y1, x2, y2):
-    """Calcula distancia Euclidiana en metros, devuelve en kilómetros."""
-    dist_m = np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
-    return dist_m / 1000.0
-
 def main():
     print("=== Fase 2: Modelo Gravitatorio (Cálculo de Flujos) ===")
     
     # 1. Cargar Nodos
     df = pd.read_csv(INPUT_CSV)
+    df_dist = pd.read_csv(INPUT_DISTANCES_CSV)
+    
     estados = df['estado'].tolist()
     n = len(estados)
-    print(f"Calculando red para {n} nodos (estados)...")
+    print(f"Calculando red para {n} nodos (estados) usando distancias reales por carretera...")
     
     edges = []
     
@@ -44,13 +42,15 @@ def main():
             P_i = est_o['inventario_bovino_2023']
             P_j = est_d['inventario_bovino_2023']
             
-            # Distancia en KM
-            d_ij = calculate_distance(
-                est_o['centroid_x_m'], est_o['centroid_y_m'],
-                est_d['centroid_x_m'], est_d['centroid_y_m']
-            )
-            
-            # Para evitar división por 0 si los centroides fueran idénticos (no ocurre en México)
+            # Buscar distancia real por carretera
+            dist_row = df_dist[(df_dist['origen'] == est_o['estado']) & (df_dist['destino'] == est_d['estado'])]
+            if not dist_row.empty:
+                d_ij = dist_row.iloc[0]['distancia_carretera_km']
+            else:
+                # Fallback de seguridad (no debería ocurrir)
+                d_ij = 100.0 
+                
+            # Para evitar división por 0 o distancias irreales (<1km entre estados)
             if d_ij < 1.0: 
                 d_ij = 1.0
                 
