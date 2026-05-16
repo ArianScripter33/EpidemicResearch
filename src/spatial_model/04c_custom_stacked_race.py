@@ -19,7 +19,7 @@ OUT_GIF = os.path.join(OUT_DIR, 'stacked_race_fmd.gif')
 OUT_MP4 = os.path.join(OUT_DIR, 'stacked_race_fmd.mp4')
 
 # Velocidad: 6 FPS = ~30 segundos de animación total (180 frames)
-FPS = 6
+FPS = 3
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)

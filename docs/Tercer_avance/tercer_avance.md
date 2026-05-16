@@ -91,6 +91,18 @@ Semilla aleatoria: 42 (reproducible)
 
 **Código:** `src/spatial_model/03_spatial_sir.py`, `src/spatial_model/03b_sir_full_history.py`
 
+![Simulación Espacial SIR — Propagación FMD 180 días](../../data/processed/spatial/fmd_spread_simulation_180d.gif)
+
+*Figura 1. Mapa animado de la propagación de FMD sobre México (180 días). El color rojo indica estados con infección activa; el negro indica hato sacrificado.*
+
+![Gráfica Apilada Nacional S-I-R](../../data/processed/spatial/charts/sir_nacional_apilado.png)
+
+*Figura 2. Evolución nacional S-I-R (Susceptibles, Infectados, Removidos) durante 180 días. El pico de infectados ocurre en el Día 58 con ~10.2M cabezas.*
+
+![Gráficas Apiladas Top 8 Estados](../../data/processed/spatial/charts/sir_top8_estados_apilado.png)
+
+*Figura 3. Evolución S-I-R individual de los 8 estados más afectados. Se observan los "picos desfasados" (staggered peaks) que demuestran el efecto dominó geográfico.*
+
 ---
 
 ## 3. Cronología de la Infección: El Efecto Dominó Estado por Estado
@@ -174,6 +186,14 @@ Las dos variables dominantes para predecir el pico de infectados son:
 
 **Conclusión epistémica:** Para que un estado sea un epicentro catastrófico, no basta con tener muchas vacas. Chiapas tiene más vacas que Michoacán pero está arrinconado geográficamente. **El peligro real reside en la combinación letal de alto inventario + alta centralidad de exportación.**
 
+![Feature Importance XGBoost — Pico de Infectados](../../data/processed/spatial/charts/xgboost_importance_pico_infectados.png)
+
+*Figura 4. Importancia de variables del XGBoost para predecir el pico de infectados. El inventario bovino y el flujo gravitatorio saliente dominan la predicción.*
+
+![XGBoost vs SIR — Pico de Infectados](../../data/processed/spatial/charts/sir_vs_xgboost_pico_infectados.png)
+
+*Figura 5. Validación cruzada: Predicción XGBoost (eje X) vs. Resultado real del SIR (eje Y). R² = 0.843. Los puntos cercanos a la diagonal indican alta precisión.*
+
 ### 4.5 Implicaciones para Política Pública: ¿Dónde Intervenir?
 
 El XGBoost revela que la intervención óptima **no depende de dónde inicie la infección**, sino de la **estructura del grafo**:
@@ -181,32 +201,62 @@ El XGBoost revela que la intervención óptima **no depende de dónde inicie la 
 - **Estrategia tradicional (Reactiva):** Esperar al brote → cerco sanitario → perseguir el fuego.
 - **Estrategia basada en grafos (Proactiva):** Instalar puntos de inspección sanitaria permanentes en las carreteras de mayor `weighted_out_flux` que salen de Jalisco, Veracruz y Estado de México. Al asfixiar estos "súper-nodos distribuidores", se fragmenta la red nacional en islas seguras, sin importar dónde haya iniciado el brote.
 
+![Feature Importance XGBoost — Día de Primera Infección](../../data/processed/spatial/charts/xgboost_importance_dia_primera_infeccion.png)
+
+*Figura 6. Importancia de variables para predecir el día de primera infección. Este modelo tiene R² ~ 0 porque el momento del contagio es estocástico, no estructural.*
+
 ---
 
-## 5. Visualizaciones Generadas
+## 5. Visualizaciones e Impacto Económico Espacial
 
-### 5.1 Inventario de Artefactos Visuales
-
-| Artefacto | Archivo | Descripción |
-|-----------|---------|-------------|
-| Mapa Animado SIR (180 días) | `fmd_spread_simulation_180d.gif` | Propagación geográfica sobre mapa de México |
-| Bar Chart Race (HTML) | `bar_chart_race_180d.html` | Competencia animada de infectados por estado |
-| **Stacked Race Chart (Custom)** | `stacked_race_fmd.mp4` / `.gif` | Barras bicolor (Infectados rojo + Sacrificados negro) con ranking dinámico |
-| Gráfica Apilada Nacional | `sir_nacional_apilado.png` | Área chart S-I-R completo del hato nacional |
-| Gráficas Apiladas Top 8 | `sir_top8_estados_apilado.png` | S-I-R individual de los 8 estados más afectados |
-| Feature Importance XGBoost | `xgboost_importance_pico_infectados.png` | Variables más predictivas del pico de infección |
-| SIR vs XGBoost Scatter | `sir_vs_xgboost_pico_infectados.png` | Validación cruzada: predicción vs realidad |
-
-### 5.2 Animación Custom: Stacked Bar Chart Race
+### 5.1 Animación Custom: Stacked Bar Chart Race
 
 Se desarrolló un motor de renderizado custom (`04c_custom_stacked_race.py`) usando `matplotlib.animation.FuncAnimation` para superar la limitación de la librería `bar_chart_race`, que no soporta barras apiladas.
 
 **Características técnicas:**
-- 180 fotogramas a 10 FPS (18 segundos de animación).
+
+- 180 fotogramas a 3 FPS (~60 segundos de animación).
 - Top 12 estados por ranking dinámico.
 - Barras bicolor: **Rojo** = Infectados Activos, **Negro** = Sacrificados/Removidos.
 - Dashboard superior con métricas nacionales en tiempo real (día, infectados, sacrificados).
 - Exportación dual: MP4 (ffmpeg/x264) y GIF (Pillow).
+
+**Archivos generados:**
+
+- Video: `data/processed/spatial/charts/stacked_race_fmd.mp4`
+- GIF: `data/processed/spatial/charts/stacked_race_fmd.gif`
+
+### 5.2 Impacto Económico con el Modelo Espacial
+
+**Código:** `src/models/fmd_finance_spatial.py`
+
+Se realizó un fork de las proyecciones financieras del Segundo Avance, reemplazando el modelo SIR teórico (mezcla homogénea) por los datos reales del SIR Espacial Gravitatorio. El resultado confirma que, aunque la geografía aplaza el colapso (empujando la masacre del Mes 2 al Mes 3), **la pérdida acumulada a 150 días sigue siendo catastrófica: $52,796 Millones de USD.**
+
+| Mes | Modelo Base (2° Avance) | Modelo Espacial (3° Avance) | Diferencia |
+|-----|------------------------|----------------------------|-----------|
+| Mes 1 | Explosión inmediata | Lento (fricción geográfica) | -85% sacrificados |
+| Mes 2-3 | Pico y caída | **Pico retrasado al Mes 3** | +40% concentración |
+| Total 5 meses | ~$52,800M USD | **~$52,796M USD** | Virtualmente igual |
+
+![Flujo de Caja FMD — Modelo Espacial](../figures/flujo_caja_fmd_espacial.png)
+
+*Figura 7. Flujo de caja mensual FMD con el Modelo Espacial Gravitatorio. La fricción geográfica redistribuye el colapso hacia los meses 3-4, pero la pérdida acumulada es idéntica.*
+
+### 5.3 Inventario Completo de Artefactos Visuales
+
+| # | Artefacto | Archivo | Tipo |
+|---|-----------|---------|------|
+| 1 | Mapa animado SIR (180 días) | `data/processed/spatial/fmd_spread_simulation_180d.gif` | GIF |
+| 2 | Bar Chart Race (HTML interactivo) | `data/processed/spatial/bar_chart_race_180d.html` | HTML |
+| 3 | **Stacked Race Chart (Custom bicolor)** | `data/processed/spatial/charts/stacked_race_fmd.mp4` | MP4 |
+| 4 | Gráfica apilada nacional S-I-R | `data/processed/spatial/charts/sir_nacional_apilado.png` | PNG |
+| 5 | Gráficas apiladas Top 8 estados | `data/processed/spatial/charts/sir_top8_estados_apilado.png` | PNG |
+| 6 | Feature Importance (Pico) | `data/processed/spatial/charts/xgboost_importance_pico_infectados.png` | PNG |
+| 7 | Feature Importance (Día) | `data/processed/spatial/charts/xgboost_importance_dia_primera_infeccion.png` | PNG |
+| 8 | Scatter SIR vs XGBoost | `data/processed/spatial/charts/sir_vs_xgboost_pico_infectados.png` | PNG |
+| 9 | Flujo de Caja Espacial | `docs/figures/flujo_caja_fmd_espacial.png` | PNG |
+| 10 | Flujo de Caja Base (2° Avance) | `docs/figures/flujo_caja_fmd.png` | PNG |
+| 11 | Contrafactual Detección FMD | `docs/figures/contrafactual_fmd.png` | PNG |
 
 ---
 
@@ -248,44 +298,139 @@ requests, Pillow, bar_chart_race
 
 ## 7. Base de Datos NoSQL (MongoDB)
 
-> 🟡 **Estado: En progreso.** Sección a cargo de [Compañero]. Se espera la implementación de las colecciones `GRANJA`, `ANIMAL`, `MOVIMIENTO`, `REPORTE_SANITARIO` y `ZONA_CONTROL` conforme al esquema definido en `docs/propuesta_app_db_cripto.md`.
+> 🟡 **Estado: En progreso.** Sección a cargo de [Compañero]. Esquema diseñado y aprobado; falta la implementación con datos reales.
 
-### 7.1 Esquema Aprobado
+### 7.1 Modelo Entidad-Relación (7 Colecciones)
 
-El modelo Entidad-Relación define 7 colecciones principales:
+```mermaid
+erDiagram
+    USUARIO ||--o{ REPORTE_SANITARIO : "Genera"
+    USUARIO ||--o{ GRANJA : "Administra"
+    GRANJA ||--o{ ANIMAL : "Alberga"
+    GRANJA ||--o{ ZONA_CONTROL : "Pertenece a"
+    ANIMAL ||--o{ MOVIMIENTO : "Registra"
+    ANIMAL ||--o{ REPORTE_SANITARIO : "Sujeto de"
+    MODELO_PREDICCION ||--o{ ZONA_CONTROL : "Calcula riesgo de"
 
-- **USUARIO:** Ganaderos, veterinarios y administradores (PII encriptada con FLE).
-- **GRANJA:** Unidades de producción con ubicación GeoJSON y score de riesgo ML.
-- **ANIMAL:** Trazabilidad individual con arete SINIIGA y estado de salud S-I-R.
-- **MOVIMIENTO:** Registro de tránsito comercial entre granjas (vector de contagio).
-- **REPORTE_SANITARIO:** Denuncias con probabilidad de riesgo del modelo ML.
-- **ZONA_CONTROL:** Perímetros de cuarentena (Foco, Perifocal, Vigilancia).
-- **MODELO_PREDICCION:** Registro de ejecuciones del XGBoost con parámetros y scores.
+    USUARIO {
+        ObjectId _id PK
+        string nombre_completo "Encriptado RSA"
+        string rfc_curp "Encriptado RSA"
+        string email "Encriptado RSA"
+        string rol "Ganadero - Veterinario - CPA - Admin"
+        string password_hash "bcrypt 12 rounds"
+        date ultimo_acceso
+    }
 
-### 7.2 Integración con el Motor Predictivo
+    GRANJA {
+        ObjectId _id PK
+        ObjectId owner_id FK
+        string upp_id "Clave SINIIGA Unica"
+        GeoJSON ubicacion "Point lat long"
+        string estado "Jalisco - Veracruz - etc"
+        int inventario_bovino "Cabezas actuales"
+        int capacidad_maxima
+        boolean cuarentena_activa
+        float indice_riesgo "Score del modelo ML 0-1"
+    }
 
-El campo `indice_riesgo` (float 0.0–1.0) de las colecciones `GRANJA` y `ZONA_CONTROL` se alimenta directamente del output del XGBoost, basándose en las 13 variables topológicas del grafo.
+    ANIMAL {
+        ObjectId _id PK
+        ObjectId granja_actual_id FK
+        string siniiga_tag "Arete RFID"
+        string especie "Bovino - Porcino - Caprino"
+        string raza
+        date fecha_nacimiento
+        string estado_salud "Sano - Sospechoso - Infectado - Removido"
+        date ultima_vacunacion
+    }
+
+    MOVIMIENTO {
+        ObjectId _id PK
+        ObjectId animal_id FK
+        ObjectId granja_origen_id FK
+        ObjectId granja_destino_id FK
+        date fecha_transito
+        string tipo "Comercial - Feria - Rastro TIF"
+        string vehiculo_placas
+        boolean guia_sanitaria_verificada
+    }
+
+    REPORTE_SANITARIO {
+        ObjectId _id PK
+        ObjectId animal_id FK
+        ObjectId usuario_id FK
+        ObjectId granja_id FK
+        date fecha_reporte
+        string sintomas "Lesiones vesiculares fiebre sialorrea"
+        string diagnostico_presuntivo
+        string metodo_diagnostico "Clinico - ELISA - RT-PCR"
+        float probabilidad_riesgo "Score del modelo ML"
+        string estatus "Pendiente - Confirmado - Descartado"
+    }
+
+    ZONA_CONTROL {
+        ObjectId _id PK
+        string estado
+        GeoJSON perimetro "Polygon de 3km o 10km"
+        string tipo "Foco - Perifocal - Vigilancia"
+        float riesgo_gravitatorio "Indice calculado por el modelo"
+        int granjas_afectadas
+        date fecha_activacion
+    }
+
+    MODELO_PREDICCION {
+        ObjectId _id PK
+        date fecha_ejecucion
+        string version_modelo "XGBoost v1.7 mas Gravity"
+        object parametros "R0 gamma alpha beta"
+        object resultados_por_estado "32 scores de riesgo"
+        float accuracy "Precision del modelo"
+    }
+```
+
+### 7.2 Ejemplo de Documento JSON (Reporte Sanitario)
+
+```json
+{
+  "_id": "ObjectId('665a1b2c3d4e5f6a7b8c9d0e')",
+  "granja_id": "ObjectId('665a1b2c3d4e5f6a7b8c9d0f')",
+  "animal_id": "ObjectId('665a1b2c3d4e5f6a7b8c9d10')",
+  "fecha_reporte": "2026-05-15T10:30:00Z",
+  "sintomas": "Lesiones vesiculares en lengua y pezuñas, fiebre 40.5°C",
+  "diagnostico_presuntivo": "Sospecha de FMD (Serotipo O)",
+  "metodo_diagnostico": "ELISA NSP",
+  "probabilidad_riesgo": 0.87,
+  "estatus": "Pendiente confirmación RT-PCR"
+}
+```
+
+### 7.3 Integración con el Motor Predictivo
+
+El campo `indice_riesgo` (float 0.0–1.0) de las colecciones `GRANJA` y `ZONA_CONTROL` se alimenta directamente del output del XGBoost, basándose en las 13 variables topológicas del grafo. Esto permite a los veterinarios de la CPA priorizar inspecciones en estados con alto flujo gravitatorio saliente.
 
 ---
 
 ## 8. Criptografía y Seguridad
 
-> 🟡 **Estado: En progreso.** Sección a cargo de [Compañero]. Se espera la implementación del esquema de seguridad de tres capas conforme a `docs/propuesta_app_db_cripto.md`.
+> 🟡 **Estado: En progreso.** Sección a cargo de [Compañero]. Esquema diseñado con los algoritmos vistos en clase.
 
-### 8.1 Arquitectura de Seguridad Aprobada (Tres Capas)
+### 8.1 Arquitectura de Seguridad (Basada en el temario del curso)
 
-| Capa | Estándar | Algoritmo |
-|------|----------|-----------|
-| En Tránsito | TLS 1.3 | ECDHE_RSA_WITH_AES_256_GCM_SHA384 |
-| En Reposo | AES-256 | AES-256-CBC (MongoDB WiredTiger) |
-| A Nivel de Campo (FLE) | AEAD | AES-256-CBC + HMAC-SHA-512 |
-| Passwords | bcrypt | 12 rounds de sal |
-| Tokens de Sesión | JWT | RS256 (RSA 2048-bit) |
+El sistema protege los datos sensibles de los ganaderos utilizando dos familias de algoritmos criptográficos:
 
-### 8.2 Campos Protegidos (Criterio LFPDPPP)
+| Capa | Algoritmo / Técnica | Propósito en la Aplicación |
+|------|---------------------|---------------------------|
+| **Passwords** | `bcrypt` (Función Hash con sal) | Las contraseñas nunca se almacenan en texto plano. Se aplica un Hash matemático irreversible para proteger contra hackeos de la base de datos. |
+| **Datos Personales (PII)** | `RSA` (Cifrado Asimétrico) | Los nombres, correos y RFC de los ganaderos se encriptan con la Llave Pública al guardarlos en MongoDB. Solo la CPA tiene la Llave Privada para desencriptar. |
+| **Tokens de Sesión** | `JWT` firmado con RSA | Al iniciar sesión, se entrega un token firmado criptográficamente para validar identidad sin retransmitir la contraseña. |
 
-- **Encriptados (FLE):** `nombre_completo`, `rfc_curp`, `email`, `vehiculo_placas`.
-- **Texto Plano:** `estado_salud`, `ubicacion`, `inventario_bovino`, `indice_riesgo`, `fecha_reporte` (requeridos para consultas geoespaciales y analíticas en tiempo real).
+### 8.2 ¿Qué campos están encriptados?
+
+| Tipo | Campos | Justificación |
+|------|--------|---------------|
+| 🔒 **Encriptados (RSA)** | `nombre_completo`, `rfc_curp`, `email`, `vehiculo_placas` | Datos personales identificables según la LFPDPPP |
+| 🟢 **Texto Plano** | `estado_salud`, `ubicacion`, `inventario_bovino`, `indice_riesgo`, `fecha_reporte` | Necesarios para consultas geoespaciales y analíticas en tiempo real |
 
 ---
 
@@ -293,12 +438,12 @@ El campo `indice_riesgo` (float 0.0–1.0) de las colecciones `GRANJA` y `ZONA_C
 
 | Materia | Componente | Estado | Evidencia |
 |---------|-----------|--------|-----------|
-| **Ecuaciones Diferenciales** | Modelo SIR Dual + SIR Espacial Gravitatorio | ✅ Completado | `src/spatial_model/` |
-| **Bases de Datos NoSQL** | Esquema MongoDB + Data Warehouse Pydantic | 🟡 Esquema aprobado, implementación pendiente | `docs/propuesta_app_db_cripto.md` |
+| **Ecuaciones Diferenciales** | Modelo SIR Dual + SIR Espacial Gravitatorio (180 días) | ✅ Completado | `src/spatial_model/03_spatial_sir.py` |
+| **Bases de Datos NoSQL** | Esquema MongoDB 7 colecciones + Data Warehouse Pydantic | 🟡 Esquema aprobado, implementación pendiente | `docs/propuesta_app_db_cripto.md` |
 | **Estadística Multivariada** | EDA + ANOVA + Correlación zoonótica | ✅ Completado | `notebooks/01-03` |
-| **Inteligencia Artificial** | XGBoost Riesgo Topológico (13 Node Embeddings) | ✅ Completado (R²=0.843) | `src/spatial_model/05_xgboost_risk.py` |
-| **Criptografía** | Esquema FLE + TLS 1.3 + bcrypt | 🟡 Diseño aprobado, código pendiente | `docs/propuesta_app_db_cripto.md` |
-| **Finanzas Corporativas** | Modelos de impacto TB + FMD + Contrafactual | ✅ Completado | `src/models/fmd_finance_addendum.py` |
+| **Inteligencia Artificial** | XGBoost Riesgo Topológico (13 Node Embeddings, R²=0.843) | ✅ Completado | `src/spatial_model/05_xgboost_risk.py` |
+| **Criptografía** | Esquema Hash (bcrypt) + RSA para PII | 🟡 Diseño aprobado, código pendiente | `docs/propuesta_app_db_cripto.md` |
+| **Finanzas Corporativas** | Impacto TB + FMD Base + FMD Espacial + Contrafactual | ✅ Completado | `src/models/fmd_finance_spatial.py` |
 | **Innovación Social** | App Ganado Saludable + Dashboard + DINESA | ✅ Conceptualizado | Sección 7 del 2° Avance |
 
 ---
@@ -308,10 +453,9 @@ El campo `indice_riesgo` (float 0.0–1.0) de las colecciones `GRANJA` y `ZONA_C
 | # | Tarea | Responsable | Estado |
 |---|-------|-------------|--------|
 | 1 | Implementar colecciones MongoDB con datos reales | Compañero | 🟡 Pendiente |
-| 2 | Codificar esquema de encriptación FLE (demo funcional) | Compañero | 🟡 Pendiente |
-| 3 | Generar documento DOCX final del Tercer Avance | Yo | 🟡 Esperando §7 y §8 |
-| 4 | Preparar presentación oral con animaciones MP4 | Equipo | 🟡 Pendiente |
-| 5 | Análisis de sensibilidad: "Blindaje" de súper-nodos | Yo (opcional) | ⚪ Futuro |
+| 2 | Codificar esquema de encriptación Hash+RSA (demo funcional) | Compañero | 🟡 Pendiente |
+| 3 | Generar documento DOCX final del Tercer Avance (JS) | Yo | 🟡 Esperando §7 y §8 |
+| 4 | Preparar presentación oral (~15 diapositivas) con animaciones MP4 | Equipo | 🟡 Pendiente |
 
 ---
 

@@ -122,49 +122,15 @@ erDiagram
 
 ## 2. Esquema de Encriptación y Seguridad (Criptografía)
 
-Dado que manejamos datos sensibles (ubicación de granjas, identidad de ganaderos y estatus sanitario que puede afectar mercados internacionales de $3,000M USD anuales), implementamos un modelo de **seguridad de tres capas**.
-
-```mermaid
-flowchart TD
-    subgraph Cliente ["Dispositivo del Ganadero / Veterinario"]
-        A["App Móvil / Web\n(React Native / Next.js)"]
-    end
-
-    subgraph Red ["Tránsito de Datos"]
-        B(("🔒 TLS 1.3\nECDHE + AES-256-GCM\nPerfect Forward Secrecy"))
-    end
-
-    subgraph Servidor ["Backend (Node.js / Python)"]
-        C["API Gateway\n+ Rate Limiting"]
-        D["Lógica de Negocio\n+ Autenticación JWT"]
-        E{"🔑 Motor FLE\nClient-Side\nField-Level Encryption"}
-    end
-
-    subgraph KMS ["Gestión de Llaves"]
-        K["AWS KMS / GCP KMS\nLlave Maestra (CMK)\nRotación cada 90 días"]
-    end
-
-    subgraph BaseDatos ["MongoDB Atlas"]
-        F[("MongoDB\n🔒 AES-256-CBC\nEncryption at Rest\n+ Audit Logging")]
-    end
-
-    A <-->|Canal Seguro HTTPS| B
-    B <--> C
-    C <--> D
-    D <-->|"Cifrado en Memoria\n(antes de escribir a DB)"| E
-    E <-->|"Datos PII cifrados\n(campos individuales)"| F
-    K -.->|"Provee Data Encryption Keys\n(DEKs)"| E
-```
+Dado que manejamos datos sensibles (ubicación de granjas y la identidad de los ganaderos), el sistema implementa una arquitectura de seguridad basada en los algoritmos vistos en clase: **Funciones Hash** y **Cifrado Asimétrico (RSA)**.
 
 ### Especificaciones Técnicas de Criptografía
 
-| Capa | Estándar | Algoritmo | Detalle Técnico |
-|------|----------|-----------|-----------------|
-| **En Tránsito** | TLS 1.3 | `ECDHE_RSA_WITH_AES_256_GCM_SHA384` | Perfect Forward Secrecy: si roban la llave hoy, no desencriptan datos de ayer. Cada sesión genera una llave efímera Diffie-Hellman sobre curva elíptica. |
-| **En Reposo** | AES-256 | `AES-256-CBC` (MongoDB WiredTiger) | Todo el volumen de disco está cifrado de forma transparente. Si roban el disco físico, los datos son ilegibles sin la llave maestra. |
-| **A Nivel de Campo (FLE)** | AEAD | `AES-256-CBC + HMAC-SHA-512` | Los campos PII (`nombre_completo`, `rfc_curp`, `email`) se cifran **antes de salir del servidor** hacia la base de datos. Ni el DBA puede leerlos sin la Data Encryption Key (DEK) gestionada por el KMS externo. |
-| **Passwords** | bcrypt | `bcrypt` con 12 rounds de sal | Las contraseñas nunca se almacenan en texto plano. bcrypt es resistente a ataques de GPU por diseño (memory-hard). |
-| **Tokens de Sesión** | JWT | `RS256` (RSA 2048-bit) | Los tokens de autenticación se firman asimétricamente. El servidor solo necesita la llave pública para verificar, reduciendo la superficie de ataque. |
+| Capa | Algoritmo / Técnica | Propósito en la Aplicación |
+|------|---------------------|---------------------------|
+| **Passwords de Usuarios** | `bcrypt` (Función Hash con sal) | Las contraseñas de los ganaderos nunca se almacenan en texto plano. Se usa `bcrypt` para aplicar un Hash matemático irreversible, protegiéndolos contra hackeos de la base de datos. |
+| **Datos Personales (PII)** | `RSA` (Cifrado Asimétrico) | Para proteger el nombre y correo del ganadero en la base de datos, usamos la Llave Pública (RSA) para encriptar la información al guardarla. Solo la autoridad (CPA) tiene la Llave Privada para desencriptarla cuando se requiere. |
+| **Tokens de Sesión** | `JWT` firmado con RSA | Cuando el usuario inicia sesión en la App, se le entrega un token firmado criptográficamente para validar su identidad sin tener que mandar la contraseña en cada petición. |
 
 ### ¿Qué campos están encriptados?
 
