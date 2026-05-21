@@ -1,0 +1,56 @@
+{
+  "fmd_diagnostics_spatial": [
+    {
+      "month": 1,
+      "infected_peak": 2647320,
+      "sacrificed": 1525048,
+      "sacrifice_cost_usd": 2354674112,
+      "export_loss_usd": 216972000,
+      "diagnostic_cost_usd": 4632810,
+      "cumulative_usd": 2576278922
+    },
+    {
+      "month": 2,
+      "infected_peak": 10172171,
+      "sacrificed": 11304526,
+      "sacrifice_cost_usd": 17454188144,
+      "export_loss_usd": 246000000,
+      "diagnostic_cost_usd": 17801280,
+      "cumulative_usd": 20294268346
+    },
+    {
+      "month": 3,
+      "infected_peak": 9697309,
+      "sacrificed": 17765994,
+      "sacrifice_cost_usd": 27430694736,
+      "export_loss_usd": 246000000,
+      "diagnostic_cost_usd": 16970275,
+      "cumulative_usd": 47987933357
+    },
+    {
+      "month": 4,
+      "infected_peak": 2432427,
+      "sacrificed": 2700368,
+      "sacrifice_cost_usd": 4169368192,
+      "export_loss_usd": 246000000,
+      "diagnostic_cost_usd": 4256735,
+      "cumulative_usd": 52407558284
+    },
+    {
+      "month": 5,
+      "infected_peak": 112805,
+      "sacrificed": 120672,
+      "sacrifice_cost_usd": 186317568,
+      "export_loss_usd": 246000000,
+      "diagnostic_cost_usd": 197400,
+      "cumulative_usd": 52840073252
+    }
+  ],
+  "summary": {
+    "total_sacrificados": 33416609,
+    "total_diagnostic_cost_usd": 43858500,
+    "total_export_loss_usd": 1200972000,
+    "total_sacrifice_cost_usd": 51595244814,
+    "total_cost_usd": 52840075314
+  }
+}

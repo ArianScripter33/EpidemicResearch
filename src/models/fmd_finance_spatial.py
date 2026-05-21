@@ -67,13 +67,18 @@ def main():
         
         sacrifice_cost = sacrificed * VALOR_CABEZA_USD
         export_loss = export_loss_range(start_day, end_day)
-        total_month = sacrifice_cost + export_loss
+        # Costo de diagnóstico (5% de infectados pico a $35 USD por prueba RT-PCR)
+        diagnostic_cost = int(peak_I * 0.05) * 35
+        total_month = sacrifice_cost + export_loss + diagnostic_cost
         cumulative += total_month
         
         monthly_fmd.append({
             "month": month,
+            "infected_peak": int(peak_I),
+            "sacrificed": sacrificed,
             "sacrifice_cost_usd": sacrifice_cost,
             "export_loss_usd": export_loss,
+            "diagnostic_cost_usd": diagnostic_cost,
             "cumulative_usd": cumulative
         })
     
@@ -142,14 +147,42 @@ def main():
     plt.tight_layout()
     out_img = os.path.join(OUT, "flujo_caja_fmd_espacial.png")
     plt.savefig(out_img, dpi=300, bbox_inches='tight')
-    print(f"✅ Gráfica generada: {out_img}")
+    print(f"[OK] Grafica generada: {out_img}")
 
-    # Resumen
+    # Resumen e importación de JSON
+    import json
+    
     total_sacrificados = df_150.iloc[-1]['removidos']
-    costo_total = total_sacrificados * VALOR_CABEZA_USD + export_loss_total(150)
+    # El costo total final a 150 días incluye el diagnóstico
+    total_diagnostico = sum(m['diagnostic_cost_usd'] for m in monthly_fmd)
+    costo_total = total_sacrificados * VALOR_CABEZA_USD + export_loss_total(150) + total_diagnostico
+    
     print("\nRESUMEN FINANCIERO ESPACIAL (150 DÍAS):")
     print(f"Total Sacrificados: {total_sacrificados:,.0f}")
-    print(f"Costo Total Estimado: ${costo_total:,.0f} USD")
+    print(f"Costo Diagnóstico Total: ${total_diagnostico:,.0f} USD")
+    print(f"Costo Total Estimado (Sacrificio + Export. + Diagnóstico): ${costo_total:,.0f} USD")
+    
+    print("\nDETALLE MENSUAL ESPACIAL:")
+    print(f"{'Mes':<5} {'Sacrificados':>15} {'Costo Sacr.':>15} {'Pérdida Exp.':>15} {'Diag. Cost':>12} {'Acumulado':>18}")
+    print("-" * 86)
+    for m in monthly_fmd:
+        print(f"{m['month']:<5} {m['sacrificed']:>15,} ${m['sacrifice_cost_usd']:>13,} ${m['export_loss_usd']:>13,} ${m['diagnostic_cost_usd']:>10,} ${m['cumulative_usd']:>16,}")
+
+    # Guardar en archivo JSON para integrarse en el Data Warehouse
+    output_json = {
+        "fmd_diagnostics_spatial": monthly_fmd,
+        "summary": {
+            "total_sacrificados": int(total_sacrificados),
+            "total_diagnostic_cost_usd": int(total_diagnostico),
+            "total_export_loss_usd": int(export_loss_total(150)),
+            "total_sacrifice_cost_usd": int(total_sacrificados * VALOR_CABEZA_USD),
+            "total_cost_usd": int(costo_total)
+        }
+    }
+    json_path = os.path.join(OUT, "..", "Segundo_avance", "fmd_finance_data_spatial.json")
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(output_json, f, indent=2, ensure_ascii=False)
+    print(f"[OK] JSON espacial guardado en: {json_path}")
 
 if __name__ == '__main__':
     main()

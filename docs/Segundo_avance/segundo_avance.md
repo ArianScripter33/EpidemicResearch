@@ -229,8 +229,6 @@ La fricción geográfica *aplanó la curva*. El pico de infecciones se redujo de
 
 **Código:** `src/models/tb_storytelling_plot.py`
 
-Dado que la curva de infectados de TB es estable (~14K animales) pero persistente durante años, el daño real es acumulativo. Se construyó un modelo económico basado en literatura científica:
-
 - **Caída en Producción:** Rahman & Samad (2009) reporta una caída del **-17%** en producción de leche por vaca infectada.
 - **Precio de la Leche (SIAP México, 2024):** $6.50 MXN/litro.
 - **Producción Estándar:** 18 litros/día por vaca (SAGARPA, 2023).
@@ -242,16 +240,20 @@ Dado que la curva de infectados de TB es estable (~14K animales) pero persistent
 
 ### 6.2 Fiebre Aftosa: La Quiebra Automática
 
-**Código:** `src/models/fmd_storytelling_plot.py`
+**Código de Referencia:** `src/models/fmd_storytelling_plot.py` y `src/models/fmd_finance_spatial.py`
 
-A diferencia de la TB, la Fiebre Aftosa desencadena un colapso instantáneo:
+A diferencia de la Tuberculosis Bovina, que actúa como un "sangrado lento" y crónico, la reintroducción de la Fiebre Aftosa (FMD) en un hato nacional 100% susceptible representa una catástrofe instantánea. 
 
-- **Pérdida Biológica:** 500 kg en pie × $50 MXN = $25,000 MXN ≈ **$1,250 USD** por cabeza sacrificada (Fuente: SNIIM / Uniones Ganaderas).
-- **Cierre de Fronteras:** Al declararse I₀=1, se activa un bloqueo OMSA a los $3,000 Millones USD anuales de exportación cárnica (pérdida de ~$8.2 Millones USD diarios).
+Al contrastar el modelado matemático:
+* **Modelo Homogéneo Simplificado:** Estima una pérdida total acumulada de **$52,800 Millones de USD** en 150 días, asumiendo una mezcla perfecta de la población.
+* **Modelo Espacial Gravitatorio:** Utilizando la red de carreteras real y el flujo comercial entre estados (`sir_simulation_results_180d.csv`), el costo total estimado a 150 días es de **$52,840 Millones de USD** (incluyendo sacrificio, cierre comercial y diagnóstico masivo). 
 
-**Resultado:** En menos de 150 días, la pérdida acumulada alcanza **$52,800 Millones de Dólares (M USD)**.
+Esto demuestra un principio económico-epidemiológico fundamental: **la fricción geográfica y el comercio en red modifican la distribución temporal de la epidemia (efecto dominó), pero no reducen la devastación absoluta** al cabo de 5 meses si no se implementa una cuarentena activa y oportuna.
 
-![Colapso Financiero — Fiebre Aftosa](../figures/fmd_impacto_nuclear.png)
+- **Pérdida Biológica Directa:** 500 kg en pie × $50 MXN = $25,000 MXN ≈ **$1,250 USD** por cabeza sacrificada (Fuente: SNIIM / Uniones Ganaderas).
+- **Cierre de Fronteras Colateral:** Al declararse el caso $I_0 = 1$ o $I_0 = 100$, se activa un bloqueo OMSA inmediato que frena en seco los $3,000 Millones de USD anuales del comercio exterior de ganado vivo y carne de res de México (pérdida de ~$8.2 Millones de USD diarios).
+
+![Colapso Financiero — Fiebre Aftosa (Homogéneo)](../figures/fmd_impacto_nuclear.png)
 
 ### 6.3 Costos de Diagnóstico FMD: ¿Cuánto cuesta detectar la enfermedad?
 
@@ -266,7 +268,7 @@ En México, la Fiebre Aftosa es una **enfermedad exótica** (libre desde 1954). 
 | **Aislamiento Viral (Cultivo Celular)** | $80 – $150 | 3-7 días | Gold Standard | OIE Manual 3.1.8; Pirbright Institute |
 | **Secuenciación Genómica (Serotipado)** | $100 – $300 | 5-14 días | 100% | Knowles & Samuel (2003); WRLFMD |
 
-**Nota:** A diferencia de la Tuberculosis Bovina (donde el productor paga la tuberculina), en FMD el diagnóstico es **absorbido íntegramente por el Estado** como parte del protocolo DINESA. El costo real lo asume el presupuesto de SENASICA y la CPA. La prueba ELISA NSP es particularmente importante porque permite distinguir animales infectados de animales vacunados (capacidad DIVA), crucial para mantener el estatus de país libre ante la OMSA.
+**Nota:** A diferencia de la Tuberculosis Bovina (donde el productor paga la tuberculina), en FMD el diagnóstico es **absorbido íntegramente por el Estado** como parte del protocolo DINESA. La prueba ELISA NSP es particularmente importante porque permite distinguir animales infectados de animales vacunados (capacidad DIVA), crucial para mantener el estatus de país libre ante la OMSA.
 
 **¿Cuánto representa una cabeza o un centenar en riesgo de FMD?**
 
@@ -281,41 +283,54 @@ En México, la Fiebre Aftosa es una **enfermedad exótica** (libre desde 1954). 
 
 ### 6.4 Flujo de Caja: Escenario de Reintroducción de FMD (5 meses)
 
-**Código:** `src/models/fmd_finance_addendum.py`
+**Códigos de Referencia:** `src/models/fmd_finance_addendum.py` (Homogéneo) y `src/models/fmd_finance_spatial.py` (Espacial)
 
-Se proyectó el impacto económico mensual de un escenario donde **1 solo animal infectado con Serotipo O** ingresa al hato nacional de 35.1 millones, utilizando el modelo SIR (R₀ = 6.0) y dos componentes de costo: el sacrificio sanitario (valor de mercado de cada animal removido) y el cierre de exportaciones bovinas por la OMSA.
+Se proyectó el impacto económico mensual a 150 días a través de dos metodologías de modelado para entender el efecto de la topología comercial carretera y la densidad de hatos geográficos:
 
-**Modelo de cierre de exportaciones:** El bloqueo comercial no es instantáneo. Se implementó un modelo escalonado basado en los tiempos de reacción documentados de los socios comerciales:
+#### A. Escenario Homogéneo Simplificado ($I_0 = 1$)
+Asume una mezcla instantánea de animales en todo el territorio mexicano sin fronteras comerciales.
 
-| Fase | Días | % Mercado Cerrado | Pérdida/día (USD) | Fuente |
-|---|---|---|---|---|
-| Sospecha | 1-3 | 0% | $0 | Protocolo DINESA (SENASICA); OIE Manual Ch. 3.1.8 |
-| Confirmación + EE.UU. | 4-7 | 90% | $7.4M | WOAH TAHC Art. 1.1.3 (24h notif.); Precedente: UK 2001 ban UE en 2 días (Anderson Report, 2002) |
-| Reacción global | 8-14 | 98% | $8.0M | MAFF Japan FMD contingency; CFIA Canada import policy |
-| Cierre total | 15+ | 100% | $8.2M | WOAH TAHC Ch. 8.8 |
+| Mes | Infectados (pico) | Animales Sacrificados | Sacrificio (USD) | Cierre Exportaciones (USD) | Diag. Cost (USD) | Pérdida Acumulada |
+|---|---|---|---|---|---|---|
+| 1 | 9,520 | 1,904 | $2,939,776 | $216,972,000 | $16,660 | $219,928,436 |
+| 2 | 19,423,405 | 8,720,482 | $13,464,424,208 | $246,000,000 | $33,991,444 | $13,964,343,594 |
+| 3 | 19,685,118 | 21,706,241 | $33,514,436,104 | $246,000,000 | $34,448,948 | $47,759,228,623 |
+| 4 | 2,966,841 | 2,644,549 | $4,083,183,656 | $246,000,000 | $5,191,956 | $52,093,604,249 |
+| 5 | 329,660 | 293,158 | $452,635,952 | $246,000,000 | $576,905 | $52,792,817,106 |
 
-> **Fuente del mercado:** Exportaciones bovinas de México: $1,015M (ganado vivo, ~100% a EE.UU.) + $1,700M (carne de res, ~86% a EE.UU.) + ~$285M (subproductos) = **~$3,000M USD/año** (USDA FAS GATS 2024; AHDB 2024). EE.UU. representa **~90% del mercado combinado**. Se refiere exclusivamente al sector **bovino**, no a toda la agricultura.
+*Nota: Cifras obtenidas mediante el modelo teórico clásico de Runge-Kutta sobre la población de 35.1M.*
 
-**Metodología de Cálculo:**
-La pérdida diaria se estima mediante la fórmula:
-$$L_{diaria} = \left( \frac{V_{anual}}{365} \right) \times \%_{Fase}$$
-Donde $V_{anual} = \$3,000M$. Esto implica una pérdida de **$8.22M USD** por cada día de cierre total. El costo de **$1,201M USD** reportado en los escenarios es la sumatoria de estas pérdidas diarias durante los primeros 150 días del brote, considerando el ramp-up inicial de 14 días.
+#### B. Escenario Espacial Gravitatorio ($I_0 = 100$ en Veracruz)
+Incorpora fricción geográfica e inicia la epidemia con un embarque contaminado de 100 animales en Veracruz, propagando el patógeno radialmente a través del comercio carretero simulado mediante teoría de grafos.
 
-| Mes | Infectados (pico) | Animales Sacrificados | Sacrificio (USD) | Cierre Exportaciones (USD) | Pérdida Acumulada |
-|---|---|---|---|---|---|
-| 1 | 9,520 | 1,904 | $2,939,776 | $216,972,000 | $219,928,436 |
-| 2 | 19,423,405 | 8,720,482 | $13,464,424,208 | $246,000,000 | $13,964,343,594 |
-| 3 | 19,685,118 | 21,706,241 | $33,514,436,104 | $246,000,000 | $47,759,228,623 |
-| 4 | 2,966,841 | 2,644,549 | $4,083,183,656 | $246,000,000 | $52,093,604,249 |
-| 5 | 329,660 | 293,158 | $452,635,952 | $246,000,000 | $52,792,817,106 |
+| Mes | Infectados (pico) | Animales Sacrificados | Sacrificio (USD) | Cierre Exportaciones (USD) | Diag. Cost (USD) | Pérdida Acumulada |
+|---|---|---|---|---|---|---|
+| 1 | 2,647,320 | 1,525,048 | $2,354,674,112 | $216,972,000 | $4,632,810 | $2,576,278,922 |
+| 2 | 10,172,171 | 11,304,526 | $17,454,188,144 | $246,000,000 | $17,801,280 | $20,294,268,346 |
+| 3 | 9,697,309 | 17,765,994 | $27,430,694,736 | $246,000,000 | $16,970,275 | $47,987,933,357 |
+| 4 | 2,432,427 | 2,700,368 | $4,169,368,192 | $246,000,000 | $4,256,735 | $52,407,558,284 |
+| 5 | 112,805 | 120,672 | $186,317,568 | $246,000,000 | $197,400 | $52,840,073,252 |
 
-**Hallazgo:** Con R₀ = 6.0, la FMD **no es lineal** — es una detonación nuclear biológica. En el Mes 1 parece controlable (1,904 sacrificados), pero en el Mes 2 ya son **8.7 millones** y en el Mes 3, **21.7 millones**. El costo del sacrificio sanitario domina completamente al cierre de exportaciones ($33,500M vs $246M en el mes pico). A 5 meses, la pérdida acumulada alcanza **$52,800 Millones USD** — equivalente al 4% del PIB de México. Nótese que el Mes 1 muestra un cierre de exportaciones menor ($217M vs $246M) debido al modelo escalonado: los primeros 3 días son de sospecha sin notificación oficial.
+*Nota: Cifras calculadas usando la integración espacial real sobre la red comercial mexicana.*
 
-**Benchmark internacional:** El brote de FMD en Reino Unido (2001) costó £8,000M (~$12,000M USD), con 6.5 millones de animales sacrificados y £1,300M en compensaciones directas (Anderson Report, 2002). México, con un hato 5.4x mayor, enfrentaría pérdidas proporcionalmente mayores.
+#### Análisis Comparativo: Fricción Geográfica vs. Mezcla Perfecta
 
-![Flujo de Caja — Escenario de Reintroducción FMD](../figures/flujo_caja_fmd.png)
+1. **Arranque Acelerado en el Modelo Espacial (Mes 1):** El modelo espacial muestra un inicio drásticamente más virulento en el Mes 1 con **1,525,048 animales sacrificados** vs. solo **1,904** en el homogéneo. Esto obedece a un escenario realista: la epidemia comienza con **$I_0 = 100$ cabezas infectadas** (en lugar de solo 1) inyectadas directamente en **Veracruz**, un estado que representa uno de los mayores hubs de exportación y biomasa ganadera del país. Sumado a una tasa de contagio local muy activa ($\beta=0.6$ y $\gamma=0.1$ por la concentración de ranchos), Veracruz y sus vecinos más cercanos (como Puebla y Tabasco) experimentan un colapso veloz antes de que la distancia actúe como barrera.
+2. **La Geografía como "Aplanador" de Curva Nacional (Meses 2 y 3):** En el modelo homogéneo, la epidemia explota de forma unificada en el Mes 3, acumulando **21.7 millones** de sacrificios en solo 30 días. En cambio, el Modelo Espacial **distribuye el pico** de contagio entre el Mes 2 (**11.3 millones**) y el Mes 3 (**17.7 millones**). Esta es la representación de la *fricción del espacio*: el virus viaja por las autopistas en red, provocando picos de infección desfasados a nivel estatal (efecto dominó), impidiendo que todos los estados alcancen el peor escenario de forma simultánea.
+3. **Pérdida Acumulada Equivalente:** A pesar de que la geografía dilata y desfasa los tiempos, la letalidad de la FMD ($R_0=6.0$) prevalece sobre la fricción de distancia en ausencia de controles. A 150 días, ambos escenarios convergen de forma catastrófica en más de **33 millones de sacrificios** (superando el 95% del hato nacional) y un costo acumulado superior a los **$52,800 Millones de USD** (equivalente al 4% del PIB nacional).
 
-### 6.5 Análisis de Sensibilidad: Impacto del Momento de Detección
+![Flujo de Caja Homogéneo — Fiebre Aftosa](../figures/flujo_caja_fmd.png)
+![Flujo de Caja Espacial — Fiebre Aftosa](../figures/flujo_caja_fmd_espacial.png)
+
+#### Visualizaciones Comparativas Directas
+
+Para apreciar de forma contundente la dinámica de la epidemia bajo ambos modelos, se generaron dos gráficas comparativas directas:
+
+1. **Pérdida Acumulada Mensual (USD):** Compara el flujo de caja acumulado a lo largo de los 5 meses de crisis. Se evidencia el arranque temprano del escenario espacial debido al foco concentrado en Veracruz ($I_0=100$) y la posterior convergencia ante el agotamiento de la población susceptible.
+2. **Dinámica de Infectados Activos Diaria (Curva Epidémica):** Muestra el aplanamiento de la curva nacional debido a la resistencia espacial de la red de carreteras (fricción vial) reduciendo el pico máximo nacional en un 48% (de 19.7M a 10.2M), aunque con un pico más prematuro (Día 58 vs Día 75) debido a la centralidad comercial de la semilla veracruzana.
+
+![Comparativa de Pérdida Acumulada Mensual](../figures/fmd_comparativa_mensual.png)
+![Dinámica de Infección Diaria — Comparación de Curvas Epidémicas](../figures/fmd_comparativa_diaria.png)
 
 **¿Qué se gana al detectar la FMD a tiempo?** Este análisis de sensibilidad varía una sola variable — el **día de activación del DINESA** — y mide el impacto en animales sacrificados y costo total a 150 días. Se asume que la cuarentena (cierre de movimientos + anillo sanitario 3 km) reduce la tasa de contagio un 85% (Tildesley et al., 2006):
 
