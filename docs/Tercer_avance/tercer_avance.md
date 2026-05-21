@@ -251,6 +251,10 @@ Se desarrolló un motor de renderizado custom (`04c_custom_stacked_race.py`) usa
 - Video: `data/processed/spatial/charts/stacked_race_fmd.mp4`
 - GIF: `data/processed/spatial/charts/stacked_race_fmd.gif`
 
+![Stacked Bar Chart Race — FMD Epidemic Evolution](../../data/processed/spatial/charts/stacked_race_fmd.gif)
+
+*Figura 8. Stacked Bar Chart Race animado bicolor (Rojo = Infectados Activos, Negro = Sacrificados). Muestra el ranking dinámico en tiempo real de los 12 estados más afectados.*
+
 ### 5.2 Impacto Económico con el Modelo Espacial
 
 **Código:** `src/models/fmd_finance_spatial.py`
