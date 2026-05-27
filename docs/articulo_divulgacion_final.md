@@ -80,12 +80,20 @@ El resultado es un **grafo dirigido** de 32 nodos (estados) y 992 aristas (rutas
 
 Sobre este grafo de carreteras ejecutamos una **simulación estocástica SIR** (Susceptibles-Infectados-Removidos) durante 180 días. A diferencia del modelo clásico que asume que todas las vacas del país conviven en el mismo campo virtual, nuestro modelo impone fricción geográfica: el virus tiene que "viajar" por las aristas del grafo ponderado por el flujo gravitatorio.
 
+**Diseño Visual de la Epidemia (Estilo *Plague Inc.*):**
+El mapa coroplético de la simulación (`data/processed/spatial/fmd_spread_simulation_180d.gif`) traduce el desastre sanitario en colores directos:
+*   **Gris Claro (`#e0e0e0`):** Representa las zonas sanas, susceptibles de infección.
+*   **Rojo Brillante (`#FF1E1E`):** Marca la irrupción inmediata del brote.
+*   **Rojo-Negro Oscuro (`#5C0505`):** Denota la fase avanzada de la epidemia local y el inicio del rifle sanitario constante.
+*   **Negro Carbón (`#111111`):** Simboliza que el hato ha sido completamente despoblado o extinguido (pérdidas mayores al 90%).
+*   **Marcador Biohazard ☣️:** En el momento exacto en que entra el virus a un estado, aparece y pulsa dinámicamente el icono de peligro biológico en su centroide durante los primeros 6 días del brote local. Veracruz inicia con este marcador en el Día 0, y Jalisco o Puebla lo encienden en cuanto el virus arriba por carretera.
+
 Los resultados desafiaron la intuición inicial:
 
 | Métrica | Modelo Clásico | Modelo Espacial AftoSec | Diferencia |
 |---------|---------------|------------------------|------------|
-| Pico nacional de infectados | ~17,000,000 | **10,200,000** | -40% |
-| Día del pico | ~45 | **58** | +13 días |
+| Pico nacional de infectados | ~17,500,000 | **10,200,000** | -41.7% |
+| Día del pico | Día 45 | **Día 58** | +13 días |
 | Sacrificio total (Día 180) | N/A | **33,421,804 (96.9%)** | — |
 | Estados que sobreviven | 0 de 32 | **5 de 32** | — |
 

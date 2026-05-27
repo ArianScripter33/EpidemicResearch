@@ -33,11 +33,22 @@ Para evitar la improvisación de variables o la invención de escenarios en una 
 
 ## 📊 2. Inventario Riguroso y Pies de Imagen Formulares
 
-### 🎬 Figura 1: Mapa Animado de la Propagación de FMD sobre México (180 días)
+### 🎬 Figura 1: Mapa Animado de la Propagación de FMD sobre México (180 días) — Estilo Plague Inc.
 *   **Archivo en Repositorio:** `data/processed/spatial/fmd_spread_simulation_180d.gif` (GIF)
 *   **Script Generador:** `src/spatial_model/03_spatial_sir.py`
-*   **Pie de Imagen Riguroso:** 
-    > *Figura 1. Simulación espacial estocástica de la propagación de Fiebre Aftosa (FMD, Serotipo O) en el rebaño bovino mexicano sobre un horizonte de 180 días, utilizando un modelo de acoplamiento gravitatorio sobre la red vial federal de transporte pecuario. El sombreado rojo representa la prevalencia de hato en fase de infección activa y el gris representa las zonas susceptibles. Elaboración propia a partir de datos del Marco Geoestadístico del INEGI (2023), los inventarios estatales de ganado del SIAP (2023), y matrices de ruteo por carretera asfáltica obtenidas vía la API de OSRM.*
+*   **Origen Preciso de los Datos:**
+    1.  **Datos Geográficos (Polígonos):** *Instituto Nacional de Estadística y Geografía (INEGI)*, Marco Geoestadístico Nacional 2023 (`data/raw/inegi/estados_mexico.geojson`).
+    2.  **Datos Ganaderos (Masas):** *Servicio de Información Agroalimentaria y Pesquera (SIAP)*, SADER, Cierre de la Producción Pecuaria 2023 (`data/raw/siap/inventario_bovino_2023.csv`).
+    3.  **Datos de Distancia (Fricción):** Matriz de conectividad construida mediante peticiones HTTP a la *API pública de OSRM (Open Source Routing Machine)*, que calcula la distancia de conducción terrestre real en carretera asfáltica (basada en mapas viales de OpenStreetMap) entre los centroides estatales (calculados mediante la proyección cartográfica Cónica Conforme de Lambert EPSG:6372 de México).
+    4.  **Modelo Biológico (Simulación):** Simulación estocástica compartimental espacial SIR de AftoSec, parametrizada con un $I_0 = 100$ cabezas en el nodo emisor masivo (Veracruz) y tasas de transmisión vial calibradas ($\beta = 0.6$, $\gamma = 0.1$, $\beta_{spatial} = 0.8$).
+*   **Diseño Visual (Efecto Plague Inc.):** 
+    *   **Estados Sanos:** Gris claro `#e0e0e0`.
+    *   **Brote Activo Inicial:** Rojo brillante `#FF1E1E`.
+    *   **Epidemia Avanzada:** Transiciona hacia un Rojo-Negro extremadamente oscuro `#5C0505` conforme aumenta la biomasa sacrificada.
+    *   **Hato Extinto / Despoblado por Rifle Sanitario:** Se torna de color Negro Carbón absoluto `#111111` cuando los removidos superan el 90% del inventario bovino del estado.
+    *   **Alerta Biohazard:** En el centroide de cada estado recién contagiado, aparece y pulsa dinámicamente un icono rojo de peligro biológico **☣️** durante los primeros 6 días del brote local (simulando los avisos clásicos de Plague Inc. al propagarse el virus, comenzando en Veracruz en el Día 0 y apareciendo en cada estado sucesivo).
+*   **Propuesta de Pie de Imagen Formal:** 
+    > *Figura 1. Simulación geoespacial de la propagación de Fiebre Aftosa (FMD) en el rebaño bovino mexicano sobre un horizonte de 180 días. El mapa coroplético dinámico transiciona de Gris (Susceptible) a Rojo brillante (Brote inicial), derivando a Rojo-Negro y finalmente Negro carbón cuando el ganado se extingue por despoblación sanitaria. Los chispazos con el icono ☣️ marcan en tiempo real el inicio de brotes locales (efecto Plague Inc.). Elaboración propia a partir de datos del Marco Geoestadístico del INEGI (2023), censos pecuarios del SIAP (2023), y matrices de ruteo vial por carretera asfáltica obtenidas vía la API de OSRM.*
 
 ### 📊 Figura 2: Bar Chart Race Interactivo (180 días)
 *   **Archivo en Repositorio:** `data/processed/spatial/bar_chart_race_180d.html` (HTML interactivo)
