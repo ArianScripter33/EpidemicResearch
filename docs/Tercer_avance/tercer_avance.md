@@ -33,9 +33,102 @@ Este avance marca la transición de un **modelo epidemiológico teórico** a un 
 
 ---
 
-## 2. Del Modelo Ingenuo al Modelo Espacial: ¿Por Qué Importa la Geografía?
+---
 
-### 2.1 Limitación del Modelo SIR Base (Segundo Avance)
+## 2. Línea Base: Análisis Exploratorio (EDA) y Estadística Inferencial
+
+Antes de formular la arquitectura geoespacial y de aprendizaje supervisado, el proyecto AftoSec requería una caracterización empírica del riesgo sanitario pecuario en México. Debido a que la Fiebre Aftosa (FMD) es una enfermedad exótica ausente del territorio nacional, se utilizó la **Tuberculosis Bovina (TB)** y patógenos zoonóticos alimenticios comunes como **Salmonella** como proxies de calibración estructural.
+
+### 2.1 Hallazgos Clave del EDA Nacional y Global
+
+**Notebook de referencia:** `notebooks/01_eda_global.ipynb`
+
+1.  **La Anomalía del COVID-19 (Validación de Canales de Venta):**  
+    El análisis de series temporales de la Dirección General de Epidemiología (DGE) de México (2015-2024) reveló un experimento natural de control biológico. Durante el confinamiento de 2020, la clausura de mercados informales, tianguis y puestos callejeros provocó una caída asimétrica en enfermedades:
+    *   **Intoxicaciones Alimentarias (CIE-10 A05):** Disminuyeron un **41.5%** (de 31,916 a 18,667 casos).
+    *   **Tuberculosis Humana (CIE-10 A15-A19):** Solo cayó un **24.8%** (vía transmisión respiratoria).
+    
+    Esto demuestra de forma cuantitativa que la desregulación de la cadena informal de suministro es el vector primordial para el contagio bacteriano y zoonótico de origen alimentario.
+2.  **La Oscuridad Estadística del Hato Nacional:**  
+    Al auditar los certificados oficiales de hatos libres de TB emitidos por SENASICA, se constató que la campaña apenas cubre **420,171 bovinos** certificados. Comparado con la biomasa nacional total de **35.1 millones de cabezas**, la cobertura real es de apenas el **1.20%**. El **98.8%** restante opera fuera del alcance de la vigilancia activa oficial, justificando el desarrollo de la arquitectura preventiva AftoSec.
+3.  **Concentración del Riesgo en Unidades Grandes:**  
+    El registro de cuarentenas federales activas de SENASICA al 2024 reporta **856 hatos** y **7,558 animales** retenidos a nivel nacional. La distribución es altamente asimétrica: el estado de **Jalisco** concentra el **66.6%** de los bovinos cuarentenados (5,035 cabezas) con apenas el 15.8% de los hatos, evidenciando que el riesgo de shock masivo se concentra en macro-unidades de producción intensiva.
+4.  **Vulnerabilidad Pecuaria frente a FMD:**  
+    De un historial global de **16,540 eventos de Fiebre Aftosa confirmados** (WOAH WAHIS 2000-2025), el continente americano registra solo el **2.7%**. Al estar México libre de FMD por más de siete décadas, la biomasa nacional es inmunológicamente virgen, lo que presupone una tasa de ataque inicial cercana al 100% y un colapso sectorial automático en caso de reintroducción. El análisis global confirma que el **Serotipo O** domina el **54.9%** de los brotes históricos (asociado al desastre del Reino Unido en 2001), estableciendo nuestro parámetro inicial de $R_0 = 6.0$.
+
+### 2.2 Análisis Estadístico Descriptivo: Incidencia Global en África
+
+**Notebook de referencia:** `notebooks/02_analisis_descriptivo.ipynb` | **Módulo por:** Victoria Enriquez
+
+Para parametrizar las tasas de difusión, se filtraron **10,606 eventos FMD positivos** confirmados en la región de África Subsahariana (2000-2025). Se aplicaron técnicas de *Data Binning* para caracterizar la evolución temporal por décadas:
+
+| Década | Brotes Confirmados en África |
+|--------|------------------------------|
+| 2000s | 1,208 |
+| 2010s | 3,154 |
+| 2020s | 762 |
+
+El análisis demostró que los brotes confirmados en la década de 2010 fueron **2.6 veces** mayores a los registrados en los 2000. La aparente disminución en la década de 2020 no representa un control de la enfermedad, sino un sesgo severo de **Right-Censoring** (rezago de reporte al Laboratorio Mundial de Referencia WRLFMD), confirmando la ineficiencia de los sistemas pasivos internacionales y la urgencia de AftoSec.
+
+![Figura 14. Incidencia Acumulada de Fiebre Aftosa en África](../figures/top5_africa_fmd.png)
+
+*Figura 14. Top 5 de países africanos con mayor incidencia confirmada de Fiebre Aftosa (2000-2025) y distribución decadal. Elaboración propia a partir de datos del sistema mundial WAHIS de la OMSA.*
+
+### 2.3 Análisis Estadístico Inferencial: Correlaciones y ANOVA Multivariable
+
+**Notebook de referencia:** `notebooks/03_analisis_inferencial.ipynb` | **Módulo por:** Victoria Enriquez
+
+Para validar la relación zoonótica y el riesgo por canal de distribución, se diseñaron dos experimentos cuantitativos:
+
+#### A. Correlación Cruzada Zoonótica TB Bovina ↔ TB Humana
+Se cruzaron los datos oficiales de animales en cuarentena por Tuberculosis Bovina (SENASICA, n=26 estados) con las tasas de morbilidad de Tuberculosis Humana (DGE, CIE-10 A15-A19):
+*   **Coeficiente de Correlación de Pearson:** $r = 0.222$
+*   **P-value:** $p = 0.275$ (no significativo a $\alpha = 0.05$)
+
+**Interpretación Metodológica:** La ausencia de una correlación lineal directa estadísticamente significativa a nivel macro-geográfico estatal no refuta la zoonosis, sino que demuestra la complejidad epidemiológica. La transmisión de *Mycobacterium bovis* ocurre principalmente a través de cadenas micro-estructurales informales (consumo directo de leche bronca o quesos artesanales no pasteurizados) y contacto ocupacional en rastros periféricos. Zonas de alta morbilidad humana (Veracruz: 6,524 casos) se deben a transmisión inter-humana acelerada por factores de vulnerabilidad social, mientras que el control bovino (Jalisco: 5,035 animales bajo cuarentena) está más correlacionado con la densidad de hatos lecheros y campañas activas.
+
+![Figura 15. Correlación Zoonótica TB](../figures/correlacion_tb_zoonotica.png)
+
+*Figura 15. Matriz de dispersión y correlación de Pearson entre la Tuberculosis Bovina (SENASICA) y Tuberculosis Humana (DGE). Elaboración propia.*
+
+#### B. ANOVA: Prevalencia Bacteriana (Salmonella) según Canal de Venta
+Se modeló un experimento simulando 1,000 muestras por canal de comercialización pecuaria, parametrizando las prevalencias reales documentadas en la literatura científica nacional:
+
+| Canal de Comercialización | Prevalencia Teórica | Prevalencia Simulada (Experimental) |
+|---------------------------|---------------------|-------------------------------------|
+| Supermercados (Cadena Fría)| 1.30% | 0.80% |
+| Carnicerías Locales | 8.40% | 9.10% |
+| Tianguis Ambulantes | 13.60% | 13.70% |
+| Mercados Municipales | 22.30% | 21.40% |
+
+Se corrió un análisis de varianza de una vía (one-way ANOVA) para comparar las medias de los cuatro grupos:
+*   **Estadístico F:** $78.72$
+*   **P-value:** $1.80 \times 10^{-49}$ (extremadamente significativo, $p < 0.001$)
+
+**Veredicto del ANOVA:** Las diferencias son abrumadoramente significativas. Un consumidor informal en un **mercado municipal** se enfrenta a una probabilidad **26.7 veces mayor** de contaminación por Salmonella frente al canal de supermercado formal (21.4% vs 0.8%). Esto valida la premisa central del proyecto: el vector de riesgo sanitario y zoonótico es de naturaleza estructural y está directamente ligado al grado de informalidad del canal.
+
+![Figura 16. ANOVA Prevalencia](../figures/anova_canales_venta.png)
+
+*Figura 16. Resultados del análisis ANOVA multivariable para la prevalencia de Salmonella por canal de venta. Elaboración propia a partir de datos del SNIIM y literatura científica nacional.*
+
+### 2.4 Modelado Compartimental SIR Teórico (Base Homogénea)
+
+**Código de referencia:** `src/models/sir_dual.py` | **Módulo por:** Arian Pedroza
+
+Como marco matemático base de cálculo y ecuaciones diferenciales ordinarias (EDOs), se construyó un simulador resuelto mediante integración numérica (`scipy.integrate.odeint` con algoritmos Runge-Kutta). El simulador contrasta dos dinámicas compartimentales:
+
+1.  **Tuberculosis Bovina (Escenario Endémico Lento):** Parametrizado para representar una enfermedad crónica de transmisión lenta y progresiva ($\beta = 0.015$, $\gamma = 0.005$, $R_0 = 3.0$). La dinámica muestra una acumulación lenta y una meseta endémica que drena gradualmente los hatos.
+2.  **Fiebre Aftosa / FMD (Escenario Epidémico Explosivo):** Parametrizado como shock exótico altamente transmisible ($\beta = 0.428$, $\gamma = 0.071$, $R_0 = 6.0$, periodo infeccioso de 14 días). La curva muestra el colapso abrupto del sistema homogéneo, con el pico de infectados activos del **50% de la población nacional** ocurriendo de manera concentrada y violenta.
+
+![Figura 17. Simulación Dual SIR Homogénea](../figures/sir_comparativo.png)
+
+*Figura 17. Trayectoria temporal comparativa de la dinámica SIR homogénea clásica para Tuberculosis Bovina (endémica) y Fiebre Aftosa (shock epidémico exótico). Elaboración propia.*
+
+---
+
+## 3. Del Modelo Ingenuo al Modelo Espacial: ¿Por Qué Importa la Geografía?
+
+### 3.1 Limitación del Modelo SIR Base (Segundo Avance)
 
 El primer modelo SIR asumía una **mezcla homogénea**: las 35.1 millones de cabezas de ganado convivían en un solo campo virtual. Esto se describe mediante el sistema clásico de ecuaciones diferenciales ordinarias (EDO):
 
@@ -51,7 +144,7 @@ Esto produjo un pico catastrófico de ~17 millones de infectados simultáneos al
 
 **Problema epistemológico:** En la realidad, una vaca en Veracruz no puede contagiar instantáneamente a una vaca en Chihuahua. El virus viaja en camiones, por carreteras, entre estados que comercian ganado. La geografía impone **fricción**.
 
-### 2.2 El Modelo Gravitatorio (Ley de Newton aplicada a Epidemiología)
+### 3.2 El Modelo Gravitatorio (Ley de Newton aplicada a Epidemiología)
 
 Se implementó un modelo de gravedad newtoniana para cuantificar el flujo comercial (y por ende, el riesgo de contagio) entre cada par de estados:
 
@@ -90,7 +183,7 @@ Donde $P_{ji}$ es la probabilidad de acoplamiento gravitatorio normalizado del e
 
 3. **Grafo dirigido ponderado.** La red resultante tiene 992 aristas (32×31) donde cada arista lleva un peso proporcional al flujo gravitatorio normalizado como probabilidad de contagio base [0, 1].
 
-### 2.3 Resultados: Fricción Geográfica y "Picos Desfasados"
+### 3.3 Resultados: Fricción Geográfica y "Picos Desfasados"
 
 La simulación SIR sobre este grafo produce un fenómeno distinto al modelo ingenuo:
 
@@ -130,7 +223,7 @@ Semilla aleatoria: 42 (reproducible)
 
 ---
 
-## 3. Cronología de la Infección: El Efecto Dominó Estado por Estado
+## 4. Cronología de la Infección: El Efecto Dominó Estado por Estado
 
 La simulación SIR espacial permite trazar exactamente **cuándo** y **con qué severidad** cada estado se infecta:
 
@@ -157,7 +250,7 @@ La simulación SIR espacial permite trazar exactamente **cuándo** y **con qué 
 
 ---
 
-## 3.1 Análisis de Sensibilidad: 3 Escenarios de Paciente Cero
+## 4.1 Análisis de Sensibilidad: 3 Escenarios de Paciente Cero
 
 Una simulación con un único paciente cero (Veracruz) proporciona una imagen poderosa pero incompleta. Para evaluar la **robustez y generalidad** del modelo geoespacial, se ejecutaron tres escenarios adicionales de brote inicial, representando tres arquetipos topológicos distintos del grafo de carreteras mexicano:
 
@@ -203,9 +296,9 @@ Los tres escenarios confirman que el **origen del paciente cero define el patró
 
 ---
 
-## 4. Machine Learning: XGBoost Risk Scoring (Credit Scoring Epidémico)
+## 5. Machine Learning: XGBoost Risk Scoring (Credit Scoring Epidémico)
 
-### 4.1 Propósito
+### 5.1 Propósito
 
 Mientras que el simulador SIR genera la "película" temporal de la infección (costoso, estocástico, toma segundos), el **XGBoost Regressor** actúa como un **tasador instantáneo de riesgo estructural**. Lee la topología del grafo carretero y predice en milisegundos qué tan devastado quedará cada estado.
 
@@ -213,7 +306,7 @@ Mientras que el simulador SIR genera la "película" temporal de la infección (c
 
 **Código:** `src/spatial_model/05_xgboost_risk.py`
 
-### 4.2 Las 13 Variables Topológicas (Node Embeddings)
+### 5.2 Las 13 Variables Topológicas (Node Embeddings)
 
 Se extrajeron 13 features del grafo para cada estado usando NetworkX:
 
@@ -233,7 +326,7 @@ Se extrajeron 13 features del grafo para cada estado usando NetworkX:
 | 12 | `lat` | Geográfica | Latitud del centroide |
 | 13 | `lon` | Geográfica | Longitud del centroide |
 
-### 4.3 Metodología de Entrenamiento
+### 5.3 Metodología de Entrenamiento
 
 - **Técnica:** Leave-One-Out Cross-Validation (32 estados = 32 folds). Cada estado se predice habiendo entrenado con los otros 31.
 - **Hiperparámetros:** `n_estimators=100`, `max_depth=4`, `learning_rate=0.1`, `subsample=0.8`.
@@ -241,7 +334,7 @@ Se extrajeron 13 features del grafo para cada estado usando NetworkX:
   - **Target 1:** `dia_primera_infeccion` (¿cuándo llega el virus?)
   - **Target 2:** `pico_infectados` (¿cuántas cabezas se infectan en el peor momento?)
 
-### 4.4 Resultados del XGBoost
+### 5.4 Resultados del XGBoost
 
 | Target | R² (LOO-CV) | MAE | Interpretación |
 |--------|-------------|-----|----------------|
@@ -265,7 +358,7 @@ Las dos variables dominantes para predecir el pico de infectados son:
 
 *Figura 5. Validación cruzada: Predicción XGBoost (eje X) vs. Resultado real del SIR (eje Y). R² = 0.843. Los puntos cercanos a la diagonal indican alta precisión.*
 
-### 4.5 Benchmarking Comparativo de Modelos (LOOCV)
+### 5.5 Benchmarking Comparativo de Modelos (LOOCV)
 
 Para validar que XGBoost es la elección óptima —y no un capricho algorítmico— se ejecutó un benchmarking formal comparando cuatro modelos de regresión bajo **Leave-One-Out Cross-Validation (LOOCV)** con los mismos 32 estados y 13 features topológicas.
 
@@ -302,7 +395,7 @@ Como se discute en §4.4, el momento exacto de la primera infección es un event
 
 ---
 
-### 4.6 Inmunización de Redes y Política Pública (Cerrar la Llave del Gas)
+### 5.6 Inmunización de Redes y Política Pública (Cerrar la Llave del Gas)
 
 El modelo predictivo XGBoost y la simulación espacial demuestran que la contención epidemiológica tradicional es obsoleta. En lugar de una estrategia reactiva, proponemos un enfoque de **Inmunización de Redes (*Network Immunization*)** basado en la topología estructural del país.
 
@@ -314,9 +407,7 @@ El modelo predictivo XGBoost y la simulación espacial demuestran que la contenc
 *   **Masa Biológica (Inventario Bovino):** Representa la cantidad de "combustible" disponible localmente para alimentar el brote. Un estado como Chiapas tiene un inventario bovino masivo (~2.6M de cabezas), pero debido a su posición periférica en el extremo sur del país, tiene un bajo potencial de distribución sistémica.
 *   **Flujo Gravitatorio Saliente (weighted_out_flux):** Mide la capacidad de inyectar riesgo comercial a las autopistas principales del país. Veracruz y Jalisco combinan alta masa biológica con una centralidad de exportación gigantesca. Bloquear o inmunizar estos nodos clave protege de forma indirecta a decenas de estados importadores netos que están a cientos de kilómetros de distancia.
 
----
-
-### 4.7 Acordeón Conceptual de Inteligencia Artificial y Grafos
+### 5.7 Acordeón Conceptual de Inteligencia Artificial y Grafos
 
 Para consolidar la defensa técnica del coloquio ante el sínodo y el docente Luis Gerardo Acuña, se presenta esta síntesis de la maquinaria lógica empleada:
 
@@ -340,9 +431,9 @@ Para consolidar la defensa técnica del coloquio ante el sínodo y el docente Lu
 
 ---
 
-## 5. Visualizaciones e Impacto Económico Espacial
+## 6. Visualizaciones e Impacto Económico Espacial
 
-### 5.1 Animación Custom: Stacked Bar Chart Race
+### 6.1 Animación Custom: Stacked Bar Chart Race
 
 Se desarrolló un motor de renderizado custom (`04c_custom_stacked_race.py`) usando `matplotlib.animation.FuncAnimation` para superar la limitación de la librería `bar_chart_race`, que no soporta barras apiladas.
 
@@ -363,7 +454,7 @@ Se desarrolló un motor de renderizado custom (`04c_custom_stacked_race.py`) usa
 
 *Figura 8. Stacked Bar Chart Race animado bicolor (Rojo = Infectados Activos, Negro = Sacrificados). Muestra el ranking dinámico en tiempo real de los 12 estados más afectados.*
 
-### 5.2 Impacto Económico con el Modelo Espacial
+### 6.2 Impacto Económico con el Modelo Espacial
 
 **Código:** `src/models/fmd_finance_spatial.py`
 
@@ -379,7 +470,7 @@ Se realizó un fork de las proyecciones financieras del Segundo Avance, reemplaz
 
 *Figura 7. Flujo de caja mensual FMD con el Modelo Espacial Gravitatorio. La fricción geográfica redistribuye el colapso hacia los meses 3-4, pero la pérdida acumulada es idéntica.*
 
-### 5.3 Comparativa Homogénea vs. Espacial (Cálculo Multivariable y Proyección Financiera)
+### 6.3 Comparativa Homogénea vs. Espacial (Cálculo Multivariable y Proyección Financiera)
 
 **Código:** `src/models/fmd_finance_comparison.py` | 
 **Módulo por:** Victoria Montserrat Enriquez (`monenri9-svg`)
@@ -399,7 +490,7 @@ Las dos figuras resultantes son piezas clave en la narrativa analítica:
 
 *Figura 9. Comparativa mensual del flujo de caja acumulado negativo (USD). El modelo espacial simula el retraso geográfico del colapso.*
 
-### 5.4 Inventario Completo de Artefactos Visuales
+### 6.4 Inventario Completo de Artefactos Visuales
 
 | # | Artefacto | Archivo | Tipo |
 |---|-----------|---------|------|
@@ -419,9 +510,9 @@ Las dos figuras resultantes son piezas clave en la narrativa analítica:
 
 ---
 
-## 6. Pipeline Técnico Completo
+## 7. Pipeline Técnico Completo
 
-### 6.1 Scripts del Pipeline (Orden de Ejecución)
+### 7.1 Scripts del Pipeline (Orden de Ejecución)
 
 ```bash
 cd src/spatial_model/
@@ -439,7 +530,7 @@ python3 07_comparison_analysis.py # Análisis comparativo genomic vs SIR
 python3 08_model_benchmark.py    # Benchmark 4 modelos LOOCV → CSV + gráfica
 ```
 
-### 6.2 Fuentes de Datos
+### 7.2 Fuentes de Datos
 
 | Dataset | Fuente | Formato |
 |---------|--------|---------|
@@ -448,7 +539,7 @@ python3 08_model_benchmark.py    # Benchmark 4 modelos LOOCV → CSV + gráfica
 | Distancias por Carretera | OSRM (Open Source Routing Machine) | API REST → CSV |
 | Red de Caminos | OpenStreetMap vía OSRM | Implícita en routing |
 
-### 6.3 Dependencias
+### 7.3 Dependencias
 
 ```
 geopandas, pandas, numpy, matplotlib, networkx, xgboost, scikit-learn,
@@ -457,11 +548,11 @@ requests, Pillow, bar_chart_race
 
 ---
 
-## 7. Base de Datos NoSQL (MongoDB)
+## 8. Base de Datos NoSQL (MongoDB)
 
 > ✅ **Estado: Completado.** Implementado de forma funcional en `src/warehouse/mongodb_loader.py` e integrado con validación Pydantic y encriptación de seguridad en el flujo real de datos.
 
-### 7.1 Modelo Entidad-Relación (7 Colecciones)
+### 8.1 Modelo Entidad-Relación (7 Colecciones)
 
 ```mermaid
 erDiagram
@@ -550,7 +641,7 @@ erDiagram
     }
 ```
 
-### 7.2 Ejemplo de Documento JSON (Reporte Sanitario)
+### 8.2 Ejemplo de Documento JSON (Reporte Sanitario)
 
 ```json
 {
@@ -566,17 +657,17 @@ erDiagram
 }
 ```
 
-### 7.3 Integración con el Motor Predictivo
+### 8.3 Integración con el Motor Predictivo
 
 El campo `indice_riesgo` (float 0.0–1.0) de las colecciones `GRANJA` y `ZONA_CONTROL` se alimenta directamente del output del XGBoost, basándose en las 13 variables topológicas del grafo. Esto permite a los veterinarios de la CPA priorizar inspecciones en estados con alto flujo gravitatorio saliente.
 
 ---
 
-## 8. Criptografía y Seguridad
+## 9. Criptografía y Seguridad
 
 > ✅ **Estado: Completado.** Módulo de infraestructura: `src/crypto/encryption.py` (RSA-2048 + bcrypt). Módulo de simulación móvil: `src/crypto/mock_mobile_app.py` (ChaCha20-Poly1305 + Field-Level Encryption → NoSQL).
 
-### 8.1 Arquitectura de Seguridad (Basada en el temario del curso)
+### 9.1 Arquitectura de Seguridad (Basada en el temario del curso)
 
 El sistema protege los datos sensibles de los ganaderos utilizando dos familias de algoritmos criptográficos:
 
@@ -586,14 +677,14 @@ El sistema protege los datos sensibles de los ganaderos utilizando dos familias 
 | **Datos Personales (PII)** | `RSA` (Cifrado Asimétrico) | Los nombres, correos y RFC de los ganaderos se encriptan con la Llave Pública al guardarlos en MongoDB. Solo la CPA tiene la Llave Privada para desencriptar. |
 | **Tokens de Sesión** | `JWT` firmado con RSA | Al iniciar sesión, se entrega un token firmado criptográficamente para validar identidad sin retransmitir la contraseña. |
 
-### 8.2 ¿Qué campos están encriptados?
+### 9.2 ¿Qué campos están encriptados?
 
 | Tipo | Campos | Justificación |
 |------|--------|---------------|
 | 🔒 **Encriptados (RSA)** | `nombre_completo`, `rfc_curp`, `email`, `vehiculo_placas` | Datos personales identificables según la LFPDPPP |
 | 🟢 **Texto Plano** | `estado_salud`, `ubicacion`, `inventario_bovino`, `indice_riesgo`, `fecha_reporte` | Necesarios para consultas geoespaciales y analíticas en tiempo real |
 
-### 8.3 Simulador de App Móvil — ChaCha20-Poly1305 + Field-Level Encryption
+### 9.3 Simulador de App Móvil — ChaCha20-Poly1305 + Field-Level Encryption
 
 **Script:** [`src/crypto/mock_mobile_app.py`](../../src/crypto/mock_mobile_app.py) |
 **Fundamentos matemáticos:** [`docs/explicacion_matematica_chacha20.md`](../explicacion_matematica_chacha20.md)
@@ -624,11 +715,11 @@ El simulador incluye un **round-trip test** (cifrar → descifrar → verificar 
 
 ---
 
-## 9. Innovación Social: Dilema Ético, Impacto Ambiental y Adopción
+## 10. Innovación Social: Dilema Ético, Impacto Ambiental y Adopción
 
 > **Documento de referencia completo:** [`docs/Tercer_avance/Propuesta_innovacionSocial/Actividad_Innovacion_Social_Ganado_Saludable.md`](../Propuesta_innovacionSocial/Actividad_Innovacion_Social_Ganado_Saludable.md)
 
-### 9.1 El Dilema Ético del Ganadero — Por Qué la Criptografía es Política Pública
+### 10.1 El Dilema Ético del Ganadero — Por Qué la Criptografía es Política Pública
 
 El verdadero obstáculo de la vigilancia epidemiológica en México no es la falta de tecnología: es una **asimetría perversa de incentivos**. El ganadero que detecta síntomas de Fiebre Aftosa sabe que reportar oficialmente implica el sacrificio total de su hato, pérdidas que las indemnizaciones gubernamentales cubren apenas en un 40–60%, y la quiebra en menos de 90 días. Ante esta amenaza racional, el productor oculta el brote.
 
@@ -645,7 +736,7 @@ El mecanismo: el ganadero reporta síntomas desde la app. Sus datos personales (
 
 **La innovación social no es el algoritmo. Es el diseño de incentivos que convierte la transparencia epidemiológica en un activo para el ganadero, no en una amenaza.**
 
-### 9.2 Impacto Ambiental — Cuarentenas Quirúrgicas vs. Sacrificio Masivo
+### 10.2 Impacto Ambiental — Cuarentenas Quirúrgicas vs. Sacrificio Masivo
 
 La respuesta tradicional ante un brote de FMD es una cuarentena estatal amplia que implica el sacrificio de todo el ganado en un radio de decenas de kilómetros. Esto tiene consecuencias ambientales significativas:
 
@@ -685,7 +776,7 @@ La adopción de tecnología en el sector ganadero rural enfrenta barreras de con
 
 ---
 
-## 10. Estado de Avance por Materia
+## 11. Estado de Avance por Materia
 
 | Materia | Componente | Estado | Evidencia |
 |---------|-----------|--------|-----------|
@@ -699,7 +790,7 @@ La adopción de tecnología en el sector ganadero rural enfrenta barreras de con
 
 ---
 
-## 11. Próximos Pasos
+## 12. Próximos Pasos
 
 | # | Tarea | Responsable | Estado |
 |---|-------|-------------|--------|
@@ -710,7 +801,7 @@ La adopción de tecnología en el sector ganadero rural enfrenta barreras de con
 
 ---
 
-## 12. Bibliografía
+## 13. Bibliografía
 
 - Anderson, I. (2002). *Foot and Mouth Disease 2001: Lessons to be Learned Inquiry Report*. The Stationery Office.
 - Barlow, N. D. (1991). A spatially aggregated disease/host model for bovine Tb in New Zealand possum populations. *Journal of Applied Ecology, 28*(3), 777–793. https://doi.org/10.2307/2404589
