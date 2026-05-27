@@ -379,7 +379,27 @@ Se realizó un fork de las proyecciones financieras del Segundo Avance, reemplaz
 
 *Figura 7. Flujo de caja mensual FMD con el Modelo Espacial Gravitatorio. La fricción geográfica redistribuye el colapso hacia los meses 3-4, pero la pérdida acumulada es idéntica.*
 
-### 5.3 Inventario Completo de Artefactos Visuales
+### 5.3 Comparativa Homogénea vs. Espacial (Cálculo Multivariable y Proyección Financiera)
+
+**Código:** `src/models/fmd_finance_comparison.py` | 
+**Módulo por:** Victoria Montserrat Enriquez (`monenri9-svg`)
+
+Para sustentar el impacto cuantitativo del proyecto bajo el enfoque de **Cálculo Multivariable y Modelación Financiera**, se implementó un script comparativo que confronta directamente la teoría epidemiológica pura (el modelo SIR homogéneo clásico de mezclas perfectas) contra la realidad del transporte terrestre mexicano (el modelo SIR Espacial Gravitatorio).
+
+Las dos figuras resultantes son piezas clave en la narrativa analítica:
+
+1.  **Comparativa Diaria de Curvas Epidémicas (Figura 8):** Grafica los infectados activos acumulados a lo largo del tiempo. Mientras que el modelo clásico de mezcla homogénea muestra una explosión exponencial violenta e irreal (pico de ~17.5M al Día 45), el modelo espacial con fricción geográfica frena drásticamente la tasa de contagio multivariable, aplanando la curva (pico de ~10.2M al Día 58) y extendiendo la ventana de reacción de control sanitario.
+2.  **Comparativa Mensual de Costos Acumulados (Figura 9):** Compara el flujo de caja negativo acumulado por indemnizaciones veterinarias y pérdidas de exportación pecuaria. El análisis multivariable demuestra que en el Mes 1 y 2, el modelo espacial genera un ahorro temporal drástico frente al modelo homogéneo debido a la demora física del virus por carreteras federales. Sin embargo, en el Mes 3 el virus alcanza los superconectores carreteras (Veracruz/Jalisco), lo que desencadena una convergencia y nivela las pérdidas totales de ambos modelos en **$52,796 Millones de USD** al Mes 5.
+
+![Comparación Epidémica Diaria](../figures/fmd_comparativa_diaria.png)
+
+*Figura 8. Comparativa diaria de la curva de infectados activos (Clásico vs. Espacial Gravitatorio). La fricción espacial aplana la curva exponencial.*
+
+![Comparación Financiera Mensual](../figures/fmd_comparativa_mensual.png)
+
+*Figura 9. Comparativa mensual del flujo de caja acumulado negativo (USD). El modelo espacial simula el retraso geográfico del colapso.*
+
+### 5.4 Inventario Completo de Artefactos Visuales
 
 | # | Artefacto | Archivo | Tipo |
 |---|-----------|---------|------|
@@ -394,6 +414,8 @@ Se realizó un fork de las proyecciones financieras del Segundo Avance, reemplaz
 | 9 | Flujo de Caja Espacial | `docs/figures/flujo_caja_fmd_espacial.png` | PNG |
 | 10 | Flujo de Caja Base (2° Avance) | `docs/figures/flujo_caja_fmd.png` | PNG |
 | 11 | Contrafactual Detección FMD | `docs/figures/contrafactual_fmd.png` | PNG |
+| 12 | **Comparativa Diaria de Curvas** | `docs/figures/fmd_comparativa_diaria.png` | PNG |
+| 13 | **Comparativa Mensual Financiera** | `docs/figures/fmd_comparativa_mensual.png` | PNG |
 
 ---
 

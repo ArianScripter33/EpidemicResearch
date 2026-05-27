@@ -147,29 +147,28 @@ Esta sección es tuya porque tú trabajaste en los dos módulos de encriptación
 
 ---
 
-## §6. Innovación Social: Cuando la Tecnología Cambia los Incentivos
-### 🟣 PENDIENTE — VICTORIA | Extensión objetivo: ~350 palabras
+## §6. Innovación Social y Modelación Financiera: Cuando la Tecnología Cambia los Incentivos
+### 🟣 PENDIENTE — VICTORIA | Extensión objetivo: ~450 palabras
 
 **Instrucciones para Victoria:**
 
-Esta sección explica el impacto humano y social del proyecto. NO necesitas entender código para escribirla — es la más cercana a ciencias sociales y negocios.
+Esta sección explica el impacto humano, social y financiero-cuantitativo del proyecto. Tú programaste las gráficas comparativas mensuales y diarias, así que en esta sección debes lucir ese análisis que une el **cálculo multivariable/epidemiológico** con las **proyecciones de negocio**.
 
 **Puntos que DEBES cubrir (en orden):**
-1. El dilema ético del ganadero: ¿reportar o no reportar? Explica el dilema como si fuera una decisión de negocios bajo incertidumbre
-2. Quiénes son los beneficiados directos e indirectos (usa la tabla de actores)
-3. El modelo de adopción en 3 fases (Piloto → Regional → Nacional)
-4. El impacto ambiental: cuarentenas quirúrgicas de 3 km vs. sacrificio estatal masivo → -40% de carcasas
-5. Cierra con por qué esto conecta con ODS 2 (Hambre Cero) y ODS 3 (Salud)
+1. **El dilema ético del ganadero:** ¿reportar o no reportar? Explica el dilema como si fuera una decisión de negocios bajo incertidumbre (miedo a perder su hato por cuarentenas estatales ineficientes).
+2. **Las curvas de infectados diarios (Cálculo Multivariable):** Explica la comparación de la **Figura 8** (`docs/figures/fmd_comparativa_diaria.png`). ¿Por qué el modelo clásico homogéneo muestra una explosión exponencial irreal y por qué el modelo espacial gravitatorio aplana la curva? (La geografía actúa como un freno físico/fricción al transporte).
+3. **El Flujo de Caja Mensual Acumulado (Proyecciones):** Explica la comparación de la **Figura 9** (`docs/figures/fmd_comparativa_mensual.png`). ¿Por qué en el Mes 1 y 2 el modelo espacial simula pérdidas mucho menores (retraso geográfico) pero al Mes 5 ambos convergen en una catástrofe de **$52,796 MDD**? (El virus eventualmente llega a los nodos superconectores Veracruz/Jalisco si no se contiene a tiempo).
+4. **El modelo de adopción y mitigación ambiental:** El modelo en 3 fases para implantar la app y cómo las cuarentenas quirúrgicas de 3 km (en vez del sacrificio masivo) reducen el impacto ambiental.
 
 **¿De dónde sacar la info?**
-- Lee COMPLETO: `docs/Tercer_avance/Propuesta_innovacionSocial/Actividad_Innovacion_Social_Ganado_Saludable.md`
-- Enfócate en las secciones 2, 6 y 8 de ese documento
-- La tabla de actores está en la Sección 9.3 de `tercer_avance.md`
+- Lee completo el documento que tú trabajaste: `src/models/fmd_finance_comparison.py` (tus ecuaciones de flujo de caja).
+- Lee la Sección **5.3** de `docs/Tercer_avance/tercer_avance.md` — ahí redacté la explicación de tus dos gráficas para la parte técnica.
+- Lee `docs/Tercer_avance/Propuesta_innovacionSocial/Actividad_Innovacion_Social_Ganado_Saludable.md` Secciones 2 y 6 para la parte de dilema ético e impacto ambiental.
 
-**Tono:** Empático y orientado a personas. Habla del "ganadero Don Aurelio" como personaje (ya está en el código del demo). Conecta la tecnología con el impacto humano real.
+**Tono:** Profesional, combinando negocios y modelación cuantitativa.
 
 ```
-[ESCRIBE AQUÍ — ~350 palabras]
+[ESCRIBE AQUÍ — ~450 palabras]
 ```
 
 ---
@@ -191,7 +190,7 @@ Esta sección explica el impacto humano y social del proyecto. NO necesitas ente
 
 **Victoria:**
 ```
-[Tu cierre aquí — 2-3 oraciones]
+[Tu cierre aquí — 2-3 oraciones. Enfoque: Qué aprendiste sobre modelación financiera y cómo el modelado estocástico espacial multivariable en grafos cambia por completo las proyecciones estáticas del segundo avance.]
 ```
 
 *Cierre editorial (a completar entre todos después de leer los tres):*
@@ -249,7 +248,7 @@ Si ves el commit `feat(crypto): integrate ChaCha20-Poly1305 mobile simulator` en
 | Quién | Archivos que TE conciernen | Qué ignorar |
 |-------|---------------------------|-------------|
 | **Axel (§1 + §5)** | `docs/Tercer_avance/tercer_avance.md` Secc. 2.1, 5.2, 8, 9.1 · `src/crypto/mock_mobile_app.py` · `docs/explicacion_matematica_chacha20.md` | Todo `src/spatial_model/`, todo `src/models/`, los notebooks |
-| **Victoria (§6)** | `docs/Tercer_avance/Propuesta_innovacionSocial/Actividad_Innovacion_Social_Ganado_Saludable.md` (completo) · Secc. 9.3 de `tercer_avance.md` | Todo el código Python, los JSON, los CSV |
+| **Victoria (§6)** | `docs/Tercer_avance/Propuesta_innovacionSocial/Actividad_Innovacion_Social_Ganado_Saludable.md` (completo) · Secc. 5.3 y 9.3 de `tercer_avance.md` · `src/models/fmd_finance_comparison.py` | Todo el código de machine learning / XGBoost y notebooks |
 
 **Para subir tu borrador:**
 ```bash
