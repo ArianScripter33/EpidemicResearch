@@ -80,20 +80,20 @@ def main():
     for m, val_h, val_s in zip(months, cum_h, cum_s):
         # Para el mes 1, 3 y 5
         if m in [1, 3, 5]:
-            ax.annotate(f"${val_h:.2f}B", xy=(m, val_h), xytext=(-25, 8 if val_h > val_s else -15),
+            ax.annotate(f"${val_h:.1f} mil M", xy=(m, val_h), xytext=(-25, 8 if val_h > val_s else -15),
                         textcoords='offset points', color=CARMESI, fontweight='bold', fontsize=9,
                         bbox=dict(boxstyle='round,pad=0.2', facecolor=WHITE, edgecolor=CARMESI, alpha=0.8))
-            ax.annotate(f"${val_s:.2f}B", xy=(m, val_s), xytext=(10, 8 if val_s >= val_h else -15),
+            ax.annotate(f"${val_s:.1f} mil M", xy=(m, val_s), xytext=(10, 8 if val_s >= val_h else -15),
                         textcoords='offset points', color=DORADO, fontweight='bold', fontsize=9,
                         bbox=dict(boxstyle='round,pad=0.2', facecolor=WHITE, edgecolor=DORADO, alpha=0.8))
 
     # Títulos y etiquetas
     ax.set_title("Comparativa de Costo Acumulado: Homogéneo vs. Espacial", fontsize=14, fontweight='bold', color=DARK, pad=15)
     ax.set_xlabel("Mes de Epidemia", fontsize=11, fontweight='bold', color=DARK)
-    ax.set_ylabel("Pérdida Acumulada (Billones de USD)", fontsize=11, fontweight='bold', color=DARK)
+    ax.set_ylabel("Pérdida Acumulada (Miles de Millones de USD)", fontsize=11, fontweight='bold', color=DARK)
     ax.set_xticks(months)
     ax.set_xticklabels([f"Mes {m}" for m in months])
-    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:.1f}B"))
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"${v:.0f} mil M"))
     
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -103,18 +103,6 @@ def main():
     ax.grid(True, linestyle='--', alpha=0.4, color='#BDC3C7')
     ax.legend(loc="upper left", framealpha=0.9, fontsize=10)
     
-    # Texto descriptivo
-    text_desc = (
-        "💡 Insight Clave:\n"
-        "• El Modelo Espacial arranca más rápido en el Mes 1 y 2 devido a que\n"
-        "  comienza con un brote de 100 animales en Veracruz (hub de alto comercio).\n"
-        "• Al llegar al Mes 5, ambos convergen en una pérdida de ~$52.8 Billones USD,\n"
-        "  demostrando que la geografía dilata el contagio en red pero no reduce\n"
-        "  la catástrofe sistémica en ausencia de bloqueo rápido."
-    )
-    ax.text(0.40, 0.15, text_desc, transform=ax.transAxes, fontsize=9.5, color=DARK,
-            bbox=dict(boxstyle='round,pad=0.5', facecolor=WHITE, edgecolor=GRAY, alpha=0.95))
-
     plt.tight_layout()
     img_mensual = os.path.join(OUT_DIR, "fmd_comparativa_mensual.png")
     plt.savefig(img_mensual, dpi=300, bbox_inches='tight')
@@ -173,17 +161,6 @@ def main():
     ax2.grid(True, linestyle='--', alpha=0.4, color='#BDC3C7')
     ax2.legend(loc="upper right", framealpha=0.9, fontsize=10)
     
-    # Texto descriptivo
-    text_desc_diario = (
-        "📈 Evidencia de Fricción Geográfica:\n"
-        "• El Modelo Espacial 'aplana la curva' nacional debido a la resistencia de distancia;\n"
-        "  el pico máximo cae un ~48% (de 19.7M a 10.2M de infectados).\n"
-        "• El pico espacial ocurre antes (Día 58 vs. 75) porque la semilla inicial ($I_0=100$) en\n"
-        "  Veracruz tiene alta centralidad comercial y acelera la fase temprana del brote."
-    )
-    ax2.text(0.02, 0.40, text_desc_diario, transform=ax2.transAxes, fontsize=9.5, color=DARK,
-            bbox=dict(boxstyle='round,pad=0.5', facecolor=WHITE, edgecolor=GRAY, alpha=0.95))
-
     plt.tight_layout()
     img_diaria = os.path.join(OUT_DIR, "fmd_comparativa_diaria.png")
     plt.savefig(img_diaria, dpi=300, bbox_inches='tight')

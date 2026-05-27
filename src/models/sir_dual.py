@@ -90,7 +90,19 @@ def run_simulation():
     ax1.set_xlabel('Días')
     ax1.set_ylabel('Población Bovinos (Millones)')
     ax1.grid(visible=True, which='major', c='#dddddd', lw=1, alpha=0.8)
-    ax1.legend(loc='center right')
+    ax1.legend(loc='lower right', framealpha=0.9)
+    
+    # Inset Axes (Efecto Lupa para Infectados TB)
+    from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+    # 40% más grande y centrado
+    axins = inset_axes(ax1, width="65%", height="55%", loc='center', 
+                       bbox_to_anchor=(0.12, 0.08, 0.80, 0.75), 
+                       bbox_transform=ax1.transAxes)
+    axins.plot(t, I_TB, 'r', linewidth=2)
+    axins.set_title('Lupa: Infectados TB (Casos Reales)', fontsize=9, color='darkred', pad=6)
+    axins.tick_params(axis='both', which='major', labelsize=8)
+    axins.grid(True, alpha=0.4)
+    axins.patch.set_alpha(0.92)  # Fondo semi-opaco para legibilidad
     
     # Gráfica 2: Fiebre Aftosa (FMD)
     ax2.plot(t, S_FMD / 1e6, 'b', alpha=0.7, linewidth=2, label='Susceptibles')

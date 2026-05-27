@@ -56,62 +56,7 @@ Antes de formular la arquitectura geoespacial y de aprendizaje supervisado, el p
 4.  **Vulnerabilidad Pecuaria frente a FMD:**  
     De un historial global de **16,540 eventos de Fiebre Aftosa confirmados** (WOAH WAHIS 2000-2025), el continente americano registra solo el **2.7%**. Al estar México libre de FMD por más de siete décadas, la biomasa nacional es inmunológicamente virgen, lo que presupone una tasa de ataque inicial cercana al 100% y un colapso sectorial automático en caso de reintroducción. El análisis global confirma que el **Serotipo O** domina el **54.9%** de los brotes históricos (asociado al desastre del Reino Unido en 2001), estableciendo nuestro parámetro inicial de $R_0 = 6.0$.
 
-### 2.2 Análisis Estadístico Descriptivo: Incidencia Global en África
-
-**Notebook de referencia:** `notebooks/02_analisis_descriptivo.ipynb` | **Módulo por:** Victoria Enriquez
-
-Para parametrizar las tasas de difusión, se filtraron **10,606 eventos FMD positivos** confirmados en la región de África Subsahariana (2000-2025). Se aplicaron técnicas de *Data Binning* para caracterizar la evolución temporal por décadas:
-
-| Década | Brotes Confirmados en África |
-|--------|------------------------------|
-| 2000s | 1,208 |
-| 2010s | 3,154 |
-| 2020s | 762 |
-
-El análisis demostró que los brotes confirmados en la década de 2010 fueron **2.6 veces** mayores a los registrados en los 2000. La aparente disminución en la década de 2020 no representa un control de la enfermedad, sino un sesgo severo de **Right-Censoring** (rezago de reporte al Laboratorio Mundial de Referencia WRLFMD), confirmando la ineficiencia de los sistemas pasivos internacionales y la urgencia de AftoSec.
-
-![Figura 14. Incidencia Acumulada de Fiebre Aftosa en África](../figures/top5_africa_fmd.png)
-
-*Figura 14. Top 5 de países africanos con mayor incidencia confirmada de Fiebre Aftosa (2000-2025) y distribución decadal. Elaboración propia a partir de datos del sistema mundial WAHIS de la OMSA.*
-
-### 2.3 Análisis Estadístico Inferencial: Correlaciones y ANOVA Multivariable
-
-**Notebook de referencia:** `notebooks/03_analisis_inferencial.ipynb` | **Módulo por:** Victoria Enriquez
-
-Para validar la relación zoonótica y el riesgo por canal de distribución, se diseñaron dos experimentos cuantitativos:
-
-#### A. Correlación Cruzada Zoonótica TB Bovina ↔ TB Humana
-Se cruzaron los datos oficiales de animales en cuarentena por Tuberculosis Bovina (SENASICA, n=26 estados) con las tasas de morbilidad de Tuberculosis Humana (DGE, CIE-10 A15-A19):
-*   **Coeficiente de Correlación de Pearson:** $r = 0.222$
-*   **P-value:** $p = 0.275$ (no significativo a $\alpha = 0.05$)
-
-**Interpretación Metodológica:** La ausencia de una correlación lineal directa estadísticamente significativa a nivel macro-geográfico estatal no refuta la zoonosis, sino que demuestra la complejidad epidemiológica. La transmisión de *Mycobacterium bovis* ocurre principalmente a través de cadenas micro-estructurales informales (consumo directo de leche bronca o quesos artesanales no pasteurizados) y contacto ocupacional en rastros periféricos. Zonas de alta morbilidad humana (Veracruz: 6,524 casos) se deben a transmisión inter-humana acelerada por factores de vulnerabilidad social, mientras que el control bovino (Jalisco: 5,035 animales bajo cuarentena) está más correlacionado con la densidad de hatos lecheros y campañas activas.
-
-![Figura 15. Correlación Zoonótica TB](../figures/correlacion_tb_zoonotica.png)
-
-*Figura 15. Matriz de dispersión y correlación de Pearson entre la Tuberculosis Bovina (SENASICA) y Tuberculosis Humana (DGE). Elaboración propia.*
-
-#### B. ANOVA: Prevalencia Bacteriana (Salmonella) según Canal de Venta
-Se modeló un experimento simulando 1,000 muestras por canal de comercialización pecuaria, parametrizando las prevalencias reales documentadas en la literatura científica nacional:
-
-| Canal de Comercialización | Prevalencia Teórica | Prevalencia Simulada (Experimental) |
-|---------------------------|---------------------|-------------------------------------|
-| Supermercados (Cadena Fría)| 1.30% | 0.80% |
-| Carnicerías Locales | 8.40% | 9.10% |
-| Tianguis Ambulantes | 13.60% | 13.70% |
-| Mercados Municipales | 22.30% | 21.40% |
-
-Se corrió un análisis de varianza de una vía (one-way ANOVA) para comparar las medias de los cuatro grupos:
-*   **Estadístico F:** $78.72$
-*   **P-value:** $1.80 \times 10^{-49}$ (extremadamente significativo, $p < 0.001$)
-
-**Veredicto del ANOVA:** Las diferencias son abrumadoramente significativas. Un consumidor informal en un **mercado municipal** se enfrenta a una probabilidad **26.7 veces mayor** de contaminación por Salmonella frente al canal de supermercado formal (21.4% vs 0.8%). Esto valida la premisa central del proyecto: el vector de riesgo sanitario y zoonótico es de naturaleza estructural y está directamente ligado al grado de informalidad del canal.
-
-![Figura 16. ANOVA Prevalencia](../figures/anova_canales_venta.png)
-
-*Figura 16. Resultados del análisis ANOVA multivariable para la prevalencia de Salmonella por canal de venta. Elaboración propia a partir de datos del SNIIM y literatura científica nacional.*
-
-### 2.4 Modelado Compartimental SIR Teórico (Base Homogénea)
+### 2.2 Modelado Compartimental SIR Teórico (Base Homogénea)
 
 **Código de referencia:** `src/models/sir_dual.py` | **Módulo por:** Arian Pedroza
 
@@ -141,6 +86,10 @@ $$
 $$
 
 Esto produjo un pico catastrófico de ~17 millones de infectados simultáneos al día ~45, con una curva de contagio casi vertical.
+
+![Impacto Financiero Nuclear FMD — Modelo Homogéneo](../figures/fmd_impacto_nuclear.png)
+
+*Figura 11. Curva de pérdida financiera acumulada diaria del modelo homogéneo base (I0=1, 150 días). La cifra de $45B es una estimación conservadora a 150 días sin incluir costos diagnósticos. El modelo financiero completo a 180 días (Sección 6.2) calcula una pérdida total de $52,796M USD al incluir diagnósticos y 30 días adicionales de bloqueo comercial. Elaboración propia.*
 
 **Problema epistemológico:** En la realidad, una vaca en Veracruz no puede contagiar instantáneamente a una vaca en Chihuahua. El virus viaja en camiones, por carreteras, entre estados que comercian ganado. La geografía impone **fricción**.
 
@@ -192,7 +141,7 @@ La simulación SIR sobre este grafo produce un fenómeno distinto al modelo inge
 | Pico Nacional de Infectados | ~17,000,000 | **10,200,000** | -40% |
 | Día del Pico Nacional | ~45 | **58** | +13 días |
 | Sacrificio Total (Día 179) | N/A (150 días) | **33,421,804** (96.9%) | — |
-| Estados que sobreviven | 0 de 32 | **5 de 32** | — |
+| Estados que sobreviven | 0 de 32 | **0 de 32 (100% de infección a 180 días)** | — |
 | Comportamiento | Explosión simultánea | **Efecto dominó** (ola desfasada) | — |
 
 **¿Por qué bajó el pico?** La geografía desincronizó los brotes estatales. Cuando Veracruz ya está en fase de sacrificio masivo, Chihuahua apenas comienza a ver casos. Los "picos desfasados" (staggered peaks) hacen que el máximo nacional *simultáneo* sea menor, aunque el resultado final acumulado siga siendo catastrófico.
@@ -246,7 +195,7 @@ La simulación SIR espacial permite trazar exactamente **cuándo** y **con qué 
 
 - **Jalisco** tiene el pico individual más alto (1.78M) pero se infecta tardíamente (Día 34). Esto se debe a que es un nodo masivo (alto inventario) pero está geográficamente al occidente, lejos del epicentro en Veracruz.
 - **Chiapas** tiene el segundo pico más alto (1.5M) y se infecta temprano (Día 27), porque está conectado por la carretera costera del Golfo con Veracruz y Tabasco.
-- Los **5 estados sobrevivientes** (Baja California, Baja California Sur, Quintana Roo, CDMX y uno más) se salvan por su aislamiento geográfico extremo o su inventario bovino insignificante.
+- **Aislamiento geográfico y persistencia:** En la primera aproximación sin calibrar del modelo de gravedad, la extrema distancia física protegía permanentemente a estados aislados como las Bajas o Quintana Roo. Al refinar la simulación e introducir una probabilidad comercial mínima ($\epsilon=0.015$) para emular fletes informales y escalas de largo alcance, **el 100% de los 32 estados de la República Mexicana terminan registrando contagios**, demostrando la inevitabilidad del colapso nacional sin control activo.
 
 ---
 
@@ -293,6 +242,31 @@ Los tres escenarios confirman que el **origen del paciente cero define el patró
 3. **Estrategia de contención:** Cada topología requiere una respuesta diferente, validando la necesidad de análisis topológico en tiempo real como el que provee AftoSec.
 
 **Código:** `src/spatial_model/03_spatial_sir.py` (parametrización del nodo inicial `PACIENTE_CERO`)
+
+### 4.2 Simulación de Intervención: Cuarentena y Cierre de Canales (Digital Twin)
+
+**Código de referencia:** `src/spatial_model/03d_spatial_sir_lockdown.py` | **Módulo por:** Arian Pedroza
+
+Una de las utilidades supremas de haber construido un modelo geoespacial basado en grafos (en lugar de ecuaciones teóricas puras) es que actúa como un **Digital Twin** (Gemelo Digital) del sistema de transporte terrestre nacional. Esto permite evaluar políticas públicas de control sanitario *in silico* antes de implementarlas físicamente.
+
+Se programó un experimento de contención simulando una **Cuarentena Focalizada Automática (Lockdown)** detonada por las alertas tempranas de nuestra aplicación móvil:
+
+*   **Punto de gatillo (Día 12):** La app detecta y confirma el foco de Fiebre Aftosa en Veracruz.
+*   **Intervención:** Se bloquean por completo todas las rutas de tránsito y embarque comercial de ganado provenientes o con destino a **Veracruz** y sus tres estados colindantes de mayor interacción comercial: **Tabasco, Puebla y Oaxaca** (MEX-180, MEX-150D).
+*   **Efecto en la Red:** Las aristas correspondientes en el modelo de gravedad física se cortan a 0 de forma inmediata en el Día 12, interrumpiendo el flujo de contagio trans-estatal.
+
+![Efecto de Intervención Cuarentena FMD](../figures/fmd_lockdown_comparison.png)
+
+*Figura 4. Comparativa de infectados activos diarios entre la libre propagación y el escenario con Cerco Sanitario (Lockdown Día 12) sobre Veracruz y colindantes. Elaboración propia.*
+
+![Mapa Animado del Cerco Sanitario (Lockdown Día 12)](../../data/processed/spatial/fmd_lockdown_simulation_180d.gif)
+
+*Figura 5. Mapa animado de la contención de FMD mediante Cerco Sanitario. La línea discontinua naranja delimita el bloqueo y confinamiento del virus en el sureste, erradicándolo completamente para el Día 173. Elaboración propia.*
+
+**Resultados del Experimento Causal (Contrafactual):**
+1.  **Aplastamiento del Pico Nacional:** El pico epidemiológico nacional se reduce de forma drástica de **10.2 Millones** de cabezas infectadas (en el Día 59) a apenas **2.02 Millones** (en el Día 59), representando una **reducción del 80.2% en la prevalencia pico simultánea**.
+2.  **Mitigación de Daño (Ganado Salvado):** El área sombreada en verde representa millones de cabezas de ganado que permanecieron completamente sanas gracias al cerco logístico inmediato. 
+3.  **Localización del Brote:** Al cortar las aristas carreteras de alta centralidad, el virus quedó atrapado geográficamente en el cuadrante del Golfo de México, impidiendo la ola expansiva catastrófica hacia el Bajío (Jalisco) y el norte ganadero exportador (Sonora/Chihuahua).
 
 ---
 
@@ -414,6 +388,9 @@ Para consolidar la defensa técnica del coloquio ante el sínodo y el docente Lu
 #### 1. XGBoost Regressor (Aprendizaje Supervisado)
 *   **¿Qué es?** Es un algoritmo de ensamble de árboles de decisión optimizado mediante *Gradient Boosting*. Construye árboles secuenciales donde cada nuevo árbol corrige los errores de predicción de los anteriores.
 *   **¿Para qué sirve en el proyecto?** Actúa como un tasador de riesgo instantáneo (equivalente al *Credit Score* de FICO). En lugar de correr una simulación estocástica SIR de 180 días (que consume valiosos segundos de cómputo), el XGBoost lee las métricas topológicas de un estado y predice en milisegundos qué tan grande será su pico máximo de infectados.
+*   **Oráculo de Intervenciones y Costo de Inacción (Extrapolabilidad Estructural):** Dado que el XGBoost aprende la relación entre la topología del grafo y el impacto epidémico, **este modelo se comporta como un oráculo de decisión en tiempo real**. 
+    - *Evaluación de Cercos:* Si el gobierno federal evalúa declarar un cerco sanitario sobre cualquier estado (ej. Jalisco o Puebla), simplemente se recalculan los *Node Embeddings* en un grafo donde se eliminan temporalmente las aristas de ese nodo. El XGBoost predecirá en milisegundos el nuevo pico nacional estimado y el ahorro resultante, omitiendo por completo el costoso proceso de simulación estocástica de Monte Carlo.
+    - *Costo de la Inacción:* Al comparar el delta de la predicción con el estado bloqueado frente a su estado activo en libre tránsito, la IA tasa instantáneamente el costo financiero marginal de no actuar a tiempo en dicho nodo, convirtiéndose en una herramienta inestimable para fijar primas de seguros ganaderos y diseñar planes de contingencia estatales.
 *   **Validación Cruzada Leave-One-Out (LOO-CV):** Dado nuestro tamaño de muestra limitado (32 estados), la validación cruzada tradicional (como 5-fold) sufriría de alta varianza. LOO-CV entrena exactamente 32 modelos independientes; en cada iteración, el modelo se entrena con 31 estados y predice el riesgo del estado excluido. Esto asegura que la métrica de precisión R² = 0.843 sea robusta, honesta y no sufra de sobreajuste (*overfitting*).
 *   **La paradoja de los Targets:**
     *   **Pico de Infectados (R² = 0.843):** Es un éxito rotundo porque la magnitud máxima de un brote es una propiedad puramente estructural del nodo (depende de su inventario y conectividad en carretera).
@@ -454,21 +431,35 @@ Se desarrolló un motor de renderizado custom (`04c_custom_stacked_race.py`) usa
 
 *Figura 8. Stacked Bar Chart Race animado bicolor (Rojo = Infectados Activos, Negro = Sacrificados). Muestra el ranking dinámico en tiempo real de los 12 estados más afectados.*
 
-### 6.2 Impacto Económico con el Modelo Espacial
+### 6.2 Impacto Económico y Evaluación de Intervención (Cerco Sanitario)
 
-**Código:** `src/models/fmd_finance_spatial.py`
+**Código:** `src/models/fmd_finance_spatial.py` y `src/models/fmd_finance_lockdown.py`
 
-Se realizó un fork de las proyecciones financieras del Segundo Avance, reemplazando el modelo SIR teórico (mezcla homogénea) por los datos reales del SIR Espacial Gravitatorio. El resultado confirma que, aunque la geografía aplaza el colapso (empujando la masacre del Mes 2 al Mes 3), **la pérdida acumulada a 150 días sigue siendo catastrófica: $52,796 Millones de USD.**
+Se realizó una modelación y proyección financiera de flujo de caja y pérdidas comerciales a 150 días, contrastando dos trayectorias de control en el modelo espacial:
 
-| Mes | Modelo Base (2° Avance) | Modelo Espacial (3° Avance) | Diferencia |
-|-----|------------------------|----------------------------|-----------|
-| Mes 1 | Explosión inmediata | Lento (fricción geográfica) | -85% sacrificados |
-| Mes 2-3 | Pico y caída | **Pico retrasado al Mes 3** | +40% concentración |
-| Total 5 meses | ~$52,800M USD | **~$52,796M USD** | Virtualmente igual |
+1.  **Escenario Libre (Sin Control - FMD Espacial Base):** Aceptación del flujo comercial sin bloqueos. Aunque la fricción vial aplaza el colapso masivo hacia los meses 3 y 4, la epidemia se expande a nivel nacional. **La pérdida acumulada total asciende a $52,796 Millones de USD** (destrucción del hato y cierre de exportaciones al 100%).
+2.  **Escenario Cerco Sanitario (Lockdown Día 12):** Bloqueo comercial de ganado de Veracruz y estados circundantes (Oaxaca, Puebla, Tabasco) a partir de la alerta temprana. Al erradicarse la infección al Día 173 y salvar al 80% de la biomasa nacional, el mercado de exportación del norte se libera parcialmente a partir del Mes 4. **La pérdida total acumulada se reduce drásticamente a solo $8,200 Millones de USD.**
 
-![Flujo de Caja FMD — Modelo Espacial](../figures/flujo_caja_fmd_espacial.png)
+| Métrica Financiera | Escenario Libre (Sin Control) | Escenario Cerco Sanitario | Beneficio Neto (Ahorro) |
+|--------------------|---------------------------------|---------------------------|-------------------------|
+| Pérdida Mes 1 | $741M USD | $741M USD | $0 (Mismo caso de inicio) |
+| Pérdida Mes 2 | $748M USD | $742M USD | $6M USD |
+| Pérdida Mes 3 | $25,502M USD | $1,281M USD | **$24,221M USD** (Pico evitado) |
+| Pérdida Mes 4 | $22,781M USD | $2,714M USD | **$20,067M USD** |
+| Pérdida Mes 5 | $3,024M USD | $2,722M USD | $302M USD |
+| **Total Acumulado** | **$52,796M USD** | **$8,200M USD** | **$44,596M USD (Ahorro de 84.5%)** |
 
-*Figura 7. Flujo de caja mensual FMD con el Modelo Espacial Gravitatorio. La fricción geográfica redistribuye el colapso hacia los meses 3-4, pero la pérdida acumulada es idéntica.*
+![Comparación de Flujo Financiero Lockdown vs Libre](../figures/fmd_finance_lockdown_comparison.png)
+
+*Figura 7. Comparación de pérdida mensual y trayectoria de pérdidas acumuladas entre el escenario libre y el cerco sanitario a partir de alertas de la app. El ahorro neto es de $44.6 mil millones de dólares ($44,600 mdd). Elaboración propia.*
+
+**Desglose del Flujo de Caja — Escenario Libre (Modelo Espacial)**
+
+La siguiente gráfica desglosa el costo mensual del escenario sin intervención bajo el modelo espacial. Se observa cómo la fricción geográfica concentra el colapso financiero en los Meses 2 y 3, generando un pico de sacrificio sanitario de **$27,431M USD** en el Mes 3 cuando el virus alcanza los superconectores carreteros nacionales:
+
+![Flujo de Caja FMD — Modelo Espacial Libre](../figures/flujo_caja_fmd_espacial.png)
+
+*Figura 12. Flujo de caja mensual y pérdida acumulada del modelo SIR Espacial (escenario libre, sin intervención). La geografía aplaza el colapso pero no lo evita: la pérdida total acumulada alcanza $52,796M USD. Elaboración propia.*
 
 ### 6.3 Comparativa Homogénea vs. Espacial (Cálculo Multivariable y Proyección Financiera)
 
@@ -490,23 +481,38 @@ Las dos figuras resultantes son piezas clave en la narrativa analítica:
 
 *Figura 9. Comparativa mensual del flujo de caja acumulado negativo (USD). El modelo espacial simula el retraso geográfico del colapso.*
 
-### 6.4 Inventario Completo de Artefactos Visuales
+### 6.4 Análisis Contrafactual: Retorno de Inversión (ROI) de Detección Temprana
+
+Una de las premisas centrales del desarrollo de la aplicación móvil de **Ganado Saludable** y su arquitectura criptográfica es la reducción de la latencia de notificación epidemiológica. Para cuantificar financieramente este valor, se corrió un análisis contrafactual sobre el inicio del brote de Fiebre Aftosa.
+
+*   **Escenario A (App Móvil - Día 3):** Detección inmediata en el Hub originario. Se sacrifican solo 16 cabezas.
+*   **Escenario B (Burócrata/Papel - Día 14):** Retraso burocrático estándar. El virus escapa del primer nodo y requiere el sacrificio de 461 cabezas.
+*   **Escenario C (Descontrol - Día 30):** Propagación inter-estatal por carreteras. Se ordena la cuarentena y sacrificio de 56,000 cabezas en múltiples estados.
+
+![ROI Contrafactual FMD](../figures/fmd_roi_contrafactual.png)
+
+*Figura 10. Costo acumulado en USD derivado de la detección tardía de un foco infeccioso exótico. El uso de la app genera un ahorro (ROI) de más de $67 Millones de dólares entre el Día 3 y el Día 30.*
+
+### 6.5 Inventario Completo de Artefactos Visuales
 
 | # | Artefacto | Archivo | Tipo |
 |---|-----------|---------|------|
-| 1 | Mapa animado SIR (180 días) | `data/processed/spatial/fmd_spread_simulation_180d.gif` | GIF |
-| 2 | Bar Chart Race (HTML interactivo) | `data/processed/spatial/bar_chart_race_180d.html` | HTML |
-| 3 | **Stacked Race Chart (Custom bicolor)** | `data/processed/spatial/charts/stacked_race_fmd.mp4` | MP4 |
-| 4 | Gráfica apilada nacional S-I-R | `data/processed/spatial/charts/sir_nacional_apilado.png` | PNG |
-| 5 | Gráficas apiladas Top 8 estados | `data/processed/spatial/charts/sir_top8_estados_apilado.png` | PNG |
-| 6 | Feature Importance (Pico) | `data/processed/spatial/charts/xgboost_importance_pico_infectados.png` | PNG |
-| 7 | Feature Importance (Día) | `data/processed/spatial/charts/xgboost_importance_dia_primera_infeccion.png` | PNG |
-| 8 | Scatter SIR vs XGBoost | `data/processed/spatial/charts/sir_vs_xgboost_pico_infectados.png` | PNG |
-| 9 | Flujo de Caja Espacial | `docs/figures/flujo_caja_fmd_espacial.png` | PNG |
-| 10 | Flujo de Caja Base (2° Avance) | `docs/figures/flujo_caja_fmd.png` | PNG |
-| 11 | Contrafactual Detección FMD | `docs/figures/contrafactual_fmd.png` | PNG |
-| 12 | **Comparativa Diaria de Curvas** | `docs/figures/fmd_comparativa_diaria.png` | PNG |
-| 13 | **Comparativa Mensual Financiera** | `docs/figures/fmd_comparativa_mensual.png` | PNG |
+| 1 | Mapa animado SIR (180 días - Libre) | `data/processed/spatial/fmd_spread_simulation_180d.gif` | GIF |
+| 2 | Mapa animado SIR (180 días - Cerco) | `data/processed/spatial/fmd_lockdown_simulation_180d.gif` | GIF |
+| 3 | Bar Chart Race (HTML interactivo) | `data/processed/spatial/bar_chart_race_180d.html` | HTML |
+| 4 | **Stacked Race Chart (Custom bicolor)** | `data/processed/spatial/charts/stacked_race_fmd.mp4` | MP4 |
+| 5 | Gráfica apilada nacional S-I-R | `data/processed/spatial/charts/sir_nacional_apilado.png` | PNG |
+| 6 | Gráficas apiladas Top 8 estados | `data/processed/spatial/charts/sir_top8_estados_apilado.png` | PNG |
+| 7 | Feature Importance (Pico) | `data/processed/spatial/charts/xgboost_importance_pico_infectados.png` | PNG |
+| 8 | Feature Importance (Día) | `data/processed/spatial/charts/xgboost_importance_dia_primera_infeccion.png` | PNG |
+| 9 | Scatter SIR vs XGBoost | `data/processed/spatial/charts/sir_vs_xgboost_pico_infectados.png` | PNG |
+| 10 | Flujo de Caja Espacial (Libre) | `docs/figures/flujo_caja_fmd_espacial.png` | PNG |
+| 11 | **Flujo Financiero Comparativo Cerco vs Libre** | `docs/figures/fmd_finance_lockdown_comparison.png` | PNG |
+| 12 | Contrafactual Detección FMD (Logarítmico) | `docs/figures/fmd_roi_contrafactual.png` | PNG |
+| 13 | **Comparativa Diaria de Curvas** | `docs/figures/fmd_comparativa_diaria.png` | PNG |
+| 14 | **Comparativa Mensual Financiera** | `docs/figures/fmd_comparativa_mensual.png` | PNG |
+| 15 | **Impacto Financiero Nuclear (Homogéneo)** | `docs/figures/fmd_impacto_nuclear.png` | PNG |
+| 16 | **Simulación Dual SIR (TB vs FMD)** | `docs/figures/sir_comparativo.png` | PNG |
 
 ---
 
@@ -661,6 +667,19 @@ erDiagram
 
 El campo `indice_riesgo` (float 0.0–1.0) de las colecciones `GRANJA` y `ZONA_CONTROL` se alimenta directamente del output del XGBoost, basándose en las 13 variables topológicas del grafo. Esto permite a los veterinarios de la CPA priorizar inspecciones en estados con alto flujo gravitatorio saliente.
 
+### 8.4 Scripts de Emulación y Demo (Pipeline End-to-End)
+
+Para demostrar el flujo completo de datos sin requerir una instancia de MongoDB en producción, se implementaron los siguientes scripts:
+
+| Script | Función | Entrada → Salida |
+|--------|---------|-------------------|
+| `src/warehouse/mongodb_loader.py` | Carga los 32 estados + datos SIR + resultados XGBoost en colecciones MongoDB con validación Pydantic | CSV → MongoDB (7 colecciones) |
+| `src/warehouse/csv_to_json.py` | Convierte los resultados de la simulación espacial a formato JSON normalizado | CSV → JSON |
+| `src/crypto/mock_mobile_app.py` | Emula el flujo de la app móvil: ingreso de reporte → cifrado local ChaCha20-Poly1305 → Field-Level Encryption → inserción en colección NoSQL | Input manual → BSON cifrado |
+| `scripts/demo_realtime_pipeline.py` | **Demo cinemática** que recorre todo el pipeline en la terminal: login bcrypt → cifrado RSA de PII → reporte anónimo → scoring XGBoost → alerta epidemiológica → descifrado CPA | Terminal interactiva |
+
+El script `demo_realtime_pipeline.py` está diseñado para ejecutarse frente al profesor o panel evaluador, mostrando en tiempo real cómo los datos fluyen desde el ganadero hasta la autoridad sanitaria con todos los mecanismos de seguridad activos.
+
 ---
 
 ## 9. Criptografía y Seguridad
@@ -762,9 +781,92 @@ AftoSec no es una solución impuesta desde la academia. Su viabilidad depende de
 | **Universidad (URC)** | Desarrollo tecnológico y validación | Investigación aplicada y generación de conocimiento |
 | **Consumidores finales** | Beneficiarios de cadena alimentaria segura | Disponibilidad y precio estable de carne bovina |
 
-### 9.4 Modelo de Adopción de la App y Estrategia de Escalabilidad
+### 9.4 Modelo de Adopción de la App: ¿Por Qué Alguien Descargaría Esto?
 
-La adopción de tecnología en el sector ganadero rural enfrenta barreras de conectividad, alfabetización digital y desconfianza institucional. El modelo de adopción de AftoSec está diseñado en tres fases:
+> **Pregunta clave:** "Nadie va a cazar vacas como si fuera Pokémon GO." ¿Cuál es el incentivo real para que un ganadero en Chiapas se descargue una app y reporte síntomas sospechosos?
+
+La respuesta es que **la vigilancia epidemiológica no puede ser la función principal de la app**. Debe ser un *efecto secundario* de un producto que el ganadero ya quiere usar todos los días. El modelo de adopción se estructura en dos capas:
+
+#### Capa 1: Utilidad Diaria (El "Gancho" — Por qué se descarga)
+
+La app funciona como una **plataforma integral de gestión ganadera** — el equivalente de un "StockX + WeatherApp + Marketplace" para el sector pecuario:
+
+| Función Diaria | Valor para el ganadero | Analogía |
+|---|---|---|
+| **Precios en Tiempo Real** | Cotizaciones de ganado en pie por estado, raza y peso. Compara precios de subastas (ANPB, AMEG) | StockX / Mercado Libre |
+| **Pronóstico Climático Agrícola** | Alertas de sequía, heladas y huracanes localizados por coordenada del rancho (API de SMN/CONAGUA) | WeatherApp / AccuWeather |
+| **Gestión de Hato** | Registro de aretes SINIIGA, vacunaciones, pesos, reproducción. Sustituye la libreta de papel | Software ERP ganadero simplificado |
+| **Mercado de Compra/Venta** | Publicar y buscar ganado entre productores verificados. Enlace directo con rastros TIF certificados | Marketplace / MercadoLibre Ganado |
+| **Noticias y Tips** | Actualizaciones de SENASICA, cambios regulatorios, técnicas de manejo sanitario | Newsletter sectorial |
+
+**¿Por qué esto funciona?** Porque el ganadero abre la app cada mañana para ver *cuánto vale su ganado hoy*, cómo estará el clima esta semana, y si alguien cerca vende suplementos. La app se vuelve **indispensable** antes de activar la capa epidemiológica.
+
+#### Capa 2: Inteligencia Epidemiológica (El "Efecto Secundario" — La función real)
+
+Una vez que el ganadero usa la app diariamente, la capa de vigilancia sanitaria se activa de forma orgánica:
+
+1. **Alertas Epidemiológicas Pasivas:** Si SENASICA detecta un caso confirmado de FMD en un estado vecino, la app muestra una notificación push con el mapa de riesgo: *"⚠️ Alerta: Caso confirmado de FMD en Puebla. Tu rancho en Veracruz está a 140 km del foco. Nivel de riesgo: ALTO. Ver recomendaciones."* Esto genera valor inmediato: el ganadero sabe si debe reforzar bioseguridad, suspender compras de ganado de la zona, o preparar documentación sanitaria.
+
+2. **Reporte Simplificado con Incentivos Monetarios:**
+   - El ganadero toma una foto del animal con síntomas (llagas, vesículas, salivación excesiva).
+   - La app guía con una interfaz visual de 3 pasos (sin texto técnico): **Foto → Ubicación → Enviar.**
+   - Los datos personales se cifran con RSA-2048 localmente (Capa 1 de privacidad del protocolo criptográfico).
+   - **El reporte activa una recompensa:** Subvención directa de SENASICA/CPA de **$5,000 – $15,000 MXN** por reporte validado (modelo tipo "Bounty System" de ciberseguridad).
+
+3. **Vinculación a Indemnización Rápida:**
+   - Los ganaderos que reportan a través de la app reciben **indemnización prioritaria** en caso de sacrificio sanitario (primeros en la fila de pago).
+   - Los ganaderos que NO usan la app y se detecta un brote en su zona pierden el acceso a la indemnización acelerada.
+   - **Incentivo perverso invertido:** Ahora ocultar te cuesta, reportar te paga.
+
+4. **Descuento en Seguro Ganadero:**
+   - Productores registrados en la plataforma acceden a pólizas de seguro agropecuario con **10–20% de descuento** (partnership con Agroasemex o aseguradoras privadas), ya que el historial de monitoreo activo reduce el riesgo actuarial.
+
+#### El Modelo de Incentivos Formalmente
+
+```
+                    ┌─────────────────────────────────┐
+                    │    GANADERO USA LA APP           │
+                    └──────────┬──────────────────────┘
+                               │
+                    ┌──────────▼──────────────────────┐
+                    │  Valor diario: Precios + Clima  │
+                    │  + Marketplace + Gestión Hato   │
+                    └──────────┬──────────────────────┘
+                               │
+               ┌───────────────▼───────────────────┐
+               │ ¿Detecta síntomas sospechosos?    │
+               └───────┬──────────────┬────────────┘
+                       │              │
+                ┌──────▼───┐   ┌──────▼──────────────────┐
+                │ NO (ok)  │   │ SÍ → Reporte anónimo    │
+                │ Sigue    │   │ → Bounty $5K-15K MXN    │
+                │ usando   │   │ → Indemnización rápida   │
+                │ la app   │   │ → Seguro con descuento   │
+                └──────────┘   └──────┬──────────────────┘
+                                      │
+                               ┌──────▼──────────────────┐
+                               │ SENASICA: Inspección     │
+                               │ focalizada (no masiva)   │
+                               │ + Cuarentena quirúrgica  │
+                               └──────────────────────────┘
+```
+
+#### ¿Quién Financia los Incentivos?
+
+El costo del programa de bounties es **ridículamente pequeño** comparado con las pérdidas evitadas:
+
+| Concepto | Costo anual estimado |
+|---|---|
+| **Bounties de reporte** (500 reportes/año × $10,000 MXN) | $5M MXN (~$250K USD) |
+| **Subsidio de seguro** (descuento actuarial) | $0 (lo absorbe la aseguradora como menor siniestralidad) |
+| **Mantenimiento de app** (servidores + desarrollo) | $2M MXN (~$100K USD) |
+| **Total programa anual** | **~$350K USD/año** |
+| **Pérdida evitada (1 brote detectado 27 días antes)** | **$44,596M USD** |
+| **ROI del programa** | **~127,000x** |
+
+El gobierno invierte $350K USD al año para evitar un riesgo potencial de $44.6 mil millones. Esto no es una app — es una **póliza de seguro nacional con un costo anual de 0.0008% del daño potencial**.
+
+#### Estrategia de Escalabilidad (3 Fases)
 
 **Fase 1 — Piloto (Meses 1–6):** 50 ganaderos voluntarios en Veracruz y Jalisco, estados de mayor riesgo estructural. La app requiere únicamente datos móviles básicos (compatible con redes 2G). Interfaz en español con iconografía simplificada (sin necesidad de leer texto técnico para reportar síntomas).
 
