@@ -18,8 +18,8 @@ def simular_captura_app_movil():
         # Datos para NoSQL (Búsquedas, Modelos Epidemiológicos) - VAN EN TEXTO PLANO
         "datos_epidemiologicos": {
             "especie": "Bos taurus",
-            "enfermedad_sospechosa": "Tuberculosis Bovina",
-            "sintomas": ["Tos crónica", "Pérdida de peso"],
+            "enfermedad_sospechosa": "Fiebre Aftosa (FMD)",
+            "sintomas": ["Vesículas en boca y pezuñas", "Salivación excesiva", "Cojera"],
             "estado": "Jalisco",
             "numero_animales_afectados": 4
         },
@@ -63,6 +63,17 @@ def cifrar_reporte(datos_completos, llave):
     
     return documento_seguro
 
+def descifrar_reporte(documento_seguro, llave):
+    """Verifica el tag de autenticidad y descifra los datos privados del ganadero."""
+    chacha = ChaCha20Poly1305(llave)
+    
+    nonce = base64.b64decode(documento_seguro["datos_privacidad_ganadero"]["nonce"])
+    ciphertext_con_tag = base64.b64decode(documento_seguro["datos_privacidad_ganadero"]["ciphertext_and_tag"])
+    
+    # decrypt() lanza InvalidTag si el ciphertext fue alterado (AEAD integrity check)
+    datos_planos_bytes = chacha.decrypt(nonce, ciphertext_con_tag, associated_data=None)
+    return json.loads(datos_planos_bytes.decode('utf-8'))
+
 def main():
     print("📱 Iniciando simulación de la App Móvil...")
     
@@ -94,6 +105,13 @@ def main():
     print("-" * 50)
     print(json.dumps(documento_nosql, indent=2, ensure_ascii=False))
     print("-" * 50)
+    
+    # 5. Verificamos que el descifrado funciona correctamente (prueba de round-trip)
+    print("\n🔓 Verificando descifrado (round-trip test)...")
+    datos_recuperados = descifrar_reporte(documento_nosql, llave)
+    assert datos_recuperados["nombre_ganadero"] == "Juan Pérez", "❌ ERROR: Datos no coinciden"
+    print("✅ Datos descifrados correctamente. Tag de autenticidad verificado.")
+    print(f"   Ganadero: {datos_recuperados['nombre_ganadero']} | Predio: {datos_recuperados['id_predio']}")
 
 if __name__ == "__main__":
     main()

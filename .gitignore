@@ -43,3 +43,7 @@ docker-compose.override.yml
 
 # MongoDB data
 mongo_data/
+docs/Segundo_avance/*.js
+
+# Decoupled Tools
+co-scientist-local/

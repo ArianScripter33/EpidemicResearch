@@ -1,0 +1,161 @@
+{
+  "fmd_diagnostics": [
+    {
+      "method": "Inspección Clínica (Vesículas)",
+      "cost_usd": "$0 – $10",
+      "time": "Inmediato",
+      "sensitivity": "~70%",
+      "notes": "Primer filtro. Confusión con estomatitis vesicular.",
+      "source": "SENASICA / CPA; OIE Manual 3.1.8"
+    },
+    {
+      "method": "ELISA NSP (Anticuerpos No-Estructurales)",
+      "cost_usd": "$8 – $15",
+      "time": "4-6 horas",
+      "sensitivity": "90-95%",
+      "notes": "Distingue infección vs vacunación (DIVA). Screening masivo.",
+      "source": "PrioCHECK FMDV NS; OIE Manual"
+    },
+    {
+      "method": "RT-PCR Tiempo Real",
+      "cost_usd": "$25 – $50",
+      "time": "4-8 horas",
+      "sensitivity": "95-99%",
+      "notes": "Gold standard molecular. Requiere BSL-3.",
+      "source": "Reid et al. (2003); PANAFTOSA"
+    },
+    {
+      "method": "LAMP (Prueba de Campo Rápida)",
+      "cost_usd": "$10 – $20",
+      "time": "30-60 min",
+      "sensitivity": "85-95%",
+      "notes": "Portátil. Útil en zonas rurales sin laboratorio.",
+      "source": "Dukes et al. (2006), J. Virol. Methods"
+    },
+    {
+      "method": "Aislamiento Viral (Cultivo Celular)",
+      "cost_usd": "$80 – $150",
+      "time": "3-7 días",
+      "sensitivity": "Gold Standard",
+      "notes": "Confirmatorio definitivo. Solo en BSL-3/4.",
+      "source": "OIE Manual 3.1.8; Pirbright Institute"
+    },
+    {
+      "method": "Secuenciación Genómica (Serotipado)",
+      "cost_usd": "$100 – $300",
+      "time": "5-14 días",
+      "sensitivity": "100%",
+      "notes": "Identifica serotipo exacto (O, A, SAT1-3, Asia1, C).",
+      "source": "Knowles & Samuel (2003); WRLFMD"
+    }
+  ],
+  "monthly_cashflow_fmd": [
+    {
+      "month": 1,
+      "infected_peak": 9520,
+      "sacrificed": 1904,
+      "sacrifice_cost_usd": 2939776,
+      "export_loss_usd": 216972000,
+      "diagnostic_cost_usd": 16660,
+      "total_month_usd": 219928436,
+      "cumulative_usd": 219928436
+    },
+    {
+      "month": 2,
+      "infected_peak": 19423405,
+      "sacrificed": 8720482,
+      "sacrifice_cost_usd": 13464424208,
+      "export_loss_usd": 246000000,
+      "diagnostic_cost_usd": 33990950,
+      "total_month_usd": 13744415158,
+      "cumulative_usd": 13964343594
+    },
+    {
+      "month": 3,
+      "infected_peak": 19685118,
+      "sacrificed": 21706241,
+      "sacrifice_cost_usd": 33514436104,
+      "export_loss_usd": 246000000,
+      "diagnostic_cost_usd": 34448925,
+      "total_month_usd": 33794885029,
+      "cumulative_usd": 47759228623
+    },
+    {
+      "month": 4,
+      "infected_peak": 2966841,
+      "sacrificed": 2644549,
+      "sacrifice_cost_usd": 4083183656,
+      "export_loss_usd": 246000000,
+      "diagnostic_cost_usd": 5191970,
+      "total_month_usd": 4334375626,
+      "cumulative_usd": 52093604249
+    },
+    {
+      "month": 5,
+      "infected_peak": 329660,
+      "sacrificed": 293158,
+      "sacrifice_cost_usd": 452635952,
+      "export_loss_usd": 246000000,
+      "diagnostic_cost_usd": 576905,
+      "total_month_usd": 699212857,
+      "cumulative_usd": 52792817106
+    }
+  ],
+  "scenarios_fmd": {
+    "Día 3 (ideal)": {
+      "detection_day": 3,
+      "total_removed": 16,
+      "peak_infected": 2,
+      "sacrifice_cost_usd": 25602,
+      "export_loss_usd": 1200972000,
+      "total_cost_usd": 1200997602,
+      "savings_usd": 54051838878,
+      "savings_pct": 97.8
+    },
+    "Día 14 (realista)": {
+      "detection_day": 14,
+      "total_removed": 461,
+      "peak_infected": 71,
+      "sacrifice_cost_usd": 713288,
+      "export_loss_usd": 1200972000,
+      "total_cost_usd": 1201685288,
+      "savings_usd": 54051151192,
+      "savings_pct": 97.8
+    },
+    "Día 30 (tardía)": {
+      "detection_day": 30,
+      "total_removed": 56674,
+      "peak_infected": 9520,
+      "sacrifice_cost_usd": 87505873,
+      "export_loss_usd": 1200972000,
+      "total_cost_usd": 1288477873,
+      "savings_usd": 53964358607,
+      "savings_pct": 97.7
+    },
+    "Sin detección": {
+      "detection_day": "Nunca",
+      "total_removed": 35007684,
+      "peak_infected": 19685118,
+      "sacrifice_cost_usd": 54051864480,
+      "export_loss_usd": 1200972000,
+      "total_cost_usd": 55252836480,
+      "savings_usd": 0,
+      "savings_pct": 0.0
+    }
+  },
+  "mexico_export_data": {
+    "live_cattle_2024_usd": 1015000000,
+    "beef_exports_2024_usd": 1700000000,
+    "total_sector_usd": 3000000000,
+    "daily_export_loss_max_usd": 8200000,
+    "export_model": "phased: D1-3=0%, D4-7=90%, D8-14=98%, D15+=100%",
+    "total_export_loss_150d": 1200972000,
+    "source": "USDA FAS GATS 2024 / AHDB 2024"
+  },
+  "uk_2001_benchmark": {
+    "total_cost_gbp": 8000000000,
+    "animals_slaughtered": 6500000,
+    "compensation_gbp": 1300000000,
+    "source": "Anderson Report (2002); National Audit Office UK"
+  }
+}

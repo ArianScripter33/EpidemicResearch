@@ -1,0 +1,280 @@
+{
+  "diagnostics": [
+    {
+      "method": "Tuberculina Intradérmica (PPD)",
+      "cost_usd_min": 3,
+      "cost_usd_max": 8,
+      "cost_mxn_min": 51,
+      "cost_mxn_max": 136,
+      "time": "72 horas",
+      "sensitivity": "80-90%",
+      "specificity": "95-99%",
+      "notes": "Requiere 2 visitas. Gold standard OIE para screening.",
+      "source": "SENASICA / NOM-031-ZOO; PRONABIVE"
+    },
+    {
+      "method": "Gamma-Interferón (BOVIGAM™)",
+      "cost_usd_min": 15,
+      "cost_usd_max": 25,
+      "cost_mxn_min": 255,
+      "cost_mxn_max": 425,
+      "time": "24-48 horas",
+      "sensitivity": "85-95%",
+      "specificity": "90-97%",
+      "notes": "Muestra sanguínea. Mayor sensibilidad en etapas tempranas.",
+      "source": "Bezos et al. (2014); Thermo Fisher"
+    },
+    {
+      "method": "ELISA (Anticuerpos)",
+      "cost_usd_min": 8,
+      "cost_usd_max": 12,
+      "cost_mxn_min": 136,
+      "cost_mxn_max": 204,
+      "time": "24-48 horas",
+      "sensitivity": "60-80%",
+      "specificity": "90-95%",
+      "notes": "Útil para screening masivo. Detecta fases avanzadas.",
+      "source": "Casal et al. (2017)"
+    },
+    {
+      "method": "PCR (IS6110/IS1081)",
+      "cost_usd_min": 20,
+      "cost_usd_max": 35,
+      "cost_mxn_min": 340,
+      "cost_mxn_max": 595,
+      "time": "5-7 días",
+      "sensitivity": "95-99%",
+      "specificity": "98-100%",
+      "notes": "Alta precisión. Requiere laboratorio equipado.",
+      "source": "Pérez-Guerrero et al. (2008); UNAM/INIFAP"
+    },
+    {
+      "method": "Cultivo Bacteriológico",
+      "cost_usd_min": 40,
+      "cost_usd_max": 60,
+      "cost_mxn_min": 680,
+      "cost_mxn_max": 1020,
+      "time": "4-8 semanas",
+      "sensitivity": "Gold Standard",
+      "specificity": "100%",
+      "notes": "Confirmatorio definitivo. Lento pero irrefutable.",
+      "source": "OIE Manual, Ch. 3.4.6"
+    },
+    {
+      "method": "Inspección Post-mortem (Rastro TIF)",
+      "cost_usd_min": 0,
+      "cost_usd_max": 0,
+      "cost_mxn_min": 0,
+      "cost_mxn_max": 0,
+      "time": "Inmediato",
+      "sensitivity": "50-60%",
+      "specificity": "95%",
+      "notes": "Sin costo adicional (absorbido por rastro). Baja sensibilidad.",
+      "source": "NOM-033-ZOO-1995; SENASICA"
+    }
+  ],
+  "monthly_cashflow": [
+    {
+      "month": 1,
+      "infected_start": 7558,
+      "infected_end": 8632,
+      "avg_infected": 8095,
+      "liters_lost_total": 743158,
+      "production_loss_mxn": 4830529,
+      "production_loss_usd": 284149,
+      "diagnostic_cost_usd": 48972,
+      "cumulative_loss_usd": 333121
+    },
+    {
+      "month": 2,
+      "infected_start": 8632,
+      "infected_end": 9860,
+      "avg_infected": 9246,
+      "liters_lost_total": 848832,
+      "production_loss_mxn": 5517408,
+      "production_loss_usd": 324553,
+      "diagnostic_cost_usd": 55940,
+      "cumulative_loss_usd": 713614
+    },
+    {
+      "month": 3,
+      "infected_start": 9860,
+      "infected_end": 11261,
+      "avg_infected": 10561,
+      "liters_lost_total": 969509,
+      "production_loss_mxn": 6301809,
+      "production_loss_usd": 370695,
+      "diagnostic_cost_usd": 63894,
+      "cumulative_loss_usd": 1148203
+    },
+    {
+      "month": 4,
+      "infected_start": 11261,
+      "infected_end": 12862,
+      "avg_infected": 12062,
+      "liters_lost_total": 1107312,
+      "production_loss_mxn": 7197533,
+      "production_loss_usd": 423384,
+      "diagnostic_cost_usd": 72974,
+      "cumulative_loss_usd": 1644561
+    },
+    {
+      "month": 5,
+      "infected_start": 12862,
+      "infected_end": 14690,
+      "avg_infected": 13776,
+      "liters_lost_total": 1264664,
+      "production_loss_mxn": 8220319,
+      "production_loss_usd": 483548,
+      "diagnostic_cost_usd": 83342,
+      "cumulative_loss_usd": 2211451
+    },
+    {
+      "month": 6,
+      "infected_start": 14690,
+      "infected_end": 16776,
+      "avg_infected": 15733,
+      "liters_lost_total": 1444325,
+      "production_loss_mxn": 9388115,
+      "production_loss_usd": 552242,
+      "diagnostic_cost_usd": 95183,
+      "cumulative_loss_usd": 2858876
+    },
+    {
+      "month": 7,
+      "infected_start": 16776,
+      "infected_end": 19158,
+      "avg_infected": 17967,
+      "liters_lost_total": 1649443,
+      "production_loss_mxn": 10721380,
+      "production_loss_usd": 630669,
+      "diagnostic_cost_usd": 108702,
+      "cumulative_loss_usd": 3598247
+    },
+    {
+      "month": 8,
+      "infected_start": 19158,
+      "infected_end": 21878,
+      "avg_infected": 20518,
+      "liters_lost_total": 1883604,
+      "production_loss_mxn": 12243428,
+      "production_loss_usd": 720202,
+      "diagnostic_cost_usd": 124135,
+      "cumulative_loss_usd": 4442584
+    },
+    {
+      "month": 9,
+      "infected_start": 21878,
+      "infected_end": 24982,
+      "avg_infected": 23430,
+      "liters_lost_total": 2150895,
+      "production_loss_mxn": 13980820,
+      "production_loss_usd": 822401,
+      "diagnostic_cost_usd": 141752,
+      "cumulative_loss_usd": 5406737
+    },
+    {
+      "month": 10,
+      "infected_start": 24982,
+      "infected_end": 28524,
+      "avg_infected": 26753,
+      "liters_lost_total": 2455969,
+      "production_loss_mxn": 15963799,
+      "production_loss_usd": 939047,
+      "diagnostic_cost_usd": 161854,
+      "cumulative_loss_usd": 6507638
+    },
+    {
+      "month": 11,
+      "infected_start": 28524,
+      "infected_end": 32567,
+      "avg_infected": 30545,
+      "liters_lost_total": 2804121,
+      "production_loss_mxn": 18226791,
+      "production_loss_usd": 1072164,
+      "diagnostic_cost_usd": 184800,
+      "cumulative_loss_usd": 7764602
+    },
+    {
+      "month": 12,
+      "infected_start": 32567,
+      "infected_end": 37179,
+      "avg_infected": 34873,
+      "liters_lost_total": 3201378,
+      "production_loss_mxn": 20808958,
+      "production_loss_usd": 1224056,
+      "diagnostic_cost_usd": 210980,
+      "cumulative_loss_usd": 9199638
+    }
+  ],
+  "scenarios": {
+    "Temprana (Mes 2)": {
+      "total_12m_usd": 2535620,
+      "final_infected": 3709,
+      "monthly_losses": [
+        284149,
+        291813,
+        270243,
+        250267,
+        231767,
+        214634,
+        198767,
+        184073,
+        170466,
+        157864,
+        146193,
+        135385
+      ]
+    },
+    "Tardía (Mes 6)": {
+      "total_12m_usd": 4679371,
+      "final_infected": 8579,
+      "monthly_losses": [
+        284149,
+        324553,
+        370695,
+        423384,
+        483548,
+        496557,
+        459836,
+        425829,
+        394336,
+        365171,
+        338163,
+        313151
+      ]
+    },
+    "Sin detección": {
+      "total_12m_usd": 7847111,
+      "final_infected": 37179,
+      "monthly_losses": [
+        284149,
+        324553,
+        370695,
+        423384,
+        483548,
+        552242,
+        630669,
+        720202,
+        822401,
+        939047,
+        1072164,
+        1224056
+      ]
+    }
+  },
+  "savings": {
+    "early_vs_none_usd": 5311491,
+    "late_vs_none_usd": 3167740,
+    "early_pct": 67.7,
+    "late_pct": 40.4
+  },
+  "unit_economics": {
+    "valor_cabeza_mxn": 26250,
+    "valor_cabeza_usd": 1544,
+    "valor_100_cabezas_usd": 154412,
+    "loss_per_cow_per_day_mxn": 19.89,
+    "loss_per_cow_per_day_usd": 1.17,
+    "loss_per_cow_per_month_usd": 35.1
+  }
+}

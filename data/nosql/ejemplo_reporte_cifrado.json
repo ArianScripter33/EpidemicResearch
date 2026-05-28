@@ -1,19 +1,20 @@
 {
-    "id_reporte": "REP-20260513-1341",
-    "fecha_reporte": "2026-05-13T19:41:00.214958Z",
+    "id_reporte": "REP-20260527-1050",
+    "fecha_reporte": "2026-05-27T16:50:43.529854Z",
     "datos_epidemiologicos": {
         "especie": "Bos taurus",
-        "enfermedad_sospechosa": "Tuberculosis Bovina",
+        "enfermedad_sospechosa": "Fiebre Aftosa (FMD)",
         "sintomas": [
-            "Tos crónica",
-            "Pérdida de peso"
+            "Vesículas en boca y pezuñas",
+            "Salivación excesiva",
+            "Cojera"
         ],
         "estado": "Jalisco",
         "numero_animales_afectados": 4
     },
     "datos_privacidad_ganadero": {
         "algoritmo": "ChaCha20-Poly1305",
-        "nonce": "vFf8DbJ6KaJ0kV0c",
-        "ciphertext_and_tag": "pF6mCk5NdqCQrLbfjs2PlcAz0es1EVLo7oA2rkTI5+EVpwwPyrTt8/NbSTxeb6mLOn+hLewcti8AXkQGX3axeWsVqsMVekdNuYwcmDffmv3jxfM4sB4mqJzxmG1qVUACzjmoOVYgCtq0V/ZrYYwyW79vJlOSmGX3ZtWfnclzghl+LhEvbxoSNkpZk9+UiimsVDoGNIN/fJv1dv5lFQPR0t64ZT8lITmzvQ=="
+        "nonce": "cN2wTzNBIBprmGui",
+        "ciphertext_and_tag": "eN27EvAss0rlZt2Lqr4UM8FGW4lYZ3B3PATmwU59XJnqGtYy0gaFTLzhcPKSGVNLRfm+F73bXkN+wj22b2W72zse4UTUKjMoE34SBDQJYhgWcoqk2MKQFzU0yTha6I8oG9EvGVmJl06kU91podULhBrRV5qrSDA8qfmyR+YyJ+pqDgwtt18O2bVOaMas/Sdu/c4nxCG5tpOblSSpvJcRGQQW8krtlO85jg=="
     }
 }

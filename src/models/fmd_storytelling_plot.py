@@ -75,7 +75,7 @@ ax1.grid(axis='y', linestyle='--', alpha=0.4)
 fig.suptitle("Fiebre Aftosa (FMD): La Ruina Automática del Sector Agropecuario", 
              fontsize=18, fontweight='bold', x=0.1, y=0.96, ha='left', color='#e74c3c')
 
-fig.text(0.1, 0.86, "Modelo de colapso: Valuación por sacrificio forzoso ($1,250 USD/cabeza) y Bloqueo de Exportación de la OMSA.\nUn solo infectado ($I_0=1$) cuesta más de $22 Billones de dólares en menos de 5 meses.", 
+fig.text(0.1, 0.80, "Modelo de colapso: Valuación por sacrificio forzoso (\$1,250 USD/cabeza) y Bloqueo de Exportación de la OMSA.\nUn solo infectado $I_0=1$ cuesta más de \$22 Billones de dólares en menos de 5 meses.", 
          fontsize=12, color='#7F8C8D', linespacing=1.5)
 
 # Asegurar límites del gráfico
@@ -91,7 +91,7 @@ end_loss_b = perdida_total[-1] / 1e9
 max_dia = t[-1]
 ax1.plot(max_dia, end_loss_b, marker='o', markersize=10, color=color_shock)
 ax1.annotate(f'Quiebre Nacional:\n${end_loss_b:,.1f} Billones USD\n(en {int(max_dia)} días)', 
-             xy=(max_dia, end_loss_b), xytext=(-15, 0), textcoords='offset points',
+             xy=(max_dia, end_loss_b), xytext=(-10, -25), textcoords='offset points',
              fontsize=11, fontweight='bold', color='#c0392b', ha='right', va='center')
 
 # Eje secundario discreto (Para la aceleración del sacrificio)

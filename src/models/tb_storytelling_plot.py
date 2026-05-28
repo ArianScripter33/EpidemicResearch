@@ -77,7 +77,7 @@ ax1.grid(axis='y', linestyle='--', alpha=0.4)
 fig.suptitle("Tuberculosis Bovina: El 'Cáncer Financiero' del Ganadero", 
              fontsize=18, fontweight='bold', x=0.1, y=0.96, ha='left', color='#2C3E50')
 
-fig.text(0.1, 0.88, "Mientras la curva infecciosa parece plana, cada vaca enferma genera un daño acumulativo devastador.\nSimulación basada en literatura (Rahman & Samad) a $1.1 USD diarios por pérdida lechera.", 
+fig.text(0.1, 0.84, "Mientras la curva infecciosa parece plana, cada vaca enferma genera un daño acumulativo devastador.\nSimulación basada en literatura (Rahman & Samad) a $1.1 USD diarios por pérdida lechera.", 
          fontsize=12, color='#7F8C8D', linespacing=1.5)
 
 # Expandir límite X para respirar a la derecha

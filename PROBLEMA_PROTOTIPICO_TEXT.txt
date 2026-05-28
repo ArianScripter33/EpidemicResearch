@@ -1,0 +1,956 @@
+ 
+Universidad Nacional “Rosario Castellanos” 
+Dirección de Asuntos Académicos 
+Subdirección de Planes y Programas de 
+Estudio Problema Prototípico e Incidentes 
+Críticos Semestre 2026-1 
+ 
+PROBLEMA PROTOTÍPICO 
+Licenciatura: Licenciatura en Ciencias de datos para Negocios 
+Fecha de 
+elaboración: 
+   
+Modalidad: Presencial ( x ) Semipresencial ( ) 
+Semestre: 1°( ) 2°(  ) 3° ( ) 4°(x ) 5° ( ) 6° ( ) 7° (   ) 8° ( ) 
+Elaboraron: Luis Gerardo Acuña Quintero               GAM  
+Luis Antonio Blanco Cebada                 KANASIN 
+Karla Lourdes Luna Gallegos                SLP 
+Irving Francisco Pech Nah                     KANASIN 
+María Guadalupe Sierra Hernández      CHALCO 
+ 
+ 
+PROBLEMA PROTOTÍPICO 
+Ganado Saludable: Detección temprana de enfermedades bovinas 
+ 
+La ganadería bovina representa uno de los pilares fundamentales del sector agropecuario, 
+al proveer alimentos esenciales como carne y leche, además de generar empleo y 
+desarrollo económico. La salud animal es un factor determinante en la productividad, la 
+rentabilidad y la sostenibilidad de las unidades ganaderas, ya que un ganado sano presenta 
+mejores índices reproductivos, mayor eficiencia alimenticia y menor mortalidad. 
+ 
+ 
+Las enfermedades bovinas pueden clasificarse en infecciosas, parasitarias, metabólicas y 
+nutricionales, siendo responsables de una reducción significativa en la productividad y la 
+rentabilidad ganadera. Entre las enfermedades más comunes se encuentran la mastitis, la 
+brucelosis, la fiebre aftosa, la tuberculosis bovina, la diarrea viral bovina y la neumonía, las 
+cuales afectan la producción de leche, el crecimiento, la reproducción y la calidad de la 
+carne. 
+ 
+ 
+El impacto de estas enfermedades se refleja en el aumento de costos veterinarios, 
+disminución del rendimiento productivo, incremento en la mortalidad y restricciones 
+comerciales. Por ello, resulta fundamental adoptar estrategias orientadas a la detección 
+temprana, con el fin de intervenir oportunamente y reducir la propagación de agentes 
+patógenos. 
+ 
+ 
+La detección temprana de enfermedades consiste en identificar de manera oportuna los 
+primeros signos clínicos y cambios fisiológicos que indiquen la presencia de un trastorno en 
+la salud del animal. Este enfoque permite aplicar tratamientos preventivos o correctivos en 
+etapas iniciales, aumentando la probabilidad de recuperación y disminuyendo la severidad 
+del padecimiento. 
+ 
+Diversos estudios han demostrado que la detección temprana contribuye a reducir el uso 
+indiscriminado de antibióticos, mejora el bienestar animal y optimiza los recursos 
+económicos. Asimismo, facilita el control epidemiológico, permitiendo aislar animales 
+ 
+enfermos y prevenir brotes que puedan afectar a todo el hato. 
+ 
+El avance de la tecnología ha permitido el desarrollo de sistemas inteligentes de monitoreo, 
+basados en sensores, dispositivos portátiles, Internet de las Cosas (IoT) y plataformas de 
+análisis de datos. Estas herramientas facilitan la recolección automátic a de información 
+fisiológica y conductual en tiempo real. 
+ 
+El uso de inteligencia artificial, aprendizaje automático y análisis predictivo permite procesar 
+grandes volúmenes de datos, identificar patrones anormales y generar alertas tempranas. 
+Estas tecnologías contribuyen a mejorar la precisión diagnóstica, reducir la carga de trabajo 
+del personal y optimizar la toma de decisiones en el manejo sanitario. 
+ 
+ 
+Los modelos predictivos utilizan técnicas estadísticas y algoritmos de aprendizaje 
+automático para anticipar la aparición de enfermedades a partir del análisis de datos 
+históricos y en tiempo real. Estos modelos permiten detectar tendencias, correlaciones y 
+desviaciones significativas en los indicadores de salud. 
+ 
+ 
+La detección temprana de enfermedades, apoyada en tecnologías digitales, promueve una 
+ganadería más sostenible, ética y responsable, al reducir el sufrimiento animal, minimizar 
+el uso de medicamentos y disminuir el impacto ambiental derivado de prácticas ineficientes. 
+ 
+ 
+Los estudiantes pueden:  
+ 
+• Diseñar un sistema integral de monitoreo sanitario que permita la recolección, 
+registro y análisis sistemático de datos sobre el estado de salud del ganado bovino. 
+ 
+• Identificar y establecer indicadores clínicos y productivos clave para la detección 
+temprana de enfermedades bovinas, facilitando la emisión de alertas oportunas. 
+ 
+• Implementar herramientas tecnológicas y protocolos de seguimiento que optimicen 
+la vigilancia sanitaria y fortalezcan la toma de decisiones preventivas en las unidades 
+de producción pecuaria. 
+ 
+• Evaluar la eficacia del sistema de detección temprana mediante el análisis del 
+impacto en la reducción de la incidencia de enfermedades, la mejora del bienestar 
+animal y el aumento de la productividad. 
+ 
+ 
+ 
+ 
+ 
+ 
+EVIDENCIA INTEGRADORA 
+ 
+Desarrollo de un documento de divulgación.  
+ 
+El trabajo se apoya en herramientas básicas de Fundamentos de Criptografía, 
+Estadística Multivariada, Inteligencia Artificial, Bases de Datos NoSQL, 
+Ecuaciones Diferenciales Aplicadas, Finanzas Corporativas, Laboratorio de 
+Innovación Social.  
+ 
+Con base en esto se va a representar de manera sintética y comprensible los 
+hallazgos y datos obtenidos durante la investigación, ofreciendo una visión holística 
+de la problemática estudiada. 
+1. Artículo de divulgación (15 a 25 páginas). 
+Tipo de publicación: a definir con el equipo y los docentes (puede ser académica, social, 
+ambiental, cultural o comunitaria). 
+Contenido mínimo obligatorio: 
+● Análisis basado en datos recolectados por el equipo o disponibles públicamente. 
+● Uso de al menos cinco fuentes confiables citadas en formato APA 7. 
+● Propuesta concreta con al menos un prototipo: organizacional, visual, algorítmico,  
+educativo o participativo. 
+● Elementos gráficos: tablas, esquemas, visualizaciones u otros. 
+● Reflexión sobre el impacto ambiental, social y económico de la propuesta. 
+2. Presentación digital. 
+Formato libre (Genially, Gamma, Prezi.). 
+Contenido mínimo obligatorio: 
+● Planteamiento del problema detectado. 
+● Visualización de datos clave. 
+● Propuesta y prototipo desarrollado. 
+● Justificación y beneficios esperados. 
+● Participación de actores escolares o comunitarios. 
+ 
+● Fuentes citadas en formato APA 7 
+3. Divulgación oral. 
+Modalidad: Exposición en coloquio (tiempo asignado por el comité organizador de la 
+sede). 
+Requisitos: 
+● Participación equitativa de todas las personas del equipo. 
+● Lenguaje claro, inclusivo y con argumentos sólidos. 
+● Apoyo visual mediante la presentación digital. 
+● Conexión explícita entre la propuesta y los incidentes críticos del semestre. 
+Saberes mínimos a integrar: 
+El proyecto exige la integración básica, pero significativa, de los aprendizajes  
+desarrollados en las asignaturas del Cuarto Semestre, por ejemplo: 
+•  Fundamentos de Criptografía: Selección de técnica de cifrado más adecuado. 
+• Estadística Multivariada: Representación gráfica de datos multivariados, 
+diagramas, caras de Chernoff, Curvas de Andrews, etc. 
+• Inteligencia Artificial:  Análisis e interpretación de datos relevantes, diseño y 
+propuesta de una solución basada en IA,  evaluación de la factibilidad de la 
+implementación. 
+• Bases de Datos NoSQL: Selección del tipo de bases de datos NoSQL y modelado 
+de datos. 
+• Ecuaciones D iferenciales Aplicadas: Formulación del modelo mediante 
+ecuaciones diferenciales, análisis e interpretación de resultados , representación 
+gráfica del comportamiento del sistema. 
+• Finanzas Corporativas: análisis de estados financieros , de razones financieras , 
+etc.  
+• Laboratorio de Innovación Social: Diferencias entre innovación tecnológica, 
+empresarial y social, problemas sociales complejos y  enfoques sistémico, 
+identificación de necesidades y actores, etc. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+RÚBRICA DE EVALUACIÓN PROYECTO 
+INTEGRADOR 30%  
+Elemento  Criterio  Desempeño 
+Bajo  
+Desempeño  
+Medio  
+Desempeño Alto  
+1. Artículo de 
+divulgación 
+(10 pt) 
+Claridad y 
+estructura del 
+texto 
+El texto carece 
+de 
+organización, 
+por lenguaje 
+inadecuado o 
+confuso 
+(1 pt) 
+Organización 
+básica, pero con 
+errores de 
+redacción o 
+coherencia 
+(2 pt) 
+Redacción clara, coherente 
+y con 
+estructura académica 
+o divulgativa sólida 
+(3 pt) 
+ 
+Integración de 
+los incidentes 
+críticos 
+No se 
+relacionan 
+saberes o son 
+irrelevantes 
+(1 pt) 
+Se integran 
+parcialmente o 
+con 
+poca profundidad 
+(2 pt) 
+Relación explícita, crítica y 
+coherente 
+(4 pt) 
+ Propuesta con 
+prototipo 
+No incluye 
+propuesta clara 
+o es inviable 
+(1 pt) 
+Incluye idea 
+general o poco 
+fundamentada 
+(2 pt) 
+Presenta propuesta viable, 
+contextualizada y con 
+elementos visuales 
+(3 pt) 
+2. Presentación 
+digital 
+(10 pt) 
+Diseño visual y 
+uso de 
+herramientas 
+digitales 
+Diapositivas 
+desordenadas 
+o 
+poco legibles 
+(1 pt) 
+Diseño funcional, 
+pero con 
+limitaciones 
+estéticas o 
+técnicas 
+(2 pt) 
+Diseño atractivo, claro y 
+apoyado en 
+recursos digitales 
+pertinentes 
+(3 pt) 
+ Síntesis de la 
+información 
+Información 
+incompleta o 
+sin relevancia 
+(1 pt) 
+Resumen 
+aspectos 
+generales sin 
+profundidad 
+(2 pt) 
+Presenta síntesis clara, 
+visual y 
+destacando puntos clave 
+(4 pt) 
+ 
+Uso ético de 
+fuentes y 
+referencias 
+(APA 7) 
+No se citan 
+fuentes o se 
+plagia parte 
+del contenido 
+(1 pt) 
+Se citan algunas 
+fuentes, pero con 
+errores de formato 
+(2 pt) 
+Todas las fuentes están 
+correctamente 
+citadas en formato 
+APA 7 
+(3 pt) 
+ 
+3. Exposición 
+oral en 
+coloquio 
+(10 pt) 
+Claridad y 
+dominio del 
+tema 
+Dificultades 
+para explicar o 
+responder 
+preguntas 
+(2 pt) 
+Explica los puntos 
+centrales con 
+apoyo del material 
+(3 pt) 
+Explica con claridad, 
+confianza y responde con 
+argumentos 
+(4 pt) 
+ 
+Trabajo en 
+equipo y 
+organización 
+Participación 
+desequilibrada 
+o improvisada 
+(1 pt) 
+Todos participan, 
+pero sin fluidez o 
+coordinación 
+(2 pt) 
+Participación equitativa, 
+organizada 
+y con tiempos bien 
+manejados 
+(3 pt) 
+ 
+Impacto y 
+conexión con el 
+entorno 
+Desconectado 
+del contexto 
+social, 
+económico o 
+ambiental 
+(1 pt) 
+Mención 
+superficial del 
+impacto local 
+(2 pt) 
+Relación clara con 
+problemáticas reales del 
+entorno 
+(3 pt) 
+ 
+ 
+DEFINICIÓN DEL PROBLEMA PROTOTÍPICO SEMESTRAL 
+TÍTULO: 
+Ganado Saludable: Detección temprana de enfermedades bovinas 
+ 
+Identificación de las Habilidades 
+Blandas: 
+  
+Pensamiento crítico y complejo     X Resolución de problemas        X 
+Negociación     X Relaciones Interpersonales         X 
+Escucha y empatía      X Apertura hacia las y los 
+demás 
+        X 
+Autogestión        X Creatividad e innovación      X 
+Trabajo en equipo        X Manejo de conflictos                X 
+Inteligencia emocional        X .  
+ 
+ 
+Resultado de esta actuación y problemas suscitados al respecto: 
+La interacción entre las entidades ganaderas, y la población  en general conlleva a un 
+resultado crítico. 
+ 
+Dilemas que plantea: 
+ 
+Los dilemas representan situaciones de decisión compleja, donde existen beneficios     
+importantes, pero también riesgos, costos o conflictos que deben analizarse 
+cuidadosamente. 
+ 
+   Desarrollo del problema prototípico: 
+ 
+El proyecto “Ganado Saludable: Detección temprana de enfermedades bovinas” surge 
+como una propuesta integral que combina tecnologías emergentes, análisis de datos y 
+evaluación financiera para mejorar la salud del ganado, optimizar la producción pecuaria y 
+reducir las pérdidas económicas. Ante los retos actuales del sector ganadero en materia de 
+sanidad, productividad y sostenibilidad, resulta fundamental implementar soluciones 
+innovadoras que permitan una gestión más eficiente, preventiva y rentable. 
+ 
+Las enfermedades bovinas representan una de las principales causas de disminución en la 
+producción de carne y leche, además de generar elevados costos operativos derivados de 
+tratamientos, atención veterinaria, mortalidad animal y reducción del rendimiento . Los 
+métodos tradicionales de detección, basados en la observación directa, suelen ser tardíos 
+y poco precisos, lo que ocasiona diagnósticos retrasados, tratamientos más costosos y 
+mayores pérdidas económicas. 
+ 
+Ante este panorama, la detección temprana mediante tecnologías de monitoreo y análisis 
+de datos se presenta como una alternativa eficaz. La integración de sensores, dispositivos 
+IoT y sistemas de recolección de datos permite supervisar variables fisiológic as y 
+conductuales del ganado, como temperatura corporal, ritmo cardíaco, actividad, 
+alimentación y patrones de movimiento, facilitando la identificación oportuna de posibles 
+enfermedades. 
+ 
+Los datos recopilados son procesados mediante técnicas de análisis estadístico y modelos 
+predictivos, lo que contribuye a anticipar problemas de salud, mejorar el bienestar animal, 
+aumentar la eficiencia productiva y reducir costos asociados a tratamientos  tardíos. Esta 
+estrategia promueve una toma de decisiones más informada y oportuna por parte de los 
+productores ganaderos. 
+ 
+ 
+Desde la perspectiva de la Ciencia de Datos, este proyecto ofrece un entorno ideal para el 
+desarrollo de competencias analíticas, permitiendo a los estudiantes trabajar con bases de 
+datos reales o simuladas para realizar procesos de limpieza, exploración, análisis 
+descriptivo y modelado predictivo, fortaleciendo así su formación profesional y su capacidad 
+para generar soluciones innovadoras en el ámbito agropecuario. 
+  
+ 
+ 
+ 
+Referencias bibliográficas.  
+ 
+• Haberman, J. (2015). Manual de veterinaria para granjeros y agricultores. CECSA. 
+• López, J. (Comp.). (2016). Manual de salud animal. NI. 
+• Fandiño, M. (Ed.). (2015). Manejo zoosanitario de ganado bovino. EDISA. 
+ 
+ 
+ 
+ 
+INCIDENTE CRÍTICO DE LA ASIGNATURA/ UCA: 
+FUNDAMENTOS DE LA CRIPTOGRAFÍA 
+“Competencia desleal: intercepción y manipulación de datos en la nube” 
+  
+La fiebre aftosa es una enfermedad viral altamente contagiosa, la cual afecta principalmente a 
+porcinos, ovinos, bovinos, búfalos y caprinos. La vigilancia, la colecta de datos y la notificación 
+oportuna son claves a la hora de contener y prevenir la propagación  (Organización de las Naciones 
+Unidas para la Alimentación y la Agricultura, 2025). Debido a ello, la empresa “Carnes Selectas 
+Mexicanas S.A. de C.V.” ha implementado diversas medidas tecnológicas para estar a la vanguardia, 
+competir en el mercado y prevenir este tipo de enfermedades, para ello almacena sus datos en la 
+nube, para mantenerlos accesibles para sus análisis de datos y prevenir la fiebre aftosa. 
+ 
+Cabe mencionar que, la fragmentación de herramientas y la baja madurez en ciberseguridad de 
+muchas empresas mexicanas hacen urgente integrar la protección digital como parte del núcleo 
+estratégico de negocio. México registró más de 35,200 millones de ciberataques en los primeros tres 
+meses de 2025, una cifra que lo coloca como el segundo país con mayor volumen de actividad 
+cibercriminal en América Latina. La creciente digitalización de la economía mexicana, sumada a la 
+baja madurez en ciberseguridad de much as empresas, especialmente las pequeñas y medianas, 
+convierte al país en un blanco recurrente para actores maliciosos (El Economista, 2025). 
+ 
+En ese orden de ideas, “Carnes Selectas Mexicanas S.A. de C.V.” hace uso de una red de sensores 
+IoT para monitorear su ganado. Estos datos se recopilan y envían a un modelo de Ciencia de Datos 
+que predice brotes de fiebre aftosa anticipadamente. Sin embargo, se ha detectado que un competidor 
+desleal ha vulnerado e interceptado la comunicación entre los sensores y el servidor. Este ha inyectado 
+datos falsos, modificando levemente los datos de las temperaturas para que el modelo no detecte 
+ 
+anomalías y genere alertas. En consecuencia, cuando los síntomas se hacen visibles un porcentaje 
+considerable de los ranchos están infectados, generando grandes pérdidas económicas para el 
+negocio. 
+ 
+Los actuales mecanismos de seguridad en el negocio no son suficientes ante vulneraciones de 
+seguridad, se requiere de mecanismos de criptografía que garanticen que los datos enviados desde 
+los sensores IoT al servidor se mantengan confiables y accesibles s olo a personas autorizadas, 
+protegiendo así la información confidencial del negocio ante vulneraciones y ataques al sistema. 
+Algunas preguntas relacionadas son: 
+ 
+¿Cómo se puede asegurar que los datos de temperatura realmente provienen de los dispositivos IoT 
+y no de un agente externo? 
+ 
+¿Qué mecanismos criptográficos posibilitan verificar que los datos no fueron alterados en el trayecto 
+de los sensores al servidor? 
+ 
+¿Cómo podrían ayudar las técnicas de cifrado para evitar la manipulación externa de los datos del 
+negocio? 
+ 
+Por ejemplo, para dar una posible solución se aplicaron las técnicas clásicas de cifrado, como el cifrado 
+César, en el que se ocultó el identificador de un lote infectado identificado de manera rápida, con un 
+desplazamiento de n posiciones, si el desplazam iento es de 3, y tenemos el identificador “LOTE” 
+quedaría cifrado como “ORWH” al intercambiar cada letra por la letra que sigue saltando tres 
+posiciones en orden alfabético para que de esta forma la información esté oculta al actor malicioso 
+que quiere man ipular la información. Otros temas relacionados para generar soluciones a la 
+problemática son: criptografía simétrica, algoritmos simétricos, cifrado de Hill, criptografía asimétrica, 
+algoritmos asimétricos o cifrado RSA. 
+ 
+Referencias bibliográficas empleadas (Formato APA 7ma. Edición) 
+• El Economista. (2025). México sufrió 35,200 millones de ciberataques en el primer 
+trimestre de 2025. https://www.eleconomista.com.mx/tecnologia/mexico-sufrio-35-200-
+millones-ciberataques-primer-trimestre-20250628-765729.html 
+• Organizacio  n de las Naciones Unidas para la Alimentacio  n y la Agricultura. (2025). La FAO 
+advierte: es necesario incrementar la concienciación y las medidas ante los brotes de fiebre 
+aftosa en Europa y el Cercano Oriente. https://www.fao.org/newsroom/detail/fao-warns-
+-enhanced-awareness-and-action-needed-amid-foot-and-mouth-disease-outbreaks-in-
+europe-and-the-near-east/es  
+  
+ 
+INCIDENTE CRÍTICO DE LA ASIGNATURA/ UCA: 
+Estadística Multivariada 
+ 
+“Estadística Multivariada en Sanidad Bovina” 
+ 
+La detección temprana de enfermedades bovinas consiste en el proceso e identificación de cambios y 
+anomalías fisiológicas que permiten actuar antes de que el ganado presente problemas, para ello se 
+debe observar y monitorear el comportamiento, para ello es  necesario conocer los datos cuantitativos 
+con base a los posibles riesgos para así poder utilizar medidas preventivas de control y erradicación de 
+enfermedades en el ganado, para procurar el bienestar y productividad adecuada.  
+  
+La actividad ganadera es fundamental en México. En 2022, se contabilizó una población de casi 36 
+millones de cabezas de bovinos en el territorio nacional (SIAP, 2022). Entre 2010 y 2021, la producción 
+en este sector mostró un crecimiento constante, alcanzando en 2021 más de dos millones de toneladas 
+métricas de carne producida (2,190,000), lo que representa un aumento del 16% en comparación con 
+2010 (Statista, 2022). 
+ 
+La carne de bovino se obtiene a través de diferentes sistemas de producción (Peel et al., 2011), los 
+cuales gestionan una amplia variedad de razas y cruces (Vázquez-Mendoza et al., 2017). Los estados 
+de la república mexicana que presentan mayor población g anadera son: Veracruz, Jalisco, Chiapas, 
+Durango y Chihuahua. A través de la estadística multivariada será posible estudiar distintas variables 
+ 
+que permitirán el análisis de la información con la cual podremos trabajar, temperatura, comportamiento, 
+aspecto físico, producción de leche, datos ambientales, condición corporal, postura, índices 
+reproductivos, etc., etc., para identificar anomalías antes de que los signos clínicos sean evidentes. 
+ 
+Uno de los desafíos más grandes ante los cuales se enfrenta nuestro país es la sequía severa en los 
+principales países productores, uno de los factores es el cambio climático severo, que reduce el 
+crecimiento del forraje y provoca la falta de agua para beb er y bañar al ganado, produciendo 
+inmunosupresión por mal nutrición, deshidratación, estrés, cuadros respiratorios como neumonía, 
+problemas digestivos como acidosis, parasitosis, botulismo, toxicidad, tuberculosis, Rinotraqueítis 
+Bovina, etc., por todo eso  y mucho más, es necesario realizar un estudio e implementar medidas 
+preventivas para evitar problemas y garantizar la sanidad. 
+ 
+Aunque se conoce el problema principal, no existe un análisis de las variables que  afectan directamente 
+al ganado, por lo tanto, no pueden preverse alternativas para combatir este mal. 
+ 
+Algunos de los temas relevantes para el análisis y tratamiento de la información, son: 
+• Regresión lineal múltiple 
+• Regresión Logística 
+• Análisis de componentes principales  
+• Análisis de Factores 
+• Escalamiento Multidimensional, etc. 
+ 
+Después de un estudio detallado y después de la exploración través de un estudio multivariado se 
+desean conocer cuáles son las variables que intervienen en el presente fenómeno, para determinar una 
+posible solución, es necesario conocer los índices con los cuales deben crearse patrones y asociaciones 
+que permitan crear gráficos estadísticos para datos multivariados, diagramas de estrella, caras de 
+Chernoff, curvas de Andrews, además de utilizar regresiones lineales, así como determinar si es 
+adecuado utilizar la ANOVA o la MANOVA, según el tipo de variable, con las que contamos, etc.  
+ 
+• ¿Que  datos son necesarios para determinar las variables que intervienen en la deteccio  n de 
+un estudio multivariado? 
+• ¿Que  tipo de gra  fico o diagrama es recomendable utilizar en ana  lisis univariados y 
+multivariados? 
+ 
+• ¿Que  tipo de varianza evalu  a la diferencia en el efecto de mu  ltiples variables independientes 
+sobre mu  ltiples variables dependientes? 
+• ¿Que  criterio esta   disen  ado para determinar la relacio  n entre dos variables, incluyendo si 
+esta  n directamente relacionadas o no? 
+ 
+   Referencias Bibliográficas   
+ 
+• Peel, D.S., Mathews, K.H.Jr. and Johnson, R.J., 2011. Trade, the Expanding Mexican Beef 
+Industry, and Feedlot and Stocker Cattle Production in Mexico. A Report from the Economic 
+Research Service, Disponible en: www.ers.usda.gov 
+• SIAP, 2022. Producción Ganadera. Servicio de Información Agroalimentaria y Pesquera. 
+Disponible en: https://www.gob.mx/siap/acciones-yprogramas/produccion-pecuaria 
+• Statista, 2022. Mexico: beef & veal meat production volume 2010-2022. Disponible en: 
+https://www.statista.com/statistics/999096/mexico-beef-veal-meat-production-volume/ 
+• Vázquez-Mendoza, O. V., Aranda-Osorio, G., HuertaBravo, M., Kholif, A.E., Elghandour, 
+M.M.Y., Salem, A.Z.M. and MaldonadoSimán, E., 2017. Carcass and meat properties of six 
+genotypes of young bulls finished under feedlot tropical conditions of Mexico. Animal Production 
+Science, 57(6), pp.1186– 1192. https://doi.org/10.1071/AN141037 
+ 
+ 
+ 
+INCIDENTE CRÍTICO DE LA ASIGNATURA/ UCA: 
+INTELIGENCIA ARTIFICIAL 
+“Sistema de alerta temprana de enfermedades en ganado bovino mediante Inteligencia 
+Artificial” 
+La ganadería es una de las actividades económicas más importantes del sector agropecuario en 
+México, la cual representa una parte fundamental en el abastecimiento de alimentos, al empleo rural 
+y a las exportaciones. No obstante, las enfermedades infecciosa s, metabólicas y parasitarias 
+continúan siendo una de las principales causas de pérdidas económicas, debido a la disminución en 
+la productividad, los costos veterinarios y la mortalidad animal (SADER, 2020). 
+ 
+En los sistemas ganaderos los brotes suelen detectarse cuando los síntomas clínicos son evidentes a 
+la vista, para ese momento el contagio ya se ha extendido, lo que dificulta su contención, control y el 
+impacto económico (FAO, 2018). 
+ 
+En los últimos años, la introducción de tecnologías digitales ha permitido monitorear a los animales 
+mediante sensores biométricos y dispositivos conectados a través del Internet de las Cosas (IoT). 
+Estos sistemas registran variables como temperatura corporal, actividad física, consumo de alimento, 
+comportamiento y condiciones ambientales, generando grandes volúmenes de datos que podrían 
+revelar señales tempranas de enfermedad antes de que los signos clínicos sean visibles (Neethirajan, 
+2020). 
+ 
+A este enfoque se le conoce como ganadería de precisión (Precision Livestock Farming), la cual 
+integra tecnologías digitales, análisis de datos e inteligencia artificial para optimizar la toma de 
+decisiones en los sistemas agropecuarios. Diversos estudios señalan que estas herramientas pueden 
+mejorar la detección temprana de problemas sanitarios, incrementando el bienestar animal y 
+reduciendo pérdidas económicas, contribuyendo además a la sostenibilidad del sector agroalimentario 
+(Wolfert et al., 2017). 
+ 
+Sin embargo, la disponibilidad de grandes cantidades de datos no garantiza por sí misma una solución 
+efectiva. Los registros pueden presentar inconsistencias, valores faltantes, ruido, diferencias en las 
+escalas de medición y eventos poco frecuentes, lo que dificulta un análisis confiable y la interpretación 
+de estos (Russell & Norvig, 2021). 
+ 
+Ante esta situación, además de contar con herramientas tecnológicas que permitan medir parámetros, 
+también se necesita poder identificar de manera oportuna a los animales en riesgo y así poder prevenir 
+la propagación de enfermedades, minimizando pérdidas productivas y a su vez, económicas. 
+Por ello, se plantea el desafío de diseñar una solución basada en Inteligencia Artificial que integre 
+información proveniente del monitoreo animal y permita anticipar posibles brotes sanitarios con 
+suficiente precisión, confiabilidad y oportunidad para apoyar la toma de decisiones en contextos reales. 
+ 
+ 
+Entre los retos asociados se encuentran: 
+ 
+• Información incompleta, inconsistente o con ruido 
+• Variables heterogéneas de tipo biológico, ambiental y de manejo 
+• Eventos poco frecuentes o desbalanceados 
+• Series temporales complejas 
+• Necesidad de interpretabilidad para especialistas 
+• Restricciones económicas y tecnológicas 
+• Impacto de errores de predicción en la salud animal y la producción 
+La solución deberá considerar no solo el desempeño técnico del sistema, sino también sus 
+implicaciones éticas, económicas y sociales, particularmente en relación con la seguridad alimentaria, 
+el bienestar animal y la accesibilidad tecnológica para distintos tipos de productores. 
+ 
+Algunas preguntas que nos podemos hacer son:  
+ 
+1. ¿Qué variables podrían ser más relevantes para anticipar enfermedades en ganado bovino? 
+2. ¿Qué enfoques de Inteligencia Artificial permitirían abordar este problema considerando las 
+características de los datos disponibles? 
+3. ¿Cómo influye la calidad, cantidad y representatividad de los datos en la confiabilidad de un 
+sistema predictivo? 
+4. ¿Qué consecuencias tendría un alto número de falsos positivos o falsos negativos en este 
+contexto? 
+5. ¿Cómo podría evaluarse la confiabilidad y utilidad práctica de la solución propuesta? 
+6. ¿Qué implicaciones éticas se relacionan con el uso de sistemas automatizados en la salud 
+animal? 
+7. ¿Qué factores determinarían la viabilidad económica de su implementación? 
+8. ¿Cómo podría adaptarse la solución a diferentes escalas de producción o regiones? 
+ 
+Referencias bibliográficas (APA 7ª edición) 
+• FAO. (2018). Transformación digital de la agricultura y la ganadería . Organizacio  n de las 
+Naciones Unidas para la Alimentacio  n y la Agricultura. https://www.fao.org 
+• Neethirajan, S. (2020). The role of sensors, big data and machine learning in modern 
+animal farming. Sensing and Bio -Sensing Research, 29 , 100367. 
+https://doi.org/10.1016/j.sbsr .2020.100367 
+• Russell, S., & Norvig, P . (2021). Artificial intelligence: A modern approach (4th ed.). Pearson. 
+ 
+ 
+ 
+ 
+INCIDENTE CRÍTICO DE LA ASIGNATURA/ UCA: 
+BASE DE DATOS NOSQL 
+“Crisis en la escalabilidad: Posible brote de fiebre aftosa” 
+ 
+La ganadería es una de las actividades económicas más importantes del sector agropecuario en 
+México, la cual representa una parte fundamental en el abastecimiento de alimentos, al empleo rural 
+y a las exportaciones. No obstante, las enfermedades infecciosa s, metabólicas y parasitarias 
+continúan siendo una de las principales causas de pérdidas económicas, debido a la disminución en 
+la productividad, los costos veterinarios y la mortalidad animal (SADER, 2020). 
+ 
+En los sistemas ganaderos los brotes suelen detectarse cuando los síntomas clínicos son evidentes a 
+la vista, para ese momento el contagio ya se ha extendido, lo que dificulta su contención, control y el 
+impacto económico (FAO, 2018). 
+ 
+En los últimos años, la introducción de tecnologías digitales ha permitido monitorear a los animales 
+mediante sensores biométricos y dispositivos conectados a través del Internet de las Cosas (IoT). 
+Estos sistemas registran variables como temperatura corporal, actividad física, consumo de alimento, 
+comportamiento y condiciones ambientales, generando grandes volúmenes de datos que podrían 
+revelar señales tempranas de enfermedad antes de que los signos clínicos sean visibles (Neethirajan, 
+2020). 
+ 
+A este enfoque se le conoce como ganadería de precisión (Precision Livestock Farming), la cual 
+integra tecnologías digitales, análisis de datos e inteligencia artificial para optimizar la toma de 
+decisiones en los sistemas agropecuarios. Diversos estudios señalan que estas herramientas pueden 
+mejorar la detección temprana de problemas sanitarios, incrementando el bienestar animal y 
+reduciendo pérdidas económicas, contribuyendo además a la sostenibilidad del sector agroalimentario 
+(Wolfert et al., 2017). 
+ 
+• Secretarí a de Agricultura y Desarrollo Rural (SADER). (2020). Situación sanitaria y 
+productiva del sector pecuario en México . Gobierno de Me xico. 
+https://www.gob.mx/agricultura 
+• Wolfert, S., Ge, L., Verdouw, C., & Bogaardt, M. J. (2017). Big data in smart farming: A review. 
+Agricultural Systems, 153, 69–80. https://doi.org/10.1016/j.agsy.2017.01.023 
+ 
+Sin embargo, la disponibilidad de grandes cantidades de datos no garantiza por sí misma una solución 
+efectiva. Los registros pueden presentar inconsistencias, valores faltantes, ruido, diferencias en las 
+escalas de medición y eventos poco frecuentes, lo que dificulta un análisis confiable y la interpretación 
+de estos (Russell & Norvig, 2021).  Ante esta situación, además de contar con herramientas 
+tecnológicas que permitan medir parámetros, también se necesita poder identificar de manera 
+oportuna a los animales en riesgo y así poder prevenir la propagación de enfermedades, minimizando 
+pérdidas productivas y a su vez, económicas. 
+ 
+Por ello, se plantea el desafío de diseñar una solución basada en Inteligencia Artificial que integre 
+información proveniente del monitoreo animal y permita anticipar posibles brotes sanitarios con 
+suficiente precisión, confiabilidad y oportunidad para apoyar la toma de decisiones en contextos reales. 
+Entre los retos asociados se encuentran: 
+ 
+• Información incompleta, inconsistente o con ruido 
+• Variables heterogéneas de tipo biológico, ambiental y de manejo 
+• Eventos poco frecuentes o desbalanceados 
+• Series temporales complejas 
+• Necesidad de interpretabilidad para especialistas 
+• Restricciones económicas y tecnológicas 
+• Impacto de errores de predicción en la salud animal y la producción 
+La solución deberá considerar no solo el desempeño técnico del sistema, sino también sus 
+implicaciones éticas, económicas y sociales, particularmente en relación con la seguridad alimentaria, 
+el bienestar animal y la accesibilidad tecnológica para distintos tipos de productores. Para lo cual nos 
+podemos preguntar 
+ 
+1. ¿Qué variables podrían ser más relevantes para anticipar enfermedades en ganado bovino? 
+2. ¿Qué enfoques de Inteligencia Artificial permitirían abordar este problema considerando las 
+características de los datos disponibles? 
+3. ¿Cómo influye la calidad, cantidad y representatividad de los datos en la confiabilidad de un 
+sistema predictivo? 
+4. ¿Qué consecuencias tendría un alto número de falsos positivos o falsos negativos en este 
+contexto? 
+5. ¿Cómo podría evaluarse la confiabilidad y utilidad práctica de la solución propuesta? 
+6. ¿Qué implicaciones éticas se relacionan con el uso de sistemas automatizados en la salud 
+animal? 
+7. ¿Qué factores determinarían la viabilidad económica de su implementación? 
+ 
+8. ¿Cómo podría adaptarse la solución a diferentes escalas de producción o regiones? 
+ 
+Referencias bibliográficas (APA 7ª edición) 
+• FAO. (2018). Transformación digital de la agricultura y la ganadería . Organizacio  n de las 
+Naciones Unidas para la Alimentacio  n y la Agricultura. https://www.fao.org 
+• Neethirajan, S. (2020). The role of sensors, big data and machine learning in modern 
+animal farming. Sensing and Bio -Sensing Research, 29 , 100367. 
+https://doi.org/10.1016/j.sbsr .2020.100367 
+• Russell, S., & Norvig, P . (2021). Artificial intelligence: A modern approach (4th ed.). Pearson. 
+• Secretarí a de Agricultura y Desarrollo Rural (SADER). (2020). Situación sanitaria y 
+productiva del sector pecuario en México . Gobierno de Me xico. 
+https://www.gob.mx/agricultura 
+• Wolfert, S., Ge, L., Verdouw, C., & Bogaardt, M. J. (2017). Big data in smart farming: A review. 
+Agricultural Systems, 153, 69–80. https://doi.org/10.1016/j.agsy.2017.01.023 
+  
+  
+ 
+ 
+INCIDENTE CRÍTICO DE LA ASIGNATURA/ UCA: 
+ECUACIONES DIFERENCIALES APLICADAS 
+“Modelación matemática de la propagación de enfermedades en ganado bovino mediante 
+ecuaciones diferenciales” 
+La ganadería es una de las actividades económicas más relevantes del sector primario en México. Sin 
+embargo, enfrenta pérdidas importantes debido a enfermedades infecciosas, metabólicas y 
+parasitarias que muchas veces se detectan cuando los síntomas ya son visibles y el daño económico 
+es significativo (FAO, 2013). 
+ 
+Desde el punto de vista matemático, muchos procesos biológicos y epidemiológicos pueden 
+describirse mediante ecuaciones diferenciales, ya que permiten modelar cambios continuos en el 
+tiempo. Modelos clásicos como los sistemas SIR (Susceptible –Infectado–Recuperado) han sido 
+ampliamente utilizados para estudiar la propagación de enfermedades en poblaciones animales y 
+humanas (Hethcote, 2000). 
+ 
+Además, la modelación mediante ecuaciones diferenciales permite analizar escenarios futuros, 
+evaluar estrategias de control y optimizar la toma de decisiones, lo cual resulta sumamente útil para 
+reducir de forma significativa los costos económicos (Brauer & Castillo-Chávez, 2012). 
+Se han registrado brotes recurrentes de enfermedades dentro de poblaciones de ganado bovino, 
+generando pérdidas económicas por mortalidad, disminución en la producción y altos costos 
+veterinarios. La detección suele ocurrir cuando la enfermedad ya se encuentra ampliamente distribuida 
+entre los animales. 
+ 
+Se cuenta con registros históricos de: 
+ 
+• Número de animales sanos, enfermos y recuperados 
+ 
+• Fechas de aparición de brotes 
+ 
+• Tasas de contagio estimadas 
+ 
+• Datos de mortalidad y recuperación 
+ 
+• Condiciones ambientales y de manejo 
+ 
+ 
+Durante ciclos productivos recientes, brotes epidémicos se han propagado sin control durante varias 
+semanas debido a la falta de herramientas analíticas para anticipar su comportamiento. Como 
+resultado: 
+ 
+• Mortalidad significativa del rebaño 
+ 
+ 
+• Pérdidas económicas millonarias 
+ 
+• Suspensión temporal de ventas por restricciones sanitarias 
+ 
+• Pérdida de contratos de suministro 
+ 
+• Riesgo de cierre de operaciones ante futuros brotes 
+ 
+Existe la necesidad de implementar modelos matemáticos que permitan comprender la dinámica de 
+propagación de la enfermedad, predecir su evolución y evaluar distintas estrategias de control sanitario 
+antes de aplicarlas en campo. 
+ 
+Se requiere modelar matemáticamente la propagación de una enfermedad contagiosa dentro de un 
+ganado bovino considerando: 
+ 
+• Los cambios en el número de animales sanos, infectados y recuperados en el tiempo 
+ 
+• Tasas de transmisión, recuperación y mortalidad 
+ 
+• Intervenciones como vacunación, aislamiento y tratamiento 
+ 
+• Variación en condiciones ambientales 
+ 
+• Limitación de recursos 
+ 
+ 
+Se debe formular, resolver y analizar un sistema de ecuaciones diferenciales que represente la 
+dinámica del problema, utilizando métodos analíticos y numéricos (Kreyszig, 2011). 
+ 
+Para abordar el problema, los estudiantes apoyados de los docentes, pueden aplicar diversos 
+contenidos de la UCA relacionados con la modelación matemática mediante ecuaciones diferenciales, 
+el análisis del comportamiento de sistemas dinámicos y el uso de herramientas analíticas y numéricas 
+para la resolución de problemas reales de ingeniería y ciencias aplicadas (Brauer & Castillo -Chávez, 
+2012). Para lo cual podemos preguntarnos: 
+ 
+1. ¿Cómo puede representarse de manera matemática la propagación de una enfermedad en 
+una población animal? 
+2. ¿Qué variables y parámetros deben considerarse para el modelo? 
+3. ¿Qué tipo de ecuaciones diferenciales describen mejor el fenómeno y por qué? 
+4. ¿Influyen las tasas de contagio y recuperación en la evolución del brote? 
+5. ¿Qué métodos numéricos pueden utilizarse si no existe solución analítica? 
+6. ¿Qué estrategias reducen significativamente la propagación de una enfermedad? 
+7. ¿Co  mo puede ayudar el modelo para la toma de decisiones en una empresa? 
+ 
+Referencias bibliográficas  
+ 
+• Brauer, F ., & Castillo-Cha  vez, C. (2012). Mathematical Models in Population Biology and 
+Epidemiology (2nd ed.). Springer . https://doi.org/10.1007/978-1-4614-1686-9 
+• Hethcote, H. W . (2000). The mathematics of infectious diseases. SIAM Review, 42(4), 599–
+653. https://doi.org/10.1137/S0036144500371907 
+• Kreyszig, E. (2011). Advanced Engineering Mathematics (10th ed.). Wiley. 
+• Organizacio  n de las Naciones Unidas para la Alimentacio  n y la Agricultura (FAO). (2013). 
+Animal health and disease control in livestock systems. FAO. https://www.fao.org 
+ 
+INCIDENTE CRÍTICO 
+ASIGNATURA/ UCA: FINANZAS CORPORATIVAS 
+“Subestimación de costos y mala evaluación del riesgo financiero en la 
+implementación de un sistema de detección temprana de enfermedades bovinas” 
+La producción bovina enfrenta un gran desafío porque muchas enfermedades se detectan demasiado 
+tarde. Esto provoca pérdida de producción, aumento de gastos veterinarios y, en casos graves, muerte 
+de animales. Además, la detección tardía dificulta controlar la propagación de las enfermedades dentro 
+del hato, generando un impacto económico significativo para la empresa. Actualmente, la mayoría de 
+los productores depende únicamente de revisiones visuales y controles ocasionales, lo que no 
+garantiza identificar los síntomas a tiempo. 
+  “Ganado Saludable” propone un sistema de monitoreo basado en sensores y   análisis de datos. Este 
+sistema registra información del ganado, como temperatura, actividad y patrones de rumia, para 
+detectar posibles enfermedades de manera temprana. La detección temprana permite intervenir antes 
+de que la enfermedad afecte gravemente al animal y, de esta forma, reducir las pérdidas económicas. 
+Sin embargo, implementar esta tecnología implica una inversión importante, y aquí es donde las 
+finanzas corporativas juegan un papel clave. Su función es evaluar si el proyecto es rentable, cómo se 
+financiará y qué riesgos pueden presentarse. Esto incluye decidir si usar recursos propios, solicitar un 
+préstamo o combinar ambas opciones, y analizar cómo estas decisiones afectarán la estabilidad 
+financiera de la empresa. 
+Por su parte, la ciencia de datos permite construir modelos predictivos que identifican patrones 
+tempranos de enfermedad, aumentando la eficacia del sistema. La combinación de datos y análisis 
+financiero asegura que la inversión no solo funcione técnicamente, sino que también genere valor real 
+para la empresa, mejore la rentabilidad, reduzca riesgos y fortalezca la sostenibilidad del negocio a 
+largo plazo. 
+Este incidente pone de relieve varios desafíos clave para el desarrollo de negocios en la era digital: 
+Rentabilidad: Mide la capacidad de una empresa o proyecto para generar utilidades a partir de sus 
+ventas, activos o capital invertido. Permite evaluar qué tan eficiente es un proyecto para producir 
+ 
+ganancias. 
+Apalancamiento: Es un indicador que evalúa cuánto del capital de una empresa proviene de la deuda, 
+lo que indica el nivel de riesgo de la empresa desde la perspectiva de su uso de la deuda en relación 
+con sus activos. 
+Liquidez: Mide la capacidad de la empresa para cumplir con sus obligaciones a corto plazo. 
+Valor presente neto: Método de análisis financiero que se utiliza para evaluar la rentabilidad de una 
+inversión. El VPN calcula el valor actual de los flujos de efectivo futuros que se esperan recibir de un 
+proyecto, descontados a una tasa que refleja el costo del capital o la tasa de retorno requerida por los 
+inversionistas. 
+Tasa de retorno de inversión:  Métrica fundamental para cualquier empresa o persona que busque 
+medir la rentabilidad de una inversión. 
+En resumen, la implementación de un sistema de detección temprana convierte un problema sanitario 
+en una oportunidad estratégica, integrando tecnología, ciencia de datos y decisiones financieras. Esto 
+protege la salud del ganado, optimiza la producción y a segura que la empresa tome decisiones 
+inteligentes y rentables. 
+Elementos para considerar en el entregable: 
+ 
+• Costo total del proyecto 
+ 
+• Beneficio económico estimado 
+ 
+• Ahorro por reducción de enfermedades 
+ 
+• Retorno de inversión (ROI) 
+ 
+• Razones financieras 
+ 
+Además de emplear regresión lineal múltiple y modelos de ciencia de datos predictivos y modelos de 
+ciencia de datos predictivos, descriptivos y prescriptivos 
+ 
+ 
+Referencias bibliográficas  
+• Gitman, L. J., & Zutter, C. J. (2016). Principios de administración financiera (14.ª ed.). Pearson. 
+• Hernández Sampieri, R., Fernández Collado, C., & Baptista Lucio, M. del P. (2014). 
+Metodología de la investigación (6.ª ed.). McGraw-Hill Education. 
+• Ross, S. A., Westerfield, R. W., & Jordan, B. D. (2018). Fundamentos de finanzas corporativas 
+(11.ª ed.). McGraw-Hill Education. 
+• Van Horne, J. C., & Wachowicz, J. M. (2010). Fundamentos de administración financiera (13.ª 
+ed.). Pearson 
+ 
+ 
+INCIDENTE CRÍTICO DE LA ASIGNATURA/ UCA: 
+LABORATORIO DE INNOVACIÓN SOCIAL 
+ 
+“Diagnóstico e innovación para una empresa cárnica en crisis” 
+La fiebre aftosa es una enfermedad viral altamente contagiosa, la cual afecta principalmente a 
+animales de pezuña partida, como porcinos, ovinos, bovinos, búfalos y caprinos (Organización de las 
+Naciones Unidas para la Alimentación y la Agricultura, 2025).  Esta enfermedad se transmite 
+fácilmente por contacto directo entre los animales, ya sea mediante el aire en cortas distancias y 
+objetos contaminados.   
+ 
+En los animales genera fiebre, aparición de vesículas y aftas en la boca, lengua, pezuñas y ubres, 
+ocasiona dificultades para caminar y alimentarse, también produce pérdida de peso y disminución de 
+la producción de leche. Debido a sus repercusiones en los sistemas alimentarios y las economías, se 
+ha establecido como una de las enfermedades del ganado más temidas en todo el mundo, 
+especialmente en los países con vocación comercial (Organización Mundial de Sanidad Animal, 
+2025).  
+ 
+Al igual que para otras enfermedades, la vigilancia, la colecta de datos y la notificación oportuna son 
+claves a la hora de contener y prevenir la propagación. Sin embargo, es probable que la verdadera 
+carga económica de la fiebre aftosa sea mucho mayor si se tienen en cuenta las perturbaciones en el 
+comercio internacional y local. Estos efectos pueden tener consecuencias devastadoras para las 
+comunidades rurales y las empresas que dependen de la ganadería (Organización de las Naciones 
+Unidas para la Alimentación y la Agricultura, 2025). 
+Se propone generar, por ejemplo: 
+• Desarrollo de productos cárnicos sostenibles y saludables.  
+• Implementación de prácticas de producción más limpias y eficientes.  
+• Creación de programas de educación y capacitación para los empleados y la comunidad.  
+• Desarrollo de alianzas con organizaciones sociales y ambientales. 
+ 
+Para ello considera las siguientes preguntas: 
+• ¿Qué dimensiones del diagnóstico fueron ignoradas inicialmente? 
+ 
+• ¿Cómo impacta la falta de involucramiento del personal y clientes en la efectividad de la 
+innovación? 
+• ¿Qué aspectos sociales, culturales o humanos deberían considerarse en la propuesta de 
+solución? 
+• ¿Cómo equilibrar eficiencia técnica y sostenibilidad social en un proyecto de innovación 
+empresarial? 
+• ¿Qué nuevos tipos de datos no estructurados de redes sociales sobre percepción de calidad, 
+encuestas de clima laboral o datos cualitativos (de proveedores) deberían integrarse en el 
+diagnóstico para que sea socialmente innovador? 
+• ¿Cómo puede la empresa utilizar los datos de los sensores de salud animal para recuperar la 
+confianza de los consumidores de forma ética, sin que se perciba como una manipulación de 
+marketing? 
+• ¿Qué competencias del Modelo Educativo UNRC se activan y cómo pueden potenciarse? 
+ 
+Referencias bibliográficas  
+• Organizacio  n de las Naciones Unidas para la Alimentacio  n y la Agricultura. (2025). La FAO 
+advierte: es necesario incrementar la concienciación y las medidas ante los brotes de fiebre 
+aftosa en Europa y el Cercano Oriente. https://www.fao.org/newsroom/detail/fao-warns--
+enhanced-awareness-and-action-needed-amid-foot-and-mouth-disease-outbreaks-in-
+europe-and-the-near-east/es  
+• Organizacio  n Mundial de Sanidad Animal. (2025). Fiebre aftosa: gestionar la respuesta en 
+medio del caos durante su resurgimiento. https://www.woah.org/es/articulo/fiebre-
+aftosa-gestionar-la-respuesta-en-medio-del-caos-durante-su-resurgimiento/  
+   
+ 
+ 
