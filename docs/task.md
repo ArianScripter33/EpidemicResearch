@@ -1,114 +1,53 @@
-# Ganado Saludable — ELT Pipeline & Data Warehouse
+# 📝 Plan de Trabajo y TODOs — AftoSec (Entrega Final y Diseño Editorial)
 
-> **Enfermedad asignada: Fiebre Aftosa (FMD)** | TB Bovina = Proxy de calibración
-
-> **Última actualización:** 2026-04-03 (Post Wave 2 Recovery)
-
-## Phase 0: Research & Audit
-
-- [x] Read V2.md (epidemiological context, 35.1M biomass, RAM prevalence)
-- [x] Read M_doc.md (extraction protocol, 24 refs, endpoints, star schema)
-- [x] Read PROBLEMA PROTOTIPICO PDF (7-subject university requirements)
-- [x] Read Protocolo Investigación Zoonótica PDF (advanced extraction, hacker vectors)
-- [x] Audit v1 plan vs v2 plan → produce definitive v3 merge
-- [x] Write implementation plan v3 (dual-path extraction, full URL table, all schemas)
-- [x] Reframe project: FMD = assigned disease, TB = calibration proxy
-- [x] Update to V4: SIR dual-mode, FMD constants, UK 2001 reference, WRLFMD/PANAFTOSA sources
-- [x] Create README.md with 7-subject coverage map and potential findings
-- [x] Create presentation_script.md (guion narrativo para coloquio)
-- [x] Add Component 5 (visualization + stats multivariate) to implementation plan
-- [x] Add "Proxy de Opacidad" (clembuterol) to XGBoost features and PNT extractor
-- [x] Create docs/mvp_strategy.md (priorización + anti-overengineering)
-- [x] Create docs/data_acquisition_plan.md (plan de adquisición de datos Wave 1-3)
-
-## Phase 1: Core Infra & Security
-
-- [x] Create directory structure (src/, extractors/, warehouse/, models/, crypto/, visualization/, tests/)
-- [x] Create `src/config.py` (all URLs from M_doc [1]-[24], V2.md constants, FMD constants, SIR scenarios)
-- [x] Create `src/base_extractor.py` (ABC with lineage: fecha_extraccion_etl, fuente_origen, version_etl)
-- [x] Create `requirements.txt`
-- [x] Update `.gitignore`
-- [ ] Create `src/crypto/encryption.py` (César + RSA — Problema Prototípico §Criptografía)
-
-## Phase 2: Extraction Modules (Module 1) — Wave-Based
-
-### Wave 1 (Stable Endpoints) ✅
-
-- [x] **SENASICA TB:** CSV hatos libres → **64 rows, 32 estados** — proxy calibración
-- [x] **DGE Morbilidad:** Anuarios 2015-2017 ZIP→CSV → **384 rows** (288 TB + 96 A05)
-  - Nota: Anuarios 2018+ no disponibles en formato CSV (404). 2015-2017 tienen datos por estado/edad/mes/institución.
-- [x] **DGE Morbilidad 2018-2024:** PDFs parseados con pdfplumber → **28 filas nacionales** + serie consolidada 2015-2024 (40 filas)
-  - Nota: Solo nivel nacional (no estatal). CSV estatal legado 2015-2017 preservado intacto.
-
-### Wave 2 (International + FMD Data)
-
-- [x] **openFMD:** Browser-assisted Playwright export → **28,585 filas reales** (123 países, serotipos, coordenadas GPS, 2001-2025)
-- [x] **Kaggle FMD:** Extractor `kaggle_fmd.py` listo (necesita API key)
-- [x] **PUCRA RAM PDFs:** Extractor `pucra_ram.py` endurecido. Host UNAM sigue caído. Acepta PDF local en `data/raw/pucra2024.pdf`.
-- [x] **COFEPRIS clausuras:** Parser reparado → **33 filas tidy**. ⚠️ PROBLEMA: PDFs son de "Establecimientos Verificados" (laboratorios farmacéuticos), NO de clausuras de rastros/mataderos. Necesita nuevas fuentes PDF con clausuras alimentarias reales.
-- [x] **SENASICA Cuarentenas:** Extractor `senasica_cuarentenas.py` → **108 filas** 2024 PDFs (API oculta = 404).
-
-### Wave 3 (Hostile Extraction — Solo si sobra tiempo)
-
-- [ ] **SINAIS Cubos:** ViewState bypass (tokens + POST) OR Anuarios fallback
-- [ ] **PNT/COFEPRIS:** Selenium headless — clausuras (clembuterol, LMR, Salmonella) + Proxy de Opacidad
-
-## Phase 3: Data Warehouse & NoSQL (Module 2)
-
-- [ ] Pydantic dimension models (6: Tiempo, Geografia, Patogeno, Antimicrobiano, Establecimiento, Especie)
-- [ ] Pydantic fact models (7: HatosTB, CuarentenasTB, MorbilidadHumana, IndemnizacionTB, FMDCasos, RAM, Clausura)
-- [ ] Star schema assembler (joins, keys geográficas)
-- [ ] MongoDB adapter (nosql_client.py — requisito académico NoSQL)
-- [ ] Docker `mongo:latest` levantado + colecciones creadas
-
-## Phase 4: Model Preparation & Financials (Module 3)
-
-- [ ] **SIR DUAL MODE:** Calibración TB (R0≈1.8, γ=1/180d) → Simulación FMD (R0≈6.0, γ=1/14d) — 6 escenarios
-- [ ] **Stats Multivariate:** ANOVA canales de venta (con datos V2.md), PCA (si datos suficientes), Regresión Múltiple
-- [ ] **Financial ROI:** VPN, ROI, tabla comparativa preventivo vs reactivo
-- [ ] XGBoost feature engineering (Tier 2 — si datos suficientes)
-- [ ] Chronos time-series formatter (Tier 2 — si openFMD data obtenida)
-
-## Phase 5: Visualization & Dashboard (Module 4)
-
-- [ ] **Mapa coroplético:** México por estado con datos SENASICA (plotly.express)
-- [ ] **SIR Plots:** Curvas S(t), I(t), R(t) comparativas TB vs FMD + diagramas de fase
-- [ ] **Tabla financiera:** Visualización ROI preventivo vs reactivo
-- [ ] Caras de Chernoff (Tier 2 — si datos multivariados suficientes)
-- [ ] Curvas de Andrews (Tier 2)
-- [ ] Dashboard interactivo Streamlit (Tier 3)
-
-## Phase 6: Notebooks EDA ✅
-
-- [x] `01_eda_global.ipynb` — EDA maestro que consolida SENASICA (32 estados), DGE (TB + A05), openFMD y COFEPRIS.
-- [ ] `02_analisis_descriptivo.ipynb` — Análisis de varianza (DGE) y Top países África (TBD - delegado).
-- [ ] `03_multivariate_analysis.ipynb` — PCA, ANOVA, Chernoff
-- [ ] `04_sir_simulation.ipynb` — Simulación SIR dual interactiva
-- [ ] `05_financial_analysis.ipynb` — VPN, ROI, escenarios
-
-## Phase 7: Verification & Delivery
-
-- [ ] Unit tests (mock HTTP, Pydantic validation, César/RSA bidireccional)
-- [x] Smoke test SENASICA CSV (endpoint alive, 64 rows downloaded)
-- [x] Smoke test DGE Anuarios (2015-2017 alive, 384 filtered rows)
-- [x] Smoke test openFMD (API no accesible, fallback a literatura OK)
-- [ ] SIR dual validation (gráfica comparativa TB vs FMD side-by-side)
-- [ ] Artículo de divulgación (15-25 páginas, APA 7, min 5 fuentes)
-- [ ] Presentación digital (Gamma/Genially/Prezi)
+> **Enfermedad Asignada:** Fiebre Aftosa (FMD) | **Proxy de Calibración:** TB Bovina
+> **Fase del Proyecto:** Auditoría de Calidad, Consolidación Bibliográfica y Diseño Editorial Premium
 
 ---
 
-## Data Inventory (as of 2026-04-03)
+## 🛠️ Phase 1: Auditoría Técnica y Consolidación (En Curso) 🔄
 
-| Dataset | Source | Rows | Status | Key columns |
-|---------|--------|------|--------|-------------|
-| SENASICA TB | CSV datos abiertos | 64 | ✅ Ready | entidad, constancias, bovinos_libres |
-| SENASICA Cuarentenas | PDFs trimestrales 2024 | 108 | ✅ Ready | estado, cuarentena, animales_sacrificados |
-| DGE Morbilidad (estatal) | Anuarios ZIP 2015-2017 | 384 | ✅ Ready | estado, CIE-10, acumulado, edad, mes, institución |
-| DGE Morbilidad (nacional) | PDFs 2018-2024 | 28 | ✅ Ready | year, cve_cie10, acumulado_nacional |
-| DGE Consolidado Nacional | Unión 2015-2024 | 40 | ✅ Ready | year, cve_cie10, acumulado_nacional |
-| openFMD (real data) | Browser export WRLFMD | 28,585 | ✅ Ready | country, date, serotype, topotype, lineage |
-| COFEPRIS Alimentaria | gob.mx PDFs | 12 | ✅ Proxy regulatory | Sanciones a empresas cárnicas (Bachoco, Qualtia) |
-| PUCRA RAM | PDFs UNAM | — | ❌ Host caído | Esperando PDF local en data/raw/pucra2024.pdf |
+- [x] **Auditoría de Hallazgos y Alucinaciones:**
+  - [x] Corregir la alucinación de Diana Victoria en la Sección §6 respecto al comportamiento inicial de los flujos de caja en Veracruz.
+  - [x] Sincronizar y auditar el término "Cifrado Híbrido" (Hybrid Encryption) en la sección §5 de Axel.
+  - [x] Actualizar y validar los nombres completos de los autores (Diana Victoria Hernandez Monroy).
+- [x] **Consolidación Bibliográfica (APA 7):**
+  - [x] Crear el documento de referencia `docs/bibliografia_maestra.md` que mapea cada fuente del semestre completo con los datos específicos del modelo SIR y finanzas.
+- [ ] **Sincronización de Referencias Cruzadas:**
+  - [ ] Unificar la bibliografía final en `docs/articulo_divulgacion_final.md` (Sección §8).
+  - [ ] Unificar la bibliografía final en `docs/Tercer_avance/tercer_avance.md` (Sección de Bibliografía).
 
-**Total filas limpias:** ~29,242
+---
+
+## 🎨 Phase 2: Diseño Editorial y Dirección de Arte ⏳
+
+- [x] **Planificación del Diseño Editorial:**
+  - [x] Crear el archivo `docs/diseno_editorial_plan.md` con los lineamientos estéticos (Estilo Híbrido Nature / MIT Tech Review, paleta UNRC, jerarquías tipográficas, citas destacadas e infoboxes).
+- [ ] **Generación de Ilustraciones con IA:**
+  - [ ] Generar la ilustración conceptual de la interfaz de la App en el campo (Ganadero/Vacas).
+  - [ ] Generar la ilustración del Grafo de Conectividad Vial Nacional de Veracruz y Jalisco.
+  - [ ] Mapear las rutas de las imágenes en los documentos `tercer_avance.md` y `articulo_divulgacion_final.md`.
+- [ ] **Maquetación Docx/PDF de Alta Calidad (Skill Docx):**
+  - [ ] Configurar el archivo de generación del documento Word para aplicar la paleta UNRC (`#9C223F`, `#C9A84C`, `#F8F4F0`).
+  - [ ] Inyectar las citas destacadas con bordes carmesí gruesos.
+  - [ ] Diseñar las tablas comparativas de benchmark del XGBoost en dos colores.
+  - [ ] Programar e inyectar el mapa de pies de página explicativos (Footnotes) vinculados a la bibliografía maestra.
+
+---
+
+## 🧪 Phase 3: Verificación de Scripts de Producción
+
+- [ ] **Smoke Tests de Ecuaciones Financieras:**
+  - [ ] Verificar consistencia del valor de cabeza bovina (`1544 USD`) y pérdida máxima por cierre de exportaciones (`8.2M USD`) en `fmd_finance_spatial.py` y `fmd_finance_comparison.py`.
+- [ ] **Smoke Tests de Ciberseguridad:**
+  - [ ] Correr `mock_mobile_app.py` para asegurar que el cifrado y descifrado de ChaCha20 y el tag AEAD se validen sin errores.
+- [ ] **Verificación de Data Warehouse:**
+  - [ ] Asegurar que el conversor `csv_to_json.py` con validación Pydantic guarde correctamente `cuarentenas.json` sin discrepancias de tipos.
+
+---
+
+## 📦 Phase 4: Sincronización y Cierre
+
+- [ ] **Revisión Conjunta de Conclusiones:**
+  - [ ] Dejar listos los placeholders para las firmas de conclusiones de Arian, Axel y Diana Victoria.
+  - [ ] Commit y Push final en GitHub de todos los entregables.
