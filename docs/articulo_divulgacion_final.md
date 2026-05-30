@@ -3,7 +3,7 @@
 
 > **Universidad Nacional "Rosario Castellanos"** | Licenciatura en Ciencias de Datos para Negocios
 > **Semestre 2026-1** | Problema Prototípico — 4° Semestre
-> **Autores:** Arian Pedroza Celis · Kevin Axel Acosta Ayala · Victoria [Apellido]
+> **Autores:** Arian Pedroza Celis · Kevin Axel Acosta Ayala · Victoria Montserrat Enríquez
 
 ---
 
@@ -124,28 +124,15 @@ Al erradicar el miedo al reporte con matemáticas aplicadas, habilitamos un fluj
 ---
 
 ## §6. Innovación Social y Modelación Financiera: Cuando la Tecnología Cambia los Incentivos
-### 🟣 PENDIENTE — VICTORIA | Extensión objetivo: ~450 palabras
+### ✅ COMPLETADO — VICTORIA
 
-**Instrucciones para Victoria:**
+Para comprender la dinámica de propagación de la Fiebre Aftosa (FMD) y su devastación económica, es indispensable analizar el comportamiento en la base productiva. Ante la sospecha de infección, el ganadero enfrenta un dilema ético: ¿reportar o no reportar el brote? Desde la teoría de decisiones, esto no es un fallo moral, sino una decisión de negocios racional bajo alta incertidumbre. El productor teme perder su patrimonio frente a protocolos estatales de cuarentena ineficientes, que frecuentemente derivan en el sacrificio masivo sin garantías de una indemnización rápida. Este miedo a la quiebra inminente fomenta la venta clandestina del ganado, convirtiéndolo en un vector activo que burla el cerco sanitario.
 
-Esta sección explica el impacto humano, social y financiero-cuantitativo del proyecto. Tú programaste las gráficas comparativas mensuales y diarias, así que en esta sección debes lucir ese análisis que une el **cálculo multivariable/epidemiológico** con las **proyecciones de negocio**.
+Para cuantificar el riesgo de esta dispersión, aplicamos ecuaciones de cálculo multivariable en la simulación epidemiológica. En la Figura 8, la curva de infecciones diarias presenta un comportamiento dual. El modelo clásico homogéneo exhibe una explosión exponencial, un resultado irreal para la ruralidad al asumir una mezcla poblacional perfecta. Por ello, diseñamos un modelo espacial gravitatorio que aplana la curva. En nuestra formulación, la geografía actúa como un freno físico —una fricción matemática directamente aplicada al transporte logístico— retrasando la velocidad a la que la enfermedad se desplaza entre las distintas unidades de producción.
 
-**Puntos que DEBES cubrir (en orden):**
-1. **El dilema ético del ganadero:** ¿reportar o no reportar? Explica el dilema como si fuera una decisión de negocios bajo incertidumbre (miedo a perder su hato por cuarentenas estatales ineficientes).
-2. **Las curvas de infectados diarios (Cálculo Multivariable):** Explica la comparación de la **Figura 8** (`docs/figures/fmd_comparativa_diaria.png`). ¿Por qué el modelo clásico homogéneo muestra una explosión exponencial irreal y por qué el modelo espacial gravitatorio aplana la curva? (La geografía actúa como un freno físico/fricción al transporte).
-3. **El Flujo de Caja Mensual Acumulado (Proyecciones):** Explica la comparación de la **Figura 9** (`docs/figures/fmd_comparativa_mensual.png`). ¿Por qué en el Mes 1 y 2 el modelo espacial simula pérdidas mucho menores (retraso geográfico) pero al Mes 5 ambos convergen en una catástrofe de **$52,796 MDD**? (El virus eventualmente llega a los nodos superconectores Veracruz/Jalisco si no se contiene a tiempo).
-4. **El modelo de adopción y mitigación ambiental:** El modelo en 3 fases para implantar la app y cómo las cuarentenas quirúrgicas de 3 km (en vez del sacrificio masivo) reducen el impacto ambiental.
+No obstante, esta fricción espacial proporciona solo un alivio temporal si el brote no se contiene. Esto se evidencia al analizar el Flujo de Caja Mensual Acumulado en la Figura 9. Durante los Meses 1 y 2, el modelo espacial simula pérdidas económicas mucho menores gracias al retraso geográfico. Sin embargo, hacia el Mes 5, ambos modelos convergen fatalmente en una catástrofe financiera proyectada en $52,796 MDD. Esta convergencia se explica por la topología de la red logística: si el virus no se erradica tempranamente, inevitablemente alcanza nodos superconectores de alta densidad ganadera como Veracruz y Jalisco. Al vulnerar estos ejes, la distribución nacional colapsa, paralizando el flujo de caja corporativo y de exportación.
 
-**¿De dónde sacar la info?**
-- Lee completo el documento que tú trabajaste: `src/models/fmd_finance_comparison.py` (tus ecuaciones de flujo de caja).
-- Lee la Sección **5.3** de `docs/Tercer_avance/tercer_avance.md` — ahí redacté la explicación de tus dos gráficas para la parte técnica.
-- Lee `docs/Tercer_avance/Propuesta_innovacionSocial/Actividad_Innovacion_Social_Ganado_Saludable.md` Secciones 2 y 6 para la parte de dilema ético e impacto ambiental.
-
-**Tono:** Profesional, combinando negocios y modelación cuantitativa.
-
-```
-[ESCRIBE AQUÍ — ~450 palabras]
-```
+Para resolver el dilema inicial del productor y mitigar la catástrofe, diseñamos un modelo de adopción e intervención estructurado en 3 fases para el despliegue de la aplicación. Este sistema transforma los incentivos del ganadero, promoviendo el reporte temprano a cambio de apoyo clínico y certidumbre comercial. Al contar con un mapeo geoespacial preciso en tiempo real, las autoridades pueden abandonar la destructiva política del sacrificio masivo. En su lugar, nuestro modelo viabiliza el establecimiento de cuarentenas quirúrgicas de 3 km de radio, aislando focos precisos de manera controlada. Este enfoque no solo salva la continuidad del negocio y frena el colapso financiero sistémico, sino que reduce de manera drástica el severo impacto ambiental causado por la incineración masiva y fosas de desechos biológicos, alineando el desarrollo tecnológico con la sostenibilidad integral.
 
 ---
 
@@ -196,7 +183,7 @@ Este proyecto me demostró que la seguridad de los datos no es un concepto puram
 | §3 La Simulación | Arian | ✅ Listo | — |
 | §4 La IA y Benchmark | Arian | ✅ Listo | — |
 | §5 La Criptografía | **Axel** | ✅ Listo | — |
-| §6 Innovación Social | **Victoria** | ⬜ Pendiente | 29/05 |
+| §6 Innovación Social | **Victoria** | ✅ Listo | — |
 | §7 Conclusión (c/u) | **Todos** | ⏳ En curso | 29/05 |
 | §8 Referencias | Arian | ✅ Listo | — |
 | Revisión final | Arian | ⬜ 30/05 | 30/05 |
