@@ -132,6 +132,20 @@ Para cuantificar el riesgo de esta dispersión, aplicamos ecuaciones de cálculo
 
 No obstante, la dinámica espacial revela un comportamiento altamente sensible al nodo de origen. Al analizar el Flujo de Caja Mensual Acumulado en la Figura 9, se observa una aparente paradoja: durante los Meses 1 y 2, el modelo espacial gravitatorio presenta pérdidas económicas significativamente mayores ($2.6 mil M y $20.4 mil M USD) en comparación con el modelo homogéneo ($0.2 mil M y $14.0 mil M USD). Esta disparidad no se debe a un fallo de la fricción geográfica, sino a las condiciones de frontera de la simulación: el modelo espacial se calibró con una infección inicial de 100 animales en Veracruz —el epicentro ganadero de México con mayor densidad de población pecuaria—, desatando una explosión epidemiológica local sumamente acelerada, mientras que el modelo homogéneo inicia con un único caso cero ($I_0 = 1$) distribuido uniformemente. Sin embargo, hacia el Mes 5, ambos modelos convergen fatalmente en la misma catástrofe financiera de $52,796 MDD. Esta convergencia final demuestra que si el virus no se erradica tempranamente en sus focos iniciales de alta densidad, la topología de la red vial nacional (Veracruz y Jalisco como superconectores) distribuye el colapso al resto del país, destruyendo el flujo de caja pecuario de exportación.
 
+Para dar sustento cuantitativo a esta dinámica, construimos un balance general que distingue la destrucción física de la riqueza pecuaria nacional del simple flujo del comercio exterior de carne bovina, proyectado frente al PIB de la República Mexicana para el año 2026:
+
+### Tabla 2. Impacto Macroeconómico del Ecosistema Bovino y Simulación de Pérdidas (PIB 2026)
+
+| Dimensión Económica | Tipo de Activo | Valor Estimado (USD) | % del PIB Nacional (2026) | Justificación Metodológica |
+| :--- | :--- | :--- | :--- | :--- |
+| **Hato Ganadero Nacional** | **Stock de Capital** | **$54,200 MDD** | **3.74%** | 35.1 millones de cabezas de ganado bovino valuadas a un precio promedio de mercado de $1,544 USD/cabeza (SNIIM, 2024). |
+| **Exportaciones Anuales** | **Flujo Comercial** | **$3,000 MDD** | **0.21%** | Límite máximo de exportación de ganado en pie y carne a EE.UU. y otros mercados internacionales (USDA ERS, 2024). |
+| **Pérdida en Brote Libre (150 días)** | **Costo Catastrófico** | **$52,796 MDD** | **3.64%** | Sacrificio del 96.9% del hato nacional ($51.6 mil M) más pérdida por cierre comercial ($1.2 mil M) y costos diagnósticos. |
+| **Costo AftoSec (Prevención)** | **Costo Tecnológico** | **$1,200.02 MDD** | **0.08%** | Detección al Día 3 (16 sacrificios) más pérdida de exportación inevitable de $1,200 MDD por pérdida de estatus libre. |
+| **Retorno de Inversión (Ahorro)** | **Beneficio Neto** | **$51,595.9 MDD** | **3.56%** | Evita la aniquilación de la riqueza pecuaria doméstica mediante cuarentenas de buffer quirúrgico de 3 km. |
+
+*Nota: Porcentajes calculados sobre la proyección del PIB nominal de México para el cierre del año 2026 ($1.45 Billones de USD / $1.45 Trillion USD de acuerdo con el FMI).*
+
 Para resolver el dilema inicial del productor y mitigar la catástrofe, diseñamos un modelo de adopción e intervención estructurado en 3 fases para el despliegue de la aplicación. Este sistema transforma los incentivos del ganadero, promoviendo el reporte temprano a cambio de apoyo clínico y certidumbre comercial. Al contar con un mapeo geoespacial preciso en tiempo real, las autoridades pueden abandonar la destructiva política del sacrificio masivo. En su lugar, nuestro modelo viabiliza el establecimiento de cuarentenas quirúrgicas de 3 km de radio, aislando focos precisos de manera controlada. Este enfoque no solo salva la continuidad del negocio y frena el colapso financiero sistémico, sino que reduce de manera drástica el severo impacto ambiental causado por la incineración masiva y fosas de desechos biológicos, alineando el desarrollo tecnológico con la sostenibilidad integral.
 
 ---
