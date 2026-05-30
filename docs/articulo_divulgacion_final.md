@@ -3,7 +3,7 @@
 
 > **Universidad Nacional "Rosario Castellanos"** | Licenciatura en Ciencias de Datos para Negocios
 > **Semestre 2026-1** | Problema Prototípico — 4° Semestre
-> **Autores:** Arian Pedroza Celis · Axel [Apellido] · Victoria [Apellido]
+> **Autores:** Arian Pedroza Celis · Kevin Axel Acosta Ayala · Victoria [Apellido]
 
 ---
 
@@ -33,30 +33,13 @@ El resultado: un motor predictivo con R² = 0.8924 que, con solo 13 variables to
 
 ---
 
-## §1. El Problema: Una Bomba de Tiempo de 35 Millones de Cabezas
-### 🔵 PENDIENTE — AXEL | Extensión objetivo: ~350 palabras
+## §1. El Problema: Una Bomba de Tiempo de 35 Millones de Cabezas ✅ COMPLETADO — AXEL
 
-**Instrucciones para Axel:**
+Imagina un patógeno tan voraz que puede propagarse con el simple roce del viento o una mota de polvo, infectando hatos enteros en cuestión de horas. Esa es la Fiebre Aftosa (FMD): una de las enfermedades animales más temidas del planeta. En México, este enemigo invisible acecha una de nuestras mayores riquezas nacionales: un hato ganadero que supera las 35.1 millones de cabezas de ganado bovino (según datos oficiales del SIAP 2023). Este gigantesco motor pecuario no solo alimenta a millones de familias, sino que posiciona a nuestro país como uno de los líderes globales en exportación de carne. 
 
-Redacta esta sección explicando el problema de la Fiebre Aftosa en México para un lector que no sabe nada del tema. Tu objetivo es que al terminar de leer, el lector entienda POR QUÉ esto es urgente.
+Sin embargo, esta enorme escala nos convierte también en un blanco sumamente vulnerable. No tenemos que adivinar qué pasaría si un brote ingresa a territorio nacional; la historia ya nos ha entregado advertencias devastadoras. El precedente del Reino Unido en 2001 es escalofriante: un brote descontrolado costó más de 8,000 millones de libras esterlinas y obligó a realizar el sacrificio masivo y doloroso de 6 millones de animales, cuyas imágenes de piras de fuego conmocionaron al mundo. 
 
-**Puntos que DEBES cubrir (en este orden):**
-1. ¿Qué es la Fiebre Aftosa y por qué es tan contagiosa? (Una oración poderosa de apertura)
-2. El tamaño del hato nacional: 35.1 millones de cabezas bovinas (fuente: SIAP 2023)
-3. El precedente histórico: el brote del Reino Unido en 2001 costó más de 8,000 millones de libras y el sacrificio de 6 millones de animales
-4. El riesgo para México: cierre inmediato de exportaciones a EE.UU., Japón y la UE
-5. El impacto en el pequeño ganadero: quiebra en menos de 90 días
-
-**¿De dónde sacar la info?**
-- Lee la Sección 2.1 de `docs/Tercer_avance/tercer_avance.md` — ahí está el contexto del modelo base
-- El dato de impacto económico de $52,800M USD está en la Sección 5.2
-- Para el contexto de FMD global: busca "FMD 2001 UK outbreak economic impact" en Google
-
-**Tono:** Periodístico, como un artículo de Expansión o El Financiero. Primera persona del plural ("encontramos", "nuestro sistema").
-
-```
-[ESCRIBE AQUÍ — ~350 palabras]
-```
+Para México, la irrupción de la Fiebre Aftosa desataría una catástrofe financiera inmediata. En cuestión de minutos, las fronteras se cerrarían y se decretaría la suspensión absoluta de nuestras exportaciones de carne y ganado en pie hacia mercados clave como Estados Unidos, Japón y la Unión Europea. Las consecuencias económicas se propagarían más rápido que el propio virus, estimando pérdidas globales de hasta $52,800 millones de dólares en solo 150 días. Pero la verdadera tragedia no reside en las frías cifras macroeconómicas, sino en el impacto social. Para el pequeño y mediano ganadero de estados como Jalisco o Veracruz, el cierre del mercado y las medidas sanitarias drásticas se traducirían en una quiebra absoluta e inevitable en un plazo menor a 90 días. En este escenario, la ganadería nacional no solo perdería cabezas de ganado, sino su sustento intergeneracional, su patrimonio y su viabilidad económica en el mediano plazo.
 
 ---
 
@@ -126,32 +109,17 @@ La Regresión Lineal con R² = 1.0 es una trampa clásica: con 13 variables y so
 
 ---
 
-## §5. La Criptografía: El Escudo que Hace Posible el Reporte
-### 🔵 PENDIENTE — AXEL | Extensión objetivo: ~300 palabras
+## §5. La Criptografía: El Escudo que Hace Posible el Reporte ✅ COMPLETADO — AXEL
 
-**Instrucciones para Axel:**
+Detrás de cualquier catástrofe epidemiológica casi siempre existe una barrera social invisible: el miedo. Ante una sospecha de Fiebre Aftosa, el ganadero se enfrenta a un dilema ético perverso. Si reporta de inmediato, teme que su predio sea inmediatamente cuarentenado, sus animales sacrificados y su sustento de vida destruido por completo. El resultado histórico de este temor es el silencio absoluto, lo que termina por convertir un brote aislado en una epidemia de proporciones nacionales. 
 
-Esta sección es tuya porque tú trabajaste en los dos módulos de encriptación. Explícale a alguien que nunca ha escuchado de criptografía cómo funciona nuestro sistema y POR QUÉ es necesario.
+Para romper este círculo vicioso, en AftoSec diseñamos un escudo de privacidad criptográfico de dos capas que trabaja en conjunto para proteger la identidad del productor, permitiéndole reportar de manera totalmente segura y confidencial. 
 
-**Puntos que DEBES cubrir:**
-1. El problema: ¿por qué el ganadero NO reporta? (Miedo a perder su rancho)
-2. La solución: **dos capas de cifrado** que trabajan en conjunto:
-   - **App móvil (tu trabajo → ChaCha20-Poly1305):** El formulario del ganadero cifra sus datos personales en el teléfono *antes* de mandarlo al servidor. Usa análoga de "caja fuerte en la palma de la mano". Menciona que usaste ChaCha20 porque es el cifrado que usa WhatsApp y TLS 1.3 en dispositivos sin chip especializado.
-   - **Servidor (RSA-2048 + bcrypt):** Los datos viajan cifrados y nunca se guardan en texto plano. Solo la CPA tiene la llave para descifrarlos.
-3. El resultado: el ganadero reporta sin miedo → la IA recibe el dato → salva el hato nacional
+La primera capa opera directamente en su teléfono celular mediante una aplicación móvil que utiliza el algoritmo **ChaCha20-Poly1305**. Este módulo actúa como una 'caja fuerte en la palma de la mano': cifra los datos personales (nombre, teléfono y ubicación GPS exacta) *antes* de que la información salga del dispositivo hacia la red. Elegimos ChaCha20 porque es el estándar moderno y ultrarrápido que protege los chats de WhatsApp y la navegación web segura TLS 1.3, funcionando perfectamente incluso en dispositivos de bajo costo en zonas rurales que carecen de chips criptográficos dedicados.
 
-**IMPORTANTE:** NO menciones el cifrado César en la redacción final del artículo. Nuestro sistema de producción usa ChaCha20 (móvil) + RSA-2048 (servidor), que son los estándares de la industria.
+La segunda capa asegura el servidor utilizando la robusta criptografía asimétrica **RSA-2048**. La información viaja encriptada y se almacena en contenedores inescrutables en la base de datos pecuaria, jamás en texto plano. Solo la Comisión oficial (CPA/SENASICA) posee la llave privada exclusiva para abrir esta 'caja fuerte' y descifrar la identidad del ganadero únicamente cuando es indispensable enviar ayuda veterinaria y vacunas al predio. 
 
-**¿De dónde sacar la info?**
-- Sección **8.3** de `docs/Tercer_avance/tercer_avance.md` — la tabla de ChaCha20 vs RSA es tuya
-- Sección 9.1 del mismo documento (el Dilema Ético del ganadero)
-- Tu script `src/crypto/mock_mobile_app.py` — ya lo integramos a `main`, úsalo como referencia de lo que hiciste
-
-**Tono:** Claro, accesible. Usa analogías del mundo físico (candados, cajas fuertes, llaves).
-
-```
-[ESCRIBE AQUÍ — ~300 palabras]
-```
+Al erradicar el miedo al reporte con matemáticas aplicadas, habilitamos un flujo seguro de alerta temprana. El ganadero reporta sin temores, nuestra inteligencia artificial procesa el riesgo en milisegundos y el hato nacional se salva de una despoblación devastadora.
 
 ---
 
@@ -193,7 +161,7 @@ Esta sección explica el impacto humano, social y financiero-cuantitativo del pr
 
 **Axel:**
 ```
-[Tu cierre aquí — 2-3 oraciones]
+Este proyecto me demostró que la seguridad de los datos no es un concepto puramente matemático u abstracto, sino una herramienta fundamental para construir confianza humana en el mundo real. Al aplicar criptografía simétrica y asimétrica de vanguardia en el sector pecuario, entendí cómo la privacidad puede transformar el temor de un ganadero en colaboración activa, logrando así que toda la modelación epidemiológica y de inteligencia artificial sea viable y efectiva para proteger nuestra economía nacional.
 ```
 
 **Victoria:**
@@ -221,17 +189,15 @@ Esta sección explica el impacto humano, social y financiero-cuantitativo del pr
 
 ---
 
-## ✅ Checklist de Entrega
-
 | Sección | Responsable | Estado | Fecha límite |
 |---------|-------------|--------|-------------|
-| §1 El Problema | **Axel** | ⬜ Pendiente | 28/05 |
+| §1 El Problema | **Axel** | ✅ Listo | — |
 | §2 La Red Vial | Arian | ✅ Listo | — |
 | §3 La Simulación | Arian | ✅ Listo | — |
 | §4 La IA y Benchmark | Arian | ✅ Listo | — |
-| §5 La Criptografía | **Axel** | ⬜ Pendiente | 28/05 |
+| §5 La Criptografía | **Axel** | ✅ Listo | — |
 | §6 Innovación Social | **Victoria** | ⬜ Pendiente | 29/05 |
-| §7 Conclusión (c/u) | **Todos** | ⬜ Pendiente | 29/05 |
+| §7 Conclusión (c/u) | **Todos** | ⏳ En curso | 29/05 |
 | §8 Referencias | Arian | ✅ Listo | — |
 | Revisión final | Arian | ⬜ 30/05 | 30/05 |
 
