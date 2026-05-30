@@ -233,3 +233,12 @@ git push origin main
 ```
 
 Si hay conflicto (poco probable pero posible si los dos editan al mismo tiempo), avisen a Arian por WhatsApp antes de hacer push.
+
+---
+
+## ⚖️ §9. Propiedad Intelectual y Cláusula de Licencia
+
+Este desarrollo (código fuente de la simulación, modelos de machine learning XGBoost, algoritmos de ruteo y fricción vial OSRM, simuladores de criptografía ChaCha20/RSA y documentación asociada) es propiedad intelectual colectiva de sus autores bajo la legislación mexicana vigente de derechos de autor (Ley Federal del Derecho de Autor - LFDA).
+
+Se prohíbe la reproducción parcial o total, distribución comercial, ingeniería inversa o uso de la metodología para proyectos ajenos a esta institución sin el consentimiento expreso y por escrito de los titulares de la autoría.
+© 2026 Arian Pedroza Celis, Kevin Axel Acosta Ayala, Victoria Montserrat Enriquez. Todos los derechos reservados.
